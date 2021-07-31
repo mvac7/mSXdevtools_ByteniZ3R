@@ -1,9 +1,10 @@
 # ByteniZ3R devtool (aka BytesGen)
+
+![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/blob/main/GFX/ByteniZ3R_title_440.png?raw=true)
     
 ```
 Short:        Another generator of data tables in Bytes.         
 Author:       mvac7
-Version:      0.9.1b (July 2021)
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3   
@@ -22,6 +23,8 @@ Generates tables of 8 bits unsigned values, from waveforms or binary files, in d
 This tool is designed primarily to support cross-development of retro-computer applications.
    
 This software was developed in Microsoft Visual Studio Community 2019.
+
+
 
 
 ---
@@ -79,6 +82,10 @@ The next step was to generate mathematical forms to use as paths for sprite move
 
 The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
 The thinking brain behind the new name is Mr. Fubukimaru.
+
+
+![ByteniZ3R screenshot](https://raw.githubusercontent.com/mvac7/mSXdevtools_ByteniZ3R/main/GFX/ByteniZ3R_v091b_screenshot01.png)
+
 
 
 ### ByteniZ3R v0.9.1b (July 2021) Last version.
