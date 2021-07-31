@@ -1,0 +1,2 @@
+asMSX ByteniZ3R_test.asm
+pause
