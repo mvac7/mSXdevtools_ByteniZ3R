@@ -1,4 +1,5 @@
-ByteniZ3R devtool (aka BytesGen)
+ByteniZ3R devtool 
+(formerly called BytesGen)
 
 Short:        Another generator of data tables in Bytes.         
 Author:       mvac7

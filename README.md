@@ -1,4 +1,5 @@
-# ByteniZ3R devtool (aka BytesGen)
+# ByteniZ3R devtool 
+(formerly called BytesGen)
 
 ![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/blob/main/GFX/ByteniZ3R_title_440.png?raw=true)
     
