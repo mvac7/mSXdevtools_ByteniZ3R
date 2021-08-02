@@ -1,18 +1,15 @@
 ; ==============================================================================
-;   ByteniZ3R Test
+;   ByteniZ3R Test waveform
 ;   Assemble with asMSX
 ; ==============================================================================
 
 
     .page	1
-		.ROM
-		;.SIZE 32
+	.ROM
+	.SIZE 16
+	.BIOS
+	
 		
-		;.SEARCH
-		
-
-VDPVRAM   EQU   $98 ;VRAM Data (Read/Write)
-VDPSTATUS EQU   $99 ;VDP Status Registers
 
 ;system vars
 MSXVER EQU $002D
@@ -22,49 +19,6 @@ BDRCLR EQU $F3EB ;Border colour
 CLIKSW EQU $F3DB ;0 disabled / 1 enabled
 RG1SAV EQU $F3E0 ;VDP REG 1
 EXTVDP EQU $FFE7 ;
-
-;BIOS (info by MSX Assembly Page)
-;http://map.grauw.nl/resources/msxbios.php
-DISSCR EQU $0041 ;inhibits the screen display
-ENASCR EQU $0044 ;displays the screen
-WRTVDP EQU $0047 ;write data in the VDP-register
-RDVRM  EQU $004A ;Reads the content of VRAM
-WRTVRM EQU $004D ;Writes data in VRAM
-SETRD  EQU $0050 ;Enable VDP to read
-SETWRT EQU $0053 ;Enable VDP to write
-FILVRM EQU $0056 ;fill VRAM with value
-LDIRMV EQU $0059 ;Block transfer to memory from VRAM
-LDIRVM EQU $005C ;Block transfer to VRAM from memory
-CHGMOD EQU $005F ;Switches to given screenmode
-CHGCLR EQU $0062 ;Changes the screencolors
-CLRSPR EQU $0069 ;Initialises all sprites
-INITXT EQU $006C ;Switches to SCREEN 0 (text screen with 40 * 24 characters)
-INIT32 EQU $006F ;Switches to SCREEN 1 (text screen with 32*24 characters)
-INIGRP EQU $0072 ;Switches to SCREEN 2 (high resolution screen with 256*192 pixels)
-INIMLT EQU $0075 ;Switches to SCREEN 3 (multi-color screen 64*48 pixels)
-SETTXT EQU $0078 ;Switches to VDP in SCREEN 0 mode
-SETT32 EQU $007B ;Switches VDP in SCREEN mode 1
-SETGRP EQU $007E ;Switches VDP to SCREEN 2 mode
-SETMLT EQU $0081 ;Switches VDP to SCREEN 3 mode
-CALPAT EQU $0084 ;Returns the address of the sprite pattern table
-CALATR EQU $0087 ;Returns the address of the sprite attribute table
-GSPSIZ EQU $008A ;Returns current sprite size
-GRPPRT EQU $008D ;Displays a character on the graphic screen
-
-GICINI EQU $0090 ;Initialises PSG and sets initial value for the PLAY statement
-WRTPSG EQU $0093 ;Writes data to PSG-register
-RDPSG  EQU $0096 ;Reads value from PSG-register
-
-; more BIOS functions
-CHKRAM EQU $0000 ;Tests RAM and sets RAM slot for the system
-ENASLT EQU $0024 ;Switches indicated slot at indicated page on perpetual
-CHGET  EQU $009F ;One character input
-POSIT  EQU $00C6
-GTSTCK EQU $00D5 ;Returns the joystick status
-GTTRIG EQU $00D8 ;Returns current trigger status
-SNSMAT EQU $0141 ;Returns the value of the specified line from the keyboard matrix
-KILBUF EQU $0156 ;Clear keyboard buffer
-
 
 
 
