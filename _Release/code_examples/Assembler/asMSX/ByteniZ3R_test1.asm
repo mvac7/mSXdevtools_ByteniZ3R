@@ -1,6 +1,6 @@
 ; ==============================================================================
 ;   ByteniZ3R Test waveform
-;   Assemble with asMSX
+;   Assemble with asMSX https://github.com/Fubukimaru/asMSX
 ; ==============================================================================
 
 

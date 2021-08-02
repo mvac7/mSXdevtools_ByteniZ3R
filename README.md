@@ -52,9 +52,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 
 
-## How to install 
+## How to Install and Run
  
-Unpack ByteniZ3R folder somewhere on your hard disk. 
+Unpack ByteniZ3R ZIP somewhere on your hard disk (It is not inside a folder). 
    
 For run, execute ByteniZ3R.exe  
 
@@ -71,6 +71,7 @@ For run, execute ByteniZ3R.exe
 * Hexadecimal table viewer (for remove headers in binary files).
 * Allows Drag & Drop of files.
 
+---
 
 ## History of versions
 
@@ -81,14 +82,14 @@ Later I would add the option to load binary files and dump them in tables format
 The next step was to generate mathematical forms to use as paths for sprite movement and thinking of a future version that will serve for musical waveforms (thinking of the SCC).
 
 The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
-The thinking brain behind the new name is Mr. Fubukimaru.
+<br/>The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
 
 ![ByteniZ3R screenshot](https://raw.githubusercontent.com/mvac7/mSXdevtools_ByteniZ3R/main/GFX/ByteniZ3R_v091b_screenshot01.png)
 
 
 
-### ByteniZ3R v0.9.1b (July 2021) Last version.
+### ByteniZ3R v0.9.1b (August 2021) Last version.
 
 - Save/Load Project File.
 - Add Project Info

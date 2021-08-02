@@ -2,7 +2,7 @@ ByteniZ3R devtool (aka BytesGen)
 
 Short:        Another generator of data tables in Bytes.         
 Author:       mvac7
-Version:      0.9.1b (July 2021)
+Version:      0.9.1b (August 2021)
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3  
@@ -14,19 +14,20 @@ Index:
 1. Description
 2. License
 3. Requirements
-4. News
+4. How to Install and Run
+5. News in version
 
-5. User Guide
-5.1 How does it work
-5.2 Project Menu
-5.3 Type of data
-5.3.1 Waveforms
-5.3.2 Binary File
-5.4 Data output format
-5.5 Saving the result
+6. User Guide
+6.1 How does it work
+6.2 Project Menu
+6.3 Type of data
+6.3.1 Waveforms
+6.3.2 Binary File
+6.4 Data output format
+6.5 Saving the result
 
-6 Programming information
-6.1 How to read data in MSX BASIC
+7 Programming information
+7.1 How to read data in MSX BASIC
 
 
 
@@ -73,9 +74,18 @@ Index:
    PC with Windows OS and Framework 4.0
    
    
-   
+
 --------------------------------------------------------------------------------
-4. News 
+4. How to Install and Run
+ 
+Unpack ByteniZ3R ZIP somewhere on your hard disk (It is not inside a folder). 
+   
+For run, execute ByteniZ3R.exe  
+   
+
+
+--------------------------------------------------------------------------------
+5. News in version 
    
      * Save/Load Project.
      * Add Project Info
@@ -97,9 +107,9 @@ Index:
 
 
 --------------------------------------------------------------------------------
-5. User Guide:
+6. User Guide:
 
-5.1. How does it work
+6.1. How does it work
 
 The flow of utilization is from top to bottom and from left to right.
 
@@ -116,7 +126,7 @@ environment or save it to a text or binary file.
          
 
 
-5.2 Project Menu
+6.2 Project Menu
     
 At the top of the main window we have the project menu, with the following 
 options:
@@ -144,14 +154,14 @@ options:
    
 
   
-5.3 Type of data
+6.3 Type of data
   
 The application can produce several types of data, which are divided into two 
 groups: Waveform and Binary File.
    
    
 
-5.3.1 Waveforms
+6.3.1 Waveforms
 
    It has 6 waveform generators, which can be useful for movement paths for 
    graphic figures (Sprites) or visual effects.
@@ -170,7 +180,7 @@ groups: Waveform and Binary File.
    
 
       
-5.3.2 Binary File
+6.3.2 Binary File
 
    Dump a binary file to code format.
     
@@ -198,7 +208,7 @@ groups: Waveform and Binary File.
                  
                  
 
-5.4 Data output format
+6.4 Data output format
 
    In the output area, we have a form to define the format, such as the 
    programming language, numeric format and compression.
@@ -263,25 +273,24 @@ groups: Waveform and Binary File.
 
 
 
-5.5 Saving the result   
+6.5 Saving the result   
 
-   Una vez que tengamos los datos que necesitemos podemos copiar y pegar el 
-   código a nuestro editor/entorno de trabajo, seleccionando el texto y 
-   utilizando la opción "Copiar" del menú contextual (Ctrl+C) o podemos copiar 
-   todo el texto pulsando el botón "Copy All" que hay en la parte inferior 
-   derecha de la ventana de la aplicación.
+   Once we have the data, we can copy and paste the code to our editor or work 
+   environment, selecting the text and using the "Copy" option from the context 
+   menu (Ctrl+C) or we can copy all the text by pressing the "Copy All" button 
+   located in the lower right part of the main window.
    
-   Copy All > Copy the entire output to the clipboard.   
+   or you can also:  
    
-   Save BIN > Save the output to a binary file (with compression).
+     [Save BIN] Save the output to a binary file.
    
-   Save TXT > Saves the output text with the extension of the selected language 
-              (.BAS; .C; .ASM/.S)    
+     [Save TXT] Saves the output text with the extension of the selected 
+                language (.BAS; .C; .ASM/.S)    
    
 
 
 --------------------------------------------------------------------------------   
-6 Programming information
+7 Programming information
 
   Here you will find some advice on how to read the data.
   
@@ -290,18 +299,19 @@ groups: Waveform and Binary File.
   
    
   
-6.1 How to read data in MSX BASIC
+7.1 How to read data in MSX BASIC
 
    For MSX BASIC it can be generated in different formats, but there are two 
    ways that I recommend depending on what you need:
 
 
-   That occupies little
+   * That occupies little
    
    If we work with a very large list and we need to reduce size, the best way 
    is to use the "hex FF" format and remove0. In this way, a value will occupy 
-   0 to 2 Bytes, but it has a drawback: execution is slower, because each value 
-   must be converted to hexadecimal by executing the VAL() instruction.    
+   0 to 2 Bytes, but it has a drawback: execution is slower, because each 
+   alphanumeric data must be converted to a numeric value using the VAL 
+   instruction.    
 
     20 FOR BC=0 to 15
     30 READ A$
@@ -312,11 +322,10 @@ groups: Waveform and Binary File.
     91 DATA 2B,35,40,4B,57,63,70,7C
 
     
-  Make it fast
+   * Make it fast
   
-  If, on the contrary, we want the data block to be read as quickly as possible,
-  the best form is in decimal "dec nnn". This way is about twice as fast as the 
-  previous one.
+   If we want the data block to be read as fast as possible, the best way is in 
+   decimal "dec nnn". This way is about twice as fast as the previous one.
   
     20 FOR BC=0 to 15
     30 READ A

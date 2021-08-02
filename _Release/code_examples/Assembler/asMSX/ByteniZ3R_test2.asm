@@ -1,6 +1,6 @@
 ; ==============================================================================
 ;   ByteniZ3R Test binary
-;   Assemble with asMSX
+;   Assemble with asMSX  https://github.com/Fubukimaru/asMSX
 ; ==============================================================================
 
     .page	1
