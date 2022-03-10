@@ -31,17 +31,12 @@ Public Class MainForm
 
     Private helpURL As String = Application.StartupPath + System.IO.Path.DirectorySeparatorChar + "Help" + System.IO.Path.DirectorySeparatorChar + AppID + System.IO.Path.DirectorySeparatorChar + AppID + "_UserGuide.html"
 
-
     Private aMSXDataFormat As New DataFormat
 
     Private workBitmap As Bitmap
 
-    Private binaryFilePath As String
-
     Private lastOutputData As Byte()
     Private outputDataSize As Integer
-
-    'Private ASM_COMMAND As String
 
     Private _projectPath As String
     Private _binaryPath As String
@@ -52,11 +47,6 @@ Public Class MainForm
 
     Private Const defaultWaveLength = 32
 
-
-    Public Shadows Enum DATA_TYPE As Integer
-        WAVE
-        BINARY
-    End Enum
 
 
     Public Shadows Enum WAVE_TYPE As Integer
@@ -88,7 +78,7 @@ Public Class MainForm
 
     Private Sub MainForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Me.Text = My.Application.Info.Title + " v " + My.Application.Info.Version.ToString + "b" + " · " + My.Application.Info.Copyright
+        Me.Text = My.Application.Info.Title + " v " + My.Application.Info.Version.ToString + "b"
 
         ' si no encuentra el fichero de ayuda, inhabilita el boton 
         'If Not System.IO.File.Exists(Me.helpURL) Then
@@ -124,6 +114,7 @@ Public Class MainForm
         AddHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
         AddHandler WaveFreqTrackBar.ValueChanged, AddressOf FreqTrackBar_ValueChanged
     End Sub
+
 
 
     Private Sub RemoveHandlers()
@@ -183,17 +174,8 @@ Public Class MainForm
         Dim aRLE As New RLE
         Dim tmpData As Byte()
 
-        Select Case ToolTabControl.SelectedIndex
-
-            Case DATA_TYPE.BINARY
-                'If System.IO.File.Exists(Me.binaryFilePath) Then
-                tmpData = GetBinaryFileData()
-
-            Case Else 'DATA_TYPE.WAVE
-                tmpData = GetWaveTable()
-                DrawWave(tmpData)
-
-        End Select
+        tmpData = GetWaveTable()
+        DrawWave(tmpData)
 
 
         If tmpData Is Nothing Then
@@ -218,6 +200,7 @@ Public Class MainForm
         End Select
 
         GenerateCode(Me.lastOutputData)
+
     End Sub
 
 
@@ -226,22 +209,58 @@ Public Class MainForm
 
         Dim comments As New ArrayList
 
-        Select Case ToolTabControl.SelectedIndex
-            Case DATA_TYPE.WAVE
-                ShowData(data, CStr(Me.WaveTypeComboBox.SelectedItem), comments)
+        Dim labelName As String = Me.LabelTextBox.Text
 
-            Case DATA_TYPE.BINARY
-                'If System.IO.File.Exists(Me.binaryFilePath) Then
-                comments.Add(Path.GetFileName(Me.binaryFilePath))
-                ShowData(data, "BinaryFile", comments)
-                'Else
-                '    MsgBox("I need you to select a file.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-                'End If
+        Dim infoData As String = ""
 
-                'Case 3 
-                ' More here --->
+        If comments Is Nothing Then
+            comments = New ArrayList
+        End If
+
+        comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
+
+        Select Case Me.DataTypeInput.Compress  'CompressionCB.SelectedIndex
+
+            Case 1
+                comments.Add("RLE compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
+            Case 2
+                comments.Add("RLE WB compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
+
+                'Case 3
+
+
+            Case Else
+
+                comments.Add("Size=" + CStr(Me.outputDataSize))
 
         End Select
+
+
+        Dim tableLength As Short = WaveLengthTrackBar.Value - 1
+        Dim minValueRange As Short = CByte(WaveMinTrackBar.Value)
+        Dim maxValueRange As Short = CByte(WaveMaxTrackBar.Value)
+
+        Dim freq As Integer = WaveFreqTrackBar.Value
+        Dim phase As Integer = WavePhaseTrackBar.Value
+
+        infoData = "Length=" + CStr(tableLength + 1) + "; Min=" + CStr(minValueRange) + "; Max=" + CStr(maxValueRange)
+
+        If Not Me.WaveTypeComboBox.SelectedIndex = WAVE_TYPE.NOISE Then
+            infoData += "; Phase=" + CStr(phase) + "; Freq=" + CStr(freq)
+        End If
+        comments.Add(infoData)
+
+
+
+        Select Case DataTypeInput.CodeLanguage
+            Case DataFormat.ProgrammingLanguage.C
+                OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastCByteCommand)
+            Case DataFormat.ProgrammingLanguage.ASSEMBLER
+                OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastAsmByteCommand)
+            Case DataFormat.ProgrammingLanguage.BASIC
+                OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, Me.DataTypeInput.BASICremoveZeros, Me.DataTypeInput.BASIClineNumber, Me.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
+        End Select
+
     End Sub
 
 
@@ -603,120 +622,6 @@ Public Class MainForm
 
 
 
-    ''' <summary>
-    ''' Generate data from binary file.
-    ''' </summary>
-    ''' <remarks></remarks>
-    Private Function GetBinaryFileData() As Byte()
-        Dim aFileData As Byte()
-        Dim outputData(1) As Byte
-        'Dim fileLength As Integer
-        Dim fileOutputSize As Integer
-
-        Dim fillValue As Byte = CByte(Me.BinaryFillValueTextBox.Text)
-        Dim initValue As Byte = CByte(Me.BinaryInitTextBox.Text)
-        Dim outputLength As Integer = CInt(BinaryLengthTextBox.Text)
-
-
-
-        If System.IO.File.Exists(Me.binaryFilePath) Then
-
-            aFileData = LoadBinary(Me.binaryFilePath)
-
-            'fileLength = aFileData.Length - 1
-            fileOutputSize = (aFileData.Length - 1) - initValue
-
-
-            ReDim outputData(outputLength - 1)
-
-
-            If outputLength > fileOutputSize Then
-
-                ' rellena con el valor dado en el campo BinaryFillValueTextBox
-                For i As Integer = fileOutputSize To outputLength - 1
-                    outputData(i) = fillValue
-                Next
-
-
-            End If
-
-
-            Array.Copy(aFileData, initValue, outputData, 0, fileOutputSize)
-
-        End If
-
-        Return outputData
-
-    End Function
-
-
-
-    ''' <summary>
-    ''' Show source data according to the selected format.
-    ''' </summary>
-    ''' <param name="data"></param>
-    ''' <param name="dataType"></param>
-    ''' <remarks></remarks>
-    Private Sub ShowData(ByVal data As Byte(), ByVal dataType As String, ByVal comments As ArrayList)
-
-        Dim labelName As String = Me.LabelTextBox.Text
-
-        Dim infoData As String = ""
-
-        If comments Is Nothing Then
-            comments = New ArrayList
-        End If
-
-        comments.Add(dataType)
-
-        Select Case Me.DataTypeInput.Compress  'CompressionCB.SelectedIndex
-
-            Case 1
-                comments.Add("RLE compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
-            Case 2
-                comments.Add("RLE WB compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
-
-                'Case 3
-
-
-            Case Else
-                If ToolTabControl.SelectedIndex = DATA_TYPE.BINARY Then
-                    comments.Add("Size=" + CStr(Me.outputDataSize))
-                End If
-        End Select
-
-
-        If ToolTabControl.SelectedIndex = DATA_TYPE.WAVE Then
-
-            Dim tableLength As Short = WaveLengthTrackBar.Value - 1
-            Dim minValueRange As Short = CByte(WaveMinTrackBar.Value)
-            Dim maxValueRange As Short = CByte(WaveMaxTrackBar.Value)
-
-            Dim freq As Integer = WaveFreqTrackBar.Value
-            Dim phase As Integer = WavePhaseTrackBar.Value
-
-            infoData = "Length=" + CStr(tableLength + 1) + "; Min=" + CStr(minValueRange) + "; Max=" + CStr(maxValueRange)
-
-            If Not Me.WaveTypeComboBox.SelectedIndex = WAVE_TYPE.NOISE Then
-                infoData += "; Phase=" + CStr(phase) + "; Freq=" + CStr(freq)
-            End If
-            comments.Add(infoData)
-        End If
-
-
-        Select Case DataTypeInput.CodeLanguage
-            Case DataFormat.ProgrammingLanguage.C
-                OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastCByteCommand)
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastAsmByteCommand)
-            Case DataFormat.ProgrammingLanguage.BASIC
-                OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, Me.DataTypeInput.BASICremoveZeros, Me.DataTypeInput.BASIClineNumber, Me.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
-        End Select
-
-
-    End Sub
-
-
 
     Private Sub CopyAllButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyAllButton.Click
         CopyAll()
@@ -731,114 +636,6 @@ Public Class MainForm
     Private Sub CopyAll()
         My.Computer.Clipboard.SetText(Me.OutputText.Text)
     End Sub
-
-
-
-    Private Sub SelectBinaryButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectBinaryButton.Click
-        LoadBinaryFileDialog()
-    End Sub
-
-
-
-    ''' <summary>
-    ''' Select a binary file.
-    ''' </summary>
-    ''' <remarks></remarks>
-    Private Sub LoadBinaryFileDialog()
-
-        If Me.binaryFilePath = "" Then
-            Me.OpenFileDialog1.FileName = ""
-            Me.OpenFileDialog1.InitialDirectory = Me.AppConfig.PathItemBinary.Path
-        Else
-            Me.OpenFileDialog1.FileName = Path.GetFileName(Me.binaryFilePath)
-            Me.OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.binaryFilePath)
-        End If
-
-        'Me.OpenFileDialog1.DefaultExt = "prj"
-        Me.OpenFileDialog1.Filter = "All files|*.*|Binary files|*.bin|SC2 files|*.SC2|SCn files|*.SC*"
-
-        If OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            SetBinFile(OpenFileDialog1.FileName)
-        End If
-
-    End Sub
-
-
-
-    ''' <summary>
-    ''' Init Binary file type project
-    ''' </summary>
-    ''' <param name="filepath"></param>
-    ''' <remarks></remarks>
-    Private Sub SetBinFile(ByVal filepath As String)
-
-        Dim aFile As FileInfo
-
-        If File.Exists(filepath) Then
-
-            aFile = New FileInfo(filepath)
-
-            If aFile.Length <= 65536 Then
-
-                Me.binaryFilePath = filepath
-                Me.Info.Name = Path.GetFileNameWithoutExtension(filepath)
-
-                Me.BinaryNameTextBox.Text = Path.GetFileName(Me.binaryFilePath)
-                Me.FileLengthTextBox.Text = CStr(My.Computer.FileSystem.GetFileInfo(Me.binaryFilePath).Length)
-                Me.BinaryLengthTextBox.Text = CStr(getBinaryFinalLength())  'Me.FileLengthTextBox.Text
-                Me.ProjectNameTextBox.Text = Me.Info.Name
-
-                aHexDump.BinaryData = LoadBinary(Me.binaryFilePath)
-
-                Me.AppConfig.PathItemBinary.UpdateLastPath(Path.GetDirectoryName(Me.binaryFilePath))
-
-                ClearOutput()
-
-            Else
-
-                MsgBox("Only supports files up to 64k.", MsgBoxStyle.Exclamation, "Alert")
-
-            End If
-
-        End If
-
-
-    End Sub
-
-
-
-    ''' <summary>
-    ''' Load binary file.
-    ''' </summary>
-    ''' <param name="filePath"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Private Function LoadBinary(ByVal filePath As String) As Byte()
-
-        Dim aStream As FileStream
-        Dim aFile As New FileInfo(filePath)
-
-        Dim aFileData As Byte()
-
-        Dim conta As Integer = 7
-
-        Dim filesize As Long = aFile.Length
-
-
-        If filesize > 65536 Then
-            Return Nothing
-        End If
-
-        aStream = New System.IO.FileStream(filePath, FileMode.Open)
-
-        ReDim aFileData(filesize)
-
-        aStream.Read(aFileData, 0, filesize)
-        aStream.Close()
-
-        Return aFileData
-
-    End Function
 
 
 
@@ -863,7 +660,7 @@ Public Class MainForm
                     Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
                 Case DataFormat.ProgrammingLanguage.C
                     Me.SaveFileDialog1.DefaultExt = "c"
-                    Me.SaveFileDialog1.Filter = "C file|*.c"
+                    Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
                 Case DataFormat.ProgrammingLanguage.ASSEMBLER
                     Me.SaveFileDialog1.DefaultExt = "asm"
                     Me.SaveFileDialog1.Filter = "ASM file|*.asm|ASM file|*.s"
@@ -895,21 +692,11 @@ Public Class MainForm
 
 
 
-    Private Sub ToolTabControl_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolTabControl.SelectedIndexChanged
-        ClearOutput()
-    End Sub
 
 
-
-    Private Sub ClearButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClearButton.Click
-        ClearOutput()
-    End Sub
-
-
-
-    Private Sub ClearOutput()
-        OutputText.Text = ""
-    End Sub
+    'Private Sub ClearOutput()
+    '    OutputText.Text = ""
+    'End Sub
 
 
 
@@ -919,9 +706,6 @@ Public Class MainForm
 
         If Path.GetExtension(tmpFilePath).ToUpper = ("." + Config.Extension_byteGEN) Then
             LoadProject(tmpFilePath)
-        Else
-            SetBinFile(tmpFilePath)
-            ToolTabControl.SelectTab(1)
         End If
 
     End Sub
@@ -1244,83 +1028,6 @@ Public Class MainForm
 
 
 
-    ' valida el campo de inicio del fichero, para remover cabeceras
-    Private Sub BinaryInitTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles BinaryInitTextBox.Validating
-        Dim value As Integer
-
-        If Not IsNumeric(Me.BinaryInitTextBox.Text) Then
-            value = 0
-        Else
-            value = CInt(Me.BinaryInitTextBox.Text)
-
-            If value > 1024 Then
-                value = 1024
-            ElseIf value < 0 Then
-                value = 0
-            End If
-        End If
-
-        Me.BinaryInitTextBox.Text = CStr(value)
-
-        BinaryLengthTextBox.Text = CStr(getBinaryFinalLength())
-
-    End Sub
-
-
-
-    'valida el campo de valor para relleno
-    Private Sub BinaryFillValueTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles BinaryFillValueTextBox.Validating
-
-        Dim value As Integer
-
-        If IsNumeric(BinaryFillValueTextBox.Text) Then
-            value = CInt(BinaryFillValueTextBox.Text)
-            If value > 255 Then
-                BinaryFillValueTextBox.Text = "255"
-            End If
-        Else
-            ' si no es un numerico mete el valor por defecto
-            BinaryFillValueTextBox.Text = "255"
-        End If
-
-    End Sub
-
-
-
-    ' valida el campo de valor de tamaño de la salida
-    Private Sub BinaryLengthTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles BinaryLengthTextBox.Validating
-        Dim value As Integer
-        Dim initPos As Integer = CInt(BinaryInitTextBox.Text)
-
-        If Not Me.FileLengthTextBox.Text = "" Then
-            If IsNumeric(BinaryLengthTextBox.Text) Then
-                value = CInt(BinaryLengthTextBox.Text)
-                If value < initPos Or value > 65536 Then
-                    BinaryLengthTextBox.Text = CStr(getBinaryFinalLength())
-                End If
-            Else
-                ' si no es un numerico mete el valor por defecto
-                BinaryLengthTextBox.Text = CStr(getBinaryFinalLength())
-            End If
-        End If
-
-    End Sub
-
-
-
-    Private Function getBinaryFinalLength()
-        Dim initPos As Integer = CInt(BinaryInitTextBox.Text)
-        Dim fileLength As Integer = CInt(Me.FileLengthTextBox.Text)
-        Dim outputLength As Integer
-
-        outputLength = fileLength - initPos
-        '(fileLength - 1) - initPos
-
-        Return outputLength
-
-    End Function
-
-
 
 
     ''' <summary>
@@ -1386,57 +1093,6 @@ Public Class MainForm
                 End If
                 Me.ProjectNameTextBox.Text = Me.Info.Name
                 ' END Project Info
-
-
-                subNode = aNode.SelectSingleNode("dataTYPE")
-                If subNode Is Nothing Then
-                    Me.ToolTabControl.SelectedIndex = 0
-                Else
-                    Me.ToolTabControl.SelectedIndex = CInt(subNode.InnerText)
-                End If
-
-
-
-                ' Binary file ###################################################
-                subNode = aNode.SelectSingleNode("binary")
-                If subNode Is Nothing Then
-                    '
-                    'Me.BinaryInitTextBox.Text = "0"
-                    'Me.BinaryLengthTextBox.Text = "0"
-                    'Me.BinaryFillValueTextBox.Text = "255"
-                Else
-                    If System.IO.File.Exists(subNode.InnerText) Then
-
-                        SetBinFile(subNode.InnerText)
-                        'Me.binaryFilePath = subNode.InnerText
-                        'Me.BinaryNameTextBox.Text = Me.binaryFilePath
-
-                        attrNode = subNode.SelectSingleNode("@init")
-                        If attrNode Is Nothing Then
-                            Me.BinaryInitTextBox.Text = "0"
-                        Else
-                            Me.BinaryInitTextBox.Text = attrNode.InnerText
-                        End If
-
-                        attrNode = subNode.SelectSingleNode("@length")
-                        If attrNode Is Nothing Then
-                            Me.BinaryLengthTextBox.Text = "0"
-                        Else
-                            Me.BinaryLengthTextBox.Text = attrNode.InnerText
-                        End If
-
-                        attrNode = subNode.SelectSingleNode("@fillValue")
-                        If attrNode Is Nothing Then
-                            Me.BinaryFillValueTextBox.Text = "255"
-                        Else
-                            Me.BinaryFillValueTextBox.Text = attrNode.InnerText
-                        End If
-                    End If
-
-
-                End If
-                ' END Binary file ###############################################
-
 
 
                 ' Wave data ###################################################
@@ -1633,7 +1289,6 @@ Public Class MainForm
 
     ''' <summary>
     ''' Save a project, from an absolute path.
-    ''' coded (18/10/2017) listening Massive Attack (Live at Melt Music Festival) https://youtu.be/TqYA7uJUbqE
     ''' </summary>
     ''' <param name="filePath"></param>
     ''' <remarks></remarks>
@@ -1642,7 +1297,7 @@ Public Class MainForm
 
         Dim aXmlDoc As New XmlDocument
         Dim rootElement As XmlElement
-        Dim txtElement As XmlText
+        'Dim txtElement As XmlText
         Dim anElement As XmlElement
         'Dim subElement As XmlElement
         Dim anItemElement As XmlElement
@@ -1673,38 +1328,9 @@ Public Class MainForm
         anElement.AppendChild(anItemElement)
 
 
-        anItemElement = aXmlDoc.CreateElement("dataTYPE")
-        anElement.AppendChild(anItemElement)
-        txtElement = aXmlDoc.CreateTextNode(CStr(Me.ToolTabControl.SelectedIndex))
-        anItemElement.AppendChild(txtElement)
 
-
-        If Me.ToolTabControl.SelectedIndex = 1 Then
-
-            ' Binary file ###################################################
-            anItemElement = aXmlDoc.CreateElement("binary")
-            anElement.AppendChild(anItemElement)
-            txtElement = aXmlDoc.CreateTextNode(Me.binaryFilePath)
-            anItemElement.AppendChild(txtElement)
-
-            anAttribute = aXmlDoc.CreateAttribute("init")
-            anAttribute.Value = Me.BinaryInitTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-
-            anAttribute = aXmlDoc.CreateAttribute("length")
-            anAttribute.Value = Me.BinaryLengthTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-
-            anAttribute = aXmlDoc.CreateAttribute("fillValue")
-            anAttribute.Value = Me.BinaryFillValueTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-            ' END Binary file ###############################################
-
-        Else
-
-
-            ' Waveform data ###################################################
-            anItemElement = aXmlDoc.CreateElement("waveform")
+        ' Waveform data ###################################################
+        anItemElement = aXmlDoc.CreateElement("waveform")
             anElement.AppendChild(anItemElement)
             '
             anAttribute = aXmlDoc.CreateAttribute("type")
@@ -1725,10 +1351,7 @@ Public Class MainForm
             anAttribute = aXmlDoc.CreateAttribute("freq")
             anAttribute.Value = FreqTextBox.Text
             anItemElement.SetAttributeNode(anAttribute)
-            ' END Wave data ################################################
-
-        End If
-
+        ' END Wave data ################################################
 
 
 

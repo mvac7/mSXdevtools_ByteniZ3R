@@ -81,9 +81,6 @@
     <Compile Include="DataTypeInputControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HexDump.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="LastProjectsList.vb" />
     <Compile Include="MainForm.vb">
       <SubType>Form</SubType>
@@ -140,10 +137,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataTypeInputControl.resx">
       <DependentUpon>DataTypeInputControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HexDump.resx">
-      <DependentUpon>HexDump.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

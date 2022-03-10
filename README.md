@@ -5,7 +5,6 @@
     
 ```
 Short:        Another generator of data tables in Bytes.         
-Author:       mvac7
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3   
@@ -19,7 +18,7 @@ License:      GNU General Public License v3
 
 ## Description
 
-Generates tables of 8 bits unsigned values, from waveforms or binary files, in different programming languages (BASIC, C or ASM).
+Generates tables of 8 bits unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
 
 This tool is designed primarily to support cross-development of retro-computer applications.
    
@@ -32,7 +31,7 @@ This software was developed in Microsoft Visual Studio Community 2019.
 
 ## License
 
-Copyright (C) 2021 mvac7
+Copyright (C) 2022 mvac7
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -68,9 +67,8 @@ For run, execute ByteniZ3R.exe
 * Phase and Frequency adjustmens.
 * BASIC, C and Assembler output.
 * RLE and RLEWB data compressors.
-* Data dump from a binary file.
-* Hexadecimal table viewer (for remove headers in binary files).
-* Allows Drag & Drop of files.
+* Save/Load project files.
+* Edit info project. 
 
 ---
 
@@ -86,11 +84,15 @@ The most current versions have a new name because one day I woke up with the nee
 <br/>The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
 
-![ByteniZ3R screenshot](https://raw.githubusercontent.com/mvac7/mSXdevtools_ByteniZ3R/main/GFX/ByteniZ3R_v091b_screenshot01.png)
+![ByteniZ3R screenshot](https://raw.githubusercontent.com/mvac7/mSXdevtools_ByteniZ3R/main/GFX/screenshots/ByteniZ3R_v092b_screenshot01.png)
 
 
+### ByteniZ3R v0.9.2b (March 2022).
 
-### ByteniZ3R v0.9.1b (August 2021) Last version.
+- Remove binary handling function #6 
+
+
+### ByteniZ3R v0.9.1b (August 2021).
 
 - Save/Load Project File.
 - Add Project Info
@@ -149,25 +151,27 @@ Requires: PC with Windows System and Framework 2.0
 
 ---
 
-## Acknowledgements:
-
+## Acknowledgments
+  
 I want to give a special thanks to all those who freely share their knowledge with the MSX developer community.
 
-* Avelino Herrera > [(WEB)](http://msx.avelinoherrera.com)
-* Nerlaska > [(Blog)](http://albertodehoyonebot.blogspot.com.es)
-* Marq > [(Marq)](http://www.kameli.net/marq/)
-* MSXKun/Paxanga soft > [(WEB)](http://paxangasoft.retroinvaders.com/)
-* Fubukimaru [(gitHub)](https://github.com/Fubukimaru)
-* Andrear > [(Blog)](http://andrear.altervista.org/home/msxsoftware.php)
-* Sapphire/Z80ST > [(WEB)](http://z80st.auic.es/)
-* Fernando García > [(Curso)](http://www.z80st.es/cursos/bitvision-assembler)
-* Ramones > [(MSXblog)](https://www.msxblog.es/tutoriales-de-programacion-en-ensamblador-ramones/) - [(MSXbanzai)](http://msxbanzai.tni.nl/dev/faq.html)
-* Eric Boez > [(gitHub)](https://github.com/ericb59)
-* MSX Assembly Page > [(WEB)](http://map.grauw.nl/resources/msxbios.php)
-* Portar MSX Tech Doc > [(WEB)](https://problemkaputt.de/portar.htm)
-* MSX Resource Center [Development Wiki](https://www.msx.org/wiki/#Developing_for_MSX)
-* Karoshi MSX Community > [(WEB)](http://karoshi.auic.es/)
-* BlueMSX emulator >> [(WEB)](http://www.bluemsx.com/)
-* OpenMSX emulator >> [(WEB)](http://openmsx.sourceforge.net/)
-* Meisei emulator >> ?
+- Avelino Herrera > [`WEB`](http://msx.avelinoherrera.com/index_es.html)
+- Nerlaska > [`Blog`](http://albertodehoyonebot.blogspot.com.es)
+- Marq > [`Marq`](http://www.kameli.net/marq/)
+- MSXKun/Paxanga soft > [`WEB`](http://paxangasoft.retroinvaders.com/)
+- Fubukimaru [`gitHub`](https://github.com/Fubukimaru)
+- Andrear > [`Blog`](http://andrear.altervista.org/home/msxsoftware.php)
+- Sapphire/Z80ST > [`WEB`](http://z80st.auic.es/)
+- Fernando García > [`Video Tutorial`](http://www.z80st.es/cursos/bitvision-assembler)
+- Ramones > [`MSXblog`](https://www.msxblog.es/tutoriales-de-programacion-en-ensamblador-ramones/) - [`MSXbanzai`](http://msxbanzai.tni.nl/dev/faq.html)
+- Eric Boez > [`gitHub`](https://github.com/ericb59)
+- MSX Assembly Page > [`WEB`](http://map.grauw.nl/resources/msxbios.php)
+- Portar MSX Tech Doc > [`WEB`](https://problemkaputt.de/portar.htm)
+- MSX Resource Center > [`WEB`](http://www.msx.org/)
+- Karoshi MSX Community > [`WEB`](http://karoshi.auic.es/)
+- BlueMSX emulator >> [`WEB`](http://www.bluemsx.com/)
+- OpenMSX emulator >> [`WEB`](http://openmsx.sourceforge.net/)
+- [`WebMSX`](https://webmsx.org/) emulator by Paulo A. Peccin >> [`gitHub`](https://github.com/ppeccin/webmsx)
+- fMSX emulator by Marat Fayzullin [`WEB`](https://fms.komkon.org/fMSX/)
+- Meisei emulator by Hap >> `?`
 
