@@ -89,6 +89,12 @@
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MessageDialog.Designer.vb">
+      <DependentUpon>MessageDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -141,6 +147,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MessageDialog.resx">
+      <DependentUpon>MessageDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -174,7 +183,6 @@
     <None Include="Resources\display_ruler.png" />
     <None Include="Resources\project_properties_24p.png" />
     <None Include="Resources\save3_x24.png" />
-    <None Include="Resources\Load_file_x24.png" />
     <None Include="Resources\help_x24.png" />
     <None Include="Resources\new_24.png" />
     <None Include="Resources\config_x24.png" />
@@ -184,9 +192,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\button_savebinary.png" />
+    <None Include="Resources\button_savesource.png" />
+    <None Include="Resources\button_CopyAll.png" />
+    <None Include="Resources\piXel_pane_XL.png" />
+    <None Include="Resources\button_Ok.png" />
+    <None Include="Resources\icon_byteniZ3R_128px.png" />
+    <None Include="Resources\ByteniZ3R_logo.png" />
     <None Include="Resources\Load_file2_x24.png" />
-    <None Include="Resources\load2_x16.png" />
-    <None Include="Resources\Aboud_win_bytenizer.png" />
     <None Include="Resources\folder2_x16.png" />
     <None Include="Resources\folder_x24.png" />
   </ItemGroup>

@@ -43,15 +43,39 @@ Public NotInheritable Class AboutWin
 
         Me.LicenseTextBox.Text = LicenseText
 
+        ' draw gradient in window-form background
+        Dim gradientBG As New Bitmap(Me.Width, Me.Height)
+        Dim newBrush As New Drawing.Drawing2D.LinearGradientBrush(New PointF(0, 0), New PointF(0, gradientBG.Height), Color.Gainsboro, Color.DarkGray)
+        Dim oneGraphic As Graphics = Graphics.FromImage(gradientBG)
+        oneGraphic.FillRectangle(newBrush, New RectangleF(0, 0, gradientBG.Width, gradientBG.Height))
+        Me.BackgroundImage = gradientBG
+
     End Sub
+
+
 
     Private Sub OKButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKButton.Click
         Me.Close()
     End Sub
 
 
+
     Private Sub GPLButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GPLButton.Click
         System.Diagnostics.Process.Start(URL_GPL)
+    End Sub
+
+
+
+    Private Sub Dialog_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
+            Me.Close()
+        End If
+
+        If e.KeyCode = Keys.Escape Then
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
+            Me.Close()
+        End If
     End Sub
 
 

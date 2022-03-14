@@ -129,15 +129,19 @@ Public Class MainForm
 
 
     Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        Dim result As System.Windows.Forms.DialogResult
 
-        Me.AppConfig.Save()
+        Dim result As System.Windows.Forms.DialogResult
+        Dim MessageWin As New MessageDialog
+
+        Application.DoEvents()
 
         Beep()
 
-        result = MessageBox.Show(Me, "Are you sure you want to close ByteGen?", "Closing Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        result = MessageWin.ShowDialog(Me, "Closing Application!", "Are you sure you want to close " + My.Application.Info.Title + "?", MessageDialog.DIALOG_TYPE.YES_NO) '+ vbCrLf
 
-        If result = Windows.Forms.DialogResult.No Then
+        If result = Windows.Forms.DialogResult.Yes Then
+            Me.AppConfig.Save()
+        Else
             e.Cancel = True 'cancela la salida de la aplicacion
         End If
 
@@ -189,10 +193,10 @@ Public Class MainForm
         Select Case Me.DataTypeInput.Compress 'CompressionCB.SelectedIndex
 
             Case 1
-                Me.lastOutputData = aRLE.GetRLE(tmpData)
+                Me.lastOutputData = aRLE.Compress_RLE(tmpData)
 
             Case 2
-                Me.lastOutputData = aRLE.GetRLE_WB(tmpData)
+                Me.lastOutputData = aRLE.Compress_RLEWB(tmpData)
 
             Case Else
                 Me.lastOutputData = tmpData
@@ -622,13 +626,6 @@ Public Class MainForm
 
 
 
-
-    Private Sub CopyAllButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyAllButton.Click
-        CopyAll()
-    End Sub
-
-
-
     ''' <summary>
     ''' Copy output to clipboard
     ''' </summary>
@@ -639,7 +636,7 @@ Public Class MainForm
 
 
 
-    Private Sub SaveAsButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveAsButton.Click
+    Private Sub SaveSourceDialog()
 
         If Me.OutputText.Text = "" Then
             MsgBox("Nothing to save for you...", MsgBoxStyle.Exclamation, "Alert")
@@ -875,7 +872,7 @@ Public Class MainForm
 
 
 
-    Private Sub SavebinButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SavebinButton.Click
+    Private Sub SaveBinaryDialog()
 
         If Me.lastOutputData.Length < 1 Then
             MsgBox("Nothing to save for you...", MsgBoxStyle.Exclamation, "Alert")
@@ -916,12 +913,6 @@ Public Class MainForm
 
 
     Private Sub RandomButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RandomButton.Click
-        GenerateData()
-    End Sub
-
-
-
-    Private Sub GenerateButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GenerateButton.Click
         GenerateData()
     End Sub
 
@@ -1331,26 +1322,26 @@ Public Class MainForm
 
         ' Waveform data ###################################################
         anItemElement = aXmlDoc.CreateElement("waveform")
-            anElement.AppendChild(anItemElement)
-            '
-            anAttribute = aXmlDoc.CreateAttribute("type")
-            anAttribute.Value = CStr(Me.WaveTypeComboBox.SelectedIndex)
-            anItemElement.SetAttributeNode(anAttribute)
-            anAttribute = aXmlDoc.CreateAttribute("size")
-            anAttribute.Value = WaveLengthTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-            anAttribute = aXmlDoc.CreateAttribute("minValue")
-            anAttribute.Value = WaveMinTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-            anAttribute = aXmlDoc.CreateAttribute("maxValue")
-            anAttribute.Value = WaveMaxTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-            anAttribute = aXmlDoc.CreateAttribute("phase")
-            anAttribute.Value = PhaseTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
-            anAttribute = aXmlDoc.CreateAttribute("freq")
-            anAttribute.Value = FreqTextBox.Text
-            anItemElement.SetAttributeNode(anAttribute)
+        anElement.AppendChild(anItemElement)
+        '
+        anAttribute = aXmlDoc.CreateAttribute("type")
+        anAttribute.Value = CStr(Me.WaveTypeComboBox.SelectedIndex)
+        anItemElement.SetAttributeNode(anAttribute)
+        anAttribute = aXmlDoc.CreateAttribute("size")
+        anAttribute.Value = WaveLengthTextBox.Text
+        anItemElement.SetAttributeNode(anAttribute)
+        anAttribute = aXmlDoc.CreateAttribute("minValue")
+        anAttribute.Value = WaveMinTextBox.Text
+        anItemElement.SetAttributeNode(anAttribute)
+        anAttribute = aXmlDoc.CreateAttribute("maxValue")
+        anAttribute.Value = WaveMaxTextBox.Text
+        anItemElement.SetAttributeNode(anAttribute)
+        anAttribute = aXmlDoc.CreateAttribute("phase")
+        anAttribute.Value = PhaseTextBox.Text
+        anItemElement.SetAttributeNode(anAttribute)
+        anAttribute = aXmlDoc.CreateAttribute("freq")
+        anAttribute.Value = FreqTextBox.Text
+        anItemElement.SetAttributeNode(anAttribute)
         ' END Wave data ################################################
 
 
@@ -1599,4 +1590,20 @@ Public Class MainForm
     Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         ShowWave()
     End Sub
+
+
+
+    Private Sub CopyAllButton_Click(sender As Object, e As EventArgs) Handles CopyAllButton.Click
+        CopyAll()
+    End Sub
+
+    Private Sub SaveSourceButton_Click(sender As Object, e As EventArgs) Handles SaveSourceButton.Click
+        SaveSourceDialog()
+    End Sub
+
+    Private Sub SaveBinaryFileButton_Click(sender As Object, e As EventArgs) Handles SaveBinaryFileButton.Click
+        SaveBinaryDialog()
+    End Sub
+
+
 End Class
