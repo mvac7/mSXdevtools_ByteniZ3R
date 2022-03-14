@@ -93,14 +93,20 @@ Public Class MainForm
         End If
 
 
-        Me.DataTypeInput.AppConfig = Me.AppConfig
-        Me.DataTypeInput.InitControl()
+        Me.anOutputDataGBox.DataTypeInput.AppConfig = Me.AppConfig
+        Me.anOutputDataGBox.DataTypeInput.InitControl()
 
-        Me.LabelTextBox.Text = Me.AppConfig.defDataLabel
+        Me.anOutputDataGBox.LabelTextBox.Text = Me.AppConfig.defDataLabel
+
+        SetOutputtextSize()
 
         NewProject()
 
         AddHandlers()
+
+        Application.DoEvents()
+
+        WaveTypeComboBox.Focus()
 
     End Sub
 
@@ -190,7 +196,7 @@ Public Class MainForm
         Me.outputDataSize = tmpData.Length
 
         'data compression
-        Select Case Me.DataTypeInput.Compress 'CompressionCB.SelectedIndex
+        Select Case Me.anOutputDataGBox.DataTypeInput.Compress 'CompressionCB.SelectedIndex
 
             Case 1
                 Me.lastOutputData = aRLE.Compress_RLE(tmpData)
@@ -205,6 +211,8 @@ Public Class MainForm
 
         GenerateCode(Me.lastOutputData)
 
+
+
     End Sub
 
 
@@ -213,7 +221,7 @@ Public Class MainForm
 
         Dim comments As New ArrayList
 
-        Dim labelName As String = Me.LabelTextBox.Text
+        Dim labelName As String = Me.anOutputDataGBox.LabelTextBox.Text
 
         Dim infoData As String = ""
 
@@ -223,7 +231,7 @@ Public Class MainForm
 
         comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
 
-        Select Case Me.DataTypeInput.Compress  'CompressionCB.SelectedIndex
+        Select Case Me.anOutputDataGBox.DataTypeInput.Compress  'CompressionCB.SelectedIndex
 
             Case 1
                 comments.Add("RLE compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
@@ -254,15 +262,13 @@ Public Class MainForm
         End If
         comments.Add(infoData)
 
-
-
-        Select Case DataTypeInput.CodeLanguage
+        Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
             Case DataFormat.ProgrammingLanguage.C
-                OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastCByteCommand)
+                OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastCByteCommand)
             Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastAsmByteCommand)
+                OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastAsmByteCommand)
             Case DataFormat.ProgrammingLanguage.BASIC
-                OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.DataTypeInput.SizeLine), Me.DataTypeInput.NumeralSystem, Me.DataTypeInput.BASICremoveZeros, Me.DataTypeInput.BASIClineNumber, Me.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
+                OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, Me.anOutputDataGBox.DataTypeInput.BASICremoveZeros, Me.anOutputDataGBox.DataTypeInput.BASIClineNumber, Me.anOutputDataGBox.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
         End Select
 
     End Sub
@@ -651,7 +657,7 @@ Public Class MainForm
                 Me.SaveFileDialog1.FileName = Path.GetDirectoryName(Me._txtPath)
             End If
 
-            Select Case DataTypeInput.CodeLanguage
+            Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
                 Case DataFormat.ProgrammingLanguage.BASIC
                     Me.SaveFileDialog1.DefaultExt = "BAS"
                     Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
@@ -1008,16 +1014,6 @@ Public Class MainForm
 
 
 
-    Private Sub LabelTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles LabelTextBox.Validating
-
-        If Me.LabelTextBox.Text.Trim() = "" Then
-            Me.LabelTextBox.Text = "DATA"
-        End If
-
-        GenerateCode(Me.lastOutputData)
-    End Sub
-
-
 
 
 
@@ -1214,13 +1210,13 @@ Public Class MainForm
 
                     attrNode = subNode.SelectSingleNode("@Label")
                     If attrNode Is Nothing Then
-                        Me.LabelTextBox.Text = "DATA"
+                        Me.anOutputDataGBox.LabelTextBox.Text = "DATA"
                     Else
-                        Me.LabelTextBox.Text = CStr(attrNode.InnerText)
+                        Me.anOutputDataGBox.LabelTextBox.Text = CStr(attrNode.InnerText)
                     End If
 
 
-                    Me.DataTypeInput.InitControl()  '<--- refresh data 
+                    Me.anOutputDataGBox.DataTypeInput.InitControl()  '<--- refresh data 
 
                 End If
                 ' END Output Data Config ###############################################
@@ -1351,39 +1347,39 @@ Public Class MainForm
         anElement.AppendChild(anItemElement)
         '
         anAttribute = aXmlDoc.CreateAttribute("CodeType")
-        anAttribute.Value = CStr(Me.DataTypeInput.CodeLanguage)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.CodeLanguage)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("DataFormat")
-        anAttribute.Value = CStr(Me.DataTypeInput.NumeralSystem) 'Me.DataFormatComboB.SelectedIndex)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.NumeralSystem) 'Me.DataFormatComboB.SelectedIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("CodeCompressType")
-        anAttribute.Value = CStr(Me.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("SizeLine")
-        anAttribute.Value = CStr(Me.DataTypeInput.SizeLineIndex) 'Me.ItemsPerLineComboBox.SelectedIndex)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.SizeLineIndex) 'Me.ItemsPerLineComboBox.SelectedIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("AsmCommand")
-        anAttribute.Value = Me.DataTypeInput.AsmByteCommand 'Me.AsmCommandTextBox.Text)
+        anAttribute.Value = Me.anOutputDataGBox.DataTypeInput.AsmByteCommand 'Me.AsmCommandTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("BASICinitLine")
-        anAttribute.Value = CStr(Me.DataTypeInput.BASIClineNumber) 'Me.BASICinitLineTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASIClineNumber) 'Me.BASICinitLineTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("BASICincLines")
-        anAttribute.Value = CStr(Me.DataTypeInput.BASICInterval) 'Me.BASICincLineslTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASICInterval) 'Me.BASICincLineslTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("Remove0")
-        anAttribute.Value = CStr(Me.DataTypeInput.BASICremoveZeros) 'Me.Remove0Check.Checked)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASICremoveZeros) 'Me.Remove0Check.Checked)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("Label")
-        anAttribute.Value = CStr(Me.LabelTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.LabelTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
         ' END Output Data Config ################################################
 
@@ -1543,6 +1539,12 @@ Public Class MainForm
 
 
 
+    Private Sub SetOutputtextSize()
+        OutputText.Location = New Point(OutputText.Location.X, anOutputDataGBox.Location.Y + anOutputDataGBox.Height + 10)
+        OutputText.Height = (SaveoutputPanel.Location.Y - OutputText.Location.Y) - 10
+    End Sub
+
+
     Private Sub NewButton_Click(sender As System.Object, e As System.EventArgs) Handles NewButton.Click
         RemoveHandlers()
         NewProject()
@@ -1570,7 +1572,7 @@ Public Class MainForm
         'helper.ShowDialog()
     End Sub
 
-    Private Sub AboutButton1_Click(sender As System.Object, e As System.EventArgs) Handles AboutButton1.Click
+    Private Sub AboutButton1_Click(sender As System.Object, e As System.EventArgs) Handles AboutButton.Click
         ShowAbout()
     End Sub
 
@@ -1581,11 +1583,6 @@ Public Class MainForm
         about.ShowDialog()
     End Sub
 
-
-
-    Private Sub DataTypeInput_DataChanged() Handles DataTypeInput.DataChanged
-        GenerateData()
-    End Sub
 
     Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         ShowWave()
@@ -1604,6 +1601,13 @@ Public Class MainForm
     Private Sub SaveBinaryFileButton_Click(sender As Object, e As EventArgs) Handles SaveBinaryFileButton.Click
         SaveBinaryDialog()
     End Sub
+
+    Private Sub anOutputDataGBox_AccordionChanged(state As Boolean) Handles anOutputDataGBox.AccordionChanged
+        SetOutputtextSize()
+    End Sub
+
+
+
 
 
 End Class

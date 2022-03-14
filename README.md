@@ -1,7 +1,7 @@
 # ByteniZ3R devtool 
 (formerly called BytesGen)
 
-![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/blob/main/GFX/ByteniZ3R_title_440.png?raw=true)
+![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/ByteniZ3R_logoX3.png)
     
 ```
 Short:        Another generator of data tables in Bytes.         
@@ -84,7 +84,7 @@ The most current versions have a new name because one day I woke up with the nee
 <br/>The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
 
-![ByteniZ3R screenshot](https://raw.githubusercontent.com/mvac7/mSXdevtools_ByteniZ3R/main/GFX/screenshots/ByteniZ3R_v092b_screenshot01.png)
+![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v094b_screenshot01.png)
 
 
 ### ByteniZ3R v0.9.2b (March 2022).

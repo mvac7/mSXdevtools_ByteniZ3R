@@ -25,8 +25,6 @@ Partial Class MainForm
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.OutputText = New System.Windows.Forms.TextBox()
-        Me.LabelTextBox = New System.Windows.Forms.TextBox()
-        Me.LabelLabel = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.WaveLengthTextBox = New System.Windows.Forms.TextBox()
         Me.PhaseTextBox = New System.Windows.Forms.TextBox()
@@ -34,11 +32,6 @@ Partial Class MainForm
         Me.FreqTextBox = New System.Windows.Forms.TextBox()
         Me.WaveMaxTextBox = New System.Windows.Forms.TextBox()
         Me.WaveMinTextBox = New System.Windows.Forms.TextBox()
-        Me.CopyAllButton = New System.Windows.Forms.Button()
-        Me.SaveBinaryFileButton = New System.Windows.Forms.Button()
-        Me.SaveSourceButton = New System.Windows.Forms.Button()
-        Me.OutputDataGroupBox = New System.Windows.Forms.GroupBox()
-        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         Me.WaveFreqTrackBar = New System.Windows.Forms.TrackBar()
         Me.LabelFreq = New System.Windows.Forms.Label()
         Me.WavePhaseTrackBar = New System.Windows.Forms.TrackBar()
@@ -54,64 +47,60 @@ Partial Class MainForm
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ProjectNameTextBox = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.anOutputDataGBox = New ByteniZ3R.OutputDataGBox()
+        Me.waveform_Panel = New System.Windows.Forms.Panel()
+        Me.waveform_up_PictureBox = New System.Windows.Forms.PictureBox()
+        Me.SaveoutputPanel = New System.Windows.Forms.Panel()
+        Me.CopyAllButton = New System.Windows.Forms.Button()
+        Me.SaveBinaryFileButton = New System.Windows.Forms.Button()
+        Me.SaveSourceButton = New System.Windows.Forms.Button()
+        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
+        Me.GFXoutputPictureBox = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.NewButton = New System.Windows.Forms.ToolStripButton()
         Me.LoadButton = New System.Windows.Forms.ToolStripButton()
         Me.SaveButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ProjectNameTextBox = New System.Windows.Forms.ToolStripTextBox()
         Me.ProjectInfoButton = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ConfigButton1 = New System.Windows.Forms.ToolStripButton()
         Me.Help_Button = New System.Windows.Forms.ToolStripButton()
-        Me.AboutButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.WaveformGroupBox = New System.Windows.Forms.GroupBox()
-        Me.GFXoutputPictureBox = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.Panel05 = New System.Windows.Forms.Panel()
-        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.OutputDataGroupBox.SuspendLayout()
+        Me.AboutButton = New System.Windows.Forms.ToolStripButton()
+        Me.DownPictureBox = New System.Windows.Forms.PictureBox()
+        Me.LeftLinePictureBox = New System.Windows.Forms.PictureBox()
+        Me.RightLinePictureBox = New System.Windows.Forms.PictureBox()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WavePhaseTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveMaxTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveMinTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveLengthTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
-        Me.WaveformGroupBox.SuspendLayout()
+        Me.waveform_Panel.SuspendLayout()
+        CType(Me.waveform_up_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SaveoutputPanel.SuspendLayout()
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GFXoutputPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel05.SuspendLayout()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OutputText
         '
-        Me.OutputText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OutputText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.OutputText.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.OutputText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.OutputText.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputText.Location = New System.Drawing.Point(12, 470)
+        Me.OutputText.Location = New System.Drawing.Point(12, 490)
         Me.OutputText.Multiline = True
         Me.OutputText.Name = "OutputText"
         Me.OutputText.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.OutputText.Size = New System.Drawing.Size(757, 101)
-        Me.OutputText.TabIndex = 48
-        '
-        'LabelTextBox
-        '
-        Me.LabelTextBox.Location = New System.Drawing.Point(605, 20)
-        Me.LabelTextBox.Name = "LabelTextBox"
-        Me.LabelTextBox.Size = New System.Drawing.Size(140, 21)
-        Me.LabelTextBox.TabIndex = 46
-        Me.LabelTextBox.Text = "DATA"
-        '
-        'LabelLabel
-        '
-        Me.LabelLabel.Location = New System.Drawing.Point(506, 19)
-        Me.LabelLabel.Name = "LabelLabel"
-        Me.LabelLabel.Size = New System.Drawing.Size(93, 21)
-        Me.LabelLabel.TabIndex = 9
-        Me.LabelLabel.Text = "Field name:"
-        Me.LabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.OutputText.Size = New System.Drawing.Size(762, 101)
+        Me.OutputText.TabIndex = 0
+        Me.OutputText.TabStop = False
         '
         'ToolTip1
         '
@@ -119,7 +108,7 @@ Partial Class MainForm
         '
         'WaveLengthTextBox
         '
-        Me.WaveLengthTextBox.Location = New System.Drawing.Point(271, 47)
+        Me.WaveLengthTextBox.Location = New System.Drawing.Point(272, 48)
         Me.WaveLengthTextBox.MaxLength = 5
         Me.WaveLengthTextBox.Name = "WaveLengthTextBox"
         Me.WaveLengthTextBox.Size = New System.Drawing.Size(44, 21)
@@ -130,7 +119,7 @@ Partial Class MainForm
         '
         'PhaseTextBox
         '
-        Me.PhaseTextBox.Location = New System.Drawing.Point(282, 131)
+        Me.PhaseTextBox.Location = New System.Drawing.Point(283, 132)
         Me.PhaseTextBox.MaxLength = 3
         Me.PhaseTextBox.Name = "PhaseTextBox"
         Me.PhaseTextBox.Size = New System.Drawing.Size(33, 21)
@@ -143,7 +132,7 @@ Partial Class MainForm
         '
         Me.RandomButton.BackColor = System.Drawing.Color.Gainsboro
         Me.RandomButton.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RandomButton.Location = New System.Drawing.Point(271, 19)
+        Me.RandomButton.Location = New System.Drawing.Point(272, 20)
         Me.RandomButton.Name = "RandomButton"
         Me.RandomButton.Size = New System.Drawing.Size(44, 23)
         Me.RandomButton.TabIndex = 2
@@ -153,7 +142,7 @@ Partial Class MainForm
         '
         'FreqTextBox
         '
-        Me.FreqTextBox.Location = New System.Drawing.Point(282, 159)
+        Me.FreqTextBox.Location = New System.Drawing.Point(283, 160)
         Me.FreqTextBox.MaxLength = 3
         Me.FreqTextBox.Name = "FreqTextBox"
         Me.FreqTextBox.Size = New System.Drawing.Size(33, 21)
@@ -164,7 +153,7 @@ Partial Class MainForm
         '
         'WaveMaxTextBox
         '
-        Me.WaveMaxTextBox.Location = New System.Drawing.Point(282, 102)
+        Me.WaveMaxTextBox.Location = New System.Drawing.Point(283, 103)
         Me.WaveMaxTextBox.MaxLength = 3
         Me.WaveMaxTextBox.Name = "WaveMaxTextBox"
         Me.WaveMaxTextBox.Size = New System.Drawing.Size(33, 21)
@@ -175,7 +164,7 @@ Partial Class MainForm
         '
         'WaveMinTextBox
         '
-        Me.WaveMinTextBox.Location = New System.Drawing.Point(282, 74)
+        Me.WaveMinTextBox.Location = New System.Drawing.Point(283, 75)
         Me.WaveMinTextBox.MaxLength = 3
         Me.WaveMinTextBox.Name = "WaveMinTextBox"
         Me.WaveMinTextBox.Size = New System.Drawing.Size(33, 21)
@@ -183,6 +172,222 @@ Partial Class MainForm
         Me.WaveMinTextBox.Text = "0"
         Me.WaveMinTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.WaveMinTextBox, "(0-255)")
+        '
+        'WaveFreqTrackBar
+        '
+        Me.WaveFreqTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
+        Me.WaveFreqTrackBar.LargeChange = 8
+        Me.WaveFreqTrackBar.Location = New System.Drawing.Point(83, 161)
+        Me.WaveFreqTrackBar.Maximum = 256
+        Me.WaveFreqTrackBar.Minimum = 1
+        Me.WaveFreqTrackBar.Name = "WaveFreqTrackBar"
+        Me.WaveFreqTrackBar.Size = New System.Drawing.Size(200, 45)
+        Me.WaveFreqTrackBar.TabIndex = 11
+        Me.WaveFreqTrackBar.TickFrequency = 32
+        Me.WaveFreqTrackBar.Value = 1
+        '
+        'LabelFreq
+        '
+        Me.LabelFreq.Location = New System.Drawing.Point(8, 163)
+        Me.LabelFreq.Name = "LabelFreq"
+        Me.LabelFreq.Size = New System.Drawing.Size(80, 13)
+        Me.LabelFreq.TabIndex = 33
+        Me.LabelFreq.Text = "Frequency:"
+        Me.LabelFreq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'WavePhaseTrackBar
+        '
+        Me.WavePhaseTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
+        Me.WavePhaseTrackBar.LargeChange = 15
+        Me.WavePhaseTrackBar.Location = New System.Drawing.Point(83, 133)
+        Me.WavePhaseTrackBar.Maximum = 359
+        Me.WavePhaseTrackBar.Name = "WavePhaseTrackBar"
+        Me.WavePhaseTrackBar.Size = New System.Drawing.Size(200, 45)
+        Me.WavePhaseTrackBar.TabIndex = 9
+        Me.WavePhaseTrackBar.TickFrequency = 45
+        '
+        'WaveMaxTrackBar
+        '
+        Me.WaveMaxTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
+        Me.WaveMaxTrackBar.LargeChange = 8
+        Me.WaveMaxTrackBar.Location = New System.Drawing.Point(83, 104)
+        Me.WaveMaxTrackBar.Maximum = 255
+        Me.WaveMaxTrackBar.Minimum = 1
+        Me.WaveMaxTrackBar.Name = "WaveMaxTrackBar"
+        Me.WaveMaxTrackBar.Size = New System.Drawing.Size(200, 45)
+        Me.WaveMaxTrackBar.TabIndex = 7
+        Me.WaveMaxTrackBar.TickFrequency = 32
+        Me.WaveMaxTrackBar.Value = 1
+        '
+        'WaveMinTrackBar
+        '
+        Me.WaveMinTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
+        Me.WaveMinTrackBar.LargeChange = 8
+        Me.WaveMinTrackBar.Location = New System.Drawing.Point(83, 75)
+        Me.WaveMinTrackBar.Maximum = 254
+        Me.WaveMinTrackBar.Name = "WaveMinTrackBar"
+        Me.WaveMinTrackBar.Size = New System.Drawing.Size(200, 45)
+        Me.WaveMinTrackBar.TabIndex = 5
+        Me.WaveMinTrackBar.TickFrequency = 32
+        '
+        'LabelPhase
+        '
+        Me.LabelPhase.Location = New System.Drawing.Point(8, 135)
+        Me.LabelPhase.Name = "LabelPhase"
+        Me.LabelPhase.Size = New System.Drawing.Size(80, 13)
+        Me.LabelPhase.TabIndex = 30
+        Me.LabelPhase.Text = "Phase:"
+        Me.LabelPhase.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label14
+        '
+        Me.Label14.Location = New System.Drawing.Point(8, 24)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(80, 13)
+        Me.Label14.TabIndex = 27
+        Me.Label14.Text = "Type:"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'WaveTypeComboBox
+        '
+        Me.WaveTypeComboBox.FormattingEnabled = True
+        Me.WaveTypeComboBox.Items.AddRange(New Object() {"Sine", "Cosine", "Square", "Triangle", "Sawtooth", "Noise (Random)"})
+        Me.WaveTypeComboBox.Location = New System.Drawing.Point(91, 21)
+        Me.WaveTypeComboBox.Name = "WaveTypeComboBox"
+        Me.WaveTypeComboBox.Size = New System.Drawing.Size(176, 21)
+        Me.WaveTypeComboBox.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(8, 51)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(80, 13)
+        Me.Label4.TabIndex = 22
+        Me.Label4.Text = "Length:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label12
+        '
+        Me.Label12.Location = New System.Drawing.Point(8, 78)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(80, 13)
+        Me.Label12.TabIndex = 25
+        Me.Label12.Text = "Min value:"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label13
+        '
+        Me.Label13.Location = New System.Drawing.Point(8, 106)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(80, 13)
+        Me.Label13.TabIndex = 23
+        Me.Label13.Text = "Max value:"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'WaveLengthTrackBar
+        '
+        Me.WaveLengthTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
+        Me.WaveLengthTrackBar.LargeChange = 8
+        Me.WaveLengthTrackBar.Location = New System.Drawing.Point(83, 48)
+        Me.WaveLengthTrackBar.Maximum = 1024
+        Me.WaveLengthTrackBar.Name = "WaveLengthTrackBar"
+        Me.WaveLengthTrackBar.Size = New System.Drawing.Size(194, 45)
+        Me.WaveLengthTrackBar.TabIndex = 3
+        Me.WaveLengthTrackBar.TickFrequency = 64
+        Me.WaveLengthTrackBar.Value = 8
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewButton, Me.LoadButton, Me.SaveButton, Me.ToolStripSeparator2, Me.ProjectNameTextBox, Me.ProjectInfoButton, Me.ToolStripSeparator1, Me.ConfigButton1, Me.Help_Button, Me.AboutButton})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
+        Me.ToolStrip1.TabIndex = 113
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
+        '
+        'ProjectNameTextBox
+        '
+        Me.ProjectNameTextBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ProjectNameTextBox.Name = "ProjectNameTextBox"
+        Me.ProjectNameTextBox.ReadOnly = True
+        Me.ProjectNameTextBox.Size = New System.Drawing.Size(200, 31)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
+        '
+        'anOutputDataGBox
+        '
+        Me.anOutputDataGBox.Location = New System.Drawing.Point(10, 331)
+        Me.anOutputDataGBox.Name = "anOutputDataGBox"
+        Me.anOutputDataGBox.Size = New System.Drawing.Size(766, 153)
+        Me.anOutputDataGBox.TabIndex = 117
+        '
+        'waveform_Panel
+        '
+        Me.waveform_Panel.Controls.Add(Me.GFXoutputPictureBox)
+        Me.waveform_Panel.Controls.Add(Me.PictureBox2)
+        Me.waveform_Panel.Controls.Add(Me.RightLinePictureBox)
+        Me.waveform_Panel.Controls.Add(Me.LeftLinePictureBox)
+        Me.waveform_Panel.Controls.Add(Me.Label13)
+        Me.waveform_Panel.Controls.Add(Me.DownPictureBox)
+        Me.waveform_Panel.Controls.Add(Me.FreqTextBox)
+        Me.waveform_Panel.Controls.Add(Me.waveform_up_PictureBox)
+        Me.waveform_Panel.Controls.Add(Me.WaveMinTextBox)
+        Me.waveform_Panel.Controls.Add(Me.LabelFreq)
+        Me.waveform_Panel.Controls.Add(Me.LabelPhase)
+        Me.waveform_Panel.Controls.Add(Me.WaveMaxTextBox)
+        Me.waveform_Panel.Controls.Add(Me.Label14)
+        Me.waveform_Panel.Controls.Add(Me.RandomButton)
+        Me.waveform_Panel.Controls.Add(Me.PhaseTextBox)
+        Me.waveform_Panel.Controls.Add(Me.Label12)
+        Me.waveform_Panel.Controls.Add(Me.WaveTypeComboBox)
+        Me.waveform_Panel.Controls.Add(Me.WaveLengthTextBox)
+        Me.waveform_Panel.Controls.Add(Me.Label4)
+        Me.waveform_Panel.Controls.Add(Me.WaveFreqTrackBar)
+        Me.waveform_Panel.Controls.Add(Me.WavePhaseTrackBar)
+        Me.waveform_Panel.Controls.Add(Me.WaveMaxTrackBar)
+        Me.waveform_Panel.Controls.Add(Me.WaveMinTrackBar)
+        Me.waveform_Panel.Controls.Add(Me.WaveLengthTrackBar)
+        Me.waveform_Panel.Location = New System.Drawing.Point(10, 118)
+        Me.waveform_Panel.Name = "waveform_Panel"
+        Me.waveform_Panel.Size = New System.Drawing.Size(766, 196)
+        Me.waveform_Panel.TabIndex = 118
+        '
+        'waveform_up_PictureBox
+        '
+        Me.waveform_up_PictureBox.Dock = System.Windows.Forms.DockStyle.Top
+        Me.waveform_up_PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_up_waveform
+        Me.waveform_up_PictureBox.Location = New System.Drawing.Point(0, 0)
+        Me.waveform_up_PictureBox.Name = "waveform_up_PictureBox"
+        Me.waveform_up_PictureBox.Size = New System.Drawing.Size(766, 14)
+        Me.waveform_up_PictureBox.TabIndex = 0
+        Me.waveform_up_PictureBox.TabStop = False
+        '
+        'SaveoutputPanel
+        '
+        Me.SaveoutputPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.SaveoutputPanel.BackColor = System.Drawing.Color.Transparent
+        Me.SaveoutputPanel.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.piXel_pane_XL
+        Me.SaveoutputPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.SaveoutputPanel.Controls.Add(Me.CopyAllButton)
+        Me.SaveoutputPanel.Controls.Add(Me.SaveBinaryFileButton)
+        Me.SaveoutputPanel.Controls.Add(Me.SaveSourceButton)
+        Me.SaveoutputPanel.Location = New System.Drawing.Point(10, 599)
+        Me.SaveoutputPanel.Name = "SaveoutputPanel"
+        Me.SaveoutputPanel.Size = New System.Drawing.Size(767, 52)
+        Me.SaveoutputPanel.TabIndex = 116
         '
         'CopyAllButton
         '
@@ -226,166 +431,35 @@ Partial Class MainForm
         Me.ToolTip1.SetToolTip(Me.SaveSourceButton, "Save output Source")
         Me.SaveSourceButton.UseVisualStyleBackColor = False
         '
-        'OutputDataGroupBox
+        'LogoPictureBox
         '
-        Me.OutputDataGroupBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.LogoPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.ByteniZ3R_logo
+        Me.LogoPictureBox.Location = New System.Drawing.Point(466, 42)
+        Me.LogoPictureBox.Name = "LogoPictureBox"
+        Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
+        Me.LogoPictureBox.TabIndex = 115
+        Me.LogoPictureBox.TabStop = False
+        '
+        'GFXoutputPictureBox
+        '
+        Me.GFXoutputPictureBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OutputDataGroupBox.Controls.Add(Me.DataTypeInput)
-        Me.OutputDataGroupBox.Controls.Add(Me.LabelTextBox)
-        Me.OutputDataGroupBox.Controls.Add(Me.LabelLabel)
-        Me.OutputDataGroupBox.Location = New System.Drawing.Point(12, 331)
-        Me.OutputDataGroupBox.Name = "OutputDataGroupBox"
-        Me.OutputDataGroupBox.Size = New System.Drawing.Size(757, 133)
-        Me.OutputDataGroupBox.TabIndex = 22
-        Me.OutputDataGroupBox.TabStop = False
-        Me.OutputDataGroupBox.Text = "Output Data"
+        Me.GFXoutputPictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(155, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(15, Byte), Integer))
+        Me.GFXoutputPictureBox.Location = New System.Drawing.Point(370, 23)
+        Me.GFXoutputPictureBox.Name = "GFXoutputPictureBox"
+        Me.GFXoutputPictureBox.Size = New System.Drawing.Size(380, 160)
+        Me.GFXoutputPictureBox.TabIndex = 28
+        Me.GFXoutputPictureBox.TabStop = False
         '
-        'DataTypeInput
+        'PictureBox2
         '
-        Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
-        Me.DataTypeInput.EnableDataSizeLine = False
-        Me.DataTypeInput.Location = New System.Drawing.Point(6, 16)
-        Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(486, 110)
-        Me.DataTypeInput.SizesForColors = False
-        Me.DataTypeInput.TabIndex = 65
-        '
-        'WaveFreqTrackBar
-        '
-        Me.WaveFreqTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
-        Me.WaveFreqTrackBar.LargeChange = 8
-        Me.WaveFreqTrackBar.Location = New System.Drawing.Point(82, 160)
-        Me.WaveFreqTrackBar.Maximum = 256
-        Me.WaveFreqTrackBar.Minimum = 1
-        Me.WaveFreqTrackBar.Name = "WaveFreqTrackBar"
-        Me.WaveFreqTrackBar.Size = New System.Drawing.Size(200, 45)
-        Me.WaveFreqTrackBar.TabIndex = 11
-        Me.WaveFreqTrackBar.TickFrequency = 32
-        Me.WaveFreqTrackBar.Value = 1
-        '
-        'LabelFreq
-        '
-        Me.LabelFreq.Location = New System.Drawing.Point(7, 162)
-        Me.LabelFreq.Name = "LabelFreq"
-        Me.LabelFreq.Size = New System.Drawing.Size(80, 13)
-        Me.LabelFreq.TabIndex = 33
-        Me.LabelFreq.Text = "Frequency:"
-        Me.LabelFreq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'WavePhaseTrackBar
-        '
-        Me.WavePhaseTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
-        Me.WavePhaseTrackBar.LargeChange = 15
-        Me.WavePhaseTrackBar.Location = New System.Drawing.Point(82, 132)
-        Me.WavePhaseTrackBar.Maximum = 359
-        Me.WavePhaseTrackBar.Name = "WavePhaseTrackBar"
-        Me.WavePhaseTrackBar.Size = New System.Drawing.Size(200, 45)
-        Me.WavePhaseTrackBar.TabIndex = 9
-        Me.WavePhaseTrackBar.TickFrequency = 45
-        '
-        'WaveMaxTrackBar
-        '
-        Me.WaveMaxTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
-        Me.WaveMaxTrackBar.LargeChange = 8
-        Me.WaveMaxTrackBar.Location = New System.Drawing.Point(82, 103)
-        Me.WaveMaxTrackBar.Maximum = 255
-        Me.WaveMaxTrackBar.Minimum = 1
-        Me.WaveMaxTrackBar.Name = "WaveMaxTrackBar"
-        Me.WaveMaxTrackBar.Size = New System.Drawing.Size(200, 45)
-        Me.WaveMaxTrackBar.TabIndex = 7
-        Me.WaveMaxTrackBar.TickFrequency = 32
-        Me.WaveMaxTrackBar.Value = 1
-        '
-        'WaveMinTrackBar
-        '
-        Me.WaveMinTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
-        Me.WaveMinTrackBar.LargeChange = 8
-        Me.WaveMinTrackBar.Location = New System.Drawing.Point(82, 74)
-        Me.WaveMinTrackBar.Maximum = 254
-        Me.WaveMinTrackBar.Name = "WaveMinTrackBar"
-        Me.WaveMinTrackBar.Size = New System.Drawing.Size(200, 45)
-        Me.WaveMinTrackBar.TabIndex = 5
-        Me.WaveMinTrackBar.TickFrequency = 32
-        '
-        'LabelPhase
-        '
-        Me.LabelPhase.Location = New System.Drawing.Point(7, 134)
-        Me.LabelPhase.Name = "LabelPhase"
-        Me.LabelPhase.Size = New System.Drawing.Size(80, 13)
-        Me.LabelPhase.TabIndex = 30
-        Me.LabelPhase.Text = "Phase:"
-        Me.LabelPhase.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label14
-        '
-        Me.Label14.Location = New System.Drawing.Point(7, 23)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(80, 13)
-        Me.Label14.TabIndex = 27
-        Me.Label14.Text = "Type:"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'WaveTypeComboBox
-        '
-        Me.WaveTypeComboBox.FormattingEnabled = True
-        Me.WaveTypeComboBox.Items.AddRange(New Object() {"Sine", "Cosine", "Square", "Triangle", "Sawtooth", "Noise (Random)"})
-        Me.WaveTypeComboBox.Location = New System.Drawing.Point(90, 20)
-        Me.WaveTypeComboBox.Name = "WaveTypeComboBox"
-        Me.WaveTypeComboBox.Size = New System.Drawing.Size(176, 21)
-        Me.WaveTypeComboBox.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.Location = New System.Drawing.Point(7, 50)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(80, 13)
-        Me.Label4.TabIndex = 22
-        Me.Label4.Text = "Length:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label12
-        '
-        Me.Label12.Location = New System.Drawing.Point(7, 77)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(80, 13)
-        Me.Label12.TabIndex = 25
-        Me.Label12.Text = "Min value:"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label13
-        '
-        Me.Label13.Location = New System.Drawing.Point(7, 105)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(80, 13)
-        Me.Label13.TabIndex = 23
-        Me.Label13.Text = "Max value:"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'WaveLengthTrackBar
-        '
-        Me.WaveLengthTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
-        Me.WaveLengthTrackBar.LargeChange = 8
-        Me.WaveLengthTrackBar.Location = New System.Drawing.Point(82, 47)
-        Me.WaveLengthTrackBar.Maximum = 1024
-        Me.WaveLengthTrackBar.Name = "WaveLengthTrackBar"
-        Me.WaveLengthTrackBar.Size = New System.Drawing.Size(194, 45)
-        Me.WaveLengthTrackBar.TabIndex = 3
-        Me.WaveLengthTrackBar.TickFrequency = 64
-        Me.WaveLengthTrackBar.Value = 8
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewButton, Me.LoadButton, Me.SaveButton, Me.ToolStripSeparator2, Me.ProjectNameTextBox, Me.ProjectInfoButton, Me.ToolStripSeparator1, Me.ConfigButton1, Me.Help_Button, Me.AboutButton1})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
-        Me.ToolStrip1.TabIndex = 113
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.display_ruler
+        Me.PictureBox2.Location = New System.Drawing.Point(340, 15)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(30, 175)
+        Me.PictureBox2.TabIndex = 34
+        Me.PictureBox2.TabStop = False
         '
         'NewButton
         '
@@ -417,18 +491,6 @@ Partial Class MainForm
         Me.SaveButton.Text = "ToolStripButton1"
         Me.SaveButton.ToolTipText = "Save Project"
         '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
-        '
-        'ProjectNameTextBox
-        '
-        Me.ProjectNameTextBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.ProjectNameTextBox.Name = "ProjectNameTextBox"
-        Me.ProjectNameTextBox.ReadOnly = True
-        Me.ProjectNameTextBox.Size = New System.Drawing.Size(200, 31)
-        '
         'ProjectInfoButton
         '
         Me.ProjectInfoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -438,11 +500,6 @@ Partial Class MainForm
         Me.ProjectInfoButton.Size = New System.Drawing.Size(28, 28)
         Me.ProjectInfoButton.Text = "ToolStripButton1"
         Me.ProjectInfoButton.ToolTipText = "Edit Project Info"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
         '
         'ConfigButton1
         '
@@ -465,91 +522,46 @@ Partial Class MainForm
         Me.Help_Button.Text = "ToolStripButton1"
         Me.Help_Button.ToolTipText = "Help!"
         '
-        'AboutButton1
+        'AboutButton
         '
-        Me.AboutButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.AboutButton1.Image = Global.ByteniZ3R.My.Resources.Resources.about_24
-        Me.AboutButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.AboutButton1.Name = "AboutButton1"
-        Me.AboutButton1.Size = New System.Drawing.Size(28, 28)
-        Me.AboutButton1.Text = "ToolStripButton1"
-        Me.AboutButton1.ToolTipText = "About this Application"
+        Me.AboutButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.AboutButton.Image = Global.ByteniZ3R.My.Resources.Resources.about_24
+        Me.AboutButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.AboutButton.Name = "AboutButton"
+        Me.AboutButton.Size = New System.Drawing.Size(28, 28)
+        Me.AboutButton.Text = "ToolStripButton1"
+        Me.AboutButton.ToolTipText = "About this Application"
         '
-        'WaveformGroupBox
+        'DownPictureBox
         '
-        Me.WaveformGroupBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WaveformGroupBox.Controls.Add(Me.GFXoutputPictureBox)
-        Me.WaveformGroupBox.Controls.Add(Me.PictureBox2)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveFreqTrackBar)
-        Me.WaveformGroupBox.Controls.Add(Me.Label13)
-        Me.WaveformGroupBox.Controls.Add(Me.FreqTextBox)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveMinTextBox)
-        Me.WaveformGroupBox.Controls.Add(Me.LabelFreq)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveMaxTextBox)
-        Me.WaveformGroupBox.Controls.Add(Me.RandomButton)
-        Me.WaveformGroupBox.Controls.Add(Me.Label12)
-        Me.WaveformGroupBox.Controls.Add(Me.WavePhaseTrackBar)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveLengthTextBox)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveMaxTrackBar)
-        Me.WaveformGroupBox.Controls.Add(Me.Label4)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveMinTrackBar)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveTypeComboBox)
-        Me.WaveformGroupBox.Controls.Add(Me.PhaseTextBox)
-        Me.WaveformGroupBox.Controls.Add(Me.Label14)
-        Me.WaveformGroupBox.Controls.Add(Me.LabelPhase)
-        Me.WaveformGroupBox.Controls.Add(Me.WaveLengthTrackBar)
-        Me.WaveformGroupBox.Location = New System.Drawing.Point(14, 114)
-        Me.WaveformGroupBox.Name = "WaveformGroupBox"
-        Me.WaveformGroupBox.Size = New System.Drawing.Size(755, 211)
-        Me.WaveformGroupBox.TabIndex = 114
-        Me.WaveformGroupBox.TabStop = False
-        Me.WaveformGroupBox.Text = "Waveform"
+        Me.DownPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.DownPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_down
+        Me.DownPictureBox.Location = New System.Drawing.Point(0, 192)
+        Me.DownPictureBox.Margin = New System.Windows.Forms.Padding(0)
+        Me.DownPictureBox.Name = "DownPictureBox"
+        Me.DownPictureBox.Size = New System.Drawing.Size(766, 4)
+        Me.DownPictureBox.TabIndex = 2
+        Me.DownPictureBox.TabStop = False
         '
-        'GFXoutputPictureBox
+        'LeftLinePictureBox
         '
-        Me.GFXoutputPictureBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GFXoutputPictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(155, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(15, Byte), Integer))
-        Me.GFXoutputPictureBox.Location = New System.Drawing.Point(356, 20)
-        Me.GFXoutputPictureBox.Name = "GFXoutputPictureBox"
-        Me.GFXoutputPictureBox.Size = New System.Drawing.Size(380, 160)
-        Me.GFXoutputPictureBox.TabIndex = 28
-        Me.GFXoutputPictureBox.TabStop = False
+        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.Black
+        Me.LeftLinePictureBox.Dock = System.Windows.Forms.DockStyle.Left
+        Me.LeftLinePictureBox.Location = New System.Drawing.Point(0, 14)
+        Me.LeftLinePictureBox.Name = "LeftLinePictureBox"
+        Me.LeftLinePictureBox.Size = New System.Drawing.Size(4, 178)
+        Me.LeftLinePictureBox.TabIndex = 3
+        Me.LeftLinePictureBox.TabStop = False
         '
-        'PictureBox2
+        'RightLinePictureBox
         '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.display_ruler
-        Me.PictureBox2.Location = New System.Drawing.Point(326, 12)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(30, 175)
-        Me.PictureBox2.TabIndex = 34
-        Me.PictureBox2.TabStop = False
-        '
-        'Panel05
-        '
-        Me.Panel05.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel05.BackColor = System.Drawing.Color.Transparent
-        Me.Panel05.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.piXel_pane_XL
-        Me.Panel05.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Panel05.Controls.Add(Me.CopyAllButton)
-        Me.Panel05.Controls.Add(Me.SaveBinaryFileButton)
-        Me.Panel05.Controls.Add(Me.SaveSourceButton)
-        Me.Panel05.Location = New System.Drawing.Point(10, 579)
-        Me.Panel05.Name = "Panel05"
-        Me.Panel05.Size = New System.Drawing.Size(767, 52)
-        Me.Panel05.TabIndex = 116
-        '
-        'LogoPictureBox
-        '
-        Me.LogoPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LogoPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.ByteniZ3R_logo
-        Me.LogoPictureBox.Location = New System.Drawing.Point(466, 42)
-        Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
-        Me.LogoPictureBox.TabIndex = 115
-        Me.LogoPictureBox.TabStop = False
+        Me.RightLinePictureBox.BackColor = System.Drawing.Color.Black
+        Me.RightLinePictureBox.Dock = System.Windows.Forms.DockStyle.Right
+        Me.RightLinePictureBox.Location = New System.Drawing.Point(762, 14)
+        Me.RightLinePictureBox.Name = "RightLinePictureBox"
+        Me.RightLinePictureBox.Size = New System.Drawing.Size(4, 178)
+        Me.RightLinePictureBox.TabIndex = 4
+        Me.RightLinePictureBox.TabStop = False
         '
         'MainForm
         '
@@ -557,20 +569,18 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightGray
-        Me.ClientSize = New System.Drawing.Size(784, 641)
-        Me.Controls.Add(Me.Panel05)
+        Me.ClientSize = New System.Drawing.Size(784, 661)
+        Me.Controls.Add(Me.waveform_Panel)
+        Me.Controls.Add(Me.anOutputDataGBox)
+        Me.Controls.Add(Me.SaveoutputPanel)
         Me.Controls.Add(Me.LogoPictureBox)
-        Me.Controls.Add(Me.WaveformGroupBox)
         Me.Controls.Add(Me.OutputText)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.OutputDataGroupBox)
         Me.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MinimumSize = New System.Drawing.Size(800, 640)
+        Me.MinimumSize = New System.Drawing.Size(800, 39)
         Me.Name = "MainForm"
         Me.Text = "ByteniZ3R"
-        Me.OutputDataGroupBox.ResumeLayout(False)
-        Me.OutputDataGroupBox.PerformLayout()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WavePhaseTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WaveMaxTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
@@ -578,21 +588,22 @@ Partial Class MainForm
         CType(Me.WaveLengthTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        Me.WaveformGroupBox.ResumeLayout(False)
-        Me.WaveformGroupBox.PerformLayout()
+        Me.waveform_Panel.ResumeLayout(False)
+        Me.waveform_Panel.PerformLayout()
+        CType(Me.waveform_up_PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SaveoutputPanel.ResumeLayout(False)
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GFXoutputPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel05.ResumeLayout(False)
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents OutputText As System.Windows.Forms.TextBox
-    Friend WithEvents LabelTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents LabelLabel As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents OutputDataGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -616,7 +627,7 @@ Partial Class MainForm
     Friend WithEvents SaveButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ProjectNameTextBox As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents AboutButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents AboutButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents Help_Button As System.Windows.Forms.ToolStripButton
     Friend WithEvents ConfigButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
@@ -626,11 +637,15 @@ Partial Class MainForm
     Friend WithEvents LabelFreq As System.Windows.Forms.Label
     Friend WithEvents WaveLengthTrackBar As System.Windows.Forms.TrackBar
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
-    Friend WithEvents DataTypeInput As ByteniZ3R.DataTypeInputControl
-    Friend WithEvents WaveformGroupBox As GroupBox
     Friend WithEvents LogoPictureBox As PictureBox
-    Friend WithEvents Panel05 As Panel
+    Friend WithEvents SaveoutputPanel As Panel
     Friend WithEvents CopyAllButton As Button
     Friend WithEvents SaveBinaryFileButton As Button
     Friend WithEvents SaveSourceButton As Button
+    Friend WithEvents anOutputDataGBox As OutputDataGBox
+    Friend WithEvents waveform_Panel As Panel
+    Friend WithEvents waveform_up_PictureBox As PictureBox
+    Friend WithEvents DownPictureBox As PictureBox
+    Friend WithEvents LeftLinePictureBox As PictureBox
+    Friend WithEvents RightLinePictureBox As PictureBox
 End Class

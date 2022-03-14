@@ -118,6 +118,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PathItem.vb" />
+    <Compile Include="OutputDataGBox.Designer.vb">
+      <DependentUpon>OutputDataGBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutputDataGBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ProjectFileItem.vb" />
     <Compile Include="ProjectInfo.vb" />
     <Compile Include="ProjectInfoUserControl.designer.vb">
@@ -159,6 +165,9 @@
     <EmbeddedResource Include="PathEntryControl.resx">
       <DependentUpon>PathEntryControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutputDataGBox.resx">
+      <DependentUpon>OutputDataGBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectInfoUserControl.resx">
       <DependentUpon>ProjectInfoUserControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +201,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\piXel_panel_XL_up_waveform.png" />
+    <None Include="Resources\piXel_panel_XL_mid.png" />
+    <None Include="Resources\piXel_panel_XL_down.png" />
+    <None Include="Resources\piXel_panel_XL_up_outputdata2.png" />
     <None Include="Resources\button_savebinary.png" />
     <None Include="Resources\button_savesource.png" />
     <None Include="Resources\button_CopyAll.png" />
