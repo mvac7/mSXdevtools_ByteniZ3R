@@ -121,8 +121,8 @@ Public Class ConfigWin
 
 
         Me.CodeOutputComboBox.SelectedIndex = Me.AppConfig.defCodeOutput '_codeOutput
-        Me.NumFormatComboBox.SelectedIndex = Me.AppConfig.defCodeNumberFormat '_codeNumberFormat
-        Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.defCodeSizeLine '_codeSizeLine
+        Me.NumFormatComboBox.SelectedIndex = Me.AppConfig.defCodeNumberSystem '_codeNumberFormat
+        Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.defCodeLineSize '_codeSizeLine
         Me.CompressTypeComboBox.SelectedIndex = Me.AppConfig.defCodeCompressType '_codeCompressType
         Me.AsmByteDataTextBox.Text = Me.AppConfig.defAsmByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.defAsmWordDataCommand
@@ -196,8 +196,8 @@ Public Class ConfigWin
         Me.AppConfig.PathItemBinary = BinaryPathControl.GetItem()
 
         Me.AppConfig.defCodeOutput = Me.CodeOutputComboBox.SelectedIndex
-        Me.AppConfig.defCodeNumberFormat = Me.NumFormatComboBox.SelectedIndex
-        Me.AppConfig.defCodeSizeLine = Me.SizeLineComboBox.SelectedIndex
+        Me.AppConfig.defCodeNumberSystem = Me.NumFormatComboBox.SelectedIndex
+        Me.AppConfig.defCodeLineSize = Me.SizeLineComboBox.SelectedIndex
         Me.AppConfig.defCodeCompressType = Me.CompressTypeComboBox.SelectedIndex
         Me.AppConfig.defAsmByteCommand = Me.AsmByteDataTextBox.Text
         Me.AppConfig.defAsmWordDataCommand = Me.AsmWordDataTextBox.Text
@@ -394,6 +394,12 @@ Public Class ConfigWin
         End If
     End Sub
 
+    Private Sub AsmByteValuesComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmByteValuesComboBox.SelectedIndexChanged
+        AsmByteDataTextBox.Text = AsmByteValuesComboBox.SelectedItem
+    End Sub
 
+    Private Sub AsmWordComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmWordValuesComboBox.SelectedIndexChanged
+        AsmWordDataTextBox.Text = AsmWordValuesComboBox.SelectedItem
+    End Sub
 
 End Class

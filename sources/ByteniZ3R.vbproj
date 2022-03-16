@@ -201,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\arrow_left_24blue.png" />
     <None Include="Resources\piXel_panel_XL_up_waveform.png" />
     <None Include="Resources\piXel_panel_XL_mid.png" />
     <None Include="Resources\piXel_panel_XL_down.png" />

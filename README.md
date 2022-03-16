@@ -83,6 +83,10 @@ The next step was to generate mathematical forms to use as paths for sprite move
 The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
 <br/>The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
+In March 2022, I resumed this project which I had pending a v0.9b Release. 
+Updated some classes, removed binary loading, and gave the frontend a new look.
+The decision to remove the binary load is due to the fact that I have been developing several specific applications for different compressors for some time. 
+This functionality is no longer required.
 
 ![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v094b_screenshot01.png)
 

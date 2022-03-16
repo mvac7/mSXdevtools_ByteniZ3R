@@ -50,8 +50,8 @@ Public Class Config
 
     Public defAuthor As String
     Public defCodeOutput As Integer = DataFormat.ProgrammingLanguage.ASSEMBLER
-    Public defCodeNumberFormat As Integer = 4
-    Public defCodeSizeLine As Integer = 1     ' 0-3 (8,16,24,32)
+    Public defCodeNumberSystem As Integer = 4
+    Public defCodeLineSize As Integer = 3      ' 0-6 (1,2,4,8,16,24,32)
     Public defCodeCompressType As Integer = 0 ' RAW
     Public defAsmByteCommand As String = "DB"
     Public defAsmWordDataCommand As String = "DW"
@@ -111,7 +111,7 @@ Public Class Config
             Return _lastCodeSizeLine
         End Get
         Set(value As Integer)
-            If value < 4 Then
+            If value < 7 Then
                 _lastCodeSizeLine = value
             End If
         End Set
@@ -151,7 +151,6 @@ Public Class Config
 
 
     'Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName
-
 
 
     Public Sub New() ', ByVal _appID As String
@@ -289,18 +288,18 @@ Public Class Config
                             Me.defCodeOutput = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeNumberFormat")
+                        aNode = groupNode.SelectSingleNode("defCodeNumberSystem")
                         If aNode Is Nothing Then
-                            Me.defCodeNumberFormat = 4
+                            Me.defCodeNumberSystem = 4
                         Else
-                            Me.defCodeNumberFormat = CInt(aNode.InnerText)
+                            Me.defCodeNumberSystem = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeSizeLine")
+                        aNode = groupNode.SelectSingleNode("defCodeLineSize")
                         If aNode Is Nothing Then
-                            Me.defCodeSizeLine = 1
+                            Me.defCodeLineSize = 1
                         Else
-                            Me.defCodeSizeLine = CInt(aNode.InnerText)
+                            Me.defCodeLineSize = CInt(aNode.InnerText)
                         End If
 
                         aNode = groupNode.SelectSingleNode("defCodeCompressType")
@@ -635,13 +634,13 @@ Public Class Config
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("defCodeNumberFormat")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeNumberFormat))
+            anElement = aXmlDoc.CreateElement("defCodeNumberSystem")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeNumberSystem))
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("defCodeSizeLine")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeSizeLine))
+            anElement = aXmlDoc.CreateElement("defCodeLineSize")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeLineSize))
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
@@ -804,8 +803,8 @@ Public Class Config
     Public Sub InitOutputInfo()
 
         Me.lastCodeOutput = Me.defCodeOutput
-        Me.lastCodeNumberFormat = Me.defCodeNumberFormat
-        Me.lastCodeSizeLine = Me.defCodeSizeLine
+        Me.lastCodeNumberFormat = Me.defCodeNumberSystem
+        Me.lastCodeSizeLine = Me.defCodeLineSize
         Me.lastCodeCompressType = Me.defCodeCompressType
         Me.lastAsmByteCommand = Me.defAsmByteCommand
         Me.lastAsmWordDataCommand = Me.defAsmWordDataCommand

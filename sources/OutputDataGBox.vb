@@ -59,4 +59,7 @@
         RaiseEvent AccordionChanged(Me.isOpen)
 
     End Sub
+
+
+
 End Class

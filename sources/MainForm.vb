@@ -119,6 +119,8 @@ Public Class MainForm
         AddHandler WaveMaxTrackBar.ValueChanged, AddressOf WaveMaxTrackBar_ValueChanged
         AddHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
         AddHandler WaveFreqTrackBar.ValueChanged, AddressOf FreqTrackBar_ValueChanged
+
+        AddHandler anOutputDataGBox.DataChanged, AddressOf anOutputDataGBox_DataChanged
     End Sub
 
 
@@ -130,6 +132,8 @@ Public Class MainForm
         RemoveHandler WaveMaxTrackBar.ValueChanged, AddressOf WaveMaxTrackBar_ValueChanged
         RemoveHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
         RemoveHandler WaveFreqTrackBar.ValueChanged, AddressOf FreqTrackBar_ValueChanged
+
+        RemoveHandler anOutputDataGBox.DataChanged, AddressOf anOutputDataGBox_DataChanged
     End Sub
 
 
@@ -1606,8 +1610,9 @@ Public Class MainForm
         SetOutputtextSize()
     End Sub
 
-
-
+    Private Sub anOutputDataGBox_DataChanged()
+        GenerateData()
+    End Sub
 
 
 End Class

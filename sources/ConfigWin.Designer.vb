@@ -72,8 +72,6 @@ Partial Class ConfigWin
         Me.tMSgfXProjectPathControl = New ByteniZ3R.PathEntryControl()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.DataOutputTab = New System.Windows.Forms.TabPage()
-        Me.PathsTab = New System.Windows.Forms.TabPage()
         Me.OthersTab = New System.Windows.Forms.TabPage()
         Me.GridColorButton = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -81,14 +79,26 @@ Partial Class ConfigWin
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.DataOutputTab = New System.Windows.Forms.TabPage()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.arrow2PictureBox = New System.Windows.Forms.PictureBox()
+        Me.arrow1PictureBox = New System.Windows.Forms.PictureBox()
+        Me.AsmWordValuesComboBox = New System.Windows.Forms.ComboBox()
+        Me.AsmByteValuesComboBox = New System.Windows.Forms.ComboBox()
+        Me.PathsTab = New System.Windows.Forms.TabPage()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.BASICGroupBox.SuspendLayout()
         Me.PathsPanel.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.DataOutputTab.SuspendLayout()
-        Me.PathsTab.SuspendLayout()
         Me.OthersTab.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.DataOutputTab.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PathsTab.SuspendLayout()
         Me.SuspendLayout()
         '
         'NumFormatComboBox
@@ -98,11 +108,11 @@ Partial Class ConfigWin
         Me.NumFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.NumFormatComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.NumFormatComboBox.FormattingEnabled = True
-        Me.NumFormatComboBox.Items.AddRange(New Object() {"dec nnn", "dec nnnd", "hex FF", "hex 0xFF", "hex $FF", "hex #FF", "hex 0FFh", "hex &HFF"})
-        Me.NumFormatComboBox.Location = New System.Drawing.Point(124, 42)
+        Me.NumFormatComboBox.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
+        Me.NumFormatComboBox.Location = New System.Drawing.Point(133, 38)
         Me.NumFormatComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.NumFormatComboBox.Name = "NumFormatComboBox"
-        Me.NumFormatComboBox.Size = New System.Drawing.Size(452, 22)
+        Me.NumFormatComboBox.Size = New System.Drawing.Size(223, 22)
         Me.NumFormatComboBox.TabIndex = 246
         Me.ToolTip1.SetToolTip(Me.NumFormatComboBox, "Computer number format")
         '
@@ -113,11 +123,11 @@ Partial Class ConfigWin
         Me.CompressTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CompressTypeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.CompressTypeComboBox.FormattingEnabled = True
-        Me.CompressTypeComboBox.Items.AddRange(New Object() {"RAW", "RLE", "RLE WB"})
-        Me.CompressTypeComboBox.Location = New System.Drawing.Point(124, 98)
+        Me.CompressTypeComboBox.Items.AddRange(New Object() {"RAW", "RLE", "RLEWB", "Pletter5c"})
+        Me.CompressTypeComboBox.Location = New System.Drawing.Point(133, 94)
         Me.CompressTypeComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.CompressTypeComboBox.Name = "CompressTypeComboBox"
-        Me.CompressTypeComboBox.Size = New System.Drawing.Size(452, 22)
+        Me.CompressTypeComboBox.Size = New System.Drawing.Size(223, 22)
         Me.CompressTypeComboBox.TabIndex = 243
         '
         'SizeLineComboBox
@@ -127,16 +137,16 @@ Partial Class ConfigWin
         Me.SizeLineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.SizeLineComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.SizeLineComboBox.FormattingEnabled = True
-        Me.SizeLineComboBox.Items.AddRange(New Object() {"8", "16", "24", "32"})
-        Me.SizeLineComboBox.Location = New System.Drawing.Point(124, 70)
+        Me.SizeLineComboBox.Items.AddRange(New Object() {"1", "2", "4", "8", "16", "24", "32"})
+        Me.SizeLineComboBox.Location = New System.Drawing.Point(133, 66)
         Me.SizeLineComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.SizeLineComboBox.Name = "SizeLineComboBox"
-        Me.SizeLineComboBox.Size = New System.Drawing.Size(452, 22)
+        Me.SizeLineComboBox.Size = New System.Drawing.Size(223, 22)
         Me.SizeLineComboBox.TabIndex = 242
         '
         'Label21
         '
-        Me.Label21.Location = New System.Drawing.Point(8, 14)
+        Me.Label21.Location = New System.Drawing.Point(17, 10)
         Me.Label21.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(110, 22)
@@ -152,10 +162,10 @@ Partial Class ConfigWin
         Me.CodeOutputComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.CodeOutputComboBox.FormattingEnabled = True
         Me.CodeOutputComboBox.Items.AddRange(New Object() {"Assembler", "BASIC", "C"})
-        Me.CodeOutputComboBox.Location = New System.Drawing.Point(124, 14)
+        Me.CodeOutputComboBox.Location = New System.Drawing.Point(133, 10)
         Me.CodeOutputComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.CodeOutputComboBox.Name = "CodeOutputComboBox"
-        Me.CodeOutputComboBox.Size = New System.Drawing.Size(452, 22)
+        Me.CodeOutputComboBox.Size = New System.Drawing.Size(221, 22)
         Me.CodeOutputComboBox.TabIndex = 241
         '
         'ToolTip1
@@ -166,19 +176,19 @@ Partial Class ConfigWin
         '
         Me.AsmByteDataTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.AsmByteDataTextBox.Location = New System.Drawing.Point(124, 214)
+        Me.AsmByteDataTextBox.Location = New System.Drawing.Point(117, 21)
         Me.AsmByteDataTextBox.Name = "AsmByteDataTextBox"
-        Me.AsmByteDataTextBox.Size = New System.Drawing.Size(452, 22)
+        Me.AsmByteDataTextBox.Size = New System.Drawing.Size(220, 22)
         Me.AsmByteDataTextBox.TabIndex = 247
-        Me.ToolTip1.SetToolTip(Me.AsmByteDataTextBox, "Byte Data command definition (DB, BYTE, DEFB...)")
+        Me.ToolTip1.SetToolTip(Me.AsmByteDataTextBox, "Byte Data command definition.")
         '
         'DataLabelTextBox
         '
         Me.DataLabelTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataLabelTextBox.Location = New System.Drawing.Point(124, 174)
+        Me.DataLabelTextBox.Location = New System.Drawing.Point(134, 151)
         Me.DataLabelTextBox.Name = "DataLabelTextBox"
-        Me.DataLabelTextBox.Size = New System.Drawing.Size(452, 22)
+        Me.DataLabelTextBox.Size = New System.Drawing.Size(220, 22)
         Me.DataLabelTextBox.TabIndex = 252
         Me.ToolTip1.SetToolTip(Me.DataLabelTextBox, "Data definition command (DB, BYTE, DEFB, etc.)")
         '
@@ -210,7 +220,7 @@ Partial Class ConfigWin
         '
         Me.TextBox1.Enabled = False
         Me.TextBox1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(218, 132)
+        Me.TextBox1.Location = New System.Drawing.Point(304, 123)
         Me.TextBox1.MaxLength = 3
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(52, 22)
@@ -224,9 +234,9 @@ Partial Class ConfigWin
         '
         Me.AsmWordDataTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.AsmWordDataTextBox.Location = New System.Drawing.Point(124, 242)
+        Me.AsmWordDataTextBox.Location = New System.Drawing.Point(117, 49)
         Me.AsmWordDataTextBox.Name = "AsmWordDataTextBox"
-        Me.AsmWordDataTextBox.Size = New System.Drawing.Size(452, 22)
+        Me.AsmWordDataTextBox.Size = New System.Drawing.Size(220, 22)
         Me.AsmWordDataTextBox.TabIndex = 247
         Me.ToolTip1.SetToolTip(Me.AsmWordDataTextBox, "Word Data command definition (DW, WORD, DEFW...)")
         '
@@ -234,9 +244,9 @@ Partial Class ConfigWin
         '
         Me.CByteDataTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CByteDataTextBox.Location = New System.Drawing.Point(124, 270)
+        Me.CByteDataTextBox.Location = New System.Drawing.Point(119, 21)
         Me.CByteDataTextBox.Name = "CByteDataTextBox"
-        Me.CByteDataTextBox.Size = New System.Drawing.Size(452, 22)
+        Me.CByteDataTextBox.Size = New System.Drawing.Size(220, 22)
         Me.CByteDataTextBox.TabIndex = 261
         Me.ToolTip1.SetToolTip(Me.CByteDataTextBox, "Byte Data command definition for C")
         '
@@ -246,7 +256,7 @@ Partial Class ConfigWin
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BASICdataTextBox.Location = New System.Drawing.Point(119, 21)
         Me.BASICdataTextBox.Name = "BASICdataTextBox"
-        Me.BASICdataTextBox.Size = New System.Drawing.Size(423, 22)
+        Me.BASICdataTextBox.Size = New System.Drawing.Size(220, 22)
         Me.BASICdataTextBox.TabIndex = 263
         Me.BASICdataTextBox.Text = "DATA"
         Me.ToolTip1.SetToolTip(Me.BASICdataTextBox, "Byte Data command definition for C")
@@ -317,9 +327,9 @@ Partial Class ConfigWin
         Me.BASICGroupBox.Controls.Add(Me.BASICinitLineTextBox)
         Me.BASICGroupBox.Controls.Add(Me.IntervalLabel)
         Me.BASICGroupBox.ForeColor = System.Drawing.Color.Black
-        Me.BASICGroupBox.Location = New System.Drawing.Point(17, 314)
+        Me.BASICGroupBox.Location = New System.Drawing.Point(17, 349)
         Me.BASICGroupBox.Name = "BASICGroupBox"
-        Me.BASICGroupBox.Size = New System.Drawing.Size(559, 137)
+        Me.BASICGroupBox.Size = New System.Drawing.Size(559, 109)
         Me.BASICGroupBox.TabIndex = 249
         Me.BASICGroupBox.TabStop = False
         Me.BASICGroupBox.Text = "BASIC"
@@ -339,7 +349,7 @@ Partial Class ConfigWin
         Me.RemoveZerosCheck.BackColor = System.Drawing.Color.Transparent
         Me.RemoveZerosCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.RemoveZerosCheck.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RemoveZerosCheck.Location = New System.Drawing.Point(6, 105)
+        Me.RemoveZerosCheck.Location = New System.Drawing.Point(418, 78)
         Me.RemoveZerosCheck.Name = "RemoveZerosCheck"
         Me.RemoveZerosCheck.Size = New System.Drawing.Size(125, 22)
         Me.RemoveZerosCheck.TabIndex = 258
@@ -368,7 +378,7 @@ Partial Class ConfigWin
         '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(10, 270)
+        Me.Label8.Location = New System.Drawing.Point(5, 21)
         Me.Label8.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(110, 22)
@@ -379,7 +389,7 @@ Partial Class ConfigWin
         'Label6
         '
         Me.Label6.Enabled = False
-        Me.Label6.Location = New System.Drawing.Point(14, 132)
+        Me.Label6.Location = New System.Drawing.Point(100, 123)
         Me.Label6.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(196, 22)
@@ -390,7 +400,7 @@ Partial Class ConfigWin
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(10, 174)
+        Me.Label5.Location = New System.Drawing.Point(20, 151)
         Me.Label5.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(110, 22)
@@ -400,7 +410,7 @@ Partial Class ConfigWin
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(10, 242)
+        Me.Label7.Location = New System.Drawing.Point(3, 49)
         Me.Label7.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(110, 22)
@@ -410,7 +420,7 @@ Partial Class ConfigWin
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(10, 214)
+        Me.Label4.Location = New System.Drawing.Point(3, 21)
         Me.Label4.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(110, 22)
@@ -420,7 +430,7 @@ Partial Class ConfigWin
         '
         'Label3
         '
-        Me.Label3.Location = New System.Drawing.Point(8, 98)
+        Me.Label3.Location = New System.Drawing.Point(17, 94)
         Me.Label3.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(110, 22)
@@ -430,22 +440,22 @@ Partial Class ConfigWin
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(8, 70)
+        Me.Label2.Location = New System.Drawing.Point(17, 66)
         Me.Label2.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(110, 22)
         Me.Label2.TabIndex = 249
-        Me.Label2.Text = "Size Line:"
+        Me.Label2.Text = "Line size:"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(8, 42)
+        Me.Label1.Location = New System.Drawing.Point(17, 38)
         Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(110, 22)
         Me.Label1.TabIndex = 248
-        Me.Label1.Text = "N. format:"
+        Me.Label1.Text = "Number system:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OK_Button
@@ -453,7 +463,7 @@ Partial Class ConfigWin
         Me.OK_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.OK_Button.BackColor = System.Drawing.Color.PaleGreen
         Me.OK_Button.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OK_Button.Location = New System.Drawing.Point(428, 520)
+        Me.OK_Button.Location = New System.Drawing.Point(423, 512)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.OK_Button.Name = "OK_Button"
         Me.OK_Button.Size = New System.Drawing.Size(110, 36)
@@ -467,7 +477,7 @@ Partial Class ConfigWin
         Me.Cancel_Button.BackColor = System.Drawing.Color.LightSalmon
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel_Button.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cancel_Button.Location = New System.Drawing.Point(546, 526)
+        Me.Cancel_Button.Location = New System.Drawing.Point(541, 518)
         Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Size = New System.Drawing.Size(70, 30)
@@ -493,7 +503,7 @@ Partial Class ConfigWin
         Me.PathsPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PathsPanel.Location = New System.Drawing.Point(3, 3)
         Me.PathsPanel.Name = "PathsPanel"
-        Me.PathsPanel.Size = New System.Drawing.Size(586, 458)
+        Me.PathsPanel.Size = New System.Drawing.Size(586, 460)
         Me.PathsPanel.TabIndex = 256
         '
         'BinaryPathControl
@@ -650,48 +660,8 @@ Partial Class ConfigWin
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(600, 491)
+        Me.TabControl1.Size = New System.Drawing.Size(600, 493)
         Me.TabControl1.TabIndex = 256
-        '
-        'DataOutputTab
-        '
-        Me.DataOutputTab.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataOutputTab.Controls.Add(Me.Label8)
-        Me.DataOutputTab.Controls.Add(Me.Label21)
-        Me.DataOutputTab.Controls.Add(Me.CByteDataTextBox)
-        Me.DataOutputTab.Controls.Add(Me.CompressTypeComboBox)
-        Me.DataOutputTab.Controls.Add(Me.BASICGroupBox)
-        Me.DataOutputTab.Controls.Add(Me.TextBox1)
-        Me.DataOutputTab.Controls.Add(Me.Label6)
-        Me.DataOutputTab.Controls.Add(Me.SizeLineComboBox)
-        Me.DataOutputTab.Controls.Add(Me.NumFormatComboBox)
-        Me.DataOutputTab.Controls.Add(Me.Label7)
-        Me.DataOutputTab.Controls.Add(Me.CodeOutputComboBox)
-        Me.DataOutputTab.Controls.Add(Me.Label4)
-        Me.DataOutputTab.Controls.Add(Me.Label5)
-        Me.DataOutputTab.Controls.Add(Me.AsmWordDataTextBox)
-        Me.DataOutputTab.Controls.Add(Me.Label1)
-        Me.DataOutputTab.Controls.Add(Me.AsmByteDataTextBox)
-        Me.DataOutputTab.Controls.Add(Me.DataLabelTextBox)
-        Me.DataOutputTab.Controls.Add(Me.Label2)
-        Me.DataOutputTab.Controls.Add(Me.Label3)
-        Me.DataOutputTab.Location = New System.Drawing.Point(4, 23)
-        Me.DataOutputTab.Name = "DataOutputTab"
-        Me.DataOutputTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataOutputTab.Size = New System.Drawing.Size(592, 464)
-        Me.DataOutputTab.TabIndex = 1
-        Me.DataOutputTab.Text = "Default Data Output"
-        '
-        'PathsTab
-        '
-        Me.PathsTab.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.PathsTab.Controls.Add(Me.PathsPanel)
-        Me.PathsTab.Location = New System.Drawing.Point(4, 23)
-        Me.PathsTab.Name = "PathsTab"
-        Me.PathsTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.PathsTab.Size = New System.Drawing.Size(592, 464)
-        Me.PathsTab.TabIndex = 0
-        Me.PathsTab.Text = "Default paths"
         '
         'OthersTab
         '
@@ -706,7 +676,7 @@ Partial Class ConfigWin
         Me.OthersTab.Location = New System.Drawing.Point(4, 23)
         Me.OthersTab.Name = "OthersTab"
         Me.OthersTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.OthersTab.Size = New System.Drawing.Size(592, 464)
+        Me.OthersTab.Size = New System.Drawing.Size(592, 466)
         Me.OthersTab.TabIndex = 2
         Me.OthersTab.Text = "Miscellany"
         '
@@ -773,14 +743,123 @@ Partial Class ConfigWin
         Me.RadioButton1.Text = "Load tMSgfX Presentation"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
+        'DataOutputTab
+        '
+        Me.DataOutputTab.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataOutputTab.Controls.Add(Me.GroupBox3)
+        Me.DataOutputTab.Controls.Add(Me.GroupBox2)
+        Me.DataOutputTab.Controls.Add(Me.Label21)
+        Me.DataOutputTab.Controls.Add(Me.CompressTypeComboBox)
+        Me.DataOutputTab.Controls.Add(Me.BASICGroupBox)
+        Me.DataOutputTab.Controls.Add(Me.TextBox1)
+        Me.DataOutputTab.Controls.Add(Me.Label6)
+        Me.DataOutputTab.Controls.Add(Me.SizeLineComboBox)
+        Me.DataOutputTab.Controls.Add(Me.NumFormatComboBox)
+        Me.DataOutputTab.Controls.Add(Me.CodeOutputComboBox)
+        Me.DataOutputTab.Controls.Add(Me.Label5)
+        Me.DataOutputTab.Controls.Add(Me.Label1)
+        Me.DataOutputTab.Controls.Add(Me.DataLabelTextBox)
+        Me.DataOutputTab.Controls.Add(Me.Label2)
+        Me.DataOutputTab.Controls.Add(Me.Label3)
+        Me.DataOutputTab.Location = New System.Drawing.Point(4, 23)
+        Me.DataOutputTab.Name = "DataOutputTab"
+        Me.DataOutputTab.Padding = New System.Windows.Forms.Padding(3)
+        Me.DataOutputTab.Size = New System.Drawing.Size(592, 466)
+        Me.DataOutputTab.TabIndex = 1
+        Me.DataOutputTab.Text = "Default Data Output"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.CByteDataTextBox)
+        Me.GroupBox3.Controls.Add(Me.Label8)
+        Me.GroupBox3.Location = New System.Drawing.Point(17, 289)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(559, 54)
+        Me.GroupBox3.TabIndex = 268
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "C"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.arrow2PictureBox)
+        Me.GroupBox2.Controls.Add(Me.AsmByteDataTextBox)
+        Me.GroupBox2.Controls.Add(Me.arrow1PictureBox)
+        Me.GroupBox2.Controls.Add(Me.AsmWordDataTextBox)
+        Me.GroupBox2.Controls.Add(Me.AsmWordValuesComboBox)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.AsmByteValuesComboBox)
+        Me.GroupBox2.Location = New System.Drawing.Point(17, 200)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(559, 83)
+        Me.GroupBox2.TabIndex = 267
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Assembler"
+        '
+        'arrow2PictureBox
+        '
+        Me.arrow2PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.arrow_left_24blue
+        Me.arrow2PictureBox.Location = New System.Drawing.Point(343, 49)
+        Me.arrow2PictureBox.Name = "arrow2PictureBox"
+        Me.arrow2PictureBox.Size = New System.Drawing.Size(24, 24)
+        Me.arrow2PictureBox.TabIndex = 266
+        Me.arrow2PictureBox.TabStop = False
+        '
+        'arrow1PictureBox
+        '
+        Me.arrow1PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.arrow_left_24blue
+        Me.arrow1PictureBox.Location = New System.Drawing.Point(343, 20)
+        Me.arrow1PictureBox.Name = "arrow1PictureBox"
+        Me.arrow1PictureBox.Size = New System.Drawing.Size(24, 24)
+        Me.arrow1PictureBox.TabIndex = 265
+        Me.arrow1PictureBox.TabStop = False
+        '
+        'AsmWordValuesComboBox
+        '
+        Me.AsmWordValuesComboBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AsmWordValuesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.AsmWordValuesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.AsmWordValuesComboBox.FormattingEnabled = True
+        Me.AsmWordValuesComboBox.Items.AddRange(New Object() {"dw", "DW", "WORD", "DEFW", "<tab>DW", "<tab>WORD", "<tab>DEFW"})
+        Me.AsmWordValuesComboBox.Location = New System.Drawing.Point(372, 50)
+        Me.AsmWordValuesComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.AsmWordValuesComboBox.Name = "AsmWordValuesComboBox"
+        Me.AsmWordValuesComboBox.Size = New System.Drawing.Size(171, 22)
+        Me.AsmWordValuesComboBox.TabIndex = 264
+        '
+        'AsmByteValuesComboBox
+        '
+        Me.AsmByteValuesComboBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AsmByteValuesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.AsmByteValuesComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.AsmByteValuesComboBox.FormattingEnabled = True
+        Me.AsmByteValuesComboBox.Items.AddRange(New Object() {"db", "DB", "BYTE", "DEFB", "DEFM", "<tab>DB", "<tab>BYTE", "<tab>DEFB", "<tab>DEFM"})
+        Me.AsmByteValuesComboBox.Location = New System.Drawing.Point(372, 21)
+        Me.AsmByteValuesComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.AsmByteValuesComboBox.Name = "AsmByteValuesComboBox"
+        Me.AsmByteValuesComboBox.Size = New System.Drawing.Size(171, 22)
+        Me.AsmByteValuesComboBox.TabIndex = 263
+        '
+        'PathsTab
+        '
+        Me.PathsTab.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.PathsTab.Controls.Add(Me.PathsPanel)
+        Me.PathsTab.Location = New System.Drawing.Point(4, 23)
+        Me.PathsTab.Name = "PathsTab"
+        Me.PathsTab.Padding = New System.Windows.Forms.Padding(3)
+        Me.PathsTab.Size = New System.Drawing.Size(592, 466)
+        Me.PathsTab.TabIndex = 0
+        Me.PathsTab.Text = "Default paths"
+        '
         'ConfigWin
         '
         Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 14.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(624, 584)
+        Me.ClientSize = New System.Drawing.Size(624, 561)
         Me.ControlBox = False
         Me.Controls.Add(Me.Cancel_Button)
         Me.Controls.Add(Me.OK_Button)
@@ -795,13 +874,19 @@ Partial Class ConfigWin
         Me.BASICGroupBox.PerformLayout()
         Me.PathsPanel.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.DataOutputTab.ResumeLayout(False)
-        Me.DataOutputTab.PerformLayout()
-        Me.PathsTab.ResumeLayout(False)
         Me.OthersTab.ResumeLayout(False)
         Me.OthersTab.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.DataOutputTab.ResumeLayout(False)
+        Me.DataOutputTab.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PathsTab.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -864,4 +949,10 @@ Partial Class ConfigWin
     Friend WithEvents Color0Button As Button
     Friend WithEvents Label11 As Label
     Friend WithEvents ColorDialog1 As ColorDialog
+    Friend WithEvents AsmByteValuesComboBox As ComboBox
+    Friend WithEvents AsmWordValuesComboBox As ComboBox
+    Friend WithEvents arrow2PictureBox As PictureBox
+    Friend WithEvents arrow1PictureBox As PictureBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
 End Class

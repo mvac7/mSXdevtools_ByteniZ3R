@@ -26,20 +26,20 @@ Partial Class OutputDataGBox
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputDataGBox))
         Me.DownPictureBox = New System.Windows.Forms.PictureBox()
         Me.upperPanel = New System.Windows.Forms.Panel()
+        Me.accordionPictureBox = New System.Windows.Forms.PictureBox()
         Me.ButtonImageList = New System.Windows.Forms.ImageList(Me.components)
         Me.LeftLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.RightLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.ContentsPanel = New System.Windows.Forms.Panel()
+        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         Me.LabelTextBox = New System.Windows.Forms.TextBox()
         Me.LabelLabel = New System.Windows.Forms.Label()
-        Me.accordionPictureBox = New System.Windows.Forms.PictureBox()
-        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.upperPanel.SuspendLayout()
+        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContentsPanel.SuspendLayout()
-        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DownPictureBox
@@ -64,6 +64,16 @@ Partial Class OutputDataGBox
         Me.upperPanel.Name = "upperPanel"
         Me.upperPanel.Size = New System.Drawing.Size(766, 20)
         Me.upperPanel.TabIndex = 0
+        '
+        'accordionPictureBox
+        '
+        Me.accordionPictureBox.BackColor = System.Drawing.Color.Transparent
+        Me.accordionPictureBox.Location = New System.Drawing.Point(726, 0)
+        Me.accordionPictureBox.Margin = New System.Windows.Forms.Padding(0)
+        Me.accordionPictureBox.Name = "accordionPictureBox"
+        Me.accordionPictureBox.Size = New System.Drawing.Size(20, 20)
+        Me.accordionPictureBox.TabIndex = 69
+        Me.accordionPictureBox.TabStop = False
         '
         'ButtonImageList
         '
@@ -104,35 +114,6 @@ Partial Class OutputDataGBox
         Me.ContentsPanel.Size = New System.Drawing.Size(758, 129)
         Me.ContentsPanel.TabIndex = 4
         '
-        'LabelTextBox
-        '
-        Me.LabelTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTextBox.Location = New System.Drawing.Point(602, 8)
-        Me.LabelTextBox.Name = "LabelTextBox"
-        Me.LabelTextBox.Size = New System.Drawing.Size(140, 21)
-        Me.LabelTextBox.TabIndex = 67
-        Me.LabelTextBox.Text = "DATA"
-        '
-        'LabelLabel
-        '
-        Me.LabelLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelLabel.Location = New System.Drawing.Point(503, 9)
-        Me.LabelLabel.Name = "LabelLabel"
-        Me.LabelLabel.Size = New System.Drawing.Size(93, 21)
-        Me.LabelLabel.TabIndex = 66
-        Me.LabelLabel.Text = "Field name:"
-        Me.LabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'accordionPictureBox
-        '
-        Me.accordionPictureBox.BackColor = System.Drawing.Color.Transparent
-        Me.accordionPictureBox.Location = New System.Drawing.Point(726, 0)
-        Me.accordionPictureBox.Margin = New System.Windows.Forms.Padding(0)
-        Me.accordionPictureBox.Name = "accordionPictureBox"
-        Me.accordionPictureBox.Size = New System.Drawing.Size(20, 20)
-        Me.accordionPictureBox.TabIndex = 69
-        Me.accordionPictureBox.TabStop = False
-        '
         'DataTypeInput
         '
         Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
@@ -141,9 +122,28 @@ Partial Class OutputDataGBox
         Me.DataTypeInput.Location = New System.Drawing.Point(3, 6)
         Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(486, 110)
+        Me.DataTypeInput.Size = New System.Drawing.Size(418, 110)
         Me.DataTypeInput.SizesForColors = False
         Me.DataTypeInput.TabIndex = 68
+        '
+        'LabelTextBox
+        '
+        Me.LabelTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelTextBox.Location = New System.Drawing.Point(535, 8)
+        Me.LabelTextBox.Name = "LabelTextBox"
+        Me.LabelTextBox.Size = New System.Drawing.Size(140, 22)
+        Me.LabelTextBox.TabIndex = 67
+        Me.LabelTextBox.Text = "DATA"
+        '
+        'LabelLabel
+        '
+        Me.LabelLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelLabel.Location = New System.Drawing.Point(436, 9)
+        Me.LabelLabel.Name = "LabelLabel"
+        Me.LabelLabel.Size = New System.Drawing.Size(93, 21)
+        Me.LabelLabel.TabIndex = 66
+        Me.LabelLabel.Text = "Field name:"
+        Me.LabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OutputDataGBox
         '
@@ -156,11 +156,11 @@ Partial Class OutputDataGBox
         Me.Size = New System.Drawing.Size(766, 153)
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.upperPanel.ResumeLayout(False)
+        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContentsPanel.ResumeLayout(False)
         Me.ContentsPanel.PerformLayout()
-        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
