@@ -31,9 +31,9 @@ Partial Class OutputDataGBox
         Me.LeftLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.RightLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.ContentsPanel = New System.Windows.Forms.Panel()
-        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         Me.LabelTextBox = New System.Windows.Forms.TextBox()
         Me.LabelLabel = New System.Windows.Forms.Label()
+        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.upperPanel.SuspendLayout()
         CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,18 +114,6 @@ Partial Class OutputDataGBox
         Me.ContentsPanel.Size = New System.Drawing.Size(758, 129)
         Me.ContentsPanel.TabIndex = 4
         '
-        'DataTypeInput
-        '
-        Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
-        Me.DataTypeInput.EnableDataSizeLine = False
-        Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataTypeInput.Location = New System.Drawing.Point(3, 6)
-        Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(418, 110)
-        Me.DataTypeInput.SizesForColors = False
-        Me.DataTypeInput.TabIndex = 68
-        '
         'LabelTextBox
         '
         Me.LabelTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -144,6 +132,18 @@ Partial Class OutputDataGBox
         Me.LabelLabel.TabIndex = 66
         Me.LabelLabel.Text = "Field name:"
         Me.LabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'DataTypeInput
+        '
+        Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
+        Me.DataTypeInput.EnableCompress = False
+        Me.DataTypeInput.EnableDataSizeLine = False
+        Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataTypeInput.Location = New System.Drawing.Point(3, 6)
+        Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DataTypeInput.Name = "DataTypeInput"
+        Me.DataTypeInput.Size = New System.Drawing.Size(418, 110)
+        Me.DataTypeInput.TabIndex = 68
         '
         'OutputDataGBox
         '

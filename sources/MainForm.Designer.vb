@@ -35,6 +35,7 @@ Partial Class MainForm
         Me.CopyAllButton = New System.Windows.Forms.Button()
         Me.SaveBinaryFileButton = New System.Windows.Forms.Button()
         Me.SaveSourceButton = New System.Windows.Forms.Button()
+        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.WaveFreqTrackBar = New System.Windows.Forms.TrackBar()
         Me.LabelFreq = New System.Windows.Forms.Label()
         Me.WavePhaseTrackBar = New System.Windows.Forms.TrackBar()
@@ -68,8 +69,8 @@ Partial Class MainForm
         Me.DownPictureBox = New System.Windows.Forms.PictureBox()
         Me.waveform_up_PictureBox = New System.Windows.Forms.PictureBox()
         Me.SaveoutputPanel = New System.Windows.Forms.Panel()
-        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.anOutputDataGBox = New ByteniZ3R.OutputDataGBox()
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WavePhaseTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveMaxTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +85,6 @@ Partial Class MainForm
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.waveform_up_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SaveoutputPanel.SuspendLayout()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OutputText
@@ -94,6 +94,7 @@ Partial Class MainForm
         Me.OutputText.BackColor = System.Drawing.Color.WhiteSmoke
         Me.OutputText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.OutputText.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputText.ForeColor = System.Drawing.Color.DimGray
         Me.OutputText.Location = New System.Drawing.Point(12, 490)
         Me.OutputText.Multiline = True
         Me.OutputText.Name = "OutputText"
@@ -215,6 +216,17 @@ Partial Class MainForm
         Me.ToolTip1.SetToolTip(Me.SaveSourceButton, "Save output Source")
         Me.SaveSourceButton.UseVisualStyleBackColor = False
         '
+        'LogoPictureBox
+        '
+        Me.LogoPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.ByteniZ3R_logo
+        Me.LogoPictureBox.Location = New System.Drawing.Point(466, 42)
+        Me.LogoPictureBox.Name = "LogoPictureBox"
+        Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
+        Me.LogoPictureBox.TabIndex = 115
+        Me.LogoPictureBox.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.LogoPictureBox, "Formerly known as BytesGen." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The new name is due to a brain process of @Fubukimar" &
+        "u")
+        '
         'WaveFreqTrackBar
         '
         Me.WaveFreqTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
@@ -293,7 +305,7 @@ Partial Class MainForm
         'WaveTypeComboBox
         '
         Me.WaveTypeComboBox.FormattingEnabled = True
-        Me.WaveTypeComboBox.Items.AddRange(New Object() {"Sine", "Cosine", "Square", "Triangle", "Sawtooth", "Noise (Random)"})
+        Me.WaveTypeComboBox.Items.AddRange(New Object() {"Sine", "Cosine", "Square", "Triangle", "Sawtooth", "Reverse Sawtooth", "Noise (Random)"})
         Me.WaveTypeComboBox.Location = New System.Drawing.Point(91, 21)
         Me.WaveTypeComboBox.Name = "WaveTypeComboBox"
         Me.WaveTypeComboBox.Size = New System.Drawing.Size(176, 21)
@@ -547,17 +559,6 @@ Partial Class MainForm
         Me.SaveoutputPanel.Size = New System.Drawing.Size(767, 52)
         Me.SaveoutputPanel.TabIndex = 116
         '
-        'LogoPictureBox
-        '
-        Me.LogoPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.ByteniZ3R_logo
-        Me.LogoPictureBox.Location = New System.Drawing.Point(466, 42)
-        Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
-        Me.LogoPictureBox.TabIndex = 115
-        Me.LogoPictureBox.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.LogoPictureBox, "Formerly known as BytesGen." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The new name is due to a brain process of @Fubukimar" &
-        "u")
-        '
         'anOutputDataGBox
         '
         Me.anOutputDataGBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -584,6 +585,7 @@ Partial Class MainForm
         Me.MinimumSize = New System.Drawing.Size(800, 39)
         Me.Name = "MainForm"
         Me.Text = "ByteniZ3R"
+        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WavePhaseTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WaveMaxTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
@@ -600,7 +602,6 @@ Partial Class MainForm
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.waveform_up_PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SaveoutputPanel.ResumeLayout(False)
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

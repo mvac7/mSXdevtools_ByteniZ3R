@@ -1,13 +1,19 @@
 ﻿Public Class DataTypeInputControl
 
-    Public AppConfig As Config
+    Private AppConfig As Config
 
-    Private _dataSizeLine As Boolean = False
-    Private _sizesForColors As Boolean = False
-    Private _enableIndex As Boolean = False
+    'Private _sizesForColors As Boolean = False
+
+    Private _enableAsmIndex As Boolean = False
+    Private _enableCompress As Boolean = True
+    Private _enableDataSizeLine As Boolean = False
+
 
 
     Public Event DataChanged()
+
+
+
 
 
     Public Shadows Enum Language_CODE As Integer
@@ -62,18 +68,33 @@
 
     Public ReadOnly Property Compress As Integer
         Get
-            Return Me.CompressComboBox.SelectedIndex
+            If _enableCompress = False Then
+                Return 0
+            Else
+                Return Me.CompressComboBox.SelectedIndex
+            End If
         End Get
     End Property
 
 
 
-    Public Property SizesForColors As Boolean
+    'Public Property SizesForColors As Boolean
+    '    Get
+    '        Return Me._sizesForColors
+    '    End Get
+    '    Set(value As Boolean)
+    '        Me._sizesForColors = value
+    '    End Set
+    'End Property
+
+
+
+    Public Property EnableCompress As Boolean
         Get
-            Return Me._sizesForColors
+            Return Me._enableCompress
         End Get
         Set(value As Boolean)
-            Me._sizesForColors = value
+            Me._enableCompress = value
         End Set
     End Property
 
@@ -81,10 +102,10 @@
 
     Public Property EnableDataSizeLine As Boolean
         Get
-            Return Me._dataSizeLine
+            Return Me._enableDataSizeLine
         End Get
         Set(value As Boolean)
-            Me._dataSizeLine = value
+            Me._enableDataSizeLine = value
         End Set
     End Property
 
@@ -95,23 +116,12 @@
     ''' </summary>
     ''' <value></value>
     ''' <remarks></remarks>
-    Public WriteOnly Property AsmEnableIndex As Boolean
+    Public WriteOnly Property EnableAssemblerIndex As Boolean
         Set(value As Boolean)
-            Me._enableIndex = value
+            Me._enableAsmIndex = value
             showIndex()
         End Set
     End Property
-
-
-
-    Private Sub showIndex()
-        Me.AddIndexCheck.Visible = Me._enableIndex
-        WordDataLabel.Visible = Me._enableIndex
-        AsmWordDataTextBox.Visible = Me._enableIndex
-        If Me._enableIndex = True Then
-            ShowWordAsmCommand()
-        End If
-    End Sub
 
 
 
@@ -174,6 +184,19 @@
 
 
 
+
+
+    Public Sub New()
+
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+    End Sub
+
+
+
     Private Sub DataTypeInputControl_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         ' posiciona la caja con campos especificos para la salida en assembler
@@ -182,7 +205,13 @@
 
         Me.LanguageComboBox.SelectedIndex = 0
 
+        If _enableCompress = False Then
+            CompressLabel.Enabled = False
+            CompressComboBox.Enabled = False
+        End If
+
     End Sub
+
 
 
 
@@ -190,36 +219,9 @@
     ''' Se ha de ejecutar despues de proporcionar el Config, para que se inicialice el control con los datos adecuados.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub InitControl()
+    Public Sub InitControl(ByRef _config As Config)
 
-        'RemoveHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
-        'RemoveHandler Me.NumSysCombo.SelectedIndexChanged, AddressOf NumSysCombo_SelectedIndexChanged
-        'RemoveHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
-        'RemoveHandler Me.CompressComboBox.SelectedIndexChanged, AddressOf CompressComboBox_SelectedIndexChanged
-
-        'RemoveHandler Me.CdataTypeTextBox.TextChanged, AddressOf CdataTypeTextBox_TextChanged
-        'RemoveHandler Me.AsmCommandTextBox.TextChanged, AddressOf AsmCommandTextBox_TextChanged
-        'RemoveHandler Me.AsmWordDataTextBox.TextChanged, AddressOf AsmWordDataTextBox_TextChanged
-
-        'RemoveHandler Me.RemoveZerosCheck.CheckedChanged, AddressOf RemoveZerosCheck_CheckedChanged
-        'RemoveHandler Me.AddIndexCheck.CheckedChanged, AddressOf AddIndexCheck_CheckedChanged
-
-
-        Me.LanguageComboBox.SelectedIndex = Me.AppConfig.lastCodeOutput
-        Me.CompressComboBox.SelectedIndex = Me.AppConfig.lastCodeCompressType
-
-        Me.AsmByteDataTextBox.Text = Me.AppConfig.lastAsmByteCommand
-        Me.AsmWordDataTextBox.Text = Me.AppConfig.lastAsmWordDataCommand
-
-        Me.CdataTypeTextBox.Text = Me.AppConfig.lastCByteCommand
-
-        Me.LineNumberText.Text = CStr(Me.AppConfig.lastBASICinitLine)
-        Me.IntervalText.Text = CStr(Me.AppConfig.lastBASICincLines)
-        Me.RemoveZerosCheck.Checked = Me.AppConfig.lastBASICremove0
-
-        showIndex()
-
-        'Me.NumSysCombo.SelectedIndex = Me.AppConfig.lastCodeNumberFormat
+        Me.AppConfig = _config
 
         'If Me._sizesForColors = True Then
         '    'pensado para los datos de una paleta
@@ -228,7 +230,7 @@
         '    Me.SizeLineComboBox.Items.Add("line")
         '    Me.SizeLineComboBox.SelectedIndex = 0
         'Else
-        If Me._dataSizeLine = True Then
+        If Me._enableDataSizeLine = True Then
             ' pensado para mapas que tienen un ancho especifico
             Me.SizeLineComboBox.Items.Add("line")
             Me.SizeLineComboBox.SelectedIndex = Me.SizeLineComboBox.Items.Count - 1
@@ -237,6 +239,37 @@
 
         End If
         'End If
+
+        AddHandlers()
+
+        RefreshControl()
+
+    End Sub
+
+
+
+    Public Sub RefreshControl()
+
+        RemoveHandlers()
+
+        Me.LanguageComboBox.SelectedIndex = Me.AppConfig.lastCodeOutput
+
+        If _enableCompress = True Then
+            Me.CompressComboBox.SelectedIndex = Me.AppConfig.lastCodeCompressType
+        Else
+            Me.CompressComboBox.SelectedIndex = 0
+        End If
+
+        Me.AsmByteDataTextBox.Text = Me.AppConfig.lastAsmByteCommand
+        Me.AsmWordDataTextBox.Text = Me.AppConfig.lastAsmWordDataCommand
+
+        Me.CdataTypeTextBox.Text = Me.AppConfig.lastCByteCommand
+
+        Me.LineNumberText.Text = CStr(Me.AppConfig.lastBASIC_initLine)
+        Me.IntervalText.Text = CStr(Me.AppConfig.lastBASIC_incLines)
+        Me.RemoveZerosCheck.Checked = Me.AppConfig.lastBASIC_remove0
+
+        showIndex()
 
         Me.AppConfig.lastCodeSizeLine = Me.SizeLineComboBox.SelectedIndex
 
@@ -290,6 +323,24 @@
         RemoveHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
 
         RemoveHandler Me.CdataTypeTextBox.TextChanged, AddressOf Text_TextChanged
+    End Sub
+
+
+
+    Private Sub showIndex()
+        Try
+
+            Me.AddIndexCheck.Visible = Me._enableAsmIndex
+            WordDataLabel.Visible = Me._enableAsmIndex
+            AsmWordDataTextBox.Visible = Me._enableAsmIndex
+
+            If Me._enableAsmIndex = True Then
+                ShowWordAsmCommand()
+            End If
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 

@@ -81,7 +81,7 @@ Later I would add the option to load binary files and dump them in tables format
 The next step was to generate mathematical forms to use as paths for sprite movement and thinking of a future version that will serve for musical waveforms (thinking of the SCC).
 
 The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
-<br/>The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
+The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
 In March 2022, I resumed this project which I had pending a v0.9b Release. 
 Updated some classes, removed binary loading, and gave the frontend a new look.

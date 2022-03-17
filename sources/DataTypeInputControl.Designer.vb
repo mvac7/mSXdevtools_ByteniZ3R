@@ -32,7 +32,7 @@ Partial Class DataTypeInputControl
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.CompressComboBox = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.CompressLabel = New System.Windows.Forms.Label()
         Me.BasicGroupBox = New System.Windows.Forms.GroupBox()
         Me.LineNumberLabel = New System.Windows.Forms.Label()
         Me.IntervalText = New System.Windows.Forms.TextBox()
@@ -167,16 +167,16 @@ Partial Class DataTypeInputControl
         Me.CompressComboBox.Size = New System.Drawing.Size(120, 21)
         Me.CompressComboBox.TabIndex = 256
         '
-        'Label10
+        'CompressLabel
         '
-        Me.Label10.Font = New System.Drawing.Font("Verdana", 8.25!)
-        Me.Label10.Location = New System.Drawing.Point(3, 56)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(90, 21)
-        Me.Label10.TabIndex = 255
-        Me.Label10.Text = "Compress:"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CompressLabel.Font = New System.Drawing.Font("Verdana", 8.25!)
+        Me.CompressLabel.Location = New System.Drawing.Point(3, 56)
+        Me.CompressLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.CompressLabel.Name = "CompressLabel"
+        Me.CompressLabel.Size = New System.Drawing.Size(90, 21)
+        Me.CompressLabel.TabIndex = 255
+        Me.CompressLabel.Text = "Compress:"
+        Me.CompressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'BasicGroupBox
         '
@@ -327,7 +327,7 @@ Partial Class DataTypeInputControl
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.CompressComboBox)
-        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.CompressLabel)
         Me.Controls.Add(Me.BasicGroupBox)
         Me.Controls.Add(Me.NumSysCombo)
         Me.Controls.Add(Me.Label1)
@@ -353,7 +353,7 @@ Partial Class DataTypeInputControl
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents CompressComboBox As System.Windows.Forms.ComboBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents CompressLabel As System.Windows.Forms.Label
     Friend WithEvents BasicGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents LineNumberLabel As System.Windows.Forms.Label
     Friend WithEvents IntervalText As System.Windows.Forms.TextBox

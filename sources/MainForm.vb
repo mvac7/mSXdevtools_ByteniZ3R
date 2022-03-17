@@ -55,6 +55,7 @@ Public Class MainForm
         SQUARE
         TRIANGLE
         SAWTOOTH
+        SAWTOOTH_REVERSE
         NOISE
     End Enum
 
@@ -92,9 +93,10 @@ Public Class MainForm
             about.ShowDialog()
         End If
 
+        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
-        Me.anOutputDataGBox.DataTypeInput.AppConfig = Me.AppConfig
-        Me.anOutputDataGBox.DataTypeInput.InitControl()
+        Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)
 
         Me.anOutputDataGBox.LabelTextBox.Text = Me.AppConfig.defDataLabel
 
@@ -185,37 +187,12 @@ Public Class MainForm
 
     Private Sub GenerateData()
 
-        Dim aRLE As New RLE
-        Dim tmpData As Byte()
+        Me.lastOutputData = GetWaveTable()
+        DrawWave(Me.lastOutputData)
 
-        tmpData = GetWaveTable()
-        DrawWave(tmpData)
-
-
-        If tmpData Is Nothing Then
-            Return
-        End If
-
-
-        Me.outputDataSize = tmpData.Length
-
-        'data compression
-        Select Case Me.anOutputDataGBox.DataTypeInput.Compress 'CompressionCB.SelectedIndex
-
-            Case 1
-                Me.lastOutputData = aRLE.Compress_RLE(tmpData)
-
-            Case 2
-                Me.lastOutputData = aRLE.Compress_RLEWB(tmpData)
-
-            Case Else
-                Me.lastOutputData = tmpData
-
-        End Select
+        Me.outputDataSize = Me.lastOutputData.Length
 
         GenerateCode(Me.lastOutputData)
-
-
 
     End Sub
 
@@ -234,23 +211,7 @@ Public Class MainForm
         End If
 
         comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
-
-        Select Case Me.anOutputDataGBox.DataTypeInput.Compress  'CompressionCB.SelectedIndex
-
-            Case 1
-                comments.Add("RLE compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
-            Case 2
-                comments.Add("RLE WB compressed - Original size=" + CStr(Me.outputDataSize) + " - Compress size=" + CStr(data.Length))
-
-                'Case 3
-
-
-            Case Else
-
-                comments.Add("Size=" + CStr(Me.outputDataSize))
-
-        End Select
-
+        comments.Add("Size=" + CStr(Me.outputDataSize))
 
         Dim tableLength As Short = WaveLengthTrackBar.Value - 1
         Dim minValueRange As Short = CByte(WaveMinTrackBar.Value)
@@ -327,6 +288,9 @@ Public Class MainForm
 
             Case WAVE_TYPE.SAWTOOTH
                 tmpData = GetSawtoothTable(tableLength, minValueRange, maxValueRange, phase, freq)
+
+            Case WAVE_TYPE.SAWTOOTH_REVERSE
+                tmpData = GetReverseSawtoothTable(tableLength, minValueRange, maxValueRange, phase, freq)
 
             Case WAVE_TYPE.NOISE
                 tmpData = GetRandomTable(tableLength, minValueRange, maxValueRange)
@@ -473,35 +437,86 @@ Public Class MainForm
         Dim tmpData(length) As Byte
         Dim value As Double
         Dim interval As Double
-        Dim conta As Double
         Dim amplitude As Integer
+        Dim waveSize As Double
+        Dim tmpValue As Short
+
+        waveSize = length / freq
 
         amplitude = maxValueRange - minValueRange
-        interval = (Math.PI) / (length / freq)
-        conta = (((length / freq) * phase) / 360) * interval
+        interval = amplitude / waveSize
 
-        For BC = 0 To length
+        value = ((waveSize / 360) * phase) * interval
 
-            value = ((((Math.PI) - conta) / Math.PI) * amplitude) + minValueRange
+        For t = 0 To length
 
-            If value < 0 Then
+            tmpValue = Fix(value)  'Math.Ceiling Floor
+
+            If tmpValue < 0 Then
+                tmpValue = 0
+            End If
+
+            If tmpValue > amplitude Then
+                tmpValue = amplitude
+            End If
+
+            tmpData(t) = CByte(tmpValue + minValueRange)
+
+            value += interval
+            If value > amplitude Then
                 value = 0
-            End If
-            If value > 255 Then
-                value = 255
-            End If
-
-            tmpData(BC) = CByte(value)
-
-            conta = conta + interval
-            If conta > (Math.PI) Then
-                conta = 0
             End If
 
         Next
 
         Return tmpData
     End Function
+
+
+
+
+    Private Function GetReverseSawtoothTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal phase As Integer, ByVal freq As Integer) As Byte()
+
+        Dim tmpData(length) As Byte
+        Dim value As Double
+        Dim interval As Double
+        Dim amplitude As Integer
+        Dim waveSize As Double
+        Dim tmpValue As Short
+
+        waveSize = length / freq
+
+        amplitude = maxValueRange - minValueRange
+        interval = amplitude / waveSize
+
+        value = ((waveSize / 360) * phase) * interval
+
+        value = amplitude - value
+
+        For t = 0 To length
+
+            tmpValue = Fix(value)  'Math.Ceiling Floor
+
+            If tmpValue < 0 Then
+                tmpValue = 0
+            End If
+
+            If tmpValue > amplitude Then
+                tmpValue = amplitude
+            End If
+
+            tmpData(t) = CByte(tmpValue + minValueRange)
+
+            value -= interval
+            If value < 0 Then
+                value = amplitude
+            End If
+
+        Next
+
+        Return tmpData
+    End Function
+
 
 
 
@@ -556,6 +571,7 @@ Public Class MainForm
             aGraphics = Graphics.FromImage(Me.workBitmap)
             Me.GFXoutputPictureBox.Image = workBitmap
 
+            aGraphics.Clear(Color.FromArgb(255, 202, 220, 159))
 
             Dim aPen As New Pen(Color.FromArgb(255, 48, 98, 48)) 'dark green
 
@@ -1192,7 +1208,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.BASICinitLineTextBox.Text = CStr(Me.AppConfig.defBASICinitLine)
                     Else
-                        Me.AppConfig.lastBASICinitLine = CInt(attrNode.InnerText)
+                        Me.AppConfig.lastBASIC_initLine = CInt(attrNode.InnerText)
                         'Me.BASICinitLineTextBox.Text = attrNode.InnerText
                     End If
 
@@ -1200,7 +1216,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.BASICincLineslTextBox.Text = CStr(Me.AppConfig.defBASICincLines)
                     Else
-                        Me.AppConfig.lastBASICincLines = CInt(attrNode.InnerText)
+                        Me.AppConfig.lastBASIC_incLines = CInt(attrNode.InnerText)
                         'Me.BASICincLineslTextBox.Text = attrNode.InnerText
                     End If
 
@@ -1208,7 +1224,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.Remove0Check.Checked = Me.AppConfig.defBASICremove0
                     Else
-                        Me.AppConfig.lastBASICremove0 = CBool(attrNode.InnerText.ToUpper = "TRUE")
+                        Me.AppConfig.lastBASIC_remove0 = CBool(attrNode.InnerText.ToUpper = "TRUE")
                         'Me.Remove0Check.Checked = CBool(attrNode.InnerText.ToUpper = "TRUE")
                     End If
 
@@ -1220,7 +1236,7 @@ Public Class MainForm
                     End If
 
 
-                    Me.anOutputDataGBox.DataTypeInput.InitControl()  '<--- refresh data 
+                    Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)  '<--- refresh data 
 
                 End If
                 ' END Output Data Config ###############################################
@@ -1538,6 +1554,12 @@ Public Class MainForm
 
         If aConfig.ShowDialog() = DialogResult.OK Then
             Me.AppConfig.Save()
+
+            Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+            Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+
+            Me.anOutputDataGBox.DataTypeInput.RefreshControl()
+            GenerateData()
         End If
     End Sub
 
