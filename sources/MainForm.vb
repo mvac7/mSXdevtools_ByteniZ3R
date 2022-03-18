@@ -171,8 +171,6 @@ Public Class MainForm
 
     Private Sub NewProject()
 
-        Me.Info.Clear()
-
         Me.WaveTypeComboBox.SelectedIndex = 0
 
         SetWaveLength(defaultWaveLength)
@@ -183,10 +181,33 @@ Public Class MainForm
         SetWavePhase(0)
         SetWaveFreq(1)
 
-        Me.ProjectNameTextBox.Text = Me.Info.Name
+        Me.Path_Project = ""
+        Me.Path_source = ""
+        Me.Path_binary = ""
+
+        Info.Clear()
+        Me.ProjectNameTextBox.Text = Info.Name
+
+        SetTitle(Me.Info.Name)
 
         GenerateData()
 
+    End Sub
+
+
+
+    Private Sub NewProjectDialog()
+        Dim MessageWin As New MessageDialog
+        Dim result As DialogResult
+
+        Beep()
+        result = MessageWin.ShowDialog(Me, "New Project", "This option will erase all data." + vbCrLf + "Do you want to continue?", MessageDialog.DIALOG_TYPE.YES_NO) '+ vbCrLf
+
+        If result = DialogResult.Yes Then
+            RemoveHandlers()
+            NewProject()
+            AddHandlers()
+        End If
     End Sub
 
 
@@ -1588,9 +1609,9 @@ Public Class MainForm
 
 
     Private Sub NewButton_Click(sender As System.Object, e As System.EventArgs) Handles NewButton.Click
-        RemoveHandlers()
-        NewProject()
-        AddHandlers()
+
+        NewProjectDialog()
+
     End Sub
 
     Private Sub LoadButton_Click(sender As System.Object, e As System.EventArgs) Handles LoadButton.Click
