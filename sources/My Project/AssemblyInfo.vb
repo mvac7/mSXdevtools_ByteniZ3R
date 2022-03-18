@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("ByteniZ3R")>
 <Assembly: AssemblyDescription("Generates tables of 8 bits unsigned values to a different programming languages (BASIC, C or ASM), from waveforms (Sine, Cosine, Square, Triangle, Sawtooth and Noise).")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyCompany("MSX Comm·unity")>
 <Assembly: AssemblyProduct("ByteniZ3R")>
 <Assembly: AssemblyCopyright("mvac7 2022")>
 <Assembly: AssemblyTrademark("")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.9.6.0")>
-<Assembly: AssemblyFileVersion("0.9.6.0")>
+<Assembly: AssemblyVersion("0.9.7.0")>
+<Assembly: AssemblyFileVersion("0.9.7.0")>

@@ -12,23 +12,21 @@ License:      GNU General Public License v3
 --------------------------------------------------------------------------------
 Index:
 
-1. Description
-2. License
-3. Requirements
-4. How to Install and Run
-5. News in version
-
-6. User Guide
-6.1 How does it work
-6.2 Project Menu
-6.3 Type of data
-6.3.1 Waveforms
-6.3.2 Binary File
-6.4 Data output format
-6.5 Saving the result
-
-7 Programming information
-7.1 How to read data in MSX BASIC
+  1. Description
+  2. License
+  3. Requirements
+  4. How to Install and Run
+  5. News in version
+  
+  6. User Guide
+  6.1 How does it work
+  6.2 Project Menu
+  6.3 Waveforms
+  6.4 Data output format
+  6.5 Saving the result
+  
+  7 Programming information
+  7.1 How to read data in MSX BASIC
 
 
 
@@ -89,11 +87,12 @@ For run, execute ByteniZ3R.exe
 5. News in version 
    
      * Save/Load Project.
-     * Add Project Info
-     * Move Random tab to Wave.
-     * Add Square form in Wave
-     * Add Triangle form in Wave
-     * Add Sawtooth form in Wave
+     * Add Project Info.
+     * Move Random tab to waveform.
+     * Add Square waveform.
+     * Add Triangle waveform.
+     * Add Sawtooth waveform.
+     * Add Reverse Sawtooth waveform.
      * Add Phase property, to move the waveform.
      * Add Frequency property.
      * Add sliders in all wave form values.
@@ -119,8 +118,7 @@ it (group, author and description), and then choose the type of data we want to
 generate and modify its properties.
    
 The next step will be to indicate the output format, such as the programming 
-language, numeric format and if the output is uncompressed (Raw) or with one of 
-the types of compression that it supports (RLE or RLEWB).
+language and number system (decimal, hexadecimal or binary).
    
 Finally, we can select the output text and copy it to our programming 
 environment or save it to a text or binary file.
@@ -155,14 +153,7 @@ options:
    
 
   
-6.3 Type of data
-  
-The application can produce several types of data, which are divided into two 
-groups: Waveform and Binary File.
-   
-   
-
-6.3.1 Waveforms
+6.3 Waveforms
 
    It has 6 waveform generators, which can be useful for movement paths for 
    graphic figures (Sprites) or visual effects.
@@ -178,34 +169,7 @@ groups: Waveform and Binary File.
    > Min & Max (0-255): Defines the smallest and the highest value of the form.
    > Phase (0-359): Shifts the wave n degrees.
    > Frecuency (1-256): Number of times the shape will be repeated.
-   
 
-      
-6.3.2 Binary File
-
-   Dump a binary file to code format.
-    
-   The file can be loaded by pressing the load button or by drag and drop the 
-   file into the window.
-
-   Includes a numeric field where the start of the dump is indicated. 
-   It is primarily intended to remove headers.
-   It includes a viewer of the file in hexadecimal so that you can identify a 
-   header.
-   
-   Header examples: 
-    - Binary MSX BASIC file = 7 Bytes 
-    - PT3 music file = 100 Bytes
-
-   File -> (path) Files that do not exceed 64k in size.
-   
-   Init -> (decimal 0-1024) Remove n bytes from header. (Example: 7 for MSX 
-                            BASIC binary files)
-                            
-   Length -> (decimal 8-65536) Size of output file.
-   
-   Fill value -> (decimal 0-255) Fill value if the size is larger than 
-                                 containing the file.
                  
                  
 
@@ -219,8 +183,9 @@ groups: Waveform and Binary File.
               C 
               Assembler
 
-   Format:  Supports various number systems and formats for different 
-            compilers/assemblers.
+   Number System:  
+            Supports various number systems and formats for different 
+            compilers or assemblers.
             
               decimal nnn 
               decimal nnnd 
@@ -230,30 +195,10 @@ groups: Waveform and Binary File.
               hexadecimal #FF 
               hexadecimal 0FFh 
               hexadecimal &HFF
-        
-   Compress: 
 
-              RAW (no compression) 
-              RLE (simple)
-
-                  nn + dd
-                  
-                  nn = 0 -> END
-                  nn = 1 - 255
-
-
-              RLE WB (https://github.com/mvac7/Z80_RLEWB)
-
-                  CD = Control Digit = $80
-                  
-                  CD + $0         --> When the value to be written to the output
-                                      is equal to the Control Digit
-                  CD + $FF        --> End
-                  CD + nn + dd    --> Repeat nn ($1-$FE)+1 dd value
-                  dd (!= CD)      --> Raw data. Values without repetition.
 
    Size Line: 
-               8, 16, 24 or 32
+               1,2,4,8, 16, 24 or 32
  
 
    Assembler > Command. 

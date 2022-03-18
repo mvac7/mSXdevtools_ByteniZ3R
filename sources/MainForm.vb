@@ -38,9 +38,9 @@ Public Class MainForm
     Private lastOutputData As Byte()
     Private outputDataSize As Integer
 
-    Private _projectPath As String
-    Private _binaryPath As String
-    Private _txtPath As String
+    Private Path_Project As String
+    Private Path_binary As String
+    Private Path_source As String
 
     Private Info As ProjectInfo
 
@@ -79,8 +79,6 @@ Public Class MainForm
 
     Private Sub MainForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Me.Text = My.Application.Info.Title + " v " + My.Application.Info.Version.ToString + "b"
-
         ' si no encuentra el fichero de ayuda, inhabilita el boton 
         'If Not System.IO.File.Exists(Me.helpURL) Then
         '    Help_Button.Enabled = False
@@ -104,6 +102,8 @@ Public Class MainForm
 
         NewProject()
 
+        SetTitle(Me.Info.Name)
+
         AddHandlers()
 
         Application.DoEvents()
@@ -112,6 +112,14 @@ Public Class MainForm
 
     End Sub
 
+
+    Private Sub SetTitle(filename As String)
+        If Not filename = "" Then
+            filename = " · [" + filename + "]"
+        End If
+
+        Me.Text = My.Application.Info.Title + " " + filename  '" v" + My.Application.Info.Version.ToString + "b "
+    End Sub
 
 
     Private Sub AddHandlers()
@@ -176,8 +184,6 @@ Public Class MainForm
         SetWaveFreq(1)
 
         Me.ProjectNameTextBox.Text = Me.Info.Name
-
-        Me._projectPath = ""
 
         GenerateData()
 
@@ -653,7 +659,7 @@ Public Class MainForm
 
 
     ''' <summary>
-    ''' Copy output to clipboard
+    ''' Copy output data to clipboard
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub CopyAll()
@@ -664,18 +670,27 @@ Public Class MainForm
 
     Private Sub SaveSourceDialog()
 
+        Dim aStreamWriterFile As StreamWriter
+
         If Me.OutputText.Text = "" Then
-            MsgBox("Nothing to save for you...", MsgBoxStyle.Exclamation, "Alert")
+            Dim MessageWin As New MessageDialog
+            MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
 
         Else
 
-            If Me._txtPath = "" Then
-                Me.SaveFileDialog1.FileName = Me.Info.Name
-                Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathItemProject.Path
+            If Me.Path_source = "" Then
+                If Me.Path_Project = "" Then
+                    Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
+                    Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
+                Else
+                    Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
+                    Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
+                End If
             Else
-                Me.SaveFileDialog1.FileName = Path.GetFileName(Me._txtPath)
-                Me.SaveFileDialog1.FileName = Path.GetDirectoryName(Me._txtPath)
+                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_source)
+                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_source)
             End If
+
 
             Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
                 Case DataFormat.ProgrammingLanguage.BASIC
@@ -692,7 +707,15 @@ Public Class MainForm
 
             If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
 
-                Me.saveCode(SaveFileDialog1.FileName)
+                Try
+                    Me.Path_source = SaveFileDialog1.FileName
+
+                    aStreamWriterFile = New System.IO.StreamWriter(Me.Path_source)
+                    aStreamWriterFile.WriteLine(Me.OutputText.Text)
+                    aStreamWriterFile.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
+                End Try
 
             End If
 
@@ -702,18 +725,45 @@ Public Class MainForm
 
 
 
-    ''' <summary>
-    ''' Save source output.
-    ''' </summary>
-    ''' <param name="filePath"></param>
-    ''' <remarks></remarks>
-    Private Sub saveCode(ByVal filePath As String)
-        Dim aStreamWriterFile As New System.IO.StreamWriter(filePath)
-        aStreamWriterFile.WriteLine(Me.OutputText.Text)
-        aStreamWriterFile.Close()
+    Private Sub SaveBinaryDialog()
+
+        Dim aStream As System.IO.FileStream
+
+        If Me.lastOutputData.Length < 1 Then
+            Dim MessageWin As New MessageDialog
+            MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
+
+        Else
+
+            If Me.Path_binary = "" Then
+                If Me.Path_Project = "" Then
+                    Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
+                    Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
+                Else
+                    Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
+                    Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
+                End If
+            Else
+                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_binary)
+                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_binary)
+            End If
+
+            Me.SaveFileDialog1.DefaultExt = "BIN"
+            Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
+
+            If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                Me.Path_binary = SaveFileDialog1.FileName
+                Try
+                    aStream = New System.IO.FileStream(Me.Path_binary, IO.FileMode.Create)
+                    aStream.Write(Me.lastOutputData, 0, Me.lastOutputData.Length)
+                    aStream.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
+                End Try
+            End If
+
+        End If
     End Sub
-
-
 
 
 
@@ -898,46 +948,6 @@ Public Class MainForm
 
 
 
-    Private Sub SaveBinaryDialog()
-
-        If Me.lastOutputData.Length < 1 Then
-            MsgBox("Nothing to save for you...", MsgBoxStyle.Exclamation, "Alert")
-
-        Else
-
-            If Me._binaryPath = "" Then
-                Me.SaveFileDialog1.FileName = Me.Info.Name
-                Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathItemBinary.Path
-            Else
-                Me.SaveFileDialog1.FileName = Path.GetFileName(Me._binaryPath)
-                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me._binaryPath)
-            End If
-
-            Me.SaveFileDialog1.DefaultExt = "BIN"
-            Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
-
-            If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-
-                SaveBinary(SaveFileDialog1.FileName, Me.lastOutputData)
-                Me._binaryPath = SaveFileDialog1.FileName
-
-            End If
-
-        End If
-    End Sub
-
-
-
-    Private Sub SaveBinary(ByVal filePath As String, ByVal data As Byte())
-
-        Dim aStream As New System.IO.FileStream(filePath, IO.FileMode.Create)
-        aStream.Write(data, 0, data.Length)
-        aStream.Close()
-
-    End Sub
-
-
-
     Private Sub RandomButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RandomButton.Click
         GenerateData()
     End Sub
@@ -1043,21 +1053,22 @@ Public Class MainForm
     ''' <remarks></remarks>
     Private Sub LoadProjectDialog()
 
-        If Me._projectPath = "" Then
+        If Me.Path_Project = "" Then
             Me.OpenFileDialog1.FileName = Me.Info.Name
             Me.OpenFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
         Else
-            Me.OpenFileDialog1.FileName = Path.GetFileName(Me._projectPath)
-            Me.OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(Me._projectPath)
+            Me.OpenFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
+            Me.OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
         End If
 
         'Me.OpenFileDialog1.DefaultExt = "*.*"
-        Me.OpenFileDialog1.Filter = "byteGEN Project file|*." + Config.Extension_byteGEN
+        Me.OpenFileDialog1.Filter = "ByteniZ3R Project file|*." + Config.Extension_byteGEN
 
         If Me.OpenFileDialog1.ShowDialog = DialogResult.OK Then
-            Me._projectPath = OpenFileDialog1.FileName
-            LoadProject(Me._projectPath)
-            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me._projectPath))
+            Me.Path_Project = OpenFileDialog1.FileName
+            LoadProject(Me.Path_Project)
+            SetTitle(Path.GetFileName(Me.Path_Project))
+            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
         End If
 
     End Sub
@@ -1077,8 +1088,6 @@ Public Class MainForm
         Dim subNode As XmlNode
         Dim attrNode As XmlNode
 
-
-        ' comprueba si existe el fichero
         If System.IO.File.Exists(filePath) Then
 
             RemoveHandlers()
@@ -1241,8 +1250,8 @@ Public Class MainForm
                 End If
                 ' END Output Data Config ###############################################
 
-                AddHandlers()
 
+                AddHandlers()
 
 
                 'Me.ASM_COMMAND = Me.AsmCommandTextBox.Text
@@ -1250,7 +1259,8 @@ Public Class MainForm
 
 
             Else
-                MsgBox("This file does not contain the correct format.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Load Project")
+                Dim MessageWin As New MessageDialog
+                MessageWin.ShowDialog(Me, "Load Project", "This file does not contain the correct format.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
             End If
 
 
@@ -1259,8 +1269,8 @@ Public Class MainForm
 
         Else
             ' en el caso de que no exista
-            MsgBox("The file does not exist!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Load Project")
-            'Exit Sub
+            Dim MessageWin As New MessageDialog
+            MessageWin.ShowDialog(Me, "Load Project", "The file does not exist.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
         End If
 
     End Sub
@@ -1273,20 +1283,20 @@ Public Class MainForm
     ''' <remarks></remarks>
     Private Sub SaveProjectDialog()
 
-        If Me._projectPath = "" Then
-            Me.SaveFileDialog1.FileName = Me.Info.Name
+        If Me.Path_Project = "" Then
+            Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
             Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
         Else
-            Me.SaveFileDialog1.FileName = Path.GetFileName(Me._projectPath)
-            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me._projectPath)
+            Me.SaveFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
+            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
         End If
 
-        Me.SaveFileDialog1.Filter = "byteGEN Project file|*." + Config.Extension_byteGEN
+        Me.SaveFileDialog1.Filter = "ByteniZ3R Project file|*." + Config.Extension_byteGEN
 
         If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-            Me._projectPath = SaveFileDialog1.FileName
-            SaveProject(Me._projectPath)
-            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me._projectPath))
+            Me.Path_Project = SaveFileDialog1.FileName
+            SaveProject(Me.Path_Project)
+            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
         End If
 
     End Sub
@@ -1410,7 +1420,7 @@ Public Class MainForm
         'Me._ProgressController.CloseProgressWin()
 
 
-        Me.AppConfig.AddRecentProject(Me._projectPath, AppID)
+        Me.AppConfig.AddRecentProject(Me.Path_Project, AppID)
 
 
     End Sub
@@ -1529,6 +1539,12 @@ Public Class MainForm
 
 
 
+    Private Sub ShowAbout()
+        Dim about As New AboutWin()
+        about.ShowDialog()
+    End Sub
+
+
 
     ''' <summary>
     ''' Opens the project information editing window.
@@ -1536,7 +1552,7 @@ Public Class MainForm
     ''' <remarks></remarks>
     Private Sub SetProjectInfo()
 
-        Dim ProjectProperties As New ProjectPropertiesDialog(Me.AppConfig, Me.Info) '_projectPath
+        Dim ProjectProperties As New ProjectPropertiesDialog(Me.AppConfig, Me.Info) 'Path_Project
 
         If ProjectProperties.ShowDialog = DialogResult.OK Then
 
@@ -1589,7 +1605,7 @@ Public Class MainForm
         SetProjectInfo()
     End Sub
 
-    Private Sub ConfigButton1_Click(sender As System.Object, e As System.EventArgs) Handles ConfigButton1.Click
+    Private Sub ConfigButton1_Click(sender As System.Object, e As System.EventArgs) Handles ConfigButton.Click
         SetConfig()
     End Sub
 
@@ -1602,19 +1618,9 @@ Public Class MainForm
         ShowAbout()
     End Sub
 
-
-
-    Private Sub ShowAbout()
-        Dim about As New AboutWin()
-        about.ShowDialog()
-    End Sub
-
-
     Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         ShowWave()
     End Sub
-
-
 
     Private Sub CopyAllButton_Click(sender As Object, e As EventArgs) Handles CopyAllButton.Click
         CopyAll()

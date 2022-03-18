@@ -20,6 +20,15 @@ Public Class ProjectInfo
 
 
 
+    Public ReadOnly Property Name_without_Spaces() As String
+        Get
+            Return Replace(Me.Name, " ", "_")
+        End Get
+    End Property
+
+
+
+
     Public Sub Clear()
         Me.Name = "New Project"
         Me.Version = "0"

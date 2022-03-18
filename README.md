@@ -66,9 +66,10 @@ For run, execute ByteniZ3R.exe
 * Maximum and minimum adjustment.
 * Phase and Frequency adjustmens.
 * BASIC, C and Assembler output.
-* RLE and RLEWB data compressors.
+* Supports several number systems and data formats (decimal, hexadecimal or binary)
+* Edit info project.
 * Save/Load project files.
-* Edit info project. 
+* Save output to source code or binary
 
 ---
 
@@ -91,19 +92,22 @@ This functionality is no longer required.
 ![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v094b_screenshot01.png)
 
 
-### ByteniZ3R v0.9.2b (March 2022).
+### ByteniZ3R v0.9.n (2022).
 
 - Remove binary handling function #6 
+- Remove compress data (No compression is obtained with this data type)
+- Add Reverse Sawtooth waveform
+- Updated graphical interface
 
 
 ### ByteniZ3R v0.9.1b (August 2021).
 
 - Save/Load Project File.
 - Add Project Info
-- Move Random tab to Wave.
-- Add Square form in Wave
-- Add Triangle form in Wave
-- Add Sawtooth form in Wave
+- Move Random tab to waveform.
+- Add Square waveform
+- Add Triangle waveform
+- Add Sawtooth waveform
 - Add Phase property, to move the waveform.
 - Add Frequency property.
 - Add sliders in all wave form values.

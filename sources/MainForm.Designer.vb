@@ -58,7 +58,7 @@ Partial Class MainForm
         Me.ProjectNameTextBox = New System.Windows.Forms.ToolStripTextBox()
         Me.ProjectInfoButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ConfigButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ConfigButton = New System.Windows.Forms.ToolStripButton()
         Me.Help_Button = New System.Windows.Forms.ToolStripButton()
         Me.AboutButton = New System.Windows.Forms.ToolStripButton()
         Me.waveform_Panel = New System.Windows.Forms.Panel()
@@ -357,7 +357,7 @@ Partial Class MainForm
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewButton, Me.LoadButton, Me.SaveButton, Me.ToolStripSeparator2, Me.ProjectNameTextBox, Me.ProjectInfoButton, Me.ToolStripSeparator1, Me.ConfigButton1, Me.Help_Button, Me.AboutButton})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewButton, Me.LoadButton, Me.SaveButton, Me.ToolStripSeparator2, Me.ProjectNameTextBox, Me.ProjectInfoButton, Me.ToolStripSeparator1, Me.ConfigButton, Me.Help_Button, Me.AboutButton})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
@@ -421,15 +421,15 @@ Partial Class MainForm
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
         '
-        'ConfigButton1
+        'ConfigButton
         '
-        Me.ConfigButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ConfigButton1.Image = Global.ByteniZ3R.My.Resources.Resources.config_x24
-        Me.ConfigButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ConfigButton1.Name = "ConfigButton1"
-        Me.ConfigButton1.Size = New System.Drawing.Size(28, 28)
-        Me.ConfigButton1.Text = "ToolStripButton1"
-        Me.ConfigButton1.ToolTipText = "Config"
+        Me.ConfigButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ConfigButton.Image = Global.ByteniZ3R.My.Resources.Resources.config_x24
+        Me.ConfigButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ConfigButton.Name = "ConfigButton"
+        Me.ConfigButton.Size = New System.Drawing.Size(28, 28)
+        Me.ConfigButton.Text = "ToolStripButton1"
+        Me.ConfigButton.ToolTipText = "Config devtools"
         '
         'Help_Button
         '
@@ -633,7 +633,7 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents AboutButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents Help_Button As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ConfigButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ConfigButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ProjectInfoButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents WaveFreqTrackBar As System.Windows.Forms.TrackBar
