@@ -799,7 +799,11 @@ Public Class MainForm
         Dim tmpFilePath As String = s(0)
 
         If Path.GetExtension(tmpFilePath).ToUpper = ("." + Config.Extension_byteGEN) Then
-            LoadProject(tmpFilePath)
+            If LoadProject(tmpFilePath) = True Then
+                Me.Path_Project = tmpFilePath
+                SetTitle(Path.GetFileName(Me.Path_Project))
+                'Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
+            End If
         End If
 
     End Sub
@@ -1086,10 +1090,13 @@ Public Class MainForm
         Me.OpenFileDialog1.Filter = "ByteniZ3R Project file|*." + Config.Extension_byteGEN
 
         If Me.OpenFileDialog1.ShowDialog = DialogResult.OK Then
-            Me.Path_Project = OpenFileDialog1.FileName
-            LoadProject(Me.Path_Project)
-            SetTitle(Path.GetFileName(Me.Path_Project))
-            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
+
+            If LoadProject(OpenFileDialog1.FileName) = True Then
+                Me.Path_Project = OpenFileDialog1.FileName
+                SetTitle(Path.GetFileName(Me.Path_Project))
+                'Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
+            End If
+
         End If
 
     End Sub
@@ -1102,12 +1109,14 @@ Public Class MainForm
     ''' </summary>
     ''' <param name="filePath"></param>
     ''' <remarks></remarks>
-    Private Sub LoadProject(ByVal filePath As String)
+    Private Function LoadProject(ByVal filePath As String) As Boolean
 
         Dim aXmlDoc As New XmlDocument
         Dim aNode As XmlNode
         Dim subNode As XmlNode
         Dim attrNode As XmlNode
+
+        Dim result As Boolean = False
 
         If System.IO.File.Exists(filePath) Then
 
@@ -1206,19 +1215,19 @@ Public Class MainForm
                     End If
                     'ChangeLanguage(Me.LanguageComboBox.SelectedIndex)
 
-                    attrNode = subNode.SelectSingleNode("@DataFormat")
+                    attrNode = subNode.SelectSingleNode("@NumberSystem")
                     If attrNode Is Nothing Then
                         'Me.DataFormatComboB.SelectedIndex = Me.AppConfig.defCodeNumberFormat
                     Else
-                        Me.AppConfig.lastCodeNumberFormat = CInt(attrNode.InnerText)
+                        Me.AppConfig.lastCodeNumberSystem = CInt(attrNode.InnerText)
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@CodeCompressType")
-                    If attrNode Is Nothing Then
-                        'Me.CompressionCB.SelectedIndex = Me.AppConfig.defCodeCompressType
-                    Else
-                        Me.AppConfig.lastCodeCompressType = CInt(attrNode.InnerText)
-                    End If
+                    'attrNode = subNode.SelectSingleNode("@CodeCompressType")
+                    'If attrNode Is Nothing Then
+                    '    'Me.CompressionCB.SelectedIndex = Me.AppConfig.defCodeCompressType
+                    'Else
+                    '    Me.AppConfig.lastCodeCompressType = CInt(attrNode.InnerText)
+                    'End If
 
                     attrNode = subNode.SelectSingleNode("@SizeLine")
                     If attrNode Is Nothing Then
@@ -1274,6 +1283,7 @@ Public Class MainForm
 
                 AddHandlers()
 
+                result = True
 
                 'Me.ASM_COMMAND = Me.AsmCommandTextBox.Text
                 GenerateData()
@@ -1292,9 +1302,12 @@ Public Class MainForm
             ' en el caso de que no exista
             Dim MessageWin As New MessageDialog
             MessageWin.ShowDialog(Me, "Load Project", "The file does not exist.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
+
         End If
 
-    End Sub
+        Return result
+
+    End Function
 
 
 
@@ -1315,9 +1328,10 @@ Public Class MainForm
         Me.SaveFileDialog1.Filter = "ByteniZ3R Project file|*." + Config.Extension_byteGEN
 
         If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+            SaveProject(SaveFileDialog1.FileName)
             Me.Path_Project = SaveFileDialog1.FileName
-            SaveProject(Me.Path_Project)
-            Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
+            SetTitle(Path.GetFileName(Me.Path_Project))
+            'Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
         End If
 
     End Sub
@@ -1330,20 +1344,17 @@ Public Class MainForm
     ''' </summary>
     ''' <param name="filePath"></param>
     ''' <remarks></remarks>
-    Private Sub SaveProject(ByVal filePath As String)
-
+    Private Sub SaveProject(ByVal filePath As String) 'As Boolean
 
         Dim aXmlDoc As New XmlDocument
         Dim rootElement As XmlElement
-        'Dim txtElement As XmlText
         Dim anElement As XmlElement
-        'Dim subElement As XmlElement
         Dim anItemElement As XmlElement
         Dim anAttribute As XmlAttribute
 
+        'Dim result As Boolean = False
 
         'Me._ProgressController.ShowProgressWin()
-
 
         ' crea el nodo root
         rootElement = aXmlDoc.CreateElement("msxdevtools")
@@ -1401,13 +1412,13 @@ Public Class MainForm
         anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.CodeLanguage)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("DataFormat")
+        anAttribute = aXmlDoc.CreateAttribute("NumberSystem")
         anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.NumeralSystem) 'Me.DataFormatComboB.SelectedIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("CodeCompressType")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
-        anItemElement.SetAttributeNode(anAttribute)
+        'anAttribute = aXmlDoc.CreateAttribute("CodeCompressType")
+        'anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
+        'anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("SizeLine")
         anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.SizeLineIndex) 'Me.ItemsPerLineComboBox.SelectedIndex)
@@ -1443,6 +1454,9 @@ Public Class MainForm
 
         Me.AppConfig.AddRecentProject(Me.Path_Project, AppID)
 
+        'result = True
+
+        'Return result
 
     End Sub
 
@@ -1609,18 +1623,28 @@ Public Class MainForm
 
 
     Private Sub NewButton_Click(sender As System.Object, e As System.EventArgs) Handles NewButton.Click
-
         NewProjectDialog()
-
     End Sub
+
 
     Private Sub LoadButton_Click(sender As System.Object, e As System.EventArgs) Handles LoadButton.Click
         LoadProjectDialog()
     End Sub
 
+
     Private Sub SaveButton_Click(sender As System.Object, e As System.EventArgs) Handles SaveButton.Click
+        If Me.Path_Project = "" Then
+            SaveProjectDialog()
+        Else
+            SaveProject(Me.Path_Project)
+        End If
+    End Sub
+
+
+    Private Sub SaveAsButton_Click(sender As Object, e As EventArgs) Handles SaveAsButton.Click
         SaveProjectDialog()
     End Sub
+
 
     Private Sub ProjectInfoButton_Click(sender As System.Object, e As System.EventArgs) Handles ProjectInfoButton.Click
         SetProjectInfo()

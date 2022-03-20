@@ -138,7 +138,6 @@
     <Compile Include="ProjectPropertiesDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RLE.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutWin.resx">
@@ -201,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\save_as3_x24.png" />
     <None Include="Resources\arrow_left_24blue.png" />
     <None Include="Resources\piXel_panel_XL_up_waveform.png" />
     <None Include="Resources\piXel_panel_XL_mid.png" />

@@ -34,7 +34,7 @@
 
     Public ReadOnly Property NumeralSystem As Integer
         Get
-            Return Me.NumSysCombo.SelectedIndex
+            Return Me.NumberSystemCombo.SelectedIndex
         End Get
     End Property
 
@@ -254,6 +254,8 @@
 
         Me.LanguageComboBox.SelectedIndex = Me.AppConfig.lastCodeOutput
 
+        Me.NumberSystemCombo.SelectedIndex = Me.AppConfig.lastCodeNumberSystem
+
         If _enableCompress = True Then
             Me.CompressComboBox.SelectedIndex = Me.AppConfig.lastCodeCompressType
         Else
@@ -283,7 +285,7 @@
 
     Private Sub AddHandlers()
         AddHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
-        AddHandler Me.NumSysCombo.SelectedIndexChanged, AddressOf NumSysCombo_SelectedIndexChanged
+        AddHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         AddHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
         AddHandler Me.CompressComboBox.SelectedIndexChanged, AddressOf CompressComboBox_SelectedIndexChanged
 
@@ -306,7 +308,7 @@
 
     Private Sub RemoveHandlers()
         RemoveHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
-        RemoveHandler Me.NumSysCombo.SelectedIndexChanged, AddressOf NumSysCombo_SelectedIndexChanged
+        RemoveHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         RemoveHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
         RemoveHandler Me.CompressComboBox.SelectedIndexChanged, AddressOf CompressComboBox_SelectedIndexChanged
 
@@ -371,13 +373,13 @@
                 Me.CGroupBox.Visible = False
 
                 'Me.RemoveZerosCheck.Enabled = True
-                Select Case Me.NumSysCombo.SelectedIndex
+                Select Case Me.NumberSystemCombo.SelectedIndex
                     Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
                     Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.BINARY_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_BASIC
                     Case Else
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_BASIC
                 End Select
 
             Case DataFormat.ProgrammingLanguage.C
@@ -385,13 +387,13 @@
                 Me.AsmGroupBox.Visible = False
                 Me.CGroupBox.Visible = True
 
-                Select Case Me.NumSysCombo.SelectedIndex
+                Select Case Me.NumberSystemCombo.SelectedIndex
                     Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
                     Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.BINARY_C
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_C
                     Case Else
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_C
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_C
                 End Select
 
             Case DataFormat.ProgrammingLanguage.ASSEMBLER
@@ -399,18 +401,18 @@
                 Me.AsmGroupBox.Visible = True
                 Me.CGroupBox.Visible = False
 
-                Select Case Me.NumSysCombo.SelectedIndex
+                Select Case Me.NumberSystemCombo.SelectedIndex
                     Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.DECIMAL_nnnd      '?? default
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_nnnd      '?? default
                     Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.BINARY_nb         '?? default
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_nb         '?? default
                     Case Else
-                        Me.NumSysCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_Snn   '?? default
+                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_Snn   '?? default
                 End Select
 
         End Select
 
-        If Me.NumSysCombo.SelectedIndex >= DataFormat.DataType.BINARY_n Then
+        If Me.NumberSystemCombo.SelectedIndex >= DataFormat.DataType.BINARY_n Then
             Me.SizeLineComboBox.SelectedIndex = 0
         Else
             Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.lastCodeSizeLine
@@ -420,8 +422,8 @@
 
 
 
-    Private Sub NumSysCombo_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
-        Me.AppConfig.lastCodeNumberFormat = NumSysCombo.SelectedIndex
+    Private Sub NumberSystem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
+        Me.AppConfig.lastCodeNumberSystem = NumberSystemCombo.SelectedIndex
         RaiseEvent DataChanged()
     End Sub
 

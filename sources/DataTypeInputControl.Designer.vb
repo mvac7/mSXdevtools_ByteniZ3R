@@ -30,7 +30,7 @@ Partial Class DataTypeInputControl
         Me.AsmByteDataTextBox = New System.Windows.Forms.TextBox()
         Me.SizeLineComboBox = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.NumberSystemLabel = New System.Windows.Forms.Label()
         Me.CompressComboBox = New System.Windows.Forms.ComboBox()
         Me.CompressLabel = New System.Windows.Forms.Label()
         Me.BasicGroupBox = New System.Windows.Forms.GroupBox()
@@ -39,7 +39,7 @@ Partial Class DataTypeInputControl
         Me.LineNumberText = New System.Windows.Forms.TextBox()
         Me.IntervalLabel = New System.Windows.Forms.Label()
         Me.RemoveZerosCheck = New System.Windows.Forms.CheckBox()
-        Me.NumSysCombo = New System.Windows.Forms.ComboBox()
+        Me.NumberSystemCombo = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LanguageComboBox = New System.Windows.Forms.ComboBox()
         Me.CGroupBox = New System.Windows.Forms.GroupBox()
@@ -143,16 +143,16 @@ Partial Class DataTypeInputControl
         Me.Label17.Text = "Line size:"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label3
+        'NumberSystemLabel
         '
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 8.25!)
-        Me.Label3.Location = New System.Drawing.Point(3, 29)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(90, 21)
-        Me.Label3.TabIndex = 257
-        Me.Label3.Text = "Number sys:"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.NumberSystemLabel.Font = New System.Drawing.Font("Verdana", 8.25!)
+        Me.NumberSystemLabel.Location = New System.Drawing.Point(3, 29)
+        Me.NumberSystemLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.NumberSystemLabel.Name = "NumberSystemLabel"
+        Me.NumberSystemLabel.Size = New System.Drawing.Size(90, 21)
+        Me.NumberSystemLabel.TabIndex = 257
+        Me.NumberSystemLabel.Text = "Number sys:"
+        Me.NumberSystemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'CompressComboBox
         '
@@ -250,17 +250,17 @@ Partial Class DataTypeInputControl
         Me.RemoveZerosCheck.Text = "Remove zeros"
         Me.RemoveZerosCheck.UseVisualStyleBackColor = True
         '
-        'NumSysCombo
+        'NumberSystemCombo
         '
-        Me.NumSysCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.NumSysCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.NumSysCombo.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NumSysCombo.FormattingEnabled = True
-        Me.NumSysCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
-        Me.NumSysCombo.Location = New System.Drawing.Point(97, 30)
-        Me.NumSysCombo.Name = "NumSysCombo"
-        Me.NumSysCombo.Size = New System.Drawing.Size(120, 21)
-        Me.NumSysCombo.TabIndex = 252
+        Me.NumberSystemCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.NumberSystemCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.NumberSystemCombo.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumberSystemCombo.FormattingEnabled = True
+        Me.NumberSystemCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
+        Me.NumberSystemCombo.Location = New System.Drawing.Point(97, 30)
+        Me.NumberSystemCombo.Name = "NumberSystemCombo"
+        Me.NumberSystemCombo.Size = New System.Drawing.Size(120, 21)
+        Me.NumberSystemCombo.TabIndex = 252
         '
         'Label1
         '
@@ -325,11 +325,11 @@ Partial Class DataTypeInputControl
         Me.Controls.Add(Me.AsmGroupBox)
         Me.Controls.Add(Me.SizeLineComboBox)
         Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.NumberSystemLabel)
         Me.Controls.Add(Me.CompressComboBox)
         Me.Controls.Add(Me.CompressLabel)
         Me.Controls.Add(Me.BasicGroupBox)
-        Me.Controls.Add(Me.NumSysCombo)
+        Me.Controls.Add(Me.NumberSystemCombo)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LanguageComboBox)
         Me.Name = "DataTypeInputControl"
@@ -351,7 +351,7 @@ Partial Class DataTypeInputControl
     Friend WithEvents AsmByteDataTextBox As System.Windows.Forms.TextBox
     Friend WithEvents SizeLineComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents NumberSystemLabel As System.Windows.Forms.Label
     Friend WithEvents CompressComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents CompressLabel As System.Windows.Forms.Label
     Friend WithEvents BasicGroupBox As System.Windows.Forms.GroupBox
@@ -360,7 +360,7 @@ Partial Class DataTypeInputControl
     Friend WithEvents LineNumberText As System.Windows.Forms.TextBox
     Friend WithEvents IntervalLabel As System.Windows.Forms.Label
     Friend WithEvents RemoveZerosCheck As System.Windows.Forms.CheckBox
-    Friend WithEvents NumSysCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents NumberSystemCombo As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents LanguageComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents CGroupBox As System.Windows.Forms.GroupBox

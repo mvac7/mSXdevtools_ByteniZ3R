@@ -1,10 +1,9 @@
-<msxdevtools app="ByteniZ3R" version="0.9.0.0">
+<msxdevtools app="ByteniZ3R" version="0.9.8.0">
   <ByteniZ3R>
-    <info name="COSINE.BAS" group="MSXcomm" version="1" author="User" startDate="637632000000000000" lastUpdate="637632000000000000">
+    <info name="COSINE.BAS" group="MSXcomm" version="1" author="User" startDate="637632000000000000" lastUpdate="637833312000000000">
       <description>Waveform for text in BASIC program</description>
     </info>
-    <dataTYPE>0</dataTYPE>
     <waveform type="1" size="64" minValue="0" maxValue="191" phase="0" freq="2" />
-    <OutputConfig CodeType="1" DataFormat="2" CodeCompressType="0" SizeLine="0" AsmCommand=".db" BASICinitLine="1000" BASICincLines="10" Remove0="True" Label="DATA00" />
+    <OutputConfig CodeType="1" NumberSystem="0" SizeLine="4" AsmCommand=".db" BASICinitLine="1000" BASICincLines="10" Remove0="True" Label="DATA00" />
   </ByteniZ3R>
 </msxdevtools>

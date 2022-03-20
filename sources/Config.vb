@@ -94,7 +94,7 @@ Public Class Config
 
 
     Public lastCodeOutput As Integer
-    Public lastCodeNumberFormat As Integer
+    Public lastCodeNumberSystem As Integer
     Private _lastCodeSizeLine As Integer
     Public lastCodeCompressType As Integer
     Public lastAsmByteCommand As String
@@ -856,7 +856,7 @@ Public Class Config
     Public Sub InitOutputInfo()
 
         Me.lastCodeOutput = Me.defCodeOutput
-        Me.lastCodeNumberFormat = Me.defCodeNumberSystem
+        Me.lastCodeNumberSystem = Me.defCodeNumberSystem
         Me.lastCodeSizeLine = Me.defCodeLineSize
         Me.lastCodeCompressType = Me.defCodeCompressType
         Me.lastAsmByteCommand = Me.defAsmByteCommand
