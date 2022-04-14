@@ -89,7 +89,7 @@ Updated some classes, removed binary loading, and gave the frontend a new look.
 The decision to remove the binary load is due to the fact that I have been developing several specific applications for different compressors for some time. 
 This functionality is no longer required.
 
-![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v094b_screenshot01.png)
+![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v0910b_screenshot01.png)
 
 
 ### ByteniZ3R v0.9.n (2022).
