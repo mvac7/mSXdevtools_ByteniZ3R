@@ -3,7 +3,7 @@ ByteniZ3R devtool
 
 Short:        Another generator of data tables in Bytes.         
 Author:       mvac7
-Version:      0.9.1b (August 2021)
+Version:      0.9b
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3  

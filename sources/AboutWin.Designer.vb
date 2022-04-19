@@ -29,20 +29,21 @@ Partial Class AboutWin
         Me.copyleftLabel = New System.Windows.Forms.Label()
         Me.versionLabel = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GPLButton = New System.Windows.Forms.Button()
         Me.OKButton = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DescriptionLabel = New System.Windows.Forms.Label()
         Me.iconPictureBox = New System.Windows.Forms.PictureBox()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
-        Me.Panel1.SuspendLayout()
         CType(Me.iconPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LicenseTextBox
         '
+        Me.LicenseTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LicenseTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.LicenseTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.LicenseTextBox.Location = New System.Drawing.Point(159, 218)
@@ -51,7 +52,7 @@ Partial Class AboutWin
         Me.LicenseTextBox.Name = "LicenseTextBox"
         Me.LicenseTextBox.ReadOnly = True
         Me.LicenseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.LicenseTextBox.Size = New System.Drawing.Size(425, 130)
+        Me.LicenseTextBox.Size = New System.Drawing.Size(433, 140)
         Me.LicenseTextBox.TabIndex = 0
         Me.LicenseTextBox.TabStop = False
         Me.LicenseTextBox.Text = "License...."
@@ -86,17 +87,6 @@ Partial Class AboutWin
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Version:"
         '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel1.Controls.Add(Me.GPLButton)
-        Me.Panel1.Controls.Add(Me.OKButton)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 351)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(584, 70)
-        Me.Panel1.TabIndex = 9
-        '
         'GPLButton
         '
         Me.GPLButton.BackColor = System.Drawing.Color.Transparent
@@ -104,7 +94,7 @@ Partial Class AboutWin
         Me.GPLButton.FlatAppearance.BorderSize = 0
         Me.GPLButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GPLButton.Image = Global.ByteniZ3R.My.Resources.Resources.gplv3_127x51
-        Me.GPLButton.Location = New System.Drawing.Point(11, 4)
+        Me.GPLButton.Location = New System.Drawing.Point(0, 357)
         Me.GPLButton.Name = "GPLButton"
         Me.GPLButton.Size = New System.Drawing.Size(145, 62)
         Me.GPLButton.TabIndex = 1
@@ -119,7 +109,7 @@ Partial Class AboutWin
         Me.OKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.OKButton.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OKButton.Image = Global.ByteniZ3R.My.Resources.Resources.button_Ok
-        Me.OKButton.Location = New System.Drawing.Point(439, 16)
+        Me.OKButton.Location = New System.Drawing.Point(461, 370)
         Me.OKButton.Name = "OKButton"
         Me.OKButton.Size = New System.Drawing.Size(133, 42)
         Me.OKButton.TabIndex = 0
@@ -159,7 +149,7 @@ Partial Class AboutWin
         Me.LogoPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LogoPictureBox.BackColor = System.Drawing.Color.Transparent
         Me.LogoPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.ByteniZ3R_logo
-        Me.LogoPictureBox.Location = New System.Drawing.Point(261, 12)
+        Me.LogoPictureBox.Location = New System.Drawing.Point(281, 12)
         Me.LogoPictureBox.Name = "LogoPictureBox"
         Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
         Me.LogoPictureBox.TabIndex = 116
@@ -171,13 +161,14 @@ Partial Class AboutWin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(584, 421)
+        Me.ClientSize = New System.Drawing.Size(604, 421)
         Me.ControlBox = False
+        Me.Controls.Add(Me.OKButton)
+        Me.Controls.Add(Me.GPLButton)
         Me.Controls.Add(Me.iconPictureBox)
         Me.Controls.Add(Me.LogoPictureBox)
         Me.Controls.Add(Me.DescriptionLabel)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.versionLabel)
         Me.Controls.Add(Me.copyleftLabel)
@@ -192,7 +183,6 @@ Partial Class AboutWin
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "About"
         Me.TransparencyKey = System.Drawing.Color.LemonChiffon
-        Me.Panel1.ResumeLayout(False)
         CType(Me.iconPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -202,7 +192,6 @@ Partial Class AboutWin
     Friend WithEvents copyleftLabel As System.Windows.Forms.Label
     Friend WithEvents versionLabel As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents DescriptionLabel As Label
     Friend WithEvents GPLButton As Button

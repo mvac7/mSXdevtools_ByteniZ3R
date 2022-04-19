@@ -33,7 +33,8 @@ Public Class MainForm
 
     Private aMSXDataFormat As New DataFormat
 
-    Private workBitmap As Bitmap
+    'Private workBitmap As Bitmap
+    Private aGraphics As Graphics
 
     Private lastOutputData As Byte()
     Private outputDataSize As Integer
@@ -90,6 +91,15 @@ Public Class MainForm
             about.StartPosition = FormStartPosition.CenterScreen
             about.ShowDialog()
         End If
+
+        Dim GFXwidth As Integer = Me.GFXoutputPictureBox.Width
+
+        Dim GFXheight As Integer = Me.GFXoutputPictureBox.Height
+
+        Dim workBitmap As New Bitmap(GFXwidth, GFXheight)
+        Me.aGraphics = Graphics.FromImage(workBitmap)
+        Me.GFXoutputPictureBox.Image = workBitmap
+
 
         Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
         Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
@@ -571,7 +581,7 @@ Public Class MainForm
 
     Private Sub DrawWave(ByVal data As Byte())
 
-        Dim aGraphics As Graphics
+        'Dim aGraphics As Graphics
 
         Dim GFXwidth As Integer = Me.GFXoutputPictureBox.Width
 
@@ -591,12 +601,12 @@ Public Class MainForm
 
         Try
 
-            If Not Me.workBitmap Is Nothing Then
-                Me.workBitmap.Dispose()
-            End If
-            Me.workBitmap = New Bitmap(GFXwidth, GFXheight)
-            aGraphics = Graphics.FromImage(Me.workBitmap)
-            Me.GFXoutputPictureBox.Image = workBitmap
+            'If Not Me.workBitmap Is Nothing Then
+            '    Me.workBitmap.Dispose()
+            'End If
+            'Me.workBitmap = New Bitmap(GFXwidth, GFXheight)
+            'aGraphics = Graphics.FromImage(Me.workBitmap)
+            'Me.GFXoutputPictureBox.Image = workBitmap
 
             aGraphics.Clear(Color.FromArgb(255, 202, 220, 159))
 
@@ -1663,9 +1673,9 @@ Public Class MainForm
         ShowAbout()
     End Sub
 
-    Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        ShowWave()
-    End Sub
+    'Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+    '    ShowWave()
+    'End Sub
 
     Private Sub CopyAllButton_Click(sender As Object, e As EventArgs) Handles CopyAllButton.Click
         CopyAll()
