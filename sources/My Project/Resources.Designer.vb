@@ -93,16 +93,6 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property button_Ok() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("button_Ok", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property button_savebinary() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("button_savebinary", resourceCulture)
@@ -166,16 +156,6 @@ Namespace My.Resources
         Friend ReadOnly Property folder2_x16() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("folder2_x16", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property gplv3_127x51() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("gplv3-127x51", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
