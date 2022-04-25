@@ -87,9 +87,8 @@ Public Class MainForm
 
 
         If Not Me.AppConfig.Load() Then
-            Dim about As New AboutWin()
-            about.StartPosition = FormStartPosition.CenterScreen
-            about.ShowDialog()
+            ' if not exist config file
+            ShowAbout(True)
         End If
 
         Dim GFXwidth As Integer = Me.GFXoutputPictureBox.Width
@@ -247,6 +246,7 @@ Public Class MainForm
             comments = New ArrayList
         End If
 
+        comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
         comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
         comments.Add("Size=" + CStr(Me.outputDataSize))
 
@@ -798,12 +798,6 @@ Public Class MainForm
 
 
 
-    'Private Sub ClearOutput()
-    '    OutputText.Text = ""
-    'End Sub
-
-
-
     Private Sub MainForm_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragDrop
         Dim s() As String = e.Data.GetData("FileDrop", False)
         Dim tmpFilePath As String = s(0)
@@ -827,10 +821,6 @@ Public Class MainForm
             e.Effect = DragDropEffects.None
         End If
     End Sub
-
-
-
-
 
 
 
@@ -885,6 +875,7 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub SetWavePhase(value As Integer)
         Me.PhaseTextBox.Text = CStr(value)
         Me.WavePhaseTrackBar.Value = value
@@ -905,11 +896,15 @@ Public Class MainForm
         'GenerateData()
     End Sub
 
+
+
     Private Sub WaveMaxTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ValidateMaxValue(Me.WaveMaxTrackBar.Value)
         ShowWave()
         'GenerateData()
     End Sub
+
+
 
     Private Sub WaveMinTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Handles WaveMinTrackBar.ValueChanged
         ValidateMinValue(Me.WaveMinTrackBar.Value)
@@ -917,11 +912,15 @@ Public Class MainForm
         'GenerateData()
     End Sub
 
+
+
     Private Sub PhaseTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) ' Handles WavePhaseTrackBar.ValueChanged
         ValidatePhaseValue(Me.WavePhaseTrackBar.Value)
         ShowWave()
         'GenerateData()
     End Sub
+
+
 
     Private Sub FreqTrackBar_ValueChanged(sender As System.Object, e As System.EventArgs) 'Handles WaveFreqTrackBar.ValueChanged
         ValidateFreqValue(Me.WaveFreqTrackBar.Value)
@@ -935,22 +934,29 @@ Public Class MainForm
         GenerateData()
     End Sub
 
+
+
     Private Sub WaveMinTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMinTrackBar.MouseUp
         GenerateData()
     End Sub
+
+
 
     Private Sub WaveMaxTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMaxTrackBar.MouseUp
         GenerateData()
     End Sub
 
+
+
     Private Sub WavePhaseTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WavePhaseTrackBar.MouseUp
         GenerateData()
     End Sub
 
+
+
     Private Sub WaveFreqTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveFreqTrackBar.MouseUp
         GenerateData()
     End Sub
-
 
 
 
@@ -1014,10 +1020,12 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub SetWaveLength(value As Integer)
         Me.WaveLengthTextBox.Text = CStr(value)
         Me.WaveLengthTrackBar.Value = value
     End Sub
+
 
 
     Private Sub ValidateWaveLength(ByVal value As Integer)
@@ -1029,7 +1037,6 @@ Public Class MainForm
 
         SetWaveLength(value)
     End Sub
-
 
 
 
@@ -1079,9 +1086,6 @@ Public Class MainForm
 
 
 
-
-
-
     ''' <summary>
     ''' Muestra la ventana de dialogo para la carga de un proyecto
     ''' </summary>
@@ -1110,7 +1114,6 @@ Public Class MainForm
         End If
 
     End Sub
-
 
 
 
@@ -1584,9 +1587,15 @@ Public Class MainForm
 
 
 
-    Private Sub ShowAbout()
-        Dim about As New AboutWin()
-        about.ShowDialog()
+    Private Sub ShowAbout(isOnInitialization As Boolean)
+        Dim newAboutWin As New AboutWin
+        newAboutWin.SetIcon = Global.ByteniZ3R.My.Resources.icon_byteniZ3R_128px
+        newAboutWin.SetLogo = Global.ByteniZ3R.My.Resources.ByteniZ3R_logo
+        'newAboutWin.Width = 660
+        If isOnInitialization = True Then
+            newAboutWin.StartPosition = FormStartPosition.CenterScreen
+        End If
+        newAboutWin.ShowDialog()
     End Sub
 
 
@@ -1670,7 +1679,7 @@ Public Class MainForm
     End Sub
 
     Private Sub AboutButton1_Click(sender As System.Object, e As System.EventArgs) Handles AboutButton.Click
-        ShowAbout()
+        ShowAbout(False)
     End Sub
 
     'Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
