@@ -1,0 +1,9 @@
+<msxdevtools app="ByteniZ3R" version="0.9.12.0">
+  <ByteniZ3R>
+    <info name="test1_C" group="" version="0" author="User" startDate="637866144000000000" lastUpdate="637866144000000000">
+      <description>Bouncing ball</description>
+    </info>
+    <waveform type="1" size="256" minValue="32" maxValue="175" phase="0" freq="4" />
+    <OutputConfig CodeType="2" NumberSystem="7" SizeLine="4" AsmCommand="DB" BASICinitLine="1000" BASICincLines="10" Remove0="False" Label="YDATA" />
+  </ByteniZ3R>
+</msxdevtools>

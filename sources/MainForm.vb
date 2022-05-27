@@ -46,6 +46,9 @@ Public Class MainForm
     Private Info As ProjectInfo
 
 
+    Private Progress As ProgressController
+
+
     Private Const defaultWaveLength = 32
 
 
@@ -84,6 +87,8 @@ Public Class MainForm
         'If Not System.IO.File.Exists(Me.helpURL) Then
         '    Help_Button.Enabled = False
         'End If
+
+        Me.Progress = New ProgressController(Me)
 
 
         If Not Me.AppConfig.Load() Then
@@ -694,7 +699,17 @@ Public Class MainForm
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub CopyAll()
-        My.Computer.Clipboard.SetText(Me.OutputText.Text)
+        Me.Progress.ShowProgressWin()
+        Try
+            My.Computer.Clipboard.SetText(Me.OutputText.Text)
+
+            'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+            'I apply a short wait for the progress window to show without closing too quickly.
+            System.Threading.Thread.Sleep(300) 'wait
+        Catch ex As Exception
+
+        End Try
+        Me.Progress.CloseProgressWin()
     End Sub
 
 
@@ -738,13 +753,23 @@ Public Class MainForm
 
             If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
 
+                Me.Path_source = SaveFileDialog1.FileName
+
                 Try
-                    Me.Path_source = SaveFileDialog1.FileName
+                    Me.Progress.ShowProgressWin()
 
                     aStreamWriterFile = New System.IO.StreamWriter(Me.Path_source)
                     aStreamWriterFile.WriteLine(Me.OutputText.Text)
                     aStreamWriterFile.Close()
+
+                    'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+                    'I apply a short wait for the progress window to show without closing too quickly.
+                    System.Threading.Thread.Sleep(200) 'wait
+
+                    Me.Progress.CloseProgressWin()
+
                 Catch ex As Exception
+                    Me.Progress.CloseProgressWin()
                     MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
                 End Try
 
@@ -783,14 +808,27 @@ Public Class MainForm
             Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
 
             If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
                 Me.Path_binary = SaveFileDialog1.FileName
+
                 Try
+                    Me.Progress.ShowProgressWin()
+
                     aStream = New System.IO.FileStream(Me.Path_binary, IO.FileMode.Create)
                     aStream.Write(Me.lastOutputData, 0, Me.lastOutputData.Length)
                     aStream.Close()
+
+                    'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+                    'I apply a short wait for the progress window to show without closing too quickly.
+                    System.Threading.Thread.Sleep(200) 'wait
+
+                    Me.Progress.CloseProgressWin()
+
                 Catch ex As Exception
+                    Me.Progress.CloseProgressWin()
                     MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
                 End Try
+
             End If
 
         End If
@@ -1135,7 +1173,7 @@ Public Class MainForm
 
             RemoveHandlers()
 
-            'Me._ProgressController.ShowProgressWin()
+            Me.Progress.ShowProgressWin()
 
 
             aXmlDoc.Load(filePath)
@@ -1289,6 +1327,7 @@ Public Class MainForm
 
 
                     Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)  '<--- refresh data 
+                    'anOutputDataGBox.DataTypeInput.SizeLineIndex
 
                 End If
                 ' END Output Data Config ###############################################
@@ -1301,14 +1340,18 @@ Public Class MainForm
                 'Me.ASM_COMMAND = Me.AsmCommandTextBox.Text
                 GenerateData()
 
+                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+                'I apply a short wait for the progress window to show without closing too quickly.
+                System.Threading.Thread.Sleep(200) 'wait
+
+                Me.Progress.CloseProgressWin()
 
             Else
+                Me.Progress.CloseProgressWin()
+
                 Dim MessageWin As New MessageDialog
                 MessageWin.ShowDialog(Me, "Load Project", "This file does not contain the correct format.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
             End If
-
-
-            'Me._ProgressController.CloseProgressWin()
 
 
         Else
@@ -1367,7 +1410,7 @@ Public Class MainForm
 
         'Dim result As Boolean = False
 
-        'Me._ProgressController.ShowProgressWin()
+        Me.Progress.ShowProgressWin()
 
         ' crea el nodo root
         rootElement = aXmlDoc.CreateElement("msxdevtools")
@@ -1462,7 +1505,11 @@ Public Class MainForm
         '
         aXmlDoc.Save(filePath)
 
-        'Me._ProgressController.CloseProgressWin()
+        'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+        'I apply a short wait for the progress window to show without closing too quickly.
+        System.Threading.Thread.Sleep(200) 'wait
+
+        Me.Progress.CloseProgressWin()
 
 
         Me.AppConfig.AddRecentProject(Me.Path_Project, AppID)

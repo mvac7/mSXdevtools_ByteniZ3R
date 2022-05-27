@@ -23,8 +23,7 @@ Generates tables of 8 bits unsigned values, from waveforms in different programm
 This tool is designed primarily to support cross-development of retro-computer applications.
    
 This software was developed in Microsoft Visual Studio Community 2019.
-
-
+ 
 
 
 ---
@@ -79,15 +78,16 @@ This application started as a tool that generated tables of random numbers that 
 
 Later I would add the option to load binary files and dump them in tables formatted for different programming languages.
 
-The next step was to generate mathematical forms to use as paths for sprite movement and thinking of a future version that will serve for musical waveforms (thinking of the SCC).
-
-The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
-The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
+The next step was to add waveforms. One of the applications for which I wanted to use it is to create paths for the movement of sprites, 
+although I was also thinking of a future version (probably v1) that would allow generating samples for the SCC (requires signed Byte numbers).
 
 In March 2022, I resumed this project which I had pending a v0.9b Release. 
 Updated some classes, removed binary loading, and gave the frontend a new look.
 The decision to remove the binary load is due to the fact that I have been developing several specific applications for different compressors for some time. 
 This functionality is no longer required.
+
+The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
+The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
 
 ![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v0910b_screenshot01.png)
 

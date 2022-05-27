@@ -1,2 +1,0 @@
-asmsx ByteniZ3R_test2.asm
-pause
