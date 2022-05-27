@@ -252,8 +252,8 @@ Public Class MainForm
         End If
 
         comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
+        comments.Add("Project: " + Me.Info.Name)
         comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
-        comments.Add("Size=" + CStr(Me.outputDataSize))
 
         Dim tableLength As Short = WaveLengthTrackBar.Value - 1
         Dim minValueRange As Short = CByte(WaveMinTrackBar.Value)
@@ -606,16 +606,9 @@ Public Class MainForm
 
         Try
 
-            'If Not Me.workBitmap Is Nothing Then
-            '    Me.workBitmap.Dispose()
-            'End If
-            'Me.workBitmap = New Bitmap(GFXwidth, GFXheight)
-            'aGraphics = Graphics.FromImage(Me.workBitmap)
-            'Me.GFXoutputPictureBox.Image = workBitmap
+            Me.aGraphics.Clear(Me.AppConfig.Color_OUTPUT_BG)
 
-            aGraphics.Clear(Color.FromArgb(255, 202, 220, 159))
-
-            Dim aPen As New Pen(Color.FromArgb(255, 48, 98, 48)) 'dark green
+            Dim aPen As New Pen(Me.AppConfig.Color_OUTPUT_INK) 'Color.FromArgb(255, 48, 98, 48)
 
             If data.Length > (GFXwidth - 1) Then
                 interval = (data.Length - 1) / GFXwidth

@@ -69,8 +69,8 @@ Partial Class MainForm
         Me.LeftLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.DownPictureBox = New System.Windows.Forms.PictureBox()
         Me.waveform_up_PictureBox = New System.Windows.Forms.PictureBox()
-        Me.anOutputDataGBox = New ByteniZ3R.OutputDataGBox()
         Me.SaveoutputPanel = New System.Windows.Forms.Panel()
+        Me.anOutputDataGBox = New ByteniZ3R.OutputDataGBox()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WavePhaseTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -527,7 +527,7 @@ Partial Class MainForm
         '
         'RightLinePictureBox
         '
-        Me.RightLinePictureBox.BackColor = System.Drawing.Color.Black
+        Me.RightLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.RightLinePictureBox.Dock = System.Windows.Forms.DockStyle.Right
         Me.RightLinePictureBox.Location = New System.Drawing.Point(762, 14)
         Me.RightLinePictureBox.Name = "RightLinePictureBox"
@@ -537,7 +537,7 @@ Partial Class MainForm
         '
         'LeftLinePictureBox
         '
-        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.Black
+        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.LeftLinePictureBox.Dock = System.Windows.Forms.DockStyle.Left
         Me.LeftLinePictureBox.Location = New System.Drawing.Point(0, 14)
         Me.LeftLinePictureBox.Name = "LeftLinePictureBox"
@@ -566,14 +566,6 @@ Partial Class MainForm
         Me.waveform_up_PictureBox.TabIndex = 0
         Me.waveform_up_PictureBox.TabStop = False
         '
-        'anOutputDataGBox
-        '
-        Me.anOutputDataGBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.anOutputDataGBox.Location = New System.Drawing.Point(10, 331)
-        Me.anOutputDataGBox.Name = "anOutputDataGBox"
-        Me.anOutputDataGBox.Size = New System.Drawing.Size(766, 153)
-        Me.anOutputDataGBox.TabIndex = 117
-        '
         'SaveoutputPanel
         '
         Me.SaveoutputPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -587,6 +579,14 @@ Partial Class MainForm
         Me.SaveoutputPanel.Name = "SaveoutputPanel"
         Me.SaveoutputPanel.Size = New System.Drawing.Size(767, 52)
         Me.SaveoutputPanel.TabIndex = 116
+        '
+        'anOutputDataGBox
+        '
+        Me.anOutputDataGBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.anOutputDataGBox.Location = New System.Drawing.Point(10, 331)
+        Me.anOutputDataGBox.Name = "anOutputDataGBox"
+        Me.anOutputDataGBox.Size = New System.Drawing.Size(766, 153)
+        Me.anOutputDataGBox.TabIndex = 117
         '
         'MainForm
         '

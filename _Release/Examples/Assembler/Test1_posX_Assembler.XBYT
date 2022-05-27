@@ -1,0 +1,10 @@
+<msxdevtools app="ByteniZ3R" version="0.9.13.0">
+  <ByteniZ3R>
+    <info name="Test1_posX_Assembler" group="" version="0" author="User" startDate="637892064000000000" lastUpdate="637892064000000000">
+      <description>
+      </description>
+    </info>
+    <waveform type="0" size="256" minValue="32" maxValue="208" phase="0" freq="3" />
+    <OutputConfig CodeType="0" NumberSystem="4" SizeLine="4" AsmCommand="&lt;tab&gt;DB" BASICinitLine="1000" BASICincLines="10" Remove0="False" Label="DATAX" />
+  </ByteniZ3R>
+</msxdevtools>

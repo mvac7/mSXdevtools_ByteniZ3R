@@ -84,7 +84,7 @@ Partial Class OutputDataGBox
         '
         'LeftLinePictureBox
         '
-        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.Black
+        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.LeftLinePictureBox.Dock = System.Windows.Forms.DockStyle.Left
         Me.LeftLinePictureBox.Location = New System.Drawing.Point(0, 20)
         Me.LeftLinePictureBox.Name = "LeftLinePictureBox"
