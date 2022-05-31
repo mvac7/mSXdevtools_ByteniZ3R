@@ -19,8 +19,9 @@ License:      GNU General Public License v3
 ## Description
 
 Generates tables of 8 bits unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
+It can be useful to generate paths to move Sprites.
 
-This tool is designed primarily to support cross-development of retro-computer applications.
+This project is open source, so you can improve or adapt the tool to your needs.
    
 This software was developed in Microsoft Visual Studio Community 2019.
  
@@ -66,9 +67,10 @@ For run, execute ByteniZ3R.exe
 * Phase and Frequency adjustmens.
 * BASIC, C and Assembler output.
 * Supports several number systems and data formats (decimal, hexadecimal or binary)
-* Edit info project.
+* Edit info project (Name, Version, Author, Group, and Description).
 * Save/Load project files.
-* Save output to source code or binary
+* Save output to source code 
+* Save output to binary file
 
 ---
 
@@ -94,10 +96,14 @@ The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan
 
 ### ByteniZ3R v0.9.n (2022).
 
-- Remove binary handling function #6 
-- Remove compress data (No compression is obtained with this data type)
+- Removed binary file handling function. (Apps for this feature will be available soon.) 
+- Removed compress data (No compression is obtained with this data type)
 - Add Reverse Sawtooth waveform
-- Updated graphical interface
+- Updated graphical interface (piXel style)
+- Configure colors of the graph and the data output.
+- Accepts tabs in the assembler output data format (add <tab>)
+- It allows to obtain the data in binary numbers.
+
 
 
 ### ByteniZ3R v0.9.1b (August 2021).

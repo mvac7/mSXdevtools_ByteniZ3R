@@ -110,7 +110,7 @@ Public Class MainForm
 
         Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)
 
-        Me.anOutputDataGBox.LabelTextBox.Text = Me.AppConfig.defDataLabel
+        Me.anOutputDataGBox.FieldNameTextBox.Text = Me.AppConfig.defDataLabel
 
         SetOutputtextSize()
 
@@ -243,7 +243,7 @@ Public Class MainForm
 
         Dim comments As New ArrayList
 
-        Dim labelName As String = Me.anOutputDataGBox.LabelTextBox.Text
+        Dim labelName As String = Me.anOutputDataGBox.FieldNameTextBox.Text
 
         Dim infoData As String = ""
 
@@ -698,7 +698,7 @@ Public Class MainForm
 
             'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
             'I apply a short wait for the progress window to show without closing too quickly.
-            System.Threading.Thread.Sleep(300) 'wait
+            System.Threading.Thread.Sleep(150) 'wait
         Catch ex As Exception
 
         End Try
@@ -797,6 +797,7 @@ Public Class MainForm
                 Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_binary)
             End If
 
+            'Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
             Me.SaveFileDialog1.DefaultExt = "BIN"
             Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
 
@@ -813,7 +814,7 @@ Public Class MainForm
 
                     'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
                     'I apply a short wait for the progress window to show without closing too quickly.
-                    System.Threading.Thread.Sleep(200) 'wait
+                    System.Threading.Thread.Sleep(150) 'wait
 
                     Me.Progress.CloseProgressWin()
 
@@ -836,6 +837,8 @@ Public Class MainForm
         If Path.GetExtension(tmpFilePath).ToUpper = ("." + Config.Extension_byteGEN) Then
             If LoadProject(tmpFilePath) = True Then
                 Me.Path_Project = tmpFilePath
+                Me.Path_source = ""
+                Me.Path_binary = ""
                 SetTitle(Path.GetFileName(Me.Path_Project))
                 'Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
             End If
@@ -961,33 +964,37 @@ Public Class MainForm
 
 
 
-    Private Sub WaveLengthTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveLengthTrackBar.MouseUp
+    Private Sub WaveLengthTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveLengthTrackBar.MouseUp, WaveMinTrackBar.MouseUp, WaveMaxTrackBar.MouseUp, WavePhaseTrackBar.MouseUp, WaveFreqTrackBar.MouseUp
         GenerateData()
     End Sub
 
 
-
-    Private Sub WaveMinTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMinTrackBar.MouseUp
+    Private Sub WaveLengthTrackBar_KeyUp(sender As Object, e As KeyEventArgs) Handles WaveLengthTrackBar.KeyUp, WaveMinTrackBar.KeyUp, WaveMaxTrackBar.KeyUp, WavePhaseTrackBar.KeyUp, WaveFreqTrackBar.KeyUp
         GenerateData()
     End Sub
 
 
-
-    Private Sub WaveMaxTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMaxTrackBar.MouseUp
-        GenerateData()
-    End Sub
-
-
-
-    Private Sub WavePhaseTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WavePhaseTrackBar.MouseUp
-        GenerateData()
-    End Sub
+    'Private Sub WaveMinTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMinTrackBar.MouseUp
+    '    GenerateData()
+    'End Sub
 
 
 
-    Private Sub WaveFreqTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveFreqTrackBar.MouseUp
-        GenerateData()
-    End Sub
+    'Private Sub WaveMaxTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMaxTrackBar.MouseUp
+    '    GenerateData()
+    'End Sub
+
+
+
+    'Private Sub WavePhaseTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WavePhaseTrackBar.MouseUp
+    '    GenerateData()
+    'End Sub
+
+
+
+    'Private Sub WaveFreqTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveFreqTrackBar.MouseUp
+    '    GenerateData()
+    'End Sub
 
 
 
@@ -1138,6 +1145,8 @@ Public Class MainForm
 
             If LoadProject(OpenFileDialog1.FileName) = True Then
                 Me.Path_Project = OpenFileDialog1.FileName
+                Me.Path_source = ""
+                Me.Path_binary = ""
                 SetTitle(Path.GetFileName(Me.Path_Project))
                 'Me.AppConfig.PathByteGen.UpdateLastPath(Path.GetDirectoryName(Me.Path_Project))
             End If
@@ -1313,9 +1322,9 @@ Public Class MainForm
 
                     attrNode = subNode.SelectSingleNode("@Label")
                     If attrNode Is Nothing Then
-                        Me.anOutputDataGBox.LabelTextBox.Text = "DATA"
+                        Me.anOutputDataGBox.FieldNameTextBox.Text = "DATA"
                     Else
-                        Me.anOutputDataGBox.LabelTextBox.Text = CStr(attrNode.InnerText)
+                        Me.anOutputDataGBox.FieldNameTextBox.Text = CStr(attrNode.InnerText)
                     End If
 
 
@@ -1490,7 +1499,7 @@ Public Class MainForm
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("Label")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.LabelTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.FieldNameTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
         ' END Output Data Config ################################################
 

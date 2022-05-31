@@ -1,10 +1,10 @@
-<msxdevtools app="ByteniZ3R" version="0.9.8.0">
+<msxdevtools app="ByteniZ3R" version="0.9.14.0">
   <ByteniZ3R>
-    <info name="TRIANGLE.BAS" group="MSXcomm" version="1" author="User" startDate="637632864000000000" lastUpdate="637833312000000000">
+    <info name="TRIANGLE.BAS" group="MSXcomm" version="1" author="User" startDate="637632864000000000" lastUpdate="637894656000000000">
       <description>
       </description>
     </info>
     <waveform type="3" size="64" minValue="0" maxValue="191" phase="0" freq="4" />
-    <OutputConfig CodeType="1" NumberSystem="0" SizeLine="3" AsmCommand=".db" BASICinitLine="1000" BASICincLines="10" Remove0="True" Label="DATA00" />
+    <OutputConfig CodeType="1" NumberSystem="3" SizeLine="3" AsmCommand=".db" BASICinitLine="1000" BASICincLines="10" Remove0="False" Label="DATA00" />
   </ByteniZ3R>
 </msxdevtools>

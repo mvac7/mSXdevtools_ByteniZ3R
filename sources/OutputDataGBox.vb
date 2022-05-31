@@ -27,10 +27,10 @@
 
 
 
-    Private Sub LabelTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles LabelTextBox.Validating
+    Private Sub LabelTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles FieldNameTextBox.Validating
 
-        If Me.LabelTextBox.Text.Trim() = "" Then
-            Me.LabelTextBox.Text = "DATA"
+        If Me.FieldNameTextBox.Text.Trim() = "" Then
+            Me.FieldNameTextBox.Text = "DATA"
         End If
 
         'GenerateCode(Me.lastOutputData)
@@ -40,6 +40,15 @@
 
 
     Private Sub DataTypeInput_DataChanged() Handles DataTypeInput.DataChanged
+
+        If DataTypeInput.CodeLanguage = DataTypeInputControl.Language_CODE.BASIC Then
+            FieldNameLabel.Visible = False
+            FieldNameTextBox.Visible = False
+        Else
+            FieldNameLabel.Visible = True
+            FieldNameTextBox.Visible = True
+        End If
+
         RaiseEvent DataChanged()
     End Sub
 
