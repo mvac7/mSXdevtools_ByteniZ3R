@@ -110,7 +110,7 @@ Public Class MainForm
 
         Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)
 
-        Me.anOutputDataGBox.FieldNameTextBox.Text = Me.AppConfig.defDataLabel
+        Me.anOutputDataGBox.DataTypeInput.FieldName = Me.AppConfig.defDataLabel
 
         SetOutputtextSize()
 
@@ -243,7 +243,7 @@ Public Class MainForm
 
         Dim comments As New ArrayList
 
-        Dim labelName As String = Me.anOutputDataGBox.FieldNameTextBox.Text
+        Dim labelName As String = Me.anOutputDataGBox.DataTypeInput.FieldName
 
         Dim infoData As String = ""
 
@@ -1322,9 +1322,9 @@ Public Class MainForm
 
                     attrNode = subNode.SelectSingleNode("@Label")
                     If attrNode Is Nothing Then
-                        Me.anOutputDataGBox.FieldNameTextBox.Text = "DATA"
+                        Me.anOutputDataGBox.DataTypeInput.FieldName = "DATA"
                     Else
-                        Me.anOutputDataGBox.FieldNameTextBox.Text = CStr(attrNode.InnerText)
+                        Me.anOutputDataGBox.DataTypeInput.FieldName = CStr(attrNode.InnerText)
                     End If
 
 
@@ -1499,7 +1499,7 @@ Public Class MainForm
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("Label")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.FieldNameTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.FieldName)
         anItemElement.SetAttributeNode(anAttribute)
         ' END Output Data Config ################################################
 

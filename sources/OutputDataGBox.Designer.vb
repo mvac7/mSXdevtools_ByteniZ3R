@@ -32,8 +32,6 @@ Partial Class OutputDataGBox
         Me.RightLinePictureBox = New System.Windows.Forms.PictureBox()
         Me.ContentsPanel = New System.Windows.Forms.Panel()
         Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
-        Me.FieldNameTextBox = New System.Windows.Forms.TextBox()
-        Me.FieldNameLabel = New System.Windows.Forms.Label()
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.upperPanel.SuspendLayout()
         CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,8 +104,6 @@ Partial Class OutputDataGBox
         '
         Me.ContentsPanel.BackColor = System.Drawing.Color.Transparent
         Me.ContentsPanel.Controls.Add(Me.DataTypeInput)
-        Me.ContentsPanel.Controls.Add(Me.FieldNameTextBox)
-        Me.ContentsPanel.Controls.Add(Me.FieldNameLabel)
         Me.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ContentsPanel.Location = New System.Drawing.Point(4, 20)
         Me.ContentsPanel.Name = "ContentsPanel"
@@ -119,31 +115,13 @@ Partial Class OutputDataGBox
         Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
         Me.DataTypeInput.EnableCompress = False
         Me.DataTypeInput.EnableDataSizeLine = False
+        Me.DataTypeInput.FieldName = "DATA"
         Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataTypeInput.Location = New System.Drawing.Point(3, 6)
         Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(418, 110)
+        Me.DataTypeInput.Size = New System.Drawing.Size(470, 117)
         Me.DataTypeInput.TabIndex = 68
-        '
-        'FieldNameTextBox
-        '
-        Me.FieldNameTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FieldNameTextBox.Location = New System.Drawing.Point(535, 8)
-        Me.FieldNameTextBox.Name = "FieldNameTextBox"
-        Me.FieldNameTextBox.Size = New System.Drawing.Size(140, 22)
-        Me.FieldNameTextBox.TabIndex = 67
-        Me.FieldNameTextBox.Text = "DATA"
-        '
-        'FieldNameLabel
-        '
-        Me.FieldNameLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FieldNameLabel.Location = New System.Drawing.Point(436, 9)
-        Me.FieldNameLabel.Name = "FieldNameLabel"
-        Me.FieldNameLabel.Size = New System.Drawing.Size(93, 21)
-        Me.FieldNameLabel.TabIndex = 66
-        Me.FieldNameLabel.Text = "Field name:"
-        Me.FieldNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OutputDataGBox
         '
@@ -160,7 +138,6 @@ Partial Class OutputDataGBox
         CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContentsPanel.ResumeLayout(False)
-        Me.ContentsPanel.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -171,8 +148,6 @@ Partial Class OutputDataGBox
     Friend WithEvents RightLinePictureBox As PictureBox
     Friend WithEvents ContentsPanel As Panel
     Friend WithEvents DataTypeInput As DataTypeInputControl
-    Friend WithEvents FieldNameTextBox As TextBox
-    Friend WithEvents FieldNameLabel As Label
     Friend WithEvents ButtonImageList As ImageList
     Friend WithEvents accordionPictureBox As PictureBox
 End Class

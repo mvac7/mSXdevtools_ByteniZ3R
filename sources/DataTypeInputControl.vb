@@ -184,6 +184,20 @@
 
 
 
+    Public Property FieldName As String
+        Get
+            If CodeLanguage = Language_CODE.ASSEMBLER Then
+                Return AsmFieldNameTextBox.Text
+            Else
+                Return CesFieldNameTextBox.Text
+            End If
+        End Get
+        Set(value As String)
+            AsmFieldNameTextBox.Text = value
+            CesFieldNameTextBox.Text = value
+        End Set
+    End Property
+
 
 
     Public Sub New()
@@ -200,8 +214,11 @@
     Private Sub DataTypeInputControl_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         ' posiciona la caja con campos especificos para la salida en assembler
-        Me.AsmGroupBox.Location = Me.BasicGroupBox.Location
-        Me.CGroupBox.Location = Me.BasicGroupBox.Location
+        Me.AssemblerPanel.Location = Me.BasicPanel.Location
+        Me.CesPanel.Location = Me.BasicPanel.Location
+
+        Me.AssemblerPanel.BackgroundImage = Me.BasicPanel.BackgroundImage
+        Me.CesPanel.BackgroundImage = Me.BasicPanel.BackgroundImage
 
         Me.LanguageComboBox.SelectedIndex = 0
 
@@ -345,7 +362,7 @@
 
 
     Private Sub DataTypeInputControl_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        Me.Size = New System.Drawing.Size(Me.Size.Width, 110)
+        Me.Size = New System.Drawing.Size(Me.Size.Width, 4 + 111 + 2)
     End Sub
 
 
@@ -365,9 +382,9 @@
 
         Select Case Me.LanguageComboBox.SelectedIndex
             Case DataFormat.ProgrammingLanguage.BASIC  'basic
-                Me.BasicGroupBox.Visible = True
-                Me.AsmGroupBox.Visible = False
-                Me.CGroupBox.Visible = False
+                Me.BasicPanel.Visible = True
+                Me.AssemblerPanel.Visible = False
+                Me.CesPanel.Visible = False
 
                 'Me.RemoveZerosCheck.Enabled = True
                 Select Case Me.NumberSystemCombo.SelectedIndex
@@ -380,9 +397,9 @@
                 End Select
 
             Case DataFormat.ProgrammingLanguage.C
-                Me.BasicGroupBox.Visible = False
-                Me.AsmGroupBox.Visible = False
-                Me.CGroupBox.Visible = True
+                Me.BasicPanel.Visible = False
+                Me.AssemblerPanel.Visible = False
+                Me.CesPanel.Visible = True
 
                 Select Case Me.NumberSystemCombo.SelectedIndex
                     Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
@@ -394,9 +411,9 @@
                 End Select
 
             Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                Me.BasicGroupBox.Visible = False
-                Me.AsmGroupBox.Visible = True
-                Me.CGroupBox.Visible = False
+                Me.BasicPanel.Visible = False
+                Me.AssemblerPanel.Visible = True
+                Me.CesPanel.Visible = False
 
                 Select Case Me.NumberSystemCombo.SelectedIndex
                     Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
@@ -555,6 +572,23 @@
         Return name
     End Function
 
+
+
+    Private Sub AsmFieldNameTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles AsmFieldNameTextBox.Validating
+        If Me.AsmFieldNameTextBox.Text.Trim() = "" Then
+            Me.AsmFieldNameTextBox.Text = "DATA"
+        End If
+        RaiseEvent DataChanged()
+    End Sub
+
+
+
+    Private Sub CesFieldNameTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CesFieldNameTextBox.Validating
+        If Me.CesFieldNameTextBox.Text.Trim() = "" Then
+            Me.CesFieldNameTextBox.Text = "DATA"
+        End If
+        RaiseEvent DataChanged()
+    End Sub
 
 
 End Class
