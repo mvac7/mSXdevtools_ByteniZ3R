@@ -4,28 +4,37 @@
 ![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/ByteniZ3R_logoX3.png)
     
 ```
-Short:        Another generator of data tables in Bytes.         
+Short:        Waveform data table generator.         
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3   
 ```
 
 ## Sorry! This text is pending correction of the English translation
-
                                                                
+
+<br/>
 
 ---
 
 ## Description
 
 Generates tables of 8 bits unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
-It can be useful to generate paths to move Sprites.
+It can be useful for generating graphics or creating paths to move [Sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)).
+
+It includes examples for various development environments of the MSX system (Assembler, C and BASIC), 
+which is what I know (sorry developers of other platforms).
+
+You can access the documentation here with [`ByteniZ3R devtool DOC`](docs/HOWTO.md).
+
+In the source code [`Examples/`](Examples/), you can find applications for testing and learning purposes.
 
 This project is open source, so you can improve or adapt the tool to your needs.
    
 This software was developed in Microsoft Visual Studio Community 2019.
  
 
+<br/>
 
 ---
 
@@ -42,6 +51,7 @@ See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
+<br/>
 
 ---
 
@@ -50,27 +60,26 @@ You should have received a copy of the GNU General Public License along with thi
 * Windows OS with .net framework v4.0
 * Display with minimum resolution: XVGA (1024x768)
 
+<br/>
 
 
-## How to Install and Run
- 
-Unpack ByteniZ3R ZIP somewhere on your hard disk (It is not inside a folder). 
-   
-For run, execute ByteniZ3R.exe  
-
+---
 
 ## Features
 
-* Sinus, Cosinus, Square, Triangle and Sawtooth waveforms table generator.
-* Random table generator.
+* 7 waveform generators: Sine, Cosine, Square, Triangle, Sawtooth, Reverse Sawtooth and Noise.
 * Maximum and minimum adjustment.
 * Phase and Frequency adjustmens.
-* BASIC, C and Assembler output.
+* BASIC, C or Assembler output.
 * Supports several number systems and data formats (decimal, hexadecimal or binary)
 * Edit info project (Name, Version, Author, Group, and Description).
 * Save/Load project files.
 * Save output to source code 
 * Save output to binary file
+
+![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v0916b_screenshot01.png)
+
+<br/>
 
 ---
 
@@ -88,11 +97,6 @@ Updated some classes, removed binary loading, and gave the frontend a new look.
 The decision to remove the binary load is due to the fact that I have been developing several specific applications for different compressors for some time. 
 This functionality is no longer required.
 
-The most current versions have a new name because one day I woke up with the need to provide a unique and cool name. 
-The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan.org/fubu/).
-
-![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v0916b_screenshot01.png)
-
 
 ### ByteniZ3R v0.9.n (2022).
 
@@ -103,7 +107,7 @@ The thinking brain behind the new name is Mr. [Fubukimaru](http://www.gamerachan
 - Configure colors of the graph and the data output.
 - Accepts tabs in the assembler output data format (add <tab>)
 - It allows to obtain the data in binary numbers.
-
+- Add binary number system in output data settings.
 
 
 ### ByteniZ3R v0.9.1b (August 2021).
@@ -143,6 +147,7 @@ Not published.
 
 [Google Code](https://code.google.com/archive/p/bytes-gen/)
 
+
 ### BytesGen! v0.7.1.0b (?) 
 
 Not published.
@@ -160,8 +165,7 @@ Requires: PC with Windows System and Framework 2.0
 [Google Code](https://code.google.com/archive/p/bytes-gen/)
 
 
-
-
+<br/>
 
 ---
 
@@ -169,11 +173,11 @@ Requires: PC with Windows System and Framework 2.0
   
 I want to give a special thanks to all those who freely share their knowledge with the MSX developer community.
 
+- MSXKun/Paxanga soft > [`WEB`](http://paxangasoft.retroinvaders.com/)
+- Fubukimaru > [`gitHub`](https://github.com/Fubukimaru)
 - Avelino Herrera > [`WEB`](http://msx.avelinoherrera.com/index_es.html)
 - Nerlaska > [`Blog`](http://albertodehoyonebot.blogspot.com.es)
 - Marq > [`Marq`](http://www.kameli.net/marq/)
-- MSXKun/Paxanga soft > [`WEB`](http://paxangasoft.retroinvaders.com/)
-- Fubukimaru [`gitHub`](https://github.com/Fubukimaru)
 - Andrear > [`Blog`](http://andrear.altervista.org/home/msxsoftware.php)
 - Sapphire/Z80ST > [`WEB`](http://z80st.auic.es/)
 - Fernando García > [`Video Tutorial`](http://www.z80st.es/cursos/bitvision-assembler)
@@ -189,3 +193,4 @@ I want to give a special thanks to all those who freely share their knowledge wi
 - fMSX emulator by Marat Fayzullin [`WEB`](https://fms.komkon.org/fMSX/)
 - Meisei emulator by Hap >> `?`
 
+---

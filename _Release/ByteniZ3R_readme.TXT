@@ -1,9 +1,9 @@
 ByteniZ3R devtool 
 (formerly called BytesGen)
 
-Short:        Another generator of data tables in Bytes.         
+Short:        Waveform data table generator.         
 Author:       mvac7
-Version:      0.9b
+Version:      0.9.16b
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3  
@@ -16,7 +16,7 @@ Index:
   2. License
   3. Requirements
   4. How to Install and Run
-  5. News in version
+  5. Features
   
   6. User Guide
   6.1 How does it work
@@ -26,31 +26,34 @@ Index:
   6.5 Saving the result
   
   7 Programming information
-  7.1 How to read data in MSX BASIC
+  7.1 Examples 
+  7.2 How to read data in MSX BASIC
 
 
 
 --------------------------------------------------------------------------------
 1. Description
 
-  Generates tables of 8 bits unsigned values, from waveforms or binary files, 
-  in different programming languages (BASIC, C or ASM).
+  Generates tables of 8 bits unsigned values, from waveforms in different 
+  programming languages (BASIC, C or ASM).
+  
+  It can be useful for movement paths for graphic figures (Sprites) or visual 
+  effects.
 
-  This tool made for cross-developing MSX programs but can be useful for anyone 
-  who needs 8bit data tables. 
-     
-  This software was developed in Microsoft Visual Basic 2010 Express. 
-     
-  The most current versions have a new name because one day I woke up with the 
-  need to provide a unique and cool name. 
-  The thinking brain behind the new name is Mr. Fubukimaru.
+  This tool is designed for the cross-development of computer programs with 
+  8-bit processors.
 
+  This project is open source, so you can improve or adapt the tool to your 
+  needs. 
+     
+  This software was developed in Microsoft Visual Studio Community 2019.
+     
 
 
 --------------------------------------------------------------------------------
 3. License
 
-   Copyright (C) 2021 mvac7
+   Copyright (C) 2022 mvac7
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -70,40 +73,39 @@ Index:
 --------------------------------------------------------------------------------
 3. Requirements 
  
-   PC with Windows OS and Framework 4.0
+   - Computer with .net Framework 4.0
+   - Display with minimum resolution: XVGA (1024x768)
    
-   
+
 
 --------------------------------------------------------------------------------
 4. How to Install and Run
  
-Unpack ByteniZ3R ZIP somewhere on your hard disk (It is not inside a folder). 
+   This application does not contain an installer and does not write to the 
+   system registry.
    
-For run, execute ByteniZ3R.exe  
+   You will only have to unpack the files included in the ZIP of the release, in 
+   the place you want on your disk. 
+   
+   For run, execute ByteniZ3R  
    
 
 
 --------------------------------------------------------------------------------
-5. News in version 
-   
-     * Save/Load Project.
-     * Add Project Info.
-     * Move Random tab to waveform.
-     * Add Square waveform.
-     * Add Triangle waveform.
-     * Add Sawtooth waveform.
-     * Add Reverse Sawtooth waveform.
-     * Add Phase property, to move the waveform.
-     * Add Frequency property.
-     * Add sliders in all wave form values.
-     * Improvements in the visualization of the graphic output of the wave.
-     * In the output it shows the parameters in a comment.
-     * Save binary file from output (with compression). For assemblers and 
-       compilers that allow to include binary files.
-     * Refresh output data and graphic when the input data are modified.
-     * Show hex dump from a loaded binary file.
-     * Config for paths and default output type data.
-     * More internal improvements.
+5. Features
+
+  - 7 waveform generators: Sine, Cosine, Square, Triangle, Sawtooth, 
+                           Reverse Sawtooth and Noise.
+  - Maximum and minimum adjustment.
+  - Phase and Frequency adjustmens.
+  - BASIC, C or Assembler output.
+  - Supports several number systems and data formats (decimal, hexadecimal or 
+    binary)
+  - Edit info project (Name, Version, Author, Group, and Description).
+  - Save/Load project files.
+  - Save output to source code 
+  - Save output to binary file
+
 
 
 --------------------------------------------------------------------------------
@@ -111,17 +113,19 @@ For run, execute ByteniZ3R.exe
 
 6.1. How does it work
 
-The flow of utilization is from top to bottom and from left to right.
+The graphical interface is designed to be used in a top-down flow.
 
-In any use case, we can start by giving the project a name and information about
-it (group, author and description), and then choose the type of data we want to 
-generate and modify its properties.
+You can start by giving the project a name and information about it (version, 
+author and description), although it is optional.
+
+The next step will be to choose the type of data (waveform or noise) that we 
+want to generate and modify its properties.
    
-The next step will be to indicate the output format, such as the programming 
-language and number system (decimal, hexadecimal or binary).
+Now you must configure the output format, indicating the programming language 
+and the numerical system (decimal, hexadecimal or binary).
    
-Finally, we can select the output text and copy it to our programming 
-environment or save it to a text or binary file.
+Finally, you'll need to move the data into your project, either copying the 
+text or saving the output to a text or binary file.
          
 
 
@@ -155,13 +159,8 @@ options:
   
 6.3 Waveforms
 
-   It has 6 waveform generators, which can be useful for movement paths for 
-   graphic figures (Sprites) or visual effects.
-   
-   Attention! In a future version, it can be generated in signed byte format, 
-   so it can be used to generate Waves for the SCC sound processor.
-   
-   The waveforms are: Sine, Cosine, Square, Triangle, Sawtooth and Noise.
+   There are 7 waveform generators available: Sine, Cosine, Square, Triangle, 
+   Sawtooth, Reverse Sawtooth and Noise.
    
    It has several parameters to adjust the form:
    
@@ -169,7 +168,6 @@ options:
    > Min & Max (0-255): Defines the smallest and the highest value of the form.
    > Phase (0-359): Shifts the wave n degrees.
    > Frecuency (1-256): Number of times the shape will be repeated.
-
                  
                  
 
@@ -178,105 +176,154 @@ options:
    In the output area, we have a form to define the format, such as the 
    programming language, numeric format and compression.
 
-   Code type: 
+   Language: 
+              Assembler
               BASIC 
               C 
-              Assembler
+              
 
-   Number System:  
+   Number sys:  
             Supports various number systems and formats for different 
             compilers or assemblers.
             
-              decimal nnn 
-              decimal nnnd 
-              hexadecimal FF 
-              hexadecimal 0xFF 
-              hexadecimal $FF 
-              hexadecimal #FF 
-              hexadecimal 0FFh 
-              hexadecimal &HFF
-
+            Name               Example       Language
+            ------------------ ------------- -----------------------
+            decimal     n     |     5       | Assembler, C or BASIC
+            decimal     nnn   |   005       | Assembler, C or BASIC
+            decimal     nnnd  |   005d      | Assembler
+            hexadecimal FF    |   FF        | BASIC           
+            hexadecimal $FF   |  $FF        | Assembler
+            hexadecimal #FF   |  #FF        | Assembler
+            hexadecimal 0FFh  |  0FFh       | Assembler
+            hexadecimal 0xFF  | 0xFF        | C or Assembler           
+            hexadecimal &HFF  | &HFF        | BASIC
+            binary 00000000   |   00000001  | BASIC
+            binary 00000000b  |   00000001b | Assembler
+            binary %00000000  |  %00000001  | Assembler
+            binary 0b00000000 | 0b00000001  | C or Assembler
+            binary &B00000000 | &B00000001  | BASIC
+                    
 
    Size Line: 
                1,2,4,8, 16, 24 or 32
  
 
-   Assembler > Command. 
+   Assembler Config > 
+          Field Name:
+               Name of the label that will be added to the output to be able to 
+               access it from the program.
+               
+          Command: 
                Command used for assembler data.
                Default = "DB"
+               You can add "<tab>" in front of it, so that it includes a tab 
+               in the output. Example: "<tab>DB"
                      
-   C > Type  > Variable declaration type
+   C Config > 
+          Field Name:
+               Name of the Array that will be used in the output source code.
+               
+          Type:  
+               Variable declaration type
                Default = "const char"
                
-   C y Assembler > Field name
-               Name of the field or label.
 
-   BASIC
-         > Initial Line: Start line number. Default = 1000
-         > Increment: Increment between lines. Default = 10
-         > Remove 0 (checkbutton): It does not show the zeros to save on the 
-                                   size of the listings. 
+
+   BASIC Config >
+          Initial Line: Start line number. Default = 1000
+          Increment: Increment between lines. Default = 10
+          Remove 0 (checkbutton): It does not show the zeros to save on the 
+                                  size of the listings. 
 
 
 
 6.5 Saving the result   
 
-   Once we have the data, we can copy and paste the code to our editor or work 
-   environment, selecting the text and using the "Copy" option from the context 
-   menu (Ctrl+C) or we can copy all the text by pressing the "Copy All" button 
-   located in the lower right part of the main window.
+   Once we have the data, you can copy and paste the code into your programming 
+   environment.
    
-   or you can also:  
+   You have two options:
+   - You can select the text you want to copy and use the 'Copy' option from the
+     context menu (keyboard shortcut Ctrl+C)
+   - You can click on the "Copy All" button located at the bottom left of the 
+     ByteniZ3R main window.
+    
    
-     [Save BIN] Save the output to a binary file.
+   ...or you can also:  
    
-     [Save TXT] Saves the output text with the extension of the selected 
-                language (.BAS; .C; .ASM/.S)    
-   
+   - [Save Source] Saves the output text with the extension of the selected 
+                   language (.BAS; .C; .ASM/.S)    
+                
+   - [Save Binary] Save the output data to a binary file.   
+
 
 
 --------------------------------------------------------------------------------   
 7 Programming information
 
-  Here you will find some advice on how to read the data.
+
+7.1 Examples 
   
-  The application includes a folder (code_examples\) where you will find 
-  programming examples.
+  The application includes a folder (Examples\) where you will find 
+  programming examples:
   
+  \Assembler\Test1_asMSX  Test output data in asMSX assembler
+  \Assembler\Test1_Sjasm  Test output data in Sjasm assembler
+  \Assembler\Test2_asMSX  Test import binary files in asMSX assembler
+  
+  \C\Test1                Test at SDCC compilator
+  
+  \BASIC\                 Several examples with different formats and data. 
    
   
-7.1 How to read data in MSX BASIC
 
-   For MSX BASIC it can be generated in different formats, but there are two 
-   ways that I recommend depending on what you need:
+7.2 How to read data in MSX BASIC
+
+    For MSX BASIC it can be generated in different formats, but there are two 
+    ways that I recommend depending on what you need:
 
 
    * That occupies little
    
-   If we work with a very large list and we need to reduce size, the best way 
-   is to use the "hex FF" format and remove0. In this way, a value will occupy 
-   0 to 2 Bytes, but it has a drawback: execution is slower, because each 
-   alphanumeric data must be converted to a numeric value using the VAL 
-   instruction.    
+    If we work with a very large list and we need to reduce size, the best way 
+    is to use the "hex FF" format and remove0. In this way, a value will occupy 
+    0 to 2 Bytes, but it has a drawback: execution is slower, because each 
+    alphanumeric data must be converted to a numeric value using the VAL 
+    instruction.    
 
-    20 FOR BC=0 to 15
-    30 READ A$
-    40 PRINT VAL("&H"+A$)
-    50 NEXT
-    60 END
-    90 DATA ,1,4,8,D,13,1A,22
-    91 DATA 2B,35,40,4B,57,63,70,7C
+    100 FOR BC=0 to 31
+    110 READ A$
+    120 PRINT VAL("&H"+A$)
+    130 NEXT
+    140 END
+    200 REM ByteniZ3R v0.9.16.0
+    210 REM Project: Example BASIC
+    220 REM Sine
+    230 REM Length=32; Min=0; Max=255; Phase=0; Freq=1
+    240 DATA 80,99,B2,C8,DC,EC,F7,FE
+    250 DATA FF,FB,F2,E4,D3,BD,A6,8C
+    260 DATA 73,59,42,2C,1B,D,4,
+    270 DATA 1,8,13,23,37,4D,66,7F
 
     
    * Make it fast
   
-   If we want the data block to be read as fast as possible, the best way is in 
-   decimal "dec nnn". This way is about twice as fast as the previous one.
+    If we want the data block to be read as fast as possible, the best way is in 
+    decimal "dec n" or hexadecimal "hex &HFF". 
+    This way is about twice as fast as the previous one.
   
-    20 FOR BC=0 to 15
-    30 READ A
-    40 PRINT A
-    50 NEXT
-    60 END  
-    90 DATA 0,1,4,8,13,19,26,34
-    91 DATA 43,53,64,75,87,99,112,124
+    100 FOR BC=0 to 31
+    110 READ A
+    120 PRINT A
+    130 NEXT
+    140 END  
+    200 REM ByteniZ3R v0.9.16.0
+    210 REM Project: Example BASIC
+    220 REM Sine
+    230 REM Length=32; Min=0; Max=255; Phase=0; Freq=1
+    240 DATA 128,153,178,200,220,236,247,254
+    250 DATA 255,251,242,228,211,189,166,140
+    260 DATA 115,89,66,44,27,13,4,
+    270 DATA 1,8,19,35,55,77,102,127
+
+--------------------------------------------------------------------------------

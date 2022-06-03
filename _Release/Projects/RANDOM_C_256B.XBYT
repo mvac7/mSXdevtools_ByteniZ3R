@@ -1,6 +1,6 @@
-<msxdevtools app="ByteniZ3R" version="0.9.8.0">
+<msxdevtools app="ByteniZ3R" version="0.9.16.0">
   <ByteniZ3R>
-    <info name="RANDOMiCe" group="MSXcomm" version="1" author="anyGuy" startDate="637632000000000000" lastUpdate="637833312000000000">
+    <info name="RANDOMi-Ce" group="MSXcomm" version="1" author="anyGuy" startDate="637632000000000000" lastUpdate="637896384000000000">
       <description>Test RANDOM values for C</description>
     </info>
     <waveform type="6" size="256" minValue="16" maxValue="128" phase="0" freq="1" />
