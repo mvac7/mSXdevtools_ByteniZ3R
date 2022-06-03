@@ -188,20 +188,20 @@ options:
             
             Name               Example       Language
             ------------------ ------------- -----------------------
-            decimal     n     |     5       | Assembler, C or BASIC
-            decimal     nnn   |   005       | Assembler, C or BASIC
-            decimal     nnnd  |   005d      | Assembler
-            hexadecimal FF    |   FF        | BASIC           
-            hexadecimal $FF   |  $FF        | Assembler
-            hexadecimal #FF   |  #FF        | Assembler
-            hexadecimal 0FFh  |  0FFh       | Assembler
-            hexadecimal 0xFF  | 0xFF        | C or Assembler           
-            hexadecimal &HFF  | &HFF        | BASIC
-            binary 00000000   |   00000001  | BASIC
-            binary 00000000b  |   00000001b | Assembler
-            binary %00000000  |  %00000001  | Assembler
-            binary 0b00000000 | 0b00000001  | C or Assembler
-            binary &B00000000 | &B00000001  | BASIC
+            decimal     n     |    15       | Assembler, C or BASIC
+            decimal     nnn   |   015       | Assembler, C or BASIC
+            decimal     nnnd  |   015d      | Assembler
+            hexadecimal FF    |   0F        | BASIC           
+            hexadecimal $FF   |  $0F        | Assembler
+            hexadecimal #FF   |  #0F        | Assembler
+            hexadecimal 0FFh  |  00Fh       | Assembler
+            hexadecimal 0xFF  | 0x0F        | C or Assembler           
+            hexadecimal &HFF  | &H0F        | BASIC
+            binary 00000000   |   00001111  | BASIC
+            binary 00000000b  |   00001111b | Assembler
+            binary %00000000  |  %00001111  | Assembler
+            binary 0b00000000 | 0b00001111  | C or Assembler
+            binary &B00000000 | &B00001111  | BASIC
                     
 
    Size Line: 

@@ -9,13 +9,11 @@
 - [3 Requirements](#3-Requirements)
 - [4 How to Install and Run](#4-How-to-Install-and-Run)
 - [5 Features](#5-Features)
-
 - [6 User Guide](#6-User-Guide)
    - [6.1 How does it work](#61-How-does-it-work)
-   - [6.2 Project Menu][#62-Project-Menu]
-   - [6.3 Waveforms][#63-Waveforms]
-   - [6.4 Data output format][#64-Data-output-format]
-
+   - [6.2 Project Menu](#62-Project-Menu)
+   - [6.3 Waveforms](#63-Waveforms)
+   - [6.4 Data output format](#64-Data-output-format)
 - [7 Programming information](#7-Programming-information)
    - [7.1 Examples](#71-Examples)
    - [7.2 How to read data in MSX BASIC](#72-How-to-read-data-in-MSX-BASIC)
@@ -112,7 +110,7 @@ Now you must configure the output format, indicating the programming language an
    
 Finally, you'll need to move the data into your project, either copying the text or saving the output to a text or binary file.
 
-
+<br/>
 
 ### 6.2 Project Menu
     
@@ -132,7 +130,7 @@ At the top of the main window we have the project menu, with the following optio
    
 * `About` Version and license information for the application.
 
-
+<br/>
 
 ### 6.3 Waveforms
 
@@ -145,7 +143,7 @@ It has several parameters to adjust the form:
 * `Phase` (0-359): Shifts the wave n degrees.
 * `Frecuency` (1-256): Number of times the shape will be repeated.
 
-
+<br/>
 
 ### 6.4 Data output format
 
@@ -162,20 +160,20 @@ Supports various number systems and formats for different compilers or assembler
 
 Name              | Example     | Language
 ----------------- | ----------- | -----------------------
-decimal     n     |    5        | Assembler, C or BASIC
-decimal     nnn   |  005        | Assembler, C or BASIC
-decimal     nnnd  |  005d       | Assembler
-hexadecimal FF    |   FF        | BASIC           
-hexadecimal $FF   |  $FF        | Assembler
-hexadecimal #FF   |  #FF        | Assembler
-hexadecimal 0FFh  |  0FFh       | Assembler
-hexadecimal 0xFF  | 0xFF        | C or Assembler           
-hexadecimal &HFF  | &HFF        | BASIC
-binary 00000000   |   00000001  | BASIC
-binary 00000000b  |   00000001b | Assembler
-binary %00000000  |  %00000001  | Assembler
-binary 0b00000000 | 0b00000001  | C or Assembler
-binary &B00000000 | &B00000001  | BASIC
+decimal     n     |   15        | Assembler, C or BASIC
+decimal     nnn   |  015        | Assembler, C or BASIC
+decimal     nnnd  |  015d       | Assembler
+hexadecimal FF    |   0F        | BASIC           
+hexadecimal $FF   |  $0F        | Assembler
+hexadecimal #FF   |  #0F        | Assembler
+hexadecimal 0FFh  |  00Fh       | Assembler
+hexadecimal 0xFF  | 0x0F        | C or Assembler           
+hexadecimal &HFF  | &H0F        | BASIC
+binary 00000000   |   00001111  | BASIC
+binary 00000000b  |   00001111b | Assembler
+binary %00000000  |  %00001111  | Assembler
+binary 0b00000000 | 0b00001111  | C or Assembler
+binary &B00000000 | &B00001111  | BASIC
                     
 
 #### Size Line: 
@@ -202,7 +200,7 @@ binary &B00000000 | &B00000001  | BASIC
 * `Increment` Increment between lines. Default = 10
 * `Remove 0` (checkbutton): It does not show the zeros to save on the size of the listings. 
 
-
+<br/>
 
 ### 6.5 Saving the result   
 
@@ -248,7 +246,7 @@ The application includes a folder (Examples\) where you will find programming ex
 * `\C\Test1`                Test at SDCC compilator
 
 
-
+<br/>
 
 ### 7.2 How to read data in MSX BASIC
 

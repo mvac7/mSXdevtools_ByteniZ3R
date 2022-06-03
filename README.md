@@ -25,7 +25,7 @@ It can be useful for generating graphics or creating paths to move [Sprites](htt
 It includes examples for various development environments of the MSX system (Assembler, C and BASIC), 
 which is what I know (sorry developers of other platforms).
 
-You can access the documentation here with [`ByteniZ3R devtool DOC`](docs/HOWTO.md).
+You can access the documentation here with [`ByteniZ3R devtool DOC`](Docs/HOWTO.md).
 
 In the source code [`Examples/`](Examples/), you can find applications for testing and learning purposes.
 
