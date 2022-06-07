@@ -3,7 +3,7 @@ ByteniZ3R devtool
 
 Short:        Waveform data table generator.         
 Author:       mvac7
-Version:      0.9.16b
+Version:      0.9.17b
 Architecture: Microsoft .Net Framework 4.0
 Programming language: Visual BASIC .net
 License:      GNU General Public License v3  
@@ -118,8 +118,8 @@ The graphical interface is designed to be used in a top-down flow.
 You can start by giving the project a name and information about it (version, 
 author and description), although it is optional.
 
-The next step will be to choose the type of data (waveform or noise) that we 
-want to generate and modify its properties.
+The next step will be to choose the type of waveform that we want to generate 
+and modify its properties.
    
 Now you must configure the output format, indicating the programming language 
 and the numerical system (decimal, hexadecimal or binary).

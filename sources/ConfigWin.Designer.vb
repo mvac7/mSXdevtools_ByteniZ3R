@@ -23,6 +23,7 @@ Partial Class ConfigWin
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConfigWin))
         Me.NumFormatComboBox = New System.Windows.Forms.ComboBox()
         Me.CompressTypeComboBox = New System.Windows.Forms.ComboBox()
         Me.SizeLineComboBox = New System.Windows.Forms.ComboBox()
@@ -61,8 +62,6 @@ Partial Class ConfigWin
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.PathsPanel = New System.Windows.Forms.Panel()
         Me.BinaryPathControl = New ByteniZ3R.PathEntryControl()
         Me.BitmapsPathControl = New ByteniZ3R.PathEntryControl()
@@ -83,7 +82,7 @@ Partial Class ConfigWin
         Me.ColorConfigsLabel = New System.Windows.Forms.Label()
         Me.ColorConfigsComboBox = New System.Windows.Forms.ComboBox()
         Me.GridColorButton = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.InitProjectGroupBox = New System.Windows.Forms.GroupBox()
         Me.PathLastPRJTextBox = New System.Windows.Forms.TextBox()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
@@ -97,18 +96,22 @@ Partial Class ConfigWin
         Me.AsmByteValuesComboBox = New System.Windows.Forms.ComboBox()
         Me.PathsTab = New System.Windows.Forms.TabPage()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.BottonsPanel = New System.Windows.Forms.Panel()
+        Me.OK_Button = New System.Windows.Forms.Button()
+        Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.BASICGroupBox.SuspendLayout()
         Me.PathsPanel.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.OthersTab.SuspendLayout()
         Me.OutputdataGroupBox.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.InitProjectGroupBox.SuspendLayout()
         Me.DataOutputTab.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PathsTab.SuspendLayout()
+        Me.BottonsPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'NumFormatComboBox
@@ -515,33 +518,6 @@ Partial Class ConfigWin
         Me.Label1.Text = "Number system:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'OK_Button
-        '
-        Me.OK_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OK_Button.BackColor = System.Drawing.Color.PaleGreen
-        Me.OK_Button.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OK_Button.Location = New System.Drawing.Point(423, 512)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(110, 36)
-        Me.OK_Button.TabIndex = 250
-        Me.OK_Button.Text = "Ok"
-        Me.OK_Button.UseVisualStyleBackColor = False
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Cancel_Button.BackColor = System.Drawing.Color.LightSalmon
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cancel_Button.Location = New System.Drawing.Point(541, 518)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(70, 30)
-        Me.Cancel_Button.TabIndex = 251
-        Me.Cancel_Button.Text = "Cancel"
-        Me.Cancel_Button.UseVisualStyleBackColor = False
-        '
         'PathsPanel
         '
         Me.PathsPanel.AutoScroll = True
@@ -560,7 +536,7 @@ Partial Class ConfigWin
         Me.PathsPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PathsPanel.Location = New System.Drawing.Point(3, 3)
         Me.PathsPanel.Name = "PathsPanel"
-        Me.PathsPanel.Size = New System.Drawing.Size(586, 461)
+        Me.PathsPanel.Size = New System.Drawing.Size(586, 484)
         Me.PathsPanel.TabIndex = 256
         '
         'BinaryPathControl
@@ -627,7 +603,7 @@ Partial Class ConfigWin
         '
         Me.BytegenPathControl.Dock = System.Windows.Forms.DockStyle.Top
         Me.BytegenPathControl.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BytegenPathControl.Label = "ByteGen Project"
+        Me.BytegenPathControl.Label = "ByteniZ3R Project"
         Me.BytegenPathControl.Location = New System.Drawing.Point(0, 192)
         Me.BytegenPathControl.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.BytegenPathControl.Name = "BytegenPathControl"
@@ -717,7 +693,7 @@ Partial Class ConfigWin
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(600, 493)
+        Me.TabControl1.Size = New System.Drawing.Size(600, 516)
         Me.TabControl1.TabIndex = 256
         '
         'OthersTab
@@ -728,13 +704,13 @@ Partial Class ConfigWin
         Me.OthersTab.Controls.Add(Me.Label12)
         Me.OthersTab.Controls.Add(Me.Color0Button)
         Me.OthersTab.Controls.Add(Me.Label11)
-        Me.OthersTab.Controls.Add(Me.GroupBox1)
+        Me.OthersTab.Controls.Add(Me.InitProjectGroupBox)
         Me.OthersTab.Controls.Add(Me.Label10)
         Me.OthersTab.Controls.Add(Me.InfoNameTextBox)
         Me.OthersTab.Location = New System.Drawing.Point(4, 23)
         Me.OthersTab.Name = "OthersTab"
         Me.OthersTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.OthersTab.Size = New System.Drawing.Size(592, 466)
+        Me.OthersTab.Size = New System.Drawing.Size(592, 489)
         Me.OthersTab.TabIndex = 2
         Me.OthersTab.Text = "Miscellany"
         '
@@ -784,18 +760,19 @@ Partial Class ConfigWin
         Me.GridColorButton.TabIndex = 260
         Me.GridColorButton.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'InitProjectGroupBox
         '
-        Me.GroupBox1.Controls.Add(Me.PathLastPRJTextBox)
-        Me.GroupBox1.Controls.Add(Me.RadioButton3)
-        Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Location = New System.Drawing.Point(38, 70)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(535, 173)
-        Me.GroupBox1.TabIndex = 256
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "tMSgfX Init Project"
+        Me.InitProjectGroupBox.Controls.Add(Me.PathLastPRJTextBox)
+        Me.InitProjectGroupBox.Controls.Add(Me.RadioButton3)
+        Me.InitProjectGroupBox.Controls.Add(Me.RadioButton2)
+        Me.InitProjectGroupBox.Controls.Add(Me.RadioButton1)
+        Me.InitProjectGroupBox.Enabled = False
+        Me.InitProjectGroupBox.Location = New System.Drawing.Point(38, 70)
+        Me.InitProjectGroupBox.Name = "InitProjectGroupBox"
+        Me.InitProjectGroupBox.Size = New System.Drawing.Size(535, 173)
+        Me.InitProjectGroupBox.TabIndex = 256
+        Me.InitProjectGroupBox.TabStop = False
+        Me.InitProjectGroupBox.Text = "tMSgfX Init Project"
         '
         'PathLastPRJTextBox
         '
@@ -859,7 +836,7 @@ Partial Class ConfigWin
         Me.DataOutputTab.Location = New System.Drawing.Point(4, 22)
         Me.DataOutputTab.Name = "DataOutputTab"
         Me.DataOutputTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataOutputTab.Size = New System.Drawing.Size(592, 467)
+        Me.DataOutputTab.Size = New System.Drawing.Size(592, 490)
         Me.DataOutputTab.TabIndex = 1
         Me.DataOutputTab.Text = "Default Data Output"
         '
@@ -893,7 +870,7 @@ Partial Class ConfigWin
         '
         'arrow2PictureBox
         '
-        Me.arrow2PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.arrow_left_24blue
+        Me.arrow2PictureBox.Image = CType(resources.GetObject("arrow2PictureBox.Image"), System.Drawing.Image)
         Me.arrow2PictureBox.Location = New System.Drawing.Point(343, 49)
         Me.arrow2PictureBox.Name = "arrow2PictureBox"
         Me.arrow2PictureBox.Size = New System.Drawing.Size(24, 24)
@@ -902,7 +879,7 @@ Partial Class ConfigWin
         '
         'arrow1PictureBox
         '
-        Me.arrow1PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.arrow_left_24blue
+        Me.arrow1PictureBox.Image = CType(resources.GetObject("arrow1PictureBox.Image"), System.Drawing.Image)
         Me.arrow1PictureBox.Location = New System.Drawing.Point(343, 20)
         Me.arrow1PictureBox.Name = "arrow1PictureBox"
         Me.arrow1PictureBox.Size = New System.Drawing.Size(24, 24)
@@ -940,20 +917,65 @@ Partial Class ConfigWin
         Me.PathsTab.Location = New System.Drawing.Point(4, 22)
         Me.PathsTab.Name = "PathsTab"
         Me.PathsTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.PathsTab.Size = New System.Drawing.Size(592, 467)
+        Me.PathsTab.Size = New System.Drawing.Size(592, 490)
         Me.PathsTab.TabIndex = 0
         Me.PathsTab.Text = "Default paths"
         '
+        'BottonsPanel
+        '
+        Me.BottonsPanel.Controls.Add(Me.OK_Button)
+        Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
+        Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 533)
+        Me.BottonsPanel.Name = "BottonsPanel"
+        Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
+        Me.BottonsPanel.Size = New System.Drawing.Size(624, 51)
+        Me.BottonsPanel.TabIndex = 257
+        '
+        'OK_Button
+        '
+        Me.OK_Button.BackColor = System.Drawing.Color.Transparent
+        Me.OK_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.OK_Button.Dock = System.Windows.Forms.DockStyle.Right
+        Me.OK_Button.FlatAppearance.BorderSize = 0
+        Me.OK_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.OK_Button.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OK_Button.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.OK_Button.Image = CType(resources.GetObject("OK_Button.Image"), System.Drawing.Image)
+        Me.OK_Button.Location = New System.Drawing.Point(378, 4)
+        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
+        Me.OK_Button.Name = "OK_Button"
+        Me.OK_Button.Size = New System.Drawing.Size(132, 43)
+        Me.OK_Button.TabIndex = 3
+        Me.OK_Button.UseVisualStyleBackColor = False
+        '
+        'Cancel_Button
+        '
+        Me.Cancel_Button.BackColor = System.Drawing.Color.Transparent
+        Me.Cancel_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Cancel_Button.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Cancel_Button.FlatAppearance.BorderSize = 0
+        Me.Cancel_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Cancel_Button.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cancel_Button.ForeColor = System.Drawing.Color.Black
+        Me.Cancel_Button.Image = CType(resources.GetObject("Cancel_Button.Image"), System.Drawing.Image)
+        Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Cancel_Button.Location = New System.Drawing.Point(510, 4)
+        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
+        Me.Cancel_Button.Name = "Cancel_Button"
+        Me.Cancel_Button.Size = New System.Drawing.Size(110, 43)
+        Me.Cancel_Button.TabIndex = 4
+        Me.Cancel_Button.UseVisualStyleBackColor = False
+        '
         'ConfigWin
         '
-        Me.AcceptButton = Me.OK_Button
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.BackColor = System.Drawing.Color.Gainsboro
+        Me.BackColor = System.Drawing.Color.LightGray
         Me.CancelButton = Me.Cancel_Button
         Me.ClientSize = New System.Drawing.Size(624, 584)
         Me.ControlBox = False
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Controls.Add(Me.OK_Button)
+        Me.Controls.Add(Me.BottonsPanel)
         Me.Controls.Add(Me.TabControl1)
         Me.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -970,8 +992,8 @@ Partial Class ConfigWin
         Me.OthersTab.ResumeLayout(False)
         Me.OthersTab.PerformLayout()
         Me.OutputdataGroupBox.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.InitProjectGroupBox.ResumeLayout(False)
+        Me.InitProjectGroupBox.PerformLayout()
         Me.DataOutputTab.ResumeLayout(False)
         Me.DataOutputTab.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -981,6 +1003,7 @@ Partial Class ConfigWin
         CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PathsTab.ResumeLayout(False)
+        Me.BottonsPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -990,8 +1013,6 @@ Partial Class ConfigWin
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents CodeOutputComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents BASICGroupBox As System.Windows.Forms.GroupBox
-    Friend WithEvents OK_Button As System.Windows.Forms.Button
-    Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Private WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents AsmByteDataTextBox As System.Windows.Forms.TextBox
@@ -1001,19 +1022,19 @@ Partial Class ConfigWin
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents DataLabelTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents SpritesPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents tMSgfXProjectPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents nMSXtilesPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents MSXBASICPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents BitmapsPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents PalettesPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents OAMPathControl As ByteniZ3R.PathEntryControl
+    Friend WithEvents SpritesPathControl As PathEntryControl
+    Friend WithEvents tMSgfXProjectPathControl As PathEntryControl
+    Friend WithEvents nMSXtilesPathControl As PathEntryControl
+    Friend WithEvents MSXBASICPathControl As PathEntryControl
+    Friend WithEvents BitmapsPathControl As PathEntryControl
+    Friend WithEvents PalettesPathControl As PathEntryControl
+    Friend WithEvents OAMPathControl As PathEntryControl
     Friend WithEvents PathsPanel As System.Windows.Forms.Panel
-    Friend WithEvents BinaryPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents SquaredsetsPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents TilesetsPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents MapsPathControl As ByteniZ3R.PathEntryControl
-    Friend WithEvents BytegenPathControl As ByteniZ3R.PathEntryControl
+    Friend WithEvents BinaryPathControl As PathEntryControl
+    Friend WithEvents SquaredsetsPathControl As PathEntryControl
+    Friend WithEvents TilesetsPathControl As PathEntryControl
+    Friend WithEvents MapsPathControl As PathEntryControl
+    Friend WithEvents BytegenPathControl As PathEntryControl
     Friend WithEvents LineNumberLabel As System.Windows.Forms.Label
     Friend WithEvents BASICincLineslTextBox As System.Windows.Forms.TextBox
     Friend WithEvents BASICinitLineTextBox As System.Windows.Forms.TextBox
@@ -1033,7 +1054,7 @@ Partial Class ConfigWin
     Friend WithEvents OthersTab As TabPage
     Friend WithEvents Label10 As Label
     Friend WithEvents InfoNameTextBox As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents InitProjectGroupBox As GroupBox
     Friend WithEvents PathLastPRJTextBox As TextBox
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
@@ -1058,4 +1079,7 @@ Partial Class ConfigWin
     Friend WithEvents Label14 As Label
     Friend WithEvents ColorConfigsLabel As Label
     Friend WithEvents ColorConfigsComboBox As ComboBox
+    Friend WithEvents BottonsPanel As Panel
+    Friend WithEvents OK_Button As Button
+    Friend WithEvents Cancel_Button As Button
 End Class

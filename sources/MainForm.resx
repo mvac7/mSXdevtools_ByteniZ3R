@@ -120,6 +120,12 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="LogoPictureBox.ToolTip" xml:space="preserve">
+    <value>This application started in the year 2013 as a tool called 
+BytesGen, to generate tables of random numbers.
+I used it for the development of the visual effects 
+application veejingSX for MSX computers.</value>
+  </data>
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>

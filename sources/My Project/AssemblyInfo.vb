@@ -9,9 +9,9 @@ Imports System.Runtime.InteropServices
 ' Revisar los valores de los atributos del ensamblado
 
 <Assembly: AssemblyTitle("ByteniZ3R")>
-<Assembly: AssemblyDescription("Generates tables of 8 bits unsigned values to a different programming languages (BASIC, C or ASM), from waveforms (Sine, Cosine, Square, Triangle, Sawtooth and Noise).")>
+<Assembly: AssemblyDescription("Waveform data table generator")>
 <Assembly: AssemblyCompany("MSX Comm·unity")>
-<Assembly: AssemblyProduct("ByteniZ3R")>
+<Assembly: AssemblyProduct("ByteniZ3R devtool")>
 <Assembly: AssemblyCopyright("Copyright 2022 mvac7")>
 <Assembly: AssemblyTrademark("")> 
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.9.16.0")>
-<Assembly: AssemblyFileVersion("0.9.16.0")>
+<Assembly: AssemblyVersion("0.9.17.0")>
+<Assembly: AssemblyFileVersion("0.9.17.0")>

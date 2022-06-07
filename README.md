@@ -85,7 +85,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## History of versions
 
-This application started as a tool that generated tables of random numbers that I used for the development of the visual effects application veejingSX for MSX computers.
+This application started in the year 2013 as a tool called BytesGen, to generate tables of random numbers.
+I used it for the development of the visual effects application veejingSX for MSX computers.
 
 Later I would add the option to load binary files and dump them in tables formatted for different programming languages.
 
@@ -98,7 +99,7 @@ The decision to remove the binary load is due to the fact that I have been devel
 This functionality is no longer required.
 
 
-### ByteniZ3R v0.9.n (2022).
+### ByteniZ3R v0.9.17 (7 June 2022)
 
 - Removed binary file handling function. (Apps for this feature will be available soon.) 
 - Removed compress data (No compression is obtained with this data type)
@@ -110,7 +111,7 @@ This functionality is no longer required.
 - Add binary number system in output data settings.
 
 
-### ByteniZ3R v0.9.1b (August 2021).
+### ByteniZ3R v0.9.1b (August 2021)
 
 - Save/Load Project File.
 - Add Project Info

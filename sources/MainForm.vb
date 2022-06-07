@@ -3,19 +3,20 @@ Imports System.Xml
 Imports System.Windows.Forms
 
 
-'v0.7.1.0 
-'* basic line changes do increase to 10 (before = 15). 
-'* drag & drop a file from the system to the input file (binary file).
-'* Added new output formats data (hex).
-'* Output is cleared when switching tabs.
-
-'v0.7.2.0
-'* Output Textbox and buttons, added to the Output GroupBox.
-'* clear button
-
 
 ''' <summary>
+''' ByteniZ3R devtool
+''' Waveform data table generator
 ''' 
+''' Copyright (C) 2022 mvac7
+''' This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
+''' the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+''' 
+''' This program is distributed in the hope that it will be useful,
+''' but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+''' See the GNU General Public License for more details.
+''' 
+''' You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ''' </summary>
 ''' <remarks></remarks>
 Public Class MainForm
@@ -90,7 +91,6 @@ Public Class MainForm
 
         Me.Progress = New ProgressController(Me)
 
-
         If Not Me.AppConfig.Load() Then
             ' if not exist config file
             ShowAbout(True)
@@ -132,7 +132,7 @@ Public Class MainForm
             filename = " · [" + filename + "]"
         End If
 
-        Me.Text = My.Application.Info.Title + " " + filename  '" v" + My.Application.Info.Version.ToString + "b "
+        Me.Text = My.Application.Info.Title + " " + filename
     End Sub
 
 
@@ -379,7 +379,6 @@ Public Class MainForm
 
 
 
-    'GetCosineTable
     Private Function GetCosineTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal phase As Integer, ByVal freq As Integer) As Byte()
 
         Dim tmpData(length) As Byte
@@ -969,32 +968,10 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub WaveLengthTrackBar_KeyUp(sender As Object, e As KeyEventArgs) Handles WaveLengthTrackBar.KeyUp, WaveMinTrackBar.KeyUp, WaveMaxTrackBar.KeyUp, WavePhaseTrackBar.KeyUp, WaveFreqTrackBar.KeyUp
         GenerateData()
     End Sub
-
-
-    'Private Sub WaveMinTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMinTrackBar.MouseUp
-    '    GenerateData()
-    'End Sub
-
-
-
-    'Private Sub WaveMaxTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveMaxTrackBar.MouseUp
-    '    GenerateData()
-    'End Sub
-
-
-
-    'Private Sub WavePhaseTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WavePhaseTrackBar.MouseUp
-    '    GenerateData()
-    'End Sub
-
-
-
-    'Private Sub WaveFreqTrackBar_MouseUp(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles WaveFreqTrackBar.MouseUp
-    '    GenerateData()
-    'End Sub
 
 
 
@@ -1087,6 +1064,7 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub WaveMinTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveMinTextBox.Validating
         If Not IsNumeric(Me.WaveMinTextBox.Text) Then
             Me.WaveMinTextBox.Text = "0"
@@ -1094,6 +1072,7 @@ Public Class MainForm
         ValidateMinValue(CInt(Me.WaveMinTextBox.Text))
         GenerateData()
     End Sub
+
 
 
     Private Sub WaveMaxTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveMaxTextBox.Validating
@@ -1105,6 +1084,7 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub PhaseTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles PhaseTextBox.Validating
         If Not IsNumeric(Me.PhaseTextBox.Text) Then
             Me.PhaseTextBox.Text = "0"
@@ -1112,6 +1092,7 @@ Public Class MainForm
         ValidatePhaseValue(CInt(Me.PhaseTextBox.Text))
         GenerateData()
     End Sub
+
 
 
     Private Sub FreqTextBox_Validating(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles FreqTextBox.Validating
@@ -1396,7 +1377,6 @@ Public Class MainForm
 
 
 
-
     ''' <summary>
     ''' Save a project, from an absolute path.
     ''' </summary>
@@ -1669,7 +1649,7 @@ Public Class MainForm
 
 
     Private Sub SetConfig()
-        Dim aConfig As New ConfigWin(Me.AppConfig, ConfigWin.CONFIG_TYPE.BYTEGEN)
+        Dim aConfig As New ConfigWin(Me.AppConfig, ConfigWin.CONFIG_TYPE.BYTENIZ3R)
 
         If aConfig.ShowDialog() = DialogResult.OK Then
             Me.AppConfig.Save()
@@ -1690,14 +1670,17 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub NewButton_Click(sender As System.Object, e As System.EventArgs) Handles NewButton.Click
         NewProjectDialog()
     End Sub
 
 
+
     Private Sub LoadButton_Click(sender As System.Object, e As System.EventArgs) Handles LoadButton.Click
         LoadProjectDialog()
     End Sub
+
 
 
     Private Sub SaveButton_Click(sender As System.Object, e As System.EventArgs) Handles SaveButton.Click
@@ -1709,51 +1692,66 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub SaveAsButton_Click(sender As Object, e As EventArgs) Handles SaveAsButton.Click
         SaveProjectDialog()
     End Sub
+
 
 
     Private Sub ProjectInfoButton_Click(sender As System.Object, e As System.EventArgs) Handles ProjectInfoButton.Click
         SetProjectInfo()
     End Sub
 
+
+
     Private Sub ConfigButton1_Click(sender As System.Object, e As System.EventArgs) Handles ConfigButton.Click
         SetConfig()
     End Sub
+
+
 
     Private Sub HelpButton_Click(sender As System.Object, e As System.EventArgs) Handles Help_Button.Click
         'Dim helper As New HelpWin(Me.Name, helpURL)
         'helper.ShowDialog()
     End Sub
 
+
+
     Private Sub AboutButton1_Click(sender As System.Object, e As System.EventArgs) Handles AboutButton.Click
         ShowAbout(False)
     End Sub
 
-    'Private Sub GFXoutputPictureBox_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-    '    ShowWave()
-    'End Sub
+
 
     Private Sub CopyAllButton_Click(sender As Object, e As EventArgs) Handles CopyAllButton.Click
         CopyAll()
     End Sub
 
+
+
     Private Sub SaveSourceButton_Click(sender As Object, e As EventArgs) Handles SaveSourceButton.Click
         SaveSourceDialog()
     End Sub
+
+
 
     Private Sub SaveBinaryFileButton_Click(sender As Object, e As EventArgs) Handles SaveBinaryFileButton.Click
         SaveBinaryDialog()
     End Sub
 
+
+
     Private Sub anOutputDataGBox_AccordionChanged(state As Boolean) Handles anOutputDataGBox.AccordionChanged
         SetOutputtextSize()
     End Sub
 
+
+
     Private Sub anOutputDataGBox_DataChanged()
         GenerateData()
     End Sub
+
 
 
 End Class

@@ -106,7 +106,12 @@ Partial Class MainForm
         '
         'ToolTip1
         '
+        Me.ToolTip1.AutoPopDelay = 7000
+        Me.ToolTip1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.ToolTip1.ForeColor = System.Drawing.Color.Black
+        Me.ToolTip1.InitialDelay = 500
         Me.ToolTip1.IsBalloon = True
+        Me.ToolTip1.ReshowDelay = 100
         '
         'WaveLengthTextBox
         '
@@ -230,8 +235,7 @@ Partial Class MainForm
         Me.LogoPictureBox.Size = New System.Drawing.Size(311, 70)
         Me.LogoPictureBox.TabIndex = 115
         Me.LogoPictureBox.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.LogoPictureBox, "Formerly known as BytesGen." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The new name is due to a brain process of @Fubukimar" &
-        "u")
+        Me.ToolTip1.SetToolTip(Me.LogoPictureBox, resources.GetString("LogoPictureBox.ToolTip"))
         '
         'WaveFreqTrackBar
         '
@@ -508,7 +512,7 @@ Partial Class MainForm
         '
         Me.GFXoutputPictureBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GFXoutputPictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(155, Byte), Integer), CType(CType(188, Byte), Integer), CType(CType(15, Byte), Integer))
+        Me.GFXoutputPictureBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GFXoutputPictureBox.Location = New System.Drawing.Point(370, 23)
         Me.GFXoutputPictureBox.Name = "GFXoutputPictureBox"
         Me.GFXoutputPictureBox.Size = New System.Drawing.Size(380, 160)
@@ -604,7 +608,7 @@ Partial Class MainForm
         Me.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximumSize = New System.Drawing.Size(800, 1200)
-        Me.MinimumSize = New System.Drawing.Size(800, 622)
+        Me.MinimumSize = New System.Drawing.Size(800, 620)
         Me.Name = "MainForm"
         Me.Text = "ByteniZ3R"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
