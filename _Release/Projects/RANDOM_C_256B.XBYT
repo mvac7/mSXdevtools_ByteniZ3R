@@ -1,9 +1,0 @@
-<msxdevtools app="ByteniZ3R" version="0.9.16.0">
-  <ByteniZ3R>
-    <info name="RANDOMi-Ce" group="MSXcomm" version="1" author="anyGuy" startDate="637632000000000000" lastUpdate="637896384000000000">
-      <description>Test RANDOM values for C</description>
-    </info>
-    <waveform type="6" size="256" minValue="16" maxValue="128" phase="0" freq="1" />
-    <OutputConfig CodeType="2" NumberSystem="7" SizeLine="4" AsmCommand="DB" BASICinitLine="1000" BASICincLines="10" Remove0="True" Label="RANDOMZ01" />
-  </ByteniZ3R>
-</msxdevtools>
