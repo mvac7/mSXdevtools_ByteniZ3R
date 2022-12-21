@@ -42,31 +42,32 @@ Partial Class OutputDataGBox
         '
         'DownPictureBox
         '
+        Me.DownPictureBox.BackgroundImage = CType(resources.GetObject("DownPictureBox.BackgroundImage"), System.Drawing.Image)
+        Me.DownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.DownPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.DownPictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_down
         Me.DownPictureBox.Location = New System.Drawing.Point(0, 149)
         Me.DownPictureBox.Margin = New System.Windows.Forms.Padding(0)
         Me.DownPictureBox.Name = "DownPictureBox"
-        Me.DownPictureBox.Size = New System.Drawing.Size(766, 4)
+        Me.DownPictureBox.Size = New System.Drawing.Size(760, 4)
         Me.DownPictureBox.TabIndex = 1
         Me.DownPictureBox.TabStop = False
         '
         'upperPanel
         '
         Me.upperPanel.BackColor = System.Drawing.Color.Transparent
-        Me.upperPanel.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_up_outputdata2
+        Me.upperPanel.BackgroundImage = CType(resources.GetObject("upperPanel.BackgroundImage"), System.Drawing.Image)
         Me.upperPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.upperPanel.Controls.Add(Me.accordionPictureBox)
         Me.upperPanel.Dock = System.Windows.Forms.DockStyle.Top
         Me.upperPanel.Location = New System.Drawing.Point(0, 0)
         Me.upperPanel.Name = "upperPanel"
-        Me.upperPanel.Size = New System.Drawing.Size(766, 20)
+        Me.upperPanel.Size = New System.Drawing.Size(760, 20)
         Me.upperPanel.TabIndex = 0
         '
         'accordionPictureBox
         '
         Me.accordionPictureBox.BackColor = System.Drawing.Color.Transparent
-        Me.accordionPictureBox.Location = New System.Drawing.Point(726, 0)
+        Me.accordionPictureBox.Location = New System.Drawing.Point(720, 0)
         Me.accordionPictureBox.Margin = New System.Windows.Forms.Padding(0)
         Me.accordionPictureBox.Name = "accordionPictureBox"
         Me.accordionPictureBox.Size = New System.Drawing.Size(20, 20)
@@ -94,7 +95,7 @@ Partial Class OutputDataGBox
         '
         Me.RightLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.RightLinePictureBox.Dock = System.Windows.Forms.DockStyle.Right
-        Me.RightLinePictureBox.Location = New System.Drawing.Point(762, 20)
+        Me.RightLinePictureBox.Location = New System.Drawing.Point(756, 20)
         Me.RightLinePictureBox.Name = "RightLinePictureBox"
         Me.RightLinePictureBox.Size = New System.Drawing.Size(4, 129)
         Me.RightLinePictureBox.TabIndex = 3
@@ -102,12 +103,12 @@ Partial Class OutputDataGBox
         '
         'ContentsPanel
         '
-        Me.ContentsPanel.BackColor = System.Drawing.Color.Transparent
+        Me.ContentsPanel.BackColor = System.Drawing.Color.LightGray
         Me.ContentsPanel.Controls.Add(Me.DataTypeInput)
         Me.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ContentsPanel.Location = New System.Drawing.Point(4, 20)
         Me.ContentsPanel.Name = "ContentsPanel"
-        Me.ContentsPanel.Size = New System.Drawing.Size(758, 129)
+        Me.ContentsPanel.Size = New System.Drawing.Size(752, 129)
         Me.ContentsPanel.TabIndex = 4
         '
         'DataTypeInput
@@ -117,7 +118,7 @@ Partial Class OutputDataGBox
         Me.DataTypeInput.EnableDataSizeLine = False
         Me.DataTypeInput.FieldName = "DATA"
         Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataTypeInput.Location = New System.Drawing.Point(3, 6)
+        Me.DataTypeInput.Location = New System.Drawing.Point(129, 5)
         Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DataTypeInput.Name = "DataTypeInput"
         Me.DataTypeInput.Size = New System.Drawing.Size(470, 117)
@@ -131,7 +132,7 @@ Partial Class OutputDataGBox
         Me.Controls.Add(Me.DownPictureBox)
         Me.Controls.Add(Me.upperPanel)
         Me.Name = "OutputDataGBox"
-        Me.Size = New System.Drawing.Size(766, 153)
+        Me.Size = New System.Drawing.Size(760, 153)
         CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.upperPanel.ResumeLayout(False)
         CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).EndInit()

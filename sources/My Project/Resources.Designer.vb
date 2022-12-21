@@ -203,39 +203,9 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property piXel_pane_XL() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("piXel_pane_XL", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property piXel_panel_XL_down() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("piXel_panel_XL_down", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property piXel_panel_XL_mid() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("piXel_panel_XL_mid", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property piXel_panel_XL_up_outputdata2() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("piXel_panel_XL_up_outputdata2", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

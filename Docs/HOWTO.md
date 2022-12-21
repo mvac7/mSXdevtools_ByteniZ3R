@@ -61,7 +61,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## 3 Requirements
 
-* Windows OS with .net framework v4.0
+* Computer with .net framework v4.0
 * Display with minimum resolution: XVGA (1024x768)
 
 <br/>

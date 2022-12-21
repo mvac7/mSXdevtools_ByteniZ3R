@@ -1,7 +1,5 @@
 ﻿Imports System.IO
 Imports System.Xml
-Imports System.Windows.Forms
-
 
 
 ''' <summary>
@@ -16,14 +14,12 @@ Imports System.Windows.Forms
 ''' but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ''' See the GNU General Public License for more details.
 ''' 
-''' You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+''' You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
 ''' </summary>
 ''' <remarks></remarks>
 Public Class MainForm
 
-
-
-    'Public Shadows Const Extension_byteGEN As String = "XBYT"
+    Private Const Version_Stage = "-beta"
 
 
     Private AppConfig As Config
@@ -251,7 +247,7 @@ Public Class MainForm
             comments = New ArrayList
         End If
 
-        comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
+        comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString + Version_Stage)
         comments.Add("Project: " + Me.Info.Name)
         comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
 
@@ -1403,7 +1399,7 @@ Public Class MainForm
         rootElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("version")
-        anAttribute.Value = My.Application.Info.Version.ToString
+        anAttribute.Value = My.Application.Info.Version.ToString + Version_Stage
         rootElement.SetAttributeNode(anAttribute)
 
 

@@ -211,13 +211,10 @@
     <Content Include="ByteniZ3R.ico" />
     <None Include="Resources\save_as3_x24.png" />
     <None Include="Resources\piXel_panel_XL_up_waveform.png" />
-    <None Include="Resources\piXel_panel_XL_mid.png" />
     <None Include="Resources\piXel_panel_XL_down.png" />
-    <None Include="Resources\piXel_panel_XL_up_outputdata2.png" />
     <None Include="Resources\button_savebinary.png" />
     <None Include="Resources\button_savesource.png" />
     <None Include="Resources\button_CopyAll.png" />
-    <None Include="Resources\piXel_pane_XL.png" />
     <None Include="Resources\icon_byteniZ3R_128px.png" />
     <None Include="Resources\ByteniZ3R_logo.png" />
     <None Include="Resources\Load_file2_x24.png" />

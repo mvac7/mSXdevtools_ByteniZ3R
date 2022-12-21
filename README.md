@@ -1,7 +1,7 @@
 # ByteniZ3R devtool 
 (formerly called BytesGen)
 
-![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/ByteniZ3R_logoX3.png)
+![ByteniZ3R title logo](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/ByteniZ3R_logo.png)
     
 ```
 Short:        Waveform data table generator.         
@@ -99,7 +99,7 @@ The decision to remove the binary load is due to the fact that I have been devel
 This functionality is no longer required.
 
 
-### ByteniZ3R v0.9.17 (7 June 2022)
+### ByteniZ3R v0.9.17b (7 June 2022)
 
 - Removed binary file handling function. (Apps for this feature will be available soon.) 
 - Removed compress data (No compression is obtained with this data type)

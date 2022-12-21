@@ -33,8 +33,8 @@ Partial Class MainForm
         Me.WaveMaxTextBox = New System.Windows.Forms.TextBox()
         Me.WaveMinTextBox = New System.Windows.Forms.TextBox()
         Me.CopyAllButton = New System.Windows.Forms.Button()
-        Me.SaveBinaryFileButton = New System.Windows.Forms.Button()
         Me.SaveSourceButton = New System.Windows.Forms.Button()
+        Me.SaveBinaryFileButton = New System.Windows.Forms.Button()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.WaveFreqTrackBar = New System.Windows.Forms.TrackBar()
         Me.LabelFreq = New System.Windows.Forms.Label()
@@ -70,6 +70,7 @@ Partial Class MainForm
         Me.DownPictureBox = New System.Windows.Forms.PictureBox()
         Me.waveform_up_PictureBox = New System.Windows.Forms.PictureBox()
         Me.SaveoutputPanel = New System.Windows.Forms.Panel()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.anOutputDataGBox = New ByteniZ3R.OutputDataGBox()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WaveFreqTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +97,7 @@ Partial Class MainForm
         Me.OutputText.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.OutputText.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OutputText.ForeColor = System.Drawing.Color.DimGray
-        Me.OutputText.Location = New System.Drawing.Point(14, 490)
+        Me.OutputText.Location = New System.Drawing.Point(12, 490)
         Me.OutputText.Multiline = True
         Me.OutputText.Name = "OutputText"
         Me.OutputText.ScrollBars = System.Windows.Forms.ScrollBars.Both
@@ -188,44 +189,47 @@ Partial Class MainForm
         'CopyAllButton
         '
         Me.CopyAllButton.BackColor = System.Drawing.Color.Transparent
+        Me.CopyAllButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.CopyAllButton.FlatAppearance.BorderSize = 0
         Me.CopyAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CopyAllButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CopyAllButton.Image = Global.ByteniZ3R.My.Resources.Resources.button_CopyAll
-        Me.CopyAllButton.Location = New System.Drawing.Point(180, 6)
+        Me.CopyAllButton.Location = New System.Drawing.Point(200, 0)
         Me.CopyAllButton.Name = "CopyAllButton"
-        Me.CopyAllButton.Size = New System.Drawing.Size(152, 38)
+        Me.CopyAllButton.Size = New System.Drawing.Size(152, 40)
         Me.CopyAllButton.TabIndex = 25
         Me.ToolTip1.SetToolTip(Me.CopyAllButton, "Copy everything you see in the output to the clipboard.")
         Me.CopyAllButton.UseVisualStyleBackColor = False
         '
-        'SaveBinaryFileButton
-        '
-        Me.SaveBinaryFileButton.BackColor = System.Drawing.Color.Transparent
-        Me.SaveBinaryFileButton.FlatAppearance.BorderSize = 0
-        Me.SaveBinaryFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.SaveBinaryFileButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveBinaryFileButton.Image = Global.ByteniZ3R.My.Resources.Resources.button_savebinary
-        Me.SaveBinaryFileButton.Location = New System.Drawing.Point(548, 6)
-        Me.SaveBinaryFileButton.Name = "SaveBinaryFileButton"
-        Me.SaveBinaryFileButton.Size = New System.Drawing.Size(204, 38)
-        Me.SaveBinaryFileButton.TabIndex = 24
-        Me.ToolTip1.SetToolTip(Me.SaveBinaryFileButton, "Save binary file")
-        Me.SaveBinaryFileButton.UseVisualStyleBackColor = False
-        '
         'SaveSourceButton
         '
         Me.SaveSourceButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveSourceButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SaveSourceButton.FlatAppearance.BorderSize = 0
         Me.SaveSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SaveSourceButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SaveSourceButton.Image = Global.ByteniZ3R.My.Resources.Resources.button_savesource
-        Me.SaveSourceButton.Location = New System.Drawing.Point(338, 6)
+        Me.SaveSourceButton.Location = New System.Drawing.Point(352, 0)
         Me.SaveSourceButton.Name = "SaveSourceButton"
-        Me.SaveSourceButton.Size = New System.Drawing.Size(204, 38)
+        Me.SaveSourceButton.Size = New System.Drawing.Size(204, 40)
         Me.SaveSourceButton.TabIndex = 23
         Me.ToolTip1.SetToolTip(Me.SaveSourceButton, "Save output Source")
         Me.SaveSourceButton.UseVisualStyleBackColor = False
+        '
+        'SaveBinaryFileButton
+        '
+        Me.SaveBinaryFileButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveBinaryFileButton.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SaveBinaryFileButton.FlatAppearance.BorderSize = 0
+        Me.SaveBinaryFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SaveBinaryFileButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveBinaryFileButton.Image = Global.ByteniZ3R.My.Resources.Resources.button_savebinary
+        Me.SaveBinaryFileButton.Location = New System.Drawing.Point(556, 0)
+        Me.SaveBinaryFileButton.Name = "SaveBinaryFileButton"
+        Me.SaveBinaryFileButton.Size = New System.Drawing.Size(204, 40)
+        Me.SaveBinaryFileButton.TabIndex = 24
+        Me.ToolTip1.SetToolTip(Me.SaveBinaryFileButton, "Save binary file")
+        Me.SaveBinaryFileButton.UseVisualStyleBackColor = False
         '
         'LogoPictureBox
         '
@@ -371,6 +375,7 @@ Partial Class MainForm
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.BackColor = System.Drawing.Color.Gainsboro
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewButton, Me.LoadButton, Me.SaveButton, Me.SaveAsButton, Me.ToolStripSeparator2, Me.ProjectNameTextBox, Me.ProjectInfoButton, Me.ToolStripSeparator1, Me.ConfigButton, Me.Help_Button, Me.AboutButton})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
@@ -426,6 +431,7 @@ Partial Class MainForm
         '
         'ProjectNameTextBox
         '
+        Me.ProjectNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ProjectNameTextBox.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ProjectNameTextBox.Name = "ProjectNameTextBox"
         Me.ProjectNameTextBox.ReadOnly = True
@@ -479,6 +485,7 @@ Partial Class MainForm
         '
         'waveform_Panel
         '
+        Me.waveform_Panel.BackColor = System.Drawing.Color.LightGray
         Me.waveform_Panel.Controls.Add(Me.GFXoutputPictureBox)
         Me.waveform_Panel.Controls.Add(Me.PictureBox2)
         Me.waveform_Panel.Controls.Add(Me.RightLinePictureBox)
@@ -503,9 +510,9 @@ Partial Class MainForm
         Me.waveform_Panel.Controls.Add(Me.WaveMaxTrackBar)
         Me.waveform_Panel.Controls.Add(Me.WaveMinTrackBar)
         Me.waveform_Panel.Controls.Add(Me.WaveLengthTrackBar)
-        Me.waveform_Panel.Location = New System.Drawing.Point(10, 118)
+        Me.waveform_Panel.Location = New System.Drawing.Point(12, 118)
         Me.waveform_Panel.Name = "waveform_Panel"
-        Me.waveform_Panel.Size = New System.Drawing.Size(766, 196)
+        Me.waveform_Panel.Size = New System.Drawing.Size(760, 196)
         Me.waveform_Panel.TabIndex = 118
         '
         'GFXoutputPictureBox
@@ -515,7 +522,7 @@ Partial Class MainForm
         Me.GFXoutputPictureBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GFXoutputPictureBox.Location = New System.Drawing.Point(370, 23)
         Me.GFXoutputPictureBox.Name = "GFXoutputPictureBox"
-        Me.GFXoutputPictureBox.Size = New System.Drawing.Size(380, 160)
+        Me.GFXoutputPictureBox.Size = New System.Drawing.Size(374, 160)
         Me.GFXoutputPictureBox.TabIndex = 28
         Me.GFXoutputPictureBox.TabStop = False
         '
@@ -533,7 +540,7 @@ Partial Class MainForm
         '
         Me.RightLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.RightLinePictureBox.Dock = System.Windows.Forms.DockStyle.Right
-        Me.RightLinePictureBox.Location = New System.Drawing.Point(762, 14)
+        Me.RightLinePictureBox.Location = New System.Drawing.Point(756, 14)
         Me.RightLinePictureBox.Name = "RightLinePictureBox"
         Me.RightLinePictureBox.Size = New System.Drawing.Size(4, 178)
         Me.RightLinePictureBox.TabIndex = 4
@@ -556,17 +563,19 @@ Partial Class MainForm
         Me.DownPictureBox.Location = New System.Drawing.Point(0, 192)
         Me.DownPictureBox.Margin = New System.Windows.Forms.Padding(0)
         Me.DownPictureBox.Name = "DownPictureBox"
-        Me.DownPictureBox.Size = New System.Drawing.Size(766, 4)
+        Me.DownPictureBox.Size = New System.Drawing.Size(760, 4)
         Me.DownPictureBox.TabIndex = 2
         Me.DownPictureBox.TabStop = False
         '
         'waveform_up_PictureBox
         '
+        Me.waveform_up_PictureBox.BackColor = System.Drawing.Color.Silver
+        Me.waveform_up_PictureBox.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_up_waveform
+        Me.waveform_up_PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.waveform_up_PictureBox.Dock = System.Windows.Forms.DockStyle.Top
-        Me.waveform_up_PictureBox.Image = Global.ByteniZ3R.My.Resources.Resources.piXel_panel_XL_up_waveform
         Me.waveform_up_PictureBox.Location = New System.Drawing.Point(0, 0)
         Me.waveform_up_PictureBox.Name = "waveform_up_PictureBox"
-        Me.waveform_up_PictureBox.Size = New System.Drawing.Size(766, 14)
+        Me.waveform_up_PictureBox.Size = New System.Drawing.Size(760, 14)
         Me.waveform_up_PictureBox.TabIndex = 0
         Me.waveform_up_PictureBox.TabStop = False
         '
@@ -574,22 +583,30 @@ Partial Class MainForm
         '
         Me.SaveoutputPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.SaveoutputPanel.BackColor = System.Drawing.Color.Transparent
-        Me.SaveoutputPanel.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.piXel_pane_XL
         Me.SaveoutputPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.SaveoutputPanel.Controls.Add(Me.CopyAllButton)
-        Me.SaveoutputPanel.Controls.Add(Me.SaveBinaryFileButton)
         Me.SaveoutputPanel.Controls.Add(Me.SaveSourceButton)
-        Me.SaveoutputPanel.Location = New System.Drawing.Point(10, 599)
+        Me.SaveoutputPanel.Controls.Add(Me.SaveBinaryFileButton)
+        Me.SaveoutputPanel.Location = New System.Drawing.Point(12, 596)
         Me.SaveoutputPanel.Name = "SaveoutputPanel"
-        Me.SaveoutputPanel.Size = New System.Drawing.Size(767, 52)
+        Me.SaveoutputPanel.Size = New System.Drawing.Size(760, 40)
         Me.SaveoutputPanel.TabIndex = 116
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.BackColor = System.Drawing.Color.Transparent
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 639)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(784, 22)
+        Me.StatusStrip1.TabIndex = 119
+        Me.StatusStrip1.Text = "StatusStrip1"
         '
         'anOutputDataGBox
         '
         Me.anOutputDataGBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.anOutputDataGBox.Location = New System.Drawing.Point(10, 331)
+        Me.anOutputDataGBox.Location = New System.Drawing.Point(12, 327)
         Me.anOutputDataGBox.Name = "anOutputDataGBox"
-        Me.anOutputDataGBox.Size = New System.Drawing.Size(766, 153)
+        Me.anOutputDataGBox.Size = New System.Drawing.Size(760, 153)
         Me.anOutputDataGBox.TabIndex = 117
         '
         'MainForm
@@ -597,8 +614,9 @@ Partial Class MainForm
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.LightGray
+        Me.BackColor = System.Drawing.Color.Silver
         Me.ClientSize = New System.Drawing.Size(784, 661)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.waveform_Panel)
         Me.Controls.Add(Me.anOutputDataGBox)
         Me.Controls.Add(Me.SaveoutputPanel)
@@ -679,4 +697,5 @@ Partial Class MainForm
     Friend WithEvents LeftLinePictureBox As PictureBox
     Friend WithEvents RightLinePictureBox As PictureBox
     Friend WithEvents SaveAsButton As ToolStripButton
+    Friend WithEvents StatusStrip1 As StatusStrip
 End Class
