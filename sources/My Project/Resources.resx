@@ -124,17 +124,14 @@
   <data name="Load_file2_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Load_file2_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="config_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\config_x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="folder_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_CopyAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_CopyAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="folder2_x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder2_x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="config_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\config_x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_byteniZ3R_128px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_byteniZ3R_128px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,12 +151,6 @@
   <data name="piXel_panel_XL_up_waveform" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\piXel_panel_XL_up_waveform.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="button_savesource" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_savesource.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="button_savebinary" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\button_savebinary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ByteniZ3R_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ByteniZ3R_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -174,5 +165,8 @@
   </data>
   <data name="save_as3_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_as3_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="textu00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\textu00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

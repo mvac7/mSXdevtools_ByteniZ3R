@@ -72,7 +72,7 @@ Public Class MainForm
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.AppConfig = New Config(AppID) 'Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName) 'System.AppDomain.CurrentDomain.BaseDirectory
-        Me.AppConfig.Load()
+        'Me.AppConfig.Load()
 
     End Sub
 
@@ -92,27 +92,24 @@ Public Class MainForm
             ShowAbout(True)
         End If
 
-        Dim GFXwidth As Integer = Me.GFXoutputPictureBox.Width
+        'Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        'Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
-        Dim GFXheight As Integer = Me.GFXoutputPictureBox.Height
+        Me.anOutputDataGBox.InitControl(Me.AppConfig)
 
-        Dim workBitmap As New Bitmap(GFXwidth, GFXheight)
-        Me.aGraphics = Graphics.FromImage(workBitmap)
-        Me.GFXoutputPictureBox.Image = workBitmap
+        'Me.anOutputDataGBox.DataTypeInput.FieldName = Me.AppConfig.DataLabel
 
-
-        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
-
-        Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)
-
-        Me.anOutputDataGBox.DataTypeInput.FieldName = Me.AppConfig.defDataLabel
-
-        SetOutputtextSize()
+        'SetOutputtextSize()
 
         NewProject()
 
         SetTitle(Me.Info.Name)
+
+        DrawPanel.Size = New Drawing.Size(DrawPanel.Width, 256 + SystemInformation.HorizontalScrollBarHeight)
+
+        SetDrawImage(WaveLengthTrackBar.Value)
+
+        GenerateData()
 
         AddHandlers()
 
@@ -120,6 +117,15 @@ Public Class MainForm
 
         WaveTypeComboBox.Focus()
 
+    End Sub
+
+
+    Private Sub SetDrawImage(ByVal waveLength As Integer)
+        'Dim workBitmap As New Bitmap(Me.GFXoutputPictureBox.Width, Me.GFXoutputPictureBox.Height)
+        Dim workBitmap As New Bitmap(waveLength, 256)
+        Me.GFXoutputPictureBox.Size = New Drawing.Size(waveLength, 256)
+        Me.aGraphics = Graphics.FromImage(workBitmap)
+        Me.GFXoutputPictureBox.Image = workBitmap
     End Sub
 
 
@@ -200,8 +206,6 @@ Public Class MainForm
 
         SetTitle(Me.Info.Name)
 
-        GenerateData()
-
     End Sub
 
 
@@ -216,6 +220,7 @@ Public Class MainForm
         If result = DialogResult.Yes Then
             RemoveHandlers()
             NewProject()
+            GenerateData()
             AddHandlers()
         End If
     End Sub
@@ -265,14 +270,16 @@ Public Class MainForm
         End If
         comments.Add(infoData)
 
-        Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
-            Case DataFormat.ProgrammingLanguage.C
-                OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastCByteCommand)
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.lastAsmByteCommand)
-            Case DataFormat.ProgrammingLanguage.BASIC
-                OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, Me.anOutputDataGBox.DataTypeInput.BASICremoveZeros, Me.anOutputDataGBox.DataTypeInput.BASIClineNumber, Me.anOutputDataGBox.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
-        End Select
+        Me.anOutputDataGBox.ShowData(data, comments)
+
+        'Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
+        '    Case DataFormat.ProgrammingLanguage.C
+        '        OutputText.Text = Me.aMSXDataFormat.GetCcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.CByteCommand)
+        '    Case DataFormat.ProgrammingLanguage.ASSEMBLER
+        '        OutputText.Text = Me.aMSXDataFormat.GetAssemblerCode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, labelName, comments, Me.AppConfig.AsmByteCommand)
+        '    Case DataFormat.ProgrammingLanguage.BASIC
+        '        OutputText.Text = Me.aMSXDataFormat.GetBASICcode(data, CInt(Me.anOutputDataGBox.DataTypeInput.SizeLine), Me.anOutputDataGBox.DataTypeInput.NumeralSystem, Me.anOutputDataGBox.DataTypeInput.BASICremoveZeros, Me.anOutputDataGBox.DataTypeInput.BASIClineNumber, Me.anOutputDataGBox.DataTypeInput.BASICInterval, comments) 'Me.aMSXDataFormat.lastLineNumber
+        'End Select
 
     End Sub
 
@@ -579,13 +586,12 @@ Public Class MainForm
 
 
 
-    Private Sub DrawWave(ByVal data As Byte())
+    Private Sub DrawWave(ByRef data As Byte())
 
         'Dim aGraphics As Graphics
 
-        Dim GFXwidth As Integer = Me.GFXoutputPictureBox.Width
-
-        Dim GFXheight As Integer = Me.GFXoutputPictureBox.Height
+        Dim GFXwidth As Integer
+        Dim GFXheight As Integer
 
         Dim length As Integer
 
@@ -598,12 +604,23 @@ Public Class MainForm
         Dim point1 As New Point
         Dim point2 As New Point
 
+        Dim aPen As Pen
+
+        If data Is Nothing Then
+            Exit Sub
+        End If
+
+        SetDrawImage(WaveLengthTrackBar.Value)
+
+        GFXwidth = Me.GFXoutputPictureBox.Width
+        GFXheight = Me.GFXoutputPictureBox.Height
+
 
         Try
 
-            Me.aGraphics.Clear(Me.AppConfig.Color_OUTPUT_BG)
+            aPen = New Pen(Me.AppConfig.Color_OUTPUT_INK) 'Color.FromArgb(255, 48, 98, 48)
 
-            Dim aPen As New Pen(Me.AppConfig.Color_OUTPUT_INK) 'Color.FromArgb(255, 48, 98, 48)
+            Me.aGraphics.Clear(Me.AppConfig.Color_OUTPUT_BG)
 
             If data.Length > (GFXwidth - 1) Then
                 interval = (data.Length - 1) / GFXwidth
@@ -661,7 +678,7 @@ Public Class MainForm
 
 
 
-            aGraphics.Flush()
+            Me.aGraphics.Flush()
             Me.GFXoutputPictureBox.Refresh()
 
 
@@ -682,146 +699,143 @@ Public Class MainForm
 
 
 
-    ''' <summary>
-    ''' Copy output data to clipboard
-    ''' </summary>
-    ''' <remarks></remarks>
-    Private Sub CopyAll()
-        Me.Progress.ShowProgressWin()
-        Try
-            My.Computer.Clipboard.SetText(Me.OutputText.Text)
 
-            'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-            'I apply a short wait for the progress window to show without closing too quickly.
-            System.Threading.Thread.Sleep(150) 'wait
-        Catch ex As Exception
+    'Private Sub CopyAll()
+    '    Me.Progress.ShowProgressWin()
+    '    Try
+    '        My.Computer.Clipboard.SetText(Me.OutputText.Text)
 
-        End Try
-        Me.Progress.CloseProgressWin()
-    End Sub
+    '        'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+    '        'I apply a short wait for the progress window to show without closing too quickly.
+    '        System.Threading.Thread.Sleep(150) 'wait
+    '    Catch ex As Exception
+
+    '    End Try
+    '    Me.Progress.CloseProgressWin()
+    'End Sub
 
 
 
-    Private Sub SaveSourceDialog()
+    'Private Sub SaveSourceDialog()
 
-        Dim aStreamWriterFile As StreamWriter
+    '    Dim aStreamWriterFile As StreamWriter
 
-        If Me.OutputText.Text = "" Then
-            Dim MessageWin As New MessageDialog
-            MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
+    '    If Me.OutputText.Text = "" Then
+    '        Dim MessageWin As New MessageDialog
+    '        MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
 
-        Else
+    '    Else
 
-            If Me.Path_source = "" Then
-                If Me.Path_Project = "" Then
-                    Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-                    Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
-                Else
-                    Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
-                    Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
-                End If
-            Else
-                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_source)
-                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_source)
-            End If
-
-
-            Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
-                Case DataFormat.ProgrammingLanguage.BASIC
-                    Me.SaveFileDialog1.DefaultExt = "BAS"
-                    Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
-                Case DataFormat.ProgrammingLanguage.C
-                    Me.SaveFileDialog1.DefaultExt = "c"
-                    Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
-                Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                    Me.SaveFileDialog1.DefaultExt = "asm"
-                    Me.SaveFileDialog1.Filter = "ASM file|*.asm|ASM file|*.s"
-            End Select
+    '        If Me.Path_source = "" Then
+    '            If Me.Path_Project = "" Then
+    '                Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
+    '                Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
+    '            Else
+    '                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
+    '                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
+    '            End If
+    '        Else
+    '            Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_source)
+    '            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_source)
+    '        End If
 
 
-            If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-
-                Me.Path_source = SaveFileDialog1.FileName
-
-                Try
-                    Me.Progress.ShowProgressWin()
-
-                    aStreamWriterFile = New System.IO.StreamWriter(Me.Path_source)
-                    aStreamWriterFile.WriteLine(Me.OutputText.Text)
-                    aStreamWriterFile.Close()
-
-                    'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-                    'I apply a short wait for the progress window to show without closing too quickly.
-                    System.Threading.Thread.Sleep(200) 'wait
-
-                    Me.Progress.CloseProgressWin()
-
-                Catch ex As Exception
-                    Me.Progress.CloseProgressWin()
-                    MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
-                End Try
-
-            End If
-
-        End If
-
-    End Sub
+    '        Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
+    '            Case DataFormat.ProgrammingLanguage.BASIC
+    '                Me.SaveFileDialog1.DefaultExt = "BAS"
+    '                Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
+    '            Case DataFormat.ProgrammingLanguage.C
+    '                Me.SaveFileDialog1.DefaultExt = "c"
+    '                Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
+    '            Case DataFormat.ProgrammingLanguage.ASSEMBLER
+    '                Me.SaveFileDialog1.DefaultExt = "asm"
+    '                Me.SaveFileDialog1.Filter = "ASM file|*.asm|ASM file|*.s"
+    '        End Select
 
 
+    '        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
 
-    Private Sub SaveBinaryDialog()
+    '            Me.Path_source = SaveFileDialog1.FileName
 
-        Dim aStream As System.IO.FileStream
+    '            Try
+    '                Me.Progress.ShowProgressWin()
 
-        If Me.lastOutputData.Length < 1 Then
-            Dim MessageWin As New MessageDialog
-            MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
+    '                aStreamWriterFile = New System.IO.StreamWriter(Me.Path_source)
+    '                aStreamWriterFile.WriteLine(Me.OutputText.Text)
+    '                aStreamWriterFile.Close()
 
-        Else
+    '                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+    '                'I apply a short wait for the progress window to show without closing too quickly.
+    '                System.Threading.Thread.Sleep(200) 'wait
 
-            If Me.Path_binary = "" Then
-                If Me.Path_Project = "" Then
-                    Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-                    Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
-                Else
-                    Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
-                    Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
-                End If
-            Else
-                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_binary)
-                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_binary)
-            End If
+    '                Me.Progress.CloseProgressWin()
 
-            'Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-            Me.SaveFileDialog1.DefaultExt = "BIN"
-            Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
+    '            Catch ex As Exception
+    '                Me.Progress.CloseProgressWin()
+    '                MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
+    '            End Try
 
-            If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+    '        End If
 
-                Me.Path_binary = SaveFileDialog1.FileName
+    '    End If
 
-                Try
-                    Me.Progress.ShowProgressWin()
+    'End Sub
 
-                    aStream = New System.IO.FileStream(Me.Path_binary, IO.FileMode.Create)
-                    aStream.Write(Me.lastOutputData, 0, Me.lastOutputData.Length)
-                    aStream.Close()
 
-                    'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-                    'I apply a short wait for the progress window to show without closing too quickly.
-                    System.Threading.Thread.Sleep(150) 'wait
 
-                    Me.Progress.CloseProgressWin()
+    'Private Sub SaveBinaryDialog()
 
-                Catch ex As Exception
-                    Me.Progress.CloseProgressWin()
-                    MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
-                End Try
+    '    Dim aStream As System.IO.FileStream
 
-            End If
+    '    If Me.lastOutputData.Length < 1 Then
+    '        Dim MessageWin As New MessageDialog
+    '        MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
 
-        End If
-    End Sub
+    '    Else
+
+    '        If Me.Path_binary = "" Then
+    '            If Me.Path_Project = "" Then
+    '                Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
+    '                Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
+    '            Else
+    '                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
+    '                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
+    '            End If
+    '        Else
+    '            Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_binary)
+    '            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_binary)
+    '        End If
+
+    '        'Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
+    '        Me.SaveFileDialog1.DefaultExt = "BIN"
+    '        Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
+
+    '        If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
+    '            Me.Path_binary = SaveFileDialog1.FileName
+
+    '            Try
+    '                Me.Progress.ShowProgressWin()
+
+    '                aStream = New System.IO.FileStream(Me.Path_binary, IO.FileMode.Create)
+    '                aStream.Write(Me.lastOutputData, 0, Me.lastOutputData.Length)
+    '                aStream.Close()
+
+    '                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+    '                'I apply a short wait for the progress window to show without closing too quickly.
+    '                System.Threading.Thread.Sleep(150) 'wait
+
+    '                Me.Progress.CloseProgressWin()
+
+    '            Catch ex As Exception
+    '                Me.Progress.CloseProgressWin()
+    '                MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
+    '            End Try
+
+    '        End If
+
+    '    End If
+    'End Sub
 
 
 
@@ -1241,7 +1255,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.LanguageComboBox.SelectedIndex = Me.AppConfig.defCodeOutput
                     Else
-                        Me.AppConfig.lastCodeOutput = CInt(attrNode.InnerText)
+                        Me.AppConfig.CodeOutput = CInt(attrNode.InnerText)
                     End If
                     'ChangeLanguage(Me.LanguageComboBox.SelectedIndex)
 
@@ -1249,7 +1263,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.DataFormatComboB.SelectedIndex = Me.AppConfig.defCodeNumberFormat
                     Else
-                        Me.AppConfig.lastCodeNumberSystem = CInt(attrNode.InnerText)
+                        Me.AppConfig.CodeNumberSystem = CInt(attrNode.InnerText)
                     End If
 
                     'attrNode = subNode.SelectSingleNode("@CodeCompressType")
@@ -1263,21 +1277,21 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.ItemsPerLineComboBox.SelectedIndex = Me.AppConfig.defCodeSizeLine
                     Else
-                        Me.AppConfig.lastCodeSizeLine = CInt(attrNode.InnerText)
+                        Me.AppConfig.CodeLineSize = CInt(attrNode.InnerText)
                     End If
 
                     attrNode = subNode.SelectSingleNode("@AsmCommand")
                     If attrNode Is Nothing Then
                         'Me.AsmCommandTextBox.Text = Me.AppConfig.defAsmByteCommand
                     Else
-                        Me.AppConfig.lastAsmByteCommand = attrNode.InnerText
+                        Me.AppConfig.AsmByteCommand = attrNode.InnerText
                     End If
 
                     attrNode = subNode.SelectSingleNode("@BASICinitLine")
                     If attrNode Is Nothing Then
                         'Me.BASICinitLineTextBox.Text = CStr(Me.AppConfig.defBASICinitLine)
                     Else
-                        Me.AppConfig.lastBASIC_initLine = CInt(attrNode.InnerText)
+                        Me.AppConfig.BASIC_initLine = CInt(attrNode.InnerText)
                         'Me.BASICinitLineTextBox.Text = attrNode.InnerText
                     End If
 
@@ -1285,7 +1299,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.BASICincLineslTextBox.Text = CStr(Me.AppConfig.defBASICincLines)
                     Else
-                        Me.AppConfig.lastBASIC_incLines = CInt(attrNode.InnerText)
+                        Me.AppConfig.BASIC_incLines = CInt(attrNode.InnerText)
                         'Me.BASICincLineslTextBox.Text = attrNode.InnerText
                     End If
 
@@ -1293,7 +1307,7 @@ Public Class MainForm
                     If attrNode Is Nothing Then
                         'Me.Remove0Check.Checked = Me.AppConfig.defBASICremove0
                     Else
-                        Me.AppConfig.lastBASIC_remove0 = CBool(attrNode.InnerText.ToUpper = "TRUE")
+                        Me.AppConfig.BASIC_remove0 = CBool(attrNode.InnerText.ToUpper = "TRUE")
                         'Me.Remove0Check.Checked = CBool(attrNode.InnerText.ToUpper = "TRUE")
                     End If
 
@@ -1305,7 +1319,7 @@ Public Class MainForm
                     End If
 
 
-                    Me.anOutputDataGBox.DataTypeInput.InitControl(Me.AppConfig)  '<--- refresh data 
+                    Me.anOutputDataGBox.InitControl(Me.AppConfig)  '<--- refresh data 
                     'anOutputDataGBox.DataTypeInput.SizeLineIndex
 
                 End If
@@ -1637,6 +1651,9 @@ Public Class MainForm
 
             Me.Info = ProjectProperties.GetProjectInfo()
             Me.ProjectNameTextBox.Text = Me.Info.Name
+            SetTitle(Me.Info.Name)
+
+            GenerateData()
 
         End If
 
@@ -1645,25 +1662,27 @@ Public Class MainForm
 
 
     Private Sub SetConfig()
-        Dim aConfig As New ConfigWin(Me.AppConfig, ConfigWin.CONFIG_TYPE.BYTENIZ3R)
+        Dim aConfig As New MiniConfigWin(Me.AppConfig, MiniConfigWin.CONFIG_TYPE.BYTENIZ3R)
 
         If aConfig.ShowDialog() = DialogResult.OK Then
             Me.AppConfig.Save()
 
-            Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-            Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+            'Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+            'Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
-            Me.anOutputDataGBox.DataTypeInput.RefreshControl()
+            Me.anOutputDataGBox.InitControl(Me.AppConfig)
+            'Me.anOutputDataGBox.DataTypeInput.RefreshControl()
+
             GenerateData()
         End If
     End Sub
 
 
 
-    Private Sub SetOutputtextSize()
-        OutputText.Location = New Point(OutputText.Location.X, anOutputDataGBox.Location.Y + anOutputDataGBox.Height + 10)
-        OutputText.Height = (SaveoutputPanel.Location.Y - OutputText.Location.Y) - 10
-    End Sub
+    'Private Sub SetOutputtextSize()
+    '    OutputText.Location = New Point(OutputText.Location.X, anOutputDataGBox.Location.Y + anOutputDataGBox.Height + 10)
+    '    OutputText.Height = (SaveoutputPanel.Location.Y - OutputText.Location.Y) - 10
+    'End Sub
 
 
 
@@ -1720,34 +1739,9 @@ Public Class MainForm
 
 
 
-    Private Sub CopyAllButton_Click(sender As Object, e As EventArgs) Handles CopyAllButton.Click
-        CopyAll()
-    End Sub
-
-
-
-    Private Sub SaveSourceButton_Click(sender As Object, e As EventArgs) Handles SaveSourceButton.Click
-        SaveSourceDialog()
-    End Sub
-
-
-
-    Private Sub SaveBinaryFileButton_Click(sender As Object, e As EventArgs) Handles SaveBinaryFileButton.Click
-        SaveBinaryDialog()
-    End Sub
-
-
-
-    Private Sub anOutputDataGBox_AccordionChanged(state As Boolean) Handles anOutputDataGBox.AccordionChanged
-        SetOutputtextSize()
-    End Sub
-
-
-
     Private Sub anOutputDataGBox_DataChanged()
         GenerateData()
     End Sub
-
 
 
 End Class

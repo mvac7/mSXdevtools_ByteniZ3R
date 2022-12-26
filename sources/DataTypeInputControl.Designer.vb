@@ -80,7 +80,7 @@ Partial Class DataTypeInputControl
         Me.AddIndexCheck.BackColor = System.Drawing.Color.Transparent
         Me.AddIndexCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.AddIndexCheck.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AddIndexCheck.Location = New System.Drawing.Point(33, 87)
+        Me.AddIndexCheck.Location = New System.Drawing.Point(31, 88)
         Me.AddIndexCheck.Name = "AddIndexCheck"
         Me.AddIndexCheck.Size = New System.Drawing.Size(90, 18)
         Me.AddIndexCheck.TabIndex = 269
@@ -114,18 +114,18 @@ Partial Class DataTypeInputControl
         Me.SizeLineComboBox.ForeColor = System.Drawing.Color.Black
         Me.SizeLineComboBox.FormattingEnabled = True
         Me.SizeLineComboBox.Items.AddRange(New Object() {"1", "2", "4", "8", "16", "24", "32"})
-        Me.SizeLineComboBox.Location = New System.Drawing.Point(97, 84)
+        Me.SizeLineComboBox.Location = New System.Drawing.Point(101, 84)
         Me.SizeLineComboBox.Name = "SizeLineComboBox"
-        Me.SizeLineComboBox.Size = New System.Drawing.Size(120, 22)
+        Me.SizeLineComboBox.Size = New System.Drawing.Size(150, 22)
         Me.SizeLineComboBox.TabIndex = 259
         '
         'Label17
         '
         Me.Label17.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(3, 84)
+        Me.Label17.Location = New System.Drawing.Point(0, 84)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(90, 21)
+        Me.Label17.Size = New System.Drawing.Size(100, 21)
         Me.Label17.TabIndex = 258
         Me.Label17.Text = "Line size:"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -133,10 +133,10 @@ Partial Class DataTypeInputControl
         'NumberSystemLabel
         '
         Me.NumberSystemLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NumberSystemLabel.Location = New System.Drawing.Point(3, 29)
+        Me.NumberSystemLabel.Location = New System.Drawing.Point(0, 29)
         Me.NumberSystemLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.NumberSystemLabel.Name = "NumberSystemLabel"
-        Me.NumberSystemLabel.Size = New System.Drawing.Size(90, 21)
+        Me.NumberSystemLabel.Size = New System.Drawing.Size(100, 21)
         Me.NumberSystemLabel.TabIndex = 257
         Me.NumberSystemLabel.Text = "Number sys:"
         Me.NumberSystemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -149,18 +149,18 @@ Partial Class DataTypeInputControl
         Me.CompressComboBox.ForeColor = System.Drawing.Color.Black
         Me.CompressComboBox.FormattingEnabled = True
         Me.CompressComboBox.Items.AddRange(New Object() {"RAW", "RLE", "RLEWB", "Pletter5c"})
-        Me.CompressComboBox.Location = New System.Drawing.Point(97, 57)
+        Me.CompressComboBox.Location = New System.Drawing.Point(101, 57)
         Me.CompressComboBox.Name = "CompressComboBox"
-        Me.CompressComboBox.Size = New System.Drawing.Size(120, 22)
+        Me.CompressComboBox.Size = New System.Drawing.Size(150, 22)
         Me.CompressComboBox.TabIndex = 256
         '
         'CompressLabel
         '
         Me.CompressLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CompressLabel.Location = New System.Drawing.Point(3, 56)
+        Me.CompressLabel.Location = New System.Drawing.Point(0, 56)
         Me.CompressLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.CompressLabel.Name = "CompressLabel"
-        Me.CompressLabel.Size = New System.Drawing.Size(90, 21)
+        Me.CompressLabel.Size = New System.Drawing.Size(100, 21)
         Me.CompressLabel.TabIndex = 255
         Me.CompressLabel.Text = "Compress:"
         Me.CompressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -226,17 +226,17 @@ Partial Class DataTypeInputControl
         Me.NumberSystemCombo.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumberSystemCombo.FormattingEnabled = True
         Me.NumberSystemCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
-        Me.NumberSystemCombo.Location = New System.Drawing.Point(97, 30)
+        Me.NumberSystemCombo.Location = New System.Drawing.Point(101, 30)
         Me.NumberSystemCombo.Name = "NumberSystemCombo"
-        Me.NumberSystemCombo.Size = New System.Drawing.Size(120, 22)
+        Me.NumberSystemCombo.Size = New System.Drawing.Size(150, 22)
         Me.NumberSystemCombo.TabIndex = 252
         '
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 3)
+        Me.Label1.Location = New System.Drawing.Point(0, 3)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(90, 21)
+        Me.Label1.Size = New System.Drawing.Size(100, 21)
         Me.Label1.TabIndex = 253
         Me.Label1.Text = "Language:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -247,10 +247,10 @@ Partial Class DataTypeInputControl
         Me.LanguageComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.LanguageComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LanguageComboBox.FormattingEnabled = True
-        Me.LanguageComboBox.Items.AddRange(New Object() {"Assembler", "BASIC", "C"})
-        Me.LanguageComboBox.Location = New System.Drawing.Point(97, 3)
+        Me.LanguageComboBox.Items.AddRange(New Object() {"Assembler default", "Assembler SJasm", "Assembler SDCC", "BASIC", "C"})
+        Me.LanguageComboBox.Location = New System.Drawing.Point(101, 3)
         Me.LanguageComboBox.Name = "LanguageComboBox"
-        Me.LanguageComboBox.Size = New System.Drawing.Size(120, 22)
+        Me.LanguageComboBox.Size = New System.Drawing.Size(150, 22)
         Me.LanguageComboBox.TabIndex = 251
         '
         'Label4
@@ -282,7 +282,7 @@ Partial Class DataTypeInputControl
         Me.BasicPanel.Controls.Add(Me.IntervalText)
         Me.BasicPanel.Controls.Add(Me.RemoveZerosCheck)
         Me.BasicPanel.Controls.Add(Me.IntervalLabel)
-        Me.BasicPanel.Location = New System.Drawing.Point(223, 4)
+        Me.BasicPanel.Location = New System.Drawing.Point(258, 4)
         Me.BasicPanel.Name = "BasicPanel"
         Me.BasicPanel.Size = New System.Drawing.Size(241, 111)
         Me.BasicPanel.TabIndex = 262
@@ -298,7 +298,7 @@ Partial Class DataTypeInputControl
         Me.AssemblerPanel.Controls.Add(Me.AsmWordDataTextBox)
         Me.AssemblerPanel.Controls.Add(Me.Label7)
         Me.AssemblerPanel.Controls.Add(Me.AddIndexCheck)
-        Me.AssemblerPanel.Location = New System.Drawing.Point(223, 120)
+        Me.AssemblerPanel.Location = New System.Drawing.Point(258, 120)
         Me.AssemblerPanel.Name = "AssemblerPanel"
         Me.AssemblerPanel.Size = New System.Drawing.Size(241, 111)
         Me.AssemblerPanel.TabIndex = 263
@@ -330,7 +330,7 @@ Partial Class DataTypeInputControl
         Me.CesPanel.Controls.Add(Me.CesFieldNameTextBox)
         Me.CesPanel.Controls.Add(Me.CdataTypeTextBox)
         Me.CesPanel.Controls.Add(Me.CesFieldNameLabel)
-        Me.CesPanel.Location = New System.Drawing.Point(223, 237)
+        Me.CesPanel.Location = New System.Drawing.Point(258, 237)
         Me.CesPanel.Name = "CesPanel"
         Me.CesPanel.Size = New System.Drawing.Size(241, 111)
         Me.CesPanel.TabIndex = 264
@@ -370,7 +370,7 @@ Partial Class DataTypeInputControl
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LanguageComboBox)
         Me.Name = "DataTypeInputControl"
-        Me.Size = New System.Drawing.Size(470, 353)
+        Me.Size = New System.Drawing.Size(500, 353)
         Me.BasicPanel.ResumeLayout(False)
         Me.BasicPanel.PerformLayout()
         Me.AssemblerPanel.ResumeLayout(False)

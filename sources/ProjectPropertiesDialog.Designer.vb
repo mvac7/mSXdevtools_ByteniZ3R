@@ -23,23 +23,40 @@ Partial Class ProjectPropertiesDialog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProjectPropertiesDialog))
+        Me.ProjectInfoUserControl1 = New ByteniZ3R.ProjectInfoUserControl()
         Me.BottonsPanel = New System.Windows.Forms.Panel()
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.ProjectInfoUserControl1 = New ByteniZ3R.ProjectInfoUserControl()
         Me.BottonsPanel.SuspendLayout()
         Me.SuspendLayout()
         '
+        'ProjectInfoUserControl1
+        '
+        Me.ProjectInfoUserControl1.BackColor = System.Drawing.Color.Transparent
+        Me.ProjectInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ProjectInfoUserControl1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ProjectInfoUserControl1.Location = New System.Drawing.Point(0, 0)
+        Me.ProjectInfoUserControl1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.ProjectInfoUserControl1.Name = "ProjectInfoUserControl1"
+        Me.ProjectInfoUserControl1.ProjectAuthor = ""
+        Me.ProjectInfoUserControl1.ProjectDescription = ""
+        Me.ProjectInfoUserControl1.ProjectGroup = ""
+        Me.ProjectInfoUserControl1.ProjectName = ""
+        Me.ProjectInfoUserControl1.ProjectVersion = ""
+        Me.ProjectInfoUserControl1.Size = New System.Drawing.Size(504, 280)
+        Me.ProjectInfoUserControl1.TabIndex = 25
+        '
         'BottonsPanel
         '
+        Me.BottonsPanel.BackColor = System.Drawing.Color.Transparent
         Me.BottonsPanel.Controls.Add(Me.OK_Button)
         Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
         Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottonsPanel.Location = New System.Drawing.Point(0, 286)
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 280)
         Me.BottonsPanel.Name = "BottonsPanel"
         Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
-        Me.BottonsPanel.Size = New System.Drawing.Size(500, 51)
-        Me.BottonsPanel.TabIndex = 26
+        Me.BottonsPanel.Size = New System.Drawing.Size(504, 45)
+        Me.BottonsPanel.TabIndex = 258
         '
         'OK_Button
         '
@@ -52,10 +69,10 @@ Partial Class ProjectPropertiesDialog
         Me.OK_Button.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OK_Button.ForeColor = System.Drawing.SystemColors.ControlText
         Me.OK_Button.Image = CType(resources.GetObject("OK_Button.Image"), System.Drawing.Image)
-        Me.OK_Button.Location = New System.Drawing.Point(254, 4)
+        Me.OK_Button.Location = New System.Drawing.Point(260, 4)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(132, 43)
+        Me.OK_Button.Size = New System.Drawing.Size(130, 37)
         Me.OK_Button.TabIndex = 3
         Me.OK_Button.UseVisualStyleBackColor = False
         '
@@ -71,36 +88,18 @@ Partial Class ProjectPropertiesDialog
         Me.Cancel_Button.ForeColor = System.Drawing.Color.Black
         Me.Cancel_Button.Image = CType(resources.GetObject("Cancel_Button.Image"), System.Drawing.Image)
         Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Cancel_Button.Location = New System.Drawing.Point(386, 4)
+        Me.Cancel_Button.Location = New System.Drawing.Point(390, 4)
         Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(110, 43)
+        Me.Cancel_Button.Size = New System.Drawing.Size(110, 37)
         Me.Cancel_Button.TabIndex = 4
         Me.Cancel_Button.UseVisualStyleBackColor = False
         '
-        'ProjectInfoUserControl1
-        '
-        Me.ProjectInfoUserControl1.BackColor = System.Drawing.Color.Gainsboro
-        Me.ProjectInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.ProjectInfoUserControl1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ProjectInfoUserControl1.Location = New System.Drawing.Point(0, 0)
-        Me.ProjectInfoUserControl1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.ProjectInfoUserControl1.Name = "ProjectInfoUserControl1"
-        Me.ProjectInfoUserControl1.ProjectAuthor = ""
-        Me.ProjectInfoUserControl1.ProjectDescription = ""
-        Me.ProjectInfoUserControl1.ProjectGroup = ""
-        Me.ProjectInfoUserControl1.ProjectName = ""
-        Me.ProjectInfoUserControl1.ProjectVersion = ""
-        Me.ProjectInfoUserControl1.Size = New System.Drawing.Size(500, 280)
-        Me.ProjectInfoUserControl1.TabIndex = 25
-        '
         'ProjectPropertiesDialog
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(500, 337)
+        Me.ClientSize = New System.Drawing.Size(504, 325)
         Me.ControlBox = False
         Me.Controls.Add(Me.BottonsPanel)
         Me.Controls.Add(Me.ProjectInfoUserControl1)

@@ -68,12 +68,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Config.vb" />
-    <Compile Include="ConfigWin.designer.vb">
-      <DependentUpon>ConfigWin.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ConfigWin.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="DataFormat.vb" />
     <Compile Include="DataTypeInputControl.Designer.vb">
       <DependentUpon>DataTypeInputControl.vb</DependentUpon>
@@ -93,6 +87,12 @@
       <DependentUpon>MessageDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="MessageDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MiniConfigWin.designer.vb">
+      <DependentUpon>MiniConfigWin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MiniConfigWin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -124,6 +124,12 @@
     <Compile Include="OutputDataGBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="piXelGroupBox.Designer.vb">
+      <DependentUpon>piXelGroupBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelGroupBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProgressController.vb" />
     <Compile Include="ProgressForm.Designer.vb">
       <DependentUpon>ProgressForm.vb</DependentUpon>
@@ -150,9 +156,6 @@
     <EmbeddedResource Include="AboutWin.resx">
       <DependentUpon>AboutWin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigWin.resx">
-      <DependentUpon>ConfigWin.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DataTypeInputControl.resx">
       <DependentUpon>DataTypeInputControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MessageDialog.resx">
       <DependentUpon>MessageDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MiniConfigWin.resx">
+      <DependentUpon>MiniConfigWin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutputDataGBox.resx">
       <DependentUpon>OutputDataGBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="piXelGroupBox.resx">
+      <DependentUpon>piXelGroupBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressForm.resx">
       <DependentUpon>ProgressForm.vb</DependentUpon>
@@ -209,12 +218,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\textu00.png" />
     <None Include="Resources\save_as3_x24.png" />
     <None Include="Resources\piXel_panel_XL_up_waveform.png" />
     <None Include="Resources\piXel_panel_XL_down.png" />
-    <None Include="Resources\button_savebinary.png" />
-    <None Include="Resources\button_savesource.png" />
-    <None Include="Resources\button_CopyAll.png" />
     <None Include="Resources\icon_byteniZ3R_128px.png" />
     <None Include="Resources\ByteniZ3R_logo.png" />
     <None Include="Resources\Load_file2_x24.png" />

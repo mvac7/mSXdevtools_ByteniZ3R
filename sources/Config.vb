@@ -7,26 +7,6 @@ Public Class Config
 
     Private ConfigPath As String
 
-    'Public PathTmsgfxPresentation As String = "tMSgfX."
-
-    'Private AppID As String
-
-    'Public _PathProject As String = ""
-    'Public lastPathProject As String = ""
-    'Public PathProject_Type As PATH_TYPE = 0
-
-    'Public PathMap As String = ""
-    'Public PathTileset As String = ""
-    'Public PathSprite As String = ""
-    'Public PathOAM As String = ""
-    'Public PathPalette As String = ""
-
-    'Public Path_MSXBasicBinary As String = ""
-    'Public PathBinary As String = ""
-    'Public PathBitmap As String = ""
-    'Public PathNMSXtiles As String = ""
-
-
 
     ' -----
     Public PathItemProject As New PathItem
@@ -48,35 +28,37 @@ Public Class Config
     ' -----
 
 
-    Public defAuthor As String
-    Public defCodeOutput As Integer = DataFormat.ProgrammingLanguage.ASSEMBLER
-    Public defCodeNumberSystem As Integer = 4
-    Public defCodeLineSize As Integer = 3      ' 0-6 (1,2,4,8,16,24,32)
-    Public defCodeCompressType As Integer = 0 ' RAW
-    Public defAsmByteCommand As String = "DB"
-    Public defAsmWordDataCommand As String = "DW"
-    Public defCByteCommand As String = "const char"
 
-    Public defBASIC_CommentInstruction As String = "REM"
-    Public defBASIC_DataInstruction As String = "DATA"
-    Public defBASIC_initLine As Integer = 1000
-    Public defBASIC_incLines As Integer = 10
-    Public defBASIC_remove0 As Boolean = False
+    Public Shadows Const def_Author As String = ""
+    Public Shadows Const def_Group As String = ""
+    Public Shadows Const def_CodeOutput As Integer = DataFormat.ProgrammingLanguage.ASSEMBLER
+    Public Shadows Const def_CodeNumberSystem As Integer = 4
+    Public Shadows Const def_CodeLineSize As Integer = 3      ' 0-6 (1,2,4,8,16,24,32)
+    Public Shadows Const def_CodeCompressType As Integer = 0 ' RAW
+    Public Shadows Const def_AsmByteCommand As String = "DB"
+    Public Shadows Const def_AsmWordDataCommand As String = "DW"
+    Public Shadows Const def_CByteCommand As String = "const char"
+    Public Shadows Const def_DataLabel As String = "DATA"
 
-    Public defDataLabel As String = "DATA"
+    Public Shadows Const def_BASIC_CommentInstruction As String = "REM"
+    Public Shadows Const def_BASIC_DataInstruction As String = "DATA"
+    Public Shadows Const def_BASIC_initLine As Integer = 1000
+    Public Shadows Const def_BASIC_incLines As Integer = 10
+    Public Shadows Const def_BASIC_remove0 As Boolean = False
+
+    Public Shadows def_Color_Zero As Color = Color.FromArgb(255, 40, 40, 55)
+    Public Shadows def_Color_Grid As Color = Color.LightSkyBlue
+
+    Public Shadows def_Color_OUTPUT_INK As Color = Color.Black
+    Public Shadows def_Color_OUTPUT_BG As Color = Color.WhiteSmoke
 
 
-    Public def_Color_Zero As Color = Color.FromArgb(255, 40, 40, 55)
-    Public def_Color_Grid As Color = Color.LightSkyBlue
 
-    Public def_Color_OUTPUT_INK As Color = Color.Black
-    Public def_Color_OUTPUT_BG As Color = Color.WhiteSmoke
+    Public Color_Zero As Color
+    Public Color_Grid As Color
 
-    Public Color_Zero As Color = def_Color_Zero
-    Public Color_Grid As Color = def_Color_Grid
-
-    Public Color_OUTPUT_BG As Color = def_Color_OUTPUT_BG
-    Public Color_OUTPUT_INK As Color = def_Color_OUTPUT_INK
+    Public Color_OUTPUT_BG As Color
+    Public Color_OUTPUT_INK As Color
 
 
     Public Shadows Enum FIRST_PROJECT As Integer
@@ -86,26 +68,34 @@ Public Class Config
     End Enum
 
 
+
+
     Public firstProjectType As FIRST_PROJECT = FIRST_PROJECT.NEWPROJECT
 
     Public PathLastProject As String = ""
 
 
+    Public Author As String
+    Public Group As String
 
+    Public DataLabel As String
 
-    Public lastCodeOutput As Integer
-    Public lastCodeNumberSystem As Integer
-    Private _lastCodeSizeLine As Integer
-    Public lastCodeCompressType As Integer
-    Public lastAsmByteCommand As String
-    Public lastAsmWordDataCommand As String
-    Public lastCByteCommand As String
+    Public CodeOutput As Integer
+    Public CodeNumberSystem As Integer
+    'Public CodeNumberFormat As Integer
+    Private _CodeLineSize As Integer
+    Public CodeCompressType As Integer
 
-    Public lastBASIC_DataInstruction As String
-    Public lastBASIC_CommentInstruction As String
-    Public lastBASIC_initLine As Integer
-    Public lastBASIC_incLines As Integer
-    Public lastBASIC_remove0 As Boolean = False
+    Public AsmByteCommand As String
+    Public AsmWordDataCommand As String
+
+    Public CByteCommand As String
+
+    Public BASIC_DataInstruction As String
+    Public BASIC_CommentInstruction As String
+    Public BASIC_initLine As Integer
+    Public BASIC_incLines As Integer
+    Public BASIC_remove0 As Boolean = False
 
     Private LastProjects As New Hashtable  'RecentProjectsList
 
@@ -113,20 +103,18 @@ Public Class Config
 
     Public Shadows Const Extension_byteGEN As String = "XBYT"
 
-
-
     Public Shadows Const Extension_BINARY As String = "BIN"
 
 
 
     ' 0-3 (8,16,24,32)
-    Public Property lastCodeSizeLine() As Integer
+    Public Property CodeLineSize() As Integer
         Get
-            Return _lastCodeSizeLine
+            Return _CodeLineSize
         End Get
         Set(value As Integer)
             If value < 7 Then
-                _lastCodeSizeLine = value
+                _CodeLineSize = value
             End If
         End Set
     End Property
@@ -167,19 +155,25 @@ Public Class Config
     'Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName
 
 
-    Public Sub New() ', ByVal _appID As String
-        Me.ConfigPath = Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName + ".config"
-        Me.defAuthor = Environment.UserName   'My.User.Name
+    Public Sub New()
+        Initialize()
     End Sub
 
 
 
-    Public Sub New(ByVal _configFileName As String) ', ByVal _appID As String
-        Me.ConfigFileName = _configFileName
-        Me.ConfigPath = Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName + ".config"
-        Me.defAuthor = Environment.UserName   'My.User.Name
+    Public Sub New(ByVal appName As String) ', ByVal _appID As String
+        Me.ConfigFileName = appName
+        Initialize()
     End Sub
 
+
+
+    Private Sub Initialize()
+        Me.ConfigPath = Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName + ".config"
+        Me.Author = Environment.UserName   'My.User.Name
+
+        InitOutputInfo()
+    End Sub
 
 
     'Public Sub SetApplicationConfig(ByVal _appID As String)
@@ -248,213 +242,227 @@ Public Class Config
                     Me.LastProjects.Clear()
 
                     '#####################################
-                    groupNode = rootNode.SelectSingleNode("paths")
+                    'groupNode = rootNode.SelectSingleNode("paths")
+                    'If Not groupNode Is Nothing Then
+                    '    aNode = groupNode.SelectSingleNode("PathProject")
+                    '    Me.PathItemProject = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathMap")
+                    '    Me.PathItemMap = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathTileset")
+                    '    Me.PathItemTileset = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathSprite")
+                    '    Me.PathItemSprite = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathOAM")
+                    '    Me.PathItemOAM = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathSupertile")
+                    '    Me.PathItemSupertile = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathPicture")
+                    '    Me.PathPicture = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathByteGen")
+                    '    Me.PathByteGen = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathPalette")
+                    '    Me.PathItemPalette = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathMSXBasic")
+                    '    Me.PathItemMSXBASIC = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathBinary")
+                    '    Me.PathItemBinary = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathBitmap")
+                    '    Me.PathItemBitmap = getPathItemFromNode(aNode)
+
+                    '    aNode = groupNode.SelectSingleNode("PathNMSXtiles")
+                    '    Me.PathItemNMSXtiles = getPathItemFromNode(aNode)
+                    'End If
+                    '#####################################
+
+
+                    '#####################################
+                    groupNode = rootNode.SelectSingleNode("Code")
                     If Not groupNode Is Nothing Then
-                        aNode = groupNode.SelectSingleNode("PathProject")
-                        Me.PathItemProject = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathMap")
-                        Me.PathItemMap = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathTileset")
-                        Me.PathItemTileset = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathSprite")
-                        Me.PathItemSprite = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathOAM")
-                        Me.PathItemOAM = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathSupertile")
-                        Me.PathItemSupertile = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathPicture")
-                        Me.PathPicture = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathByteGen")
-                        Me.PathByteGen = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathPalette")
-                        Me.PathItemPalette = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathMSXBasic")
-                        Me.PathItemMSXBASIC = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathBinary")
-                        Me.PathItemBinary = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathBitmap")
-                        Me.PathItemBitmap = getPathItemFromNode(aNode)
-
-                        aNode = groupNode.SelectSingleNode("PathNMSXtiles")
-                        Me.PathItemNMSXtiles = getPathItemFromNode(aNode)
-                    End If
-                    '#####################################
-
-
-                    '#####################################
-                    groupNode = rootNode.SelectSingleNode("defCode")
-                    If Not groupNode Is Nothing Then
-                        aNode = groupNode.SelectSingleNode("defDataLabel")
+                        aNode = groupNode.SelectSingleNode("DataLabel")
                         If aNode Is Nothing Then
-                            Me.defDataLabel = "DATA"
+                            Me.DataLabel = def_DataLabel
                         Else
-                            Me.defDataLabel = aNode.InnerText
+                            Me.DataLabel = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeOutput")
+                        aNode = groupNode.SelectSingleNode("CodeOutput")
                         If aNode Is Nothing Then
-                            Me.defCodeOutput = 2 'MSXDataFormat.OutputFormat.ASM
+                            Me.CodeOutput = def_CodeOutput
                         Else
-                            Me.defCodeOutput = CInt(aNode.InnerText)
+                            Me.CodeOutput = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeNumberSystem")
+                        aNode = groupNode.SelectSingleNode("CodeNumberSystem")
                         If aNode Is Nothing Then
-                            Me.defCodeNumberSystem = 4
+                            Me.CodeNumberSystem = def_CodeNumberSystem
                         Else
-                            Me.defCodeNumberSystem = CInt(aNode.InnerText)
+                            Me.CodeNumberSystem = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeLineSize")
+                        aNode = groupNode.SelectSingleNode("CodeLineSize")
                         If aNode Is Nothing Then
-                            Me.defCodeLineSize = 3
+                            Me.CodeLineSize = def_CodeLineSize
                         Else
-                            Me.defCodeLineSize = CInt(aNode.InnerText)
+                            Me.CodeLineSize = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCodeCompressType")
+                        aNode = groupNode.SelectSingleNode("CodeCompressType")
                         If aNode Is Nothing Then
-                            Me.defCodeCompressType = 0
+                            Me.CodeCompressType = def_CodeCompressType
                         Else
-                            Me.defCodeCompressType = CInt(aNode.InnerText)
+                            Me.CodeCompressType = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defAsmByteCommand")
+                        aNode = groupNode.SelectSingleNode("AsmByteCommand")
                         If aNode Is Nothing Then
-                            Me.defAsmByteCommand = "DB"
+                            Me.AsmByteCommand = def_AsmByteCommand
                         Else
-                            Me.defAsmByteCommand = aNode.InnerText
+                            Me.AsmByteCommand = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defAsmWordCommand")
+                        aNode = groupNode.SelectSingleNode("AsmWordCommand")
                         If aNode Is Nothing Then
-                            Me.defAsmWordDataCommand = "DW"
+                            Me.AsmWordDataCommand = def_AsmWordDataCommand
                         Else
-                            Me.defAsmWordDataCommand = aNode.InnerText
+                            Me.AsmWordDataCommand = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defCByteCommand")
+                        aNode = groupNode.SelectSingleNode("CByteCommand")
                         If aNode Is Nothing Then
-                            Me.defCByteCommand = "const char"
+                            Me.CByteCommand = def_CByteCommand
                         Else
-                            Me.defCByteCommand = aNode.InnerText
+                            Me.CByteCommand = aNode.InnerText
                         End If
 
 
-                        aNode = groupNode.SelectSingleNode("defBASICdataInstruction")
+                        aNode = groupNode.SelectSingleNode("BASICdataInstruction")
                         If aNode Is Nothing Then
-                            Me.defBASIC_DataInstruction = "DATA"
+                            Me.BASIC_DataInstruction = def_BASIC_DataInstruction
                         Else
-                            Me.defBASIC_DataInstruction = aNode.InnerText
+                            Me.BASIC_DataInstruction = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defBASICcommentInstruction")
+                        aNode = groupNode.SelectSingleNode("BASICcommentInstruction")
                         If aNode Is Nothing Then
-                            Me.defBASIC_CommentInstruction = "REM"
+                            Me.BASIC_CommentInstruction = def_BASIC_CommentInstruction
                         Else
-                            Me.defBASIC_CommentInstruction = aNode.InnerText
+                            Me.BASIC_CommentInstruction = aNode.InnerText
                         End If
 
 
 
-                        aNode = groupNode.SelectSingleNode("defBASICinitLine")
+                        aNode = groupNode.SelectSingleNode("BASICinitLine")
                         If aNode Is Nothing Then
-                            Me.defBASIC_initLine = 1000
+                            Me.BASIC_initLine = def_BASIC_initLine
                         Else
-                            Me.defBASIC_initLine = CInt(aNode.InnerText)
+                            Me.BASIC_initLine = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defBASICincLines")
+                        aNode = groupNode.SelectSingleNode("BASICincLines")
                         If aNode Is Nothing Then
-                            Me.defBASIC_incLines = 10
+                            Me.BASIC_incLines = def_BASIC_incLines
                         Else
-                            Me.defBASIC_incLines = CInt(aNode.InnerText)
+                            Me.BASIC_incLines = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("defBASICremove0")
+                        aNode = groupNode.SelectSingleNode("BASICremove0")
                         If aNode Is Nothing Then
-                            Me.defBASIC_remove0 = False
+                            Me.BASIC_remove0 = def_BASIC_remove0
                         Else
-                            Me.defBASIC_remove0 = CBool(aNode.InnerText.ToUpper = "TRUE")
+                            Me.BASIC_remove0 = CBool(aNode.InnerText.ToUpper = "TRUE")
                         End If
-                    End If
-                    '#####################################
-
-
-
-
-                    '#####################################
-                    groupNode = rootNode.SelectSingleNode("others")
-                    If Not groupNode Is Nothing Then
-
-                        aNode = groupNode.SelectSingleNode("defAuthor")
-                        If aNode Is Nothing Then
-                            Me.defAuthor = Environment.UserName   'My.User.Name
-                        Else
-                            Me.defAuthor = aNode.InnerText
-                        End If
-
-                        aNode = groupNode.SelectSingleNode("firstProjectType")
-                        If aNode Is Nothing Then
-                            Me.firstProjectType = 0
-                        Else
-                            Me.firstProjectType = CInt(aNode.InnerText)
-                        End If
-
-                        aNode = groupNode.SelectSingleNode("PathLastProject")
-                        If aNode Is Nothing Then
-                            Me.PathLastProject = ""
-                        Else
-                            Me.PathLastProject = aNode.InnerText
-                        End If
-
-                        aNode = groupNode.SelectSingleNode("Color_Zero")
-                        If aNode Is Nothing Then
-                            Me.Color_Zero = def_Color_Zero
-                        Else
-                            Me.Color_Zero = Color.FromArgb(CInt(aNode.InnerText))
-                        End If
-
-                        aNode = groupNode.SelectSingleNode("Color_Grid")
-                        If aNode Is Nothing Then
-                            Me.Color_Grid = def_Color_Grid
-                        Else
-                            Me.Color_Grid = Color.FromArgb(CInt(aNode.InnerText))
-                        End If
-
-
-                        aNode = groupNode.SelectSingleNode("Color_OutBG")
-                        If aNode Is Nothing Then
-                            Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
-                        Else
-                            Me.Color_OUTPUT_BG = Color.FromArgb(CInt(aNode.InnerText))
-                        End If
-
-                        aNode = groupNode.SelectSingleNode("Color_OutINK")
-                        If aNode Is Nothing Then
-                            Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
-                        Else
-                            Me.Color_OUTPUT_INK = Color.FromArgb(CInt(aNode.InnerText))
-                        End If
-
                     End If
                     '#####################################
 
 
 
+
                     '#####################################
-                    aNodeList = rootNode.SelectNodes("LastProjects/list")
+                    groupNode = rootNode.SelectSingleNode("project")
+                    If Not groupNode Is Nothing Then
+
+                        aNode = groupNode.SelectSingleNode("author")
+                        If aNode Is Nothing Then
+                            Me.Author = def_Author
+                        Else
+                            Me.Author = aNode.InnerText
+                        End If
+
+                        aNode = groupNode.SelectSingleNode("group")
+                        If aNode Is Nothing Then
+                            Me.Group = def_Group
+                        Else
+                            Me.Group = aNode.InnerText
+                        End If
+
+                    End If
+
+
+                    '#####################################
+                    groupNode = rootNode.SelectSingleNode("misc")
+                    If Not groupNode Is Nothing Then
+
+                            aNode = groupNode.SelectSingleNode("firstProjectType")
+                            If aNode Is Nothing Then
+                                Me.firstProjectType = 0
+                            Else
+                                Me.firstProjectType = CInt(aNode.InnerText)
+                            End If
+
+                            aNode = groupNode.SelectSingleNode("PathLastProject")
+                            If aNode Is Nothing Then
+                                Me.PathLastProject = ""
+                            Else
+                                Me.PathLastProject = aNode.InnerText
+                            End If
+
+                            aNode = groupNode.SelectSingleNode("Color_Zero")
+                            If aNode Is Nothing Then
+                                Me.Color_Zero = def_Color_Zero
+                            Else
+                                Me.Color_Zero = Color.FromArgb(CInt(aNode.InnerText))
+                            End If
+
+                            aNode = groupNode.SelectSingleNode("Color_Grid")
+                            If aNode Is Nothing Then
+                                Me.Color_Grid = def_Color_Grid
+                            Else
+                                Me.Color_Grid = Color.FromArgb(CInt(aNode.InnerText))
+                            End If
+
+
+                            aNode = groupNode.SelectSingleNode("Color_OutBG")
+                            If aNode Is Nothing Then
+                                Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
+                            Else
+                                Me.Color_OUTPUT_BG = Color.FromArgb(CInt(aNode.InnerText))
+                            End If
+
+                            aNode = groupNode.SelectSingleNode("Color_OutINK")
+                            If aNode Is Nothing Then
+                                Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
+                            Else
+                                Me.Color_OUTPUT_INK = Color.FromArgb(CInt(aNode.InnerText))
+                            End If
+
+                        End If
+                        '#####################################
+
+
+
+                        '#####################################
+                        aNodeList = rootNode.SelectNodes("LastProjects/list")
                     If aNodeList Is Nothing Then
                         'Me.RecentProjects = New RecentProjectsList
 
@@ -524,7 +532,7 @@ Public Class Config
             Me.PathItemNMSXtiles = New PathItem
         End If
 
-        InitOutputInfo()
+        'InitOutputInfo()
 
         Return result
 
@@ -610,139 +618,25 @@ Public Class Config
 
 
 
-            ' ###################################################
-            groupElement = aXmlDoc.CreateElement("paths")
+            ' ################################################### Project info
+            groupElement = aXmlDoc.CreateElement("project")
             rootElement.AppendChild(groupElement)
 
-            'anElement = aXmlDoc.CreateElement("PathProject")
-            'If (Not Me.PathItemProject.TypePath = PathItem.PATH_TYPE.APP) Then
-            '    txtElement = aXmlDoc.CreateTextNode(Me.PathItemProject.Path)
-            '    anElement.AppendChild(txtElement)
-            'End If
-            'groupElement.AppendChild(anElement)
-            'anAttribute = aXmlDoc.CreateAttribute("type")
-            'anAttribute.Value = CStr(Me.PathItemProject.TypePath)
-            anElement = getElementPath(aXmlDoc, "PathProject", Me.PathItemProject)
+            anElement = aXmlDoc.CreateElement("author")
+            txtElement = aXmlDoc.CreateTextNode(Me.Author)
+            anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = getElementPath(aXmlDoc, "PathMap", Me.PathItemMap)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathTileset", Me.PathItemTileset)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathSprite", Me.PathItemSprite)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathOAM", Me.PathItemOAM)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathSupertile", Me.PathItemSupertile)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathPicture", Me.PathPicture)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathByteGen", Me.PathByteGen)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathPalette", Me.PathItemPalette)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathMSXBasic", Me.PathItemMSXBASIC)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathBinary", Me.PathItemBinary)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathBitmap", Me.PathItemBitmap)
-            groupElement.AppendChild(anElement)
-
-            anElement = getElementPath(aXmlDoc, "PathNMSXtiles", Me.PathItemNMSXtiles)
+            anElement = aXmlDoc.CreateElement("group")
+            txtElement = aXmlDoc.CreateTextNode(Me.Group)
+            anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
             ' ###################################################
 
 
-            ' ###################################################
-            groupElement = aXmlDoc.CreateElement("defCode")
+            ' ################################################### Miscellaneous Data
+            groupElement = aXmlDoc.CreateElement("misc")
             rootElement.AppendChild(groupElement)
-
-            anElement = aXmlDoc.CreateElement("defDataLabel")
-            txtElement = aXmlDoc.CreateTextNode(Me.defDataLabel)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defCodeOutput")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeOutput))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defCodeNumberSystem")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeNumberSystem))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defCodeLineSize")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeLineSize))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defCodeCompressType")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defCodeCompressType))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defAsmByteCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.defAsmByteCommand)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defAsmWordCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.defAsmWordDataCommand)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defCByteCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.defCByteCommand)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defBASICcommentInstruction")
-            txtElement = aXmlDoc.CreateTextNode(Me.defBASIC_CommentInstruction)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defBASICdataInstruction")
-            txtElement = aXmlDoc.CreateTextNode(Me.defBASIC_DataInstruction)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defBASICinitLine")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defBASIC_initLine))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defBASICincLines")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defBASIC_incLines))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-
-            anElement = aXmlDoc.CreateElement("defBASICremove0")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.defBASIC_remove0))
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
-            ' ###################################################
-
-
-
-            ' ###################################################
-            groupElement = aXmlDoc.CreateElement("others")
-            rootElement.AppendChild(groupElement)
-
-            anElement = aXmlDoc.CreateElement("defAuthor")
-            txtElement = aXmlDoc.CreateTextNode(Me.defAuthor)
-            anElement.AppendChild(txtElement)
-            groupElement.AppendChild(anElement)
 
             anElement = aXmlDoc.CreateElement("firstProjectType")
             txtElement = aXmlDoc.CreateTextNode(CStr(Me.firstProjectType))
@@ -770,7 +664,124 @@ Public Class Config
             groupElement.AppendChild(anElement)
 
             anElement = aXmlDoc.CreateElement("Color_OutINK")
-            txtElement = aXmlDoc.CreateTextNode(CStr(Me.Color_OUTPUT_INK .ToArgb))
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.Color_OUTPUT_INK.ToArgb))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+            ' ###################################################
+
+
+
+            ' ###################################################
+            'groupElement = aXmlDoc.CreateElement("paths")
+            'rootElement.AppendChild(groupElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathProject", Me.PathItemProject)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathMap", Me.PathItemMap)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathTileset", Me.PathItemTileset)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathSprite", Me.PathItemSprite)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathOAM", Me.PathItemOAM)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathSupertile", Me.PathItemSupertile)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathPicture", Me.PathPicture)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathByteGen", Me.PathByteGen)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathPalette", Me.PathItemPalette)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathMSXBasic", Me.PathItemMSXBASIC)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathBinary", Me.PathItemBinary)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathBitmap", Me.PathItemBitmap)
+            'groupElement.AppendChild(anElement)
+
+            'anElement = getElementPath(aXmlDoc, "PathNMSXtiles", Me.PathItemNMSXtiles)
+            'groupElement.AppendChild(anElement)
+            ' ###################################################
+
+
+            ' ###################################################
+            groupElement = aXmlDoc.CreateElement("Code")
+            rootElement.AppendChild(groupElement)
+
+            anElement = aXmlDoc.CreateElement("DataLabel")
+            txtElement = aXmlDoc.CreateTextNode(Me.DataLabel)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CodeOutput")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.CodeOutput))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CodeNumberSystem")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.CodeNumberSystem))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CodeLineSize")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.CodeLineSize))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CodeCompressType")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.CodeCompressType))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("AsmByteCommand")
+            txtElement = aXmlDoc.CreateTextNode(Me.AsmByteCommand)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("AsmWordCommand")
+            txtElement = aXmlDoc.CreateTextNode(Me.AsmWordDataCommand)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CByteCommand")
+            txtElement = aXmlDoc.CreateTextNode(Me.CByteCommand)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("BASICcommentInstruction")
+            txtElement = aXmlDoc.CreateTextNode(Me.BASIC_CommentInstruction)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("BASICdataInstruction")
+            txtElement = aXmlDoc.CreateTextNode(Me.BASIC_DataInstruction)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("BASICinitLine")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.BASIC_initLine))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("BASICincLines")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.BASIC_incLines))
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("BASICremove0")
+            txtElement = aXmlDoc.CreateTextNode(CStr(Me.BASIC_remove0))
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
             ' ###################################################
@@ -855,19 +866,27 @@ Public Class Config
 
     Public Sub InitOutputInfo()
 
-        Me.lastCodeOutput = Me.defCodeOutput
-        Me.lastCodeNumberSystem = Me.defCodeNumberSystem
-        Me.lastCodeSizeLine = Me.defCodeLineSize
-        Me.lastCodeCompressType = Me.defCodeCompressType
-        Me.lastAsmByteCommand = Me.defAsmByteCommand
-        Me.lastAsmWordDataCommand = Me.defAsmWordDataCommand
-        Me.lastCByteCommand = Me.defCByteCommand
-        Me.lastBASIC_DataInstruction = Me.defBASIC_DataInstruction
-        Me.lastBASIC_CommentInstruction = Me.defBASIC_CommentInstruction
+        Me.CodeOutput = def_CodeOutput
+        Me.CodeNumberSystem = def_CodeNumberSystem
+        Me.CodeLineSize = def_CodeLineSize
+        Me.CodeCompressType = def_CodeCompressType
 
-        Me.lastBASIC_initLine = Me.defBASIC_initLine
-        Me.lastBASIC_incLines = Me.defBASIC_incLines
-        Me.lastBASIC_remove0 = Me.defBASIC_remove0
+        Me.AsmByteCommand = def_AsmByteCommand
+        Me.AsmWordDataCommand = def_AsmWordDataCommand
+
+        Me.CByteCommand = def_CByteCommand
+
+        Me.BASIC_DataInstruction = def_BASIC_DataInstruction
+        Me.BASIC_CommentInstruction = def_BASIC_CommentInstruction
+        Me.BASIC_initLine = def_BASIC_initLine
+        Me.BASIC_incLines = def_BASIC_incLines
+        Me.BASIC_remove0 = def_BASIC_remove0
+
+        Me.Color_Zero = def_Color_Zero
+        Me.Color_Grid = def_Color_Grid
+
+        Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
+        Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
 
     End Sub
 

@@ -22,133 +22,140 @@ Partial Class OutputDataGBox
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputDataGBox))
-        Me.DownPictureBox = New System.Windows.Forms.PictureBox()
-        Me.upperPanel = New System.Windows.Forms.Panel()
-        Me.accordionPictureBox = New System.Windows.Forms.PictureBox()
-        Me.ButtonImageList = New System.Windows.Forms.ImageList(Me.components)
-        Me.LeftLinePictureBox = New System.Windows.Forms.PictureBox()
-        Me.RightLinePictureBox = New System.Windows.Forms.PictureBox()
-        Me.ContentsPanel = New System.Windows.Forms.Panel()
-        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
-        CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.upperPanel.SuspendLayout()
-        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContentsPanel.SuspendLayout()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.DataTypeInput = New DataTypeInputControl()
+        Me.OutputText = New System.Windows.Forms.TextBox()
+        Me.OutputButtonsPanel = New System.Windows.Forms.Panel()
+        Me.CopyAllButton = New System.Windows.Forms.Button()
+        Me.SaveSourceButton = New System.Windows.Forms.Button()
+        Me.SaveCompressFileButton = New System.Windows.Forms.Button()
+        Me.PiXelGroupBox1 = New piXelGroupBox()
+        Me.OutputButtonsPanel.SuspendLayout()
+        Me.PiXelGroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'DownPictureBox
-        '
-        Me.DownPictureBox.BackgroundImage = CType(resources.GetObject("DownPictureBox.BackgroundImage"), System.Drawing.Image)
-        Me.DownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.DownPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.DownPictureBox.Location = New System.Drawing.Point(0, 149)
-        Me.DownPictureBox.Margin = New System.Windows.Forms.Padding(0)
-        Me.DownPictureBox.Name = "DownPictureBox"
-        Me.DownPictureBox.Size = New System.Drawing.Size(760, 4)
-        Me.DownPictureBox.TabIndex = 1
-        Me.DownPictureBox.TabStop = False
-        '
-        'upperPanel
-        '
-        Me.upperPanel.BackColor = System.Drawing.Color.Transparent
-        Me.upperPanel.BackgroundImage = CType(resources.GetObject("upperPanel.BackgroundImage"), System.Drawing.Image)
-        Me.upperPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.upperPanel.Controls.Add(Me.accordionPictureBox)
-        Me.upperPanel.Dock = System.Windows.Forms.DockStyle.Top
-        Me.upperPanel.Location = New System.Drawing.Point(0, 0)
-        Me.upperPanel.Name = "upperPanel"
-        Me.upperPanel.Size = New System.Drawing.Size(760, 20)
-        Me.upperPanel.TabIndex = 0
-        '
-        'accordionPictureBox
-        '
-        Me.accordionPictureBox.BackColor = System.Drawing.Color.Transparent
-        Me.accordionPictureBox.Location = New System.Drawing.Point(720, 0)
-        Me.accordionPictureBox.Margin = New System.Windows.Forms.Padding(0)
-        Me.accordionPictureBox.Name = "accordionPictureBox"
-        Me.accordionPictureBox.Size = New System.Drawing.Size(20, 20)
-        Me.accordionPictureBox.TabIndex = 69
-        Me.accordionPictureBox.TabStop = False
-        '
-        'ButtonImageList
-        '
-        Me.ButtonImageList.ImageStream = CType(resources.GetObject("ButtonImageList.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ButtonImageList.TransparentColor = System.Drawing.Color.Transparent
-        Me.ButtonImageList.Images.SetKeyName(0, "button_close.png")
-        Me.ButtonImageList.Images.SetKeyName(1, "button_open.png")
-        '
-        'LeftLinePictureBox
-        '
-        Me.LeftLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.LeftLinePictureBox.Dock = System.Windows.Forms.DockStyle.Left
-        Me.LeftLinePictureBox.Location = New System.Drawing.Point(0, 20)
-        Me.LeftLinePictureBox.Name = "LeftLinePictureBox"
-        Me.LeftLinePictureBox.Size = New System.Drawing.Size(4, 129)
-        Me.LeftLinePictureBox.TabIndex = 2
-        Me.LeftLinePictureBox.TabStop = False
-        '
-        'RightLinePictureBox
-        '
-        Me.RightLinePictureBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.RightLinePictureBox.Dock = System.Windows.Forms.DockStyle.Right
-        Me.RightLinePictureBox.Location = New System.Drawing.Point(756, 20)
-        Me.RightLinePictureBox.Name = "RightLinePictureBox"
-        Me.RightLinePictureBox.Size = New System.Drawing.Size(4, 129)
-        Me.RightLinePictureBox.TabIndex = 3
-        Me.RightLinePictureBox.TabStop = False
-        '
-        'ContentsPanel
-        '
-        Me.ContentsPanel.BackColor = System.Drawing.Color.LightGray
-        Me.ContentsPanel.Controls.Add(Me.DataTypeInput)
-        Me.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ContentsPanel.Location = New System.Drawing.Point(4, 20)
-        Me.ContentsPanel.Name = "ContentsPanel"
-        Me.ContentsPanel.Size = New System.Drawing.Size(752, 129)
-        Me.ContentsPanel.TabIndex = 4
         '
         'DataTypeInput
         '
         Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
+        Me.DataTypeInput.Compress = DataTypeInputControl.Compress_Type.RAW
+        Me.DataTypeInput.EnableAssemblerIndex = False
         Me.DataTypeInput.EnableCompress = False
         Me.DataTypeInput.EnableDataSizeLine = False
         Me.DataTypeInput.FieldName = "DATA"
         Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataTypeInput.Location = New System.Drawing.Point(129, 5)
+        Me.DataTypeInput.Location = New System.Drawing.Point(14, 26)
         Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(470, 117)
+        Me.DataTypeInput.Size = New System.Drawing.Size(510, 117)
+        Me.DataTypeInput.SizeLineIndex = 6
         Me.DataTypeInput.TabIndex = 68
+        '
+        'OutputText
+        '
+        Me.OutputText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OutputText.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.OutputText.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.OutputText.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputText.ForeColor = System.Drawing.Color.Black
+        Me.OutputText.Location = New System.Drawing.Point(14, 150)
+        Me.OutputText.Margin = New System.Windows.Forms.Padding(4)
+        Me.OutputText.Multiline = True
+        Me.OutputText.Name = "OutputText"
+        Me.OutputText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.OutputText.Size = New System.Drawing.Size(573, 50)
+        Me.OutputText.TabIndex = 40
+        '
+        'OutputButtonsPanel
+        '
+        Me.OutputButtonsPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OutputButtonsPanel.BackColor = System.Drawing.Color.Transparent
+        Me.OutputButtonsPanel.Controls.Add(Me.CopyAllButton)
+        Me.OutputButtonsPanel.Controls.Add(Me.SaveSourceButton)
+        Me.OutputButtonsPanel.Controls.Add(Me.SaveCompressFileButton)
+        Me.OutputButtonsPanel.Location = New System.Drawing.Point(13, 207)
+        Me.OutputButtonsPanel.Name = "OutputButtonsPanel"
+        Me.OutputButtonsPanel.Size = New System.Drawing.Size(574, 44)
+        Me.OutputButtonsPanel.TabIndex = 70
+        '
+        'CopyAllButton
+        '
+        Me.CopyAllButton.BackColor = System.Drawing.Color.Transparent
+        Me.CopyAllButton.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CopyAllButton.FlatAppearance.BorderSize = 0
+        Me.CopyAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CopyAllButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CopyAllButton.Image = CType(resources.GetObject("CopyAllButton.Image"), System.Drawing.Image)
+        Me.CopyAllButton.Location = New System.Drawing.Point(4, 0)
+        Me.CopyAllButton.Name = "CopyAllButton"
+        Me.CopyAllButton.Size = New System.Drawing.Size(154, 44)
+        Me.CopyAllButton.TabIndex = 41
+        Me.CopyAllButton.UseVisualStyleBackColor = False
+        '
+        'SaveSourceButton
+        '
+        Me.SaveSourceButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveSourceButton.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SaveSourceButton.FlatAppearance.BorderSize = 0
+        Me.SaveSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SaveSourceButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveSourceButton.Image = CType(resources.GetObject("SaveSourceButton.Image"), System.Drawing.Image)
+        Me.SaveSourceButton.Location = New System.Drawing.Point(158, 0)
+        Me.SaveSourceButton.Name = "SaveSourceButton"
+        Me.SaveSourceButton.Size = New System.Drawing.Size(208, 44)
+        Me.SaveSourceButton.TabIndex = 42
+        Me.SaveSourceButton.UseVisualStyleBackColor = False
+        '
+        'SaveCompressFileButton
+        '
+        Me.SaveCompressFileButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveCompressFileButton.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SaveCompressFileButton.FlatAppearance.BorderSize = 0
+        Me.SaveCompressFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SaveCompressFileButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveCompressFileButton.Image = CType(resources.GetObject("SaveCompressFileButton.Image"), System.Drawing.Image)
+        Me.SaveCompressFileButton.Location = New System.Drawing.Point(366, 0)
+        Me.SaveCompressFileButton.Name = "SaveCompressFileButton"
+        Me.SaveCompressFileButton.Size = New System.Drawing.Size(208, 44)
+        Me.SaveCompressFileButton.TabIndex = 43
+        Me.SaveCompressFileButton.UseVisualStyleBackColor = False
+        '
+        'PiXelGroupBox1
+        '
+        Me.PiXelGroupBox1.Controls.Add(Me.OutputButtonsPanel)
+        Me.PiXelGroupBox1.Controls.Add(Me.DataTypeInput)
+        Me.PiXelGroupBox1.Controls.Add(Me.OutputText)
+        Me.PiXelGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PiXelGroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PiXelGroupBox1.MinimumSize = New System.Drawing.Size(600, 260)
+        Me.PiXelGroupBox1.Name = "PiXelGroupBox1"
+        Me.PiXelGroupBox1.Padding = New System.Windows.Forms.Padding(10)
+        Me.PiXelGroupBox1.Size = New System.Drawing.Size(600, 260)
+        Me.PiXelGroupBox1.TabIndex = 5
+        Me.PiXelGroupBox1.TabStop = False
+        Me.PiXelGroupBox1.Text = "Output Data"
         '
         'OutputDataGBox
         '
-        Me.Controls.Add(Me.ContentsPanel)
-        Me.Controls.Add(Me.RightLinePictureBox)
-        Me.Controls.Add(Me.LeftLinePictureBox)
-        Me.Controls.Add(Me.DownPictureBox)
-        Me.Controls.Add(Me.upperPanel)
+        Me.Controls.Add(Me.PiXelGroupBox1)
+        Me.MinimumSize = New System.Drawing.Size(600, 260)
         Me.Name = "OutputDataGBox"
-        Me.Size = New System.Drawing.Size(760, 153)
-        CType(Me.DownPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.upperPanel.ResumeLayout(False)
-        CType(Me.accordionPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LeftLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RightLinePictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContentsPanel.ResumeLayout(False)
+        Me.Size = New System.Drawing.Size(600, 260)
+        Me.OutputButtonsPanel.ResumeLayout(False)
+        Me.PiXelGroupBox1.ResumeLayout(False)
+        Me.PiXelGroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents upperPanel As Panel
-    Friend WithEvents DownPictureBox As PictureBox
-    Friend WithEvents LeftLinePictureBox As PictureBox
-    Friend WithEvents RightLinePictureBox As PictureBox
-    Friend WithEvents ContentsPanel As Panel
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents DataTypeInput As DataTypeInputControl
-    Friend WithEvents ButtonImageList As ImageList
-    Friend WithEvents accordionPictureBox As PictureBox
+    Friend WithEvents OutputText As TextBox
+    Friend WithEvents OutputButtonsPanel As Panel
+    Friend WithEvents CopyAllButton As Button
+    Friend WithEvents SaveSourceButton As Button
+    Friend WithEvents SaveCompressFileButton As Button
+    Friend WithEvents PiXelGroupBox1 As piXelGroupBox
 End Class

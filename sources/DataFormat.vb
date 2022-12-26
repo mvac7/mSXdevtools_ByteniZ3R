@@ -1,6 +1,4 @@
-﻿
-
-Public Class DataFormat
+﻿Public Class DataFormat
 
     ''' <summary>
     ''' Provides the last line number used in BASIC, with its increase.
@@ -483,7 +481,6 @@ Public Class DataFormat
 
         Dim defaultString As String = "," + CStr(defaultvalue)
 
-        'data += ",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
         For i As Integer = 0 To 31
             data += defaultString
         Next
@@ -566,24 +563,75 @@ Public Class DataFormat
 
 
 
-    'Public Function GetBASICComments(ByVal comment As ArrayList, ByVal firstNumLine As Short, ByVal incLine As Byte) As String
-    '    Dim outputString As String = ""
+    Public Function GetAsmLabelsIndex(ByVal label As String, ByVal labelsList As ArrayList, ByVal dataCommand As String) As String
+        Dim outputString As String = ""
+        Dim contaLines As Integer = 0
+        Dim item As String
+        Dim total As Integer = labelsList.Count - 1
 
-    '    Me.BASIC_Line = firstNumLine
+        outputString = label + ":" + vbNewLine
 
-    '    If Not comment Is Nothing Then
-    '        For Each commentValue As String In comment
-    '            outputString += CStr(Me.BASIC_Line) + " REM " + commentValue + vbNewLine
-    '            Me.BASIC_Line += incLine
-    '        Next
+        For i As Integer = 0 To total
+            item = labelsList.Item(i)
+
+            If contaLines = 0 Then
+                If dataCommand.ToLower.StartsWith("<tab>") Then
+                    outputString += vbTab + dataCommand.Substring(5) + " "
+                Else
+                    outputString += dataCommand + " "
+                End If
+            End If
+
+            outputString += item
+            contaLines += 1
+            If contaLines < 4 And i < total Then
+                outputString += ","
+            Else
+                outputString += vbNewLine
+                contaLines = 0
+            End If
+
+        Next
+
+        Return outputString
+
+    End Function
+
+
+
+    'Public Function GetProjectInfoComments(ByRef prjinfo As ProjectInfo, ByVal format As ProgrammingLanguage) As String
+
+    '    Dim comments As New ArrayList
+    '    Dim tmpInfo As String = ""
+
+    '    comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
+    '    comments.Add("Project: " + prjinfo.Project)
+
+    '    comments.Add("Subproject: " + prjinfo.Name)
+
+    '    If Not prjinfo.Author = "" Then
+    '        tmpInfo = "Author: " + prjinfo.Author
     '    End If
 
-    '    Return outputString
+    '    If Not prjinfo.Group = "" Then
+    '        If Not tmpInfo = "" Then
+    '            tmpInfo += " - "
+    '        End If
+    '        tmpInfo += "Group: " + prjinfo.Group
+    '    End If
+
+    '    If Not tmpInfo = "" Then
+    '        comments.Add(tmpInfo)
+    '    End If
+
+
+    '    If Not prjinfo.Description = "" Then
+    '        comments.Add("Description: " + prjinfo.Description)
+    '    End If
+
+    '    Return GetComments(comments, format)
 
     'End Function
-
-
-
 
 
 End Class
