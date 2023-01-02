@@ -189,7 +189,7 @@ Public Class MainForm
 
         Me.WaveTypeComboBox.SelectedIndex = 0
 
-        SetWaveLength(defaultWaveLength)
+        SetWaveLength(256)
         SetWaveState(0)
 
         SetWaveMin(0)
@@ -350,7 +350,6 @@ Public Class MainForm
         Return tmpData
 
     End Function
-
 
 
 
@@ -1662,19 +1661,17 @@ Public Class MainForm
 
 
     Private Sub SetConfig()
+
         Dim aConfig As New MiniConfigWin(Me.AppConfig, MiniConfigWin.CONFIG_TYPE.BYTENIZ3R)
 
         If aConfig.ShowDialog() = DialogResult.OK Then
             Me.AppConfig.Save()
 
-            'Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-            'Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
-
-            Me.anOutputDataGBox.InitControl(Me.AppConfig)
-            'Me.anOutputDataGBox.DataTypeInput.RefreshControl()
+            Me.anOutputDataGBox.RefreshControl()
 
             GenerateData()
         End If
+
     End Sub
 
 

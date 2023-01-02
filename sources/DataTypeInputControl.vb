@@ -300,12 +300,15 @@
         End Select
 
         Me.NumberSystemCombo.SelectedIndex = Me.AppConfig.CodeNumberSystem ' lastCodeNumberSystem
+        Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
 
         If _enableCompress = True Then
             Me.CompressComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
         Else
             Me.CompressComboBox.SelectedIndex = _compressType
         End If
+
+        Me.FieldName = Me.AppConfig.DataLabel
 
         Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmWordDataCommand
@@ -316,11 +319,7 @@
         Me.IntervalText.Text = CStr(Me.AppConfig.BASIC_incLines)
         Me.RemoveZerosCheck.Checked = Me.AppConfig.BASIC_remove0
 
-        Me.FieldName = Me.AppConfig.DataLabel
-
         showIndex()
-
-        'Me.AppConfig.lastCodeSizeLine = Me.SizeLineComboBox.SelectedIndex
 
         ShowLanguageStatus()
 
@@ -392,20 +391,10 @@
         RemoveHandlers()
         Me.AppConfig.CodeOutput = Me.LanguageComboBox.SelectedIndex
         ShowLanguageStatus()
-        AddHandlers()
 
-        RaiseEvent DataChanged()
-    End Sub
-
-
-
-    Private Sub ShowLanguageStatus()
-
+        ' ----------------------------------------------------------------------------------------- set default values
         Select Case CodeLanguage
-            Case DataFormat.ProgrammingLanguage.BASIC  'basic
-                Me.BasicPanel.Visible = True
-                Me.AssemblerPanel.Visible = False
-                Me.CesPanel.Visible = False
+            Case DataFormat.ProgrammingLanguage.BASIC
 
                 'Me.RemoveZerosCheck.Enabled = True
                 Select Case Me.NumberSystemCombo.SelectedIndex
@@ -417,24 +406,20 @@
                         Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_BASIC
                 End Select
 
+
             Case DataFormat.ProgrammingLanguage.C
-                Me.BasicPanel.Visible = False
-                Me.AssemblerPanel.Visible = False
-                Me.CesPanel.Visible = True
 
-                SetSDCC_CodeFormat()
+                Set_C_CodeFormat()
 
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                Me.BasicPanel.Visible = False
-                Me.AssemblerPanel.Visible = True
-                Me.CesPanel.Visible = False
+
+            Case Else
 
                 If Me.LanguageComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SDCC Then
 
                     Me.AsmByteDataTextBox.Text = ".db"
                     Me.AsmWordDataTextBox.Text = ".dw"
 
-                    SetSDCC_CodeFormat()
+                    Set_C_CodeFormat()
 
                 Else
                     If Me.LanguageComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SJasm Then
@@ -457,7 +442,6 @@
 
                 End If
 
-
         End Select
 
         If Me.NumberSystemCombo.SelectedIndex >= DataFormat.DataType.BINARY_n Then
@@ -465,11 +449,44 @@
         Else
             Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
         End If
+        ' ----------------------------------------------------------------------------------------- END default values
+
+
+        AddHandlers()
+
+        RaiseEvent DataChanged()
+    End Sub
+
+
+
+    Private Sub ShowLanguageStatus()
+
+        Select Case CodeLanguage
+
+            Case DataFormat.ProgrammingLanguage.BASIC  'basic
+                Me.BasicPanel.Visible = True
+                Me.AssemblerPanel.Visible = False
+                Me.CesPanel.Visible = False
+
+            Case DataFormat.ProgrammingLanguage.C
+                Me.BasicPanel.Visible = False
+                Me.AssemblerPanel.Visible = False
+                Me.CesPanel.Visible = True
+
+            Case DataFormat.ProgrammingLanguage.ASSEMBLER
+                Me.BasicPanel.Visible = False
+                Me.AssemblerPanel.Visible = True
+                Me.CesPanel.Visible = False
+
+        End Select
+
+
 
     End Sub
 
 
-    Private Sub SetSDCC_CodeFormat()
+
+    Private Sub Set_C_CodeFormat()
         Select Case Me.NumberSystemCombo.SelectedIndex
             Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
                 Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n

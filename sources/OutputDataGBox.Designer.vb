@@ -24,13 +24,13 @@ Partial Class OutputDataGBox
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputDataGBox))
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.DataTypeInput = New DataTypeInputControl()
+        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         Me.OutputText = New System.Windows.Forms.TextBox()
         Me.OutputButtonsPanel = New System.Windows.Forms.Panel()
         Me.CopyAllButton = New System.Windows.Forms.Button()
         Me.SaveSourceButton = New System.Windows.Forms.Button()
         Me.SaveCompressFileButton = New System.Windows.Forms.Button()
-        Me.PiXelGroupBox1 = New piXelGroupBox()
+        Me.PiXelGroupBox1 = New ByteniZ3R.piXelGroupBox()
         Me.OutputButtonsPanel.SuspendLayout()
         Me.PiXelGroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -38,7 +38,7 @@ Partial Class OutputDataGBox
         'DataTypeInput
         '
         Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
-        Me.DataTypeInput.Compress = DataTypeInputControl.Compress_Type.RAW
+        Me.DataTypeInput.Compress = ByteniZ3R.DataTypeInputControl.Compress_Type.RAW
         Me.DataTypeInput.EnableAssemblerIndex = False
         Me.DataTypeInput.EnableCompress = False
         Me.DataTypeInput.EnableDataSizeLine = False
@@ -53,6 +53,7 @@ Partial Class OutputDataGBox
         '
         'OutputText
         '
+        Me.OutputText.AcceptsReturn = True
         Me.OutputText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)

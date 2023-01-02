@@ -87,7 +87,7 @@ Partial Class MainForm
         'FreqTextBox
         '
         Me.FreqTextBox.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FreqTextBox.Location = New System.Drawing.Point(288, 181)
+        Me.FreqTextBox.Location = New System.Drawing.Point(288, 187)
         Me.FreqTextBox.MaxLength = 3
         Me.FreqTextBox.Name = "FreqTextBox"
         Me.FreqTextBox.Size = New System.Drawing.Size(49, 21)
@@ -99,7 +99,7 @@ Partial Class MainForm
         'WaveMinTextBox
         '
         Me.WaveMinTextBox.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WaveMinTextBox.Location = New System.Drawing.Point(288, 84)
+        Me.WaveMinTextBox.Location = New System.Drawing.Point(288, 90)
         Me.WaveMinTextBox.MaxLength = 3
         Me.WaveMinTextBox.Name = "WaveMinTextBox"
         Me.WaveMinTextBox.Size = New System.Drawing.Size(49, 21)
@@ -111,7 +111,7 @@ Partial Class MainForm
         'WaveMaxTextBox
         '
         Me.WaveMaxTextBox.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WaveMaxTextBox.Location = New System.Drawing.Point(288, 116)
+        Me.WaveMaxTextBox.Location = New System.Drawing.Point(288, 122)
         Me.WaveMaxTextBox.MaxLength = 3
         Me.WaveMaxTextBox.Name = "WaveMaxTextBox"
         Me.WaveMaxTextBox.Size = New System.Drawing.Size(49, 21)
@@ -123,7 +123,7 @@ Partial Class MainForm
         'WaveLengthTextBox
         '
         Me.WaveLengthTextBox.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WaveLengthTextBox.Location = New System.Drawing.Point(288, 53)
+        Me.WaveLengthTextBox.Location = New System.Drawing.Point(288, 59)
         Me.WaveLengthTextBox.MaxLength = 5
         Me.WaveLengthTextBox.Name = "WaveLengthTextBox"
         Me.WaveLengthTextBox.Size = New System.Drawing.Size(49, 21)
@@ -136,7 +136,7 @@ Partial Class MainForm
         '
         Me.RandomButton.BackColor = System.Drawing.Color.Gainsboro
         Me.RandomButton.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RandomButton.Location = New System.Drawing.Point(288, 22)
+        Me.RandomButton.Location = New System.Drawing.Point(288, 28)
         Me.RandomButton.Name = "RandomButton"
         Me.RandomButton.Size = New System.Drawing.Size(49, 23)
         Me.RandomButton.TabIndex = 2
@@ -147,7 +147,7 @@ Partial Class MainForm
         'PhaseTextBox
         '
         Me.PhaseTextBox.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PhaseTextBox.Location = New System.Drawing.Point(288, 149)
+        Me.PhaseTextBox.Location = New System.Drawing.Point(288, 155)
         Me.PhaseTextBox.MaxLength = 3
         Me.PhaseTextBox.Name = "PhaseTextBox"
         Me.PhaseTextBox.Size = New System.Drawing.Size(49, 21)
@@ -348,7 +348,7 @@ Partial Class MainForm
         '
         'Label13
         '
-        Me.Label13.Location = New System.Drawing.Point(13, 120)
+        Me.Label13.Location = New System.Drawing.Point(13, 126)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(80, 13)
         Me.Label13.TabIndex = 23
@@ -357,7 +357,7 @@ Partial Class MainForm
         '
         'Label14
         '
-        Me.Label14.Location = New System.Drawing.Point(13, 26)
+        Me.Label14.Location = New System.Drawing.Point(13, 32)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(80, 13)
         Me.Label14.TabIndex = 27
@@ -370,7 +370,7 @@ Partial Class MainForm
         Me.WaveLengthTrackBar.BackColor = System.Drawing.Color.LightGray
         Me.WaveLengthTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
         Me.WaveLengthTrackBar.LargeChange = 8
-        Me.WaveLengthTrackBar.Location = New System.Drawing.Point(88, 54)
+        Me.WaveLengthTrackBar.Location = New System.Drawing.Point(88, 60)
         Me.WaveLengthTrackBar.Maximum = 1024
         Me.WaveLengthTrackBar.Name = "WaveLengthTrackBar"
         Me.WaveLengthTrackBar.Size = New System.Drawing.Size(200, 26)
@@ -384,7 +384,7 @@ Partial Class MainForm
         Me.WaveMinTrackBar.BackColor = System.Drawing.Color.LightGray
         Me.WaveMinTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
         Me.WaveMinTrackBar.LargeChange = 8
-        Me.WaveMinTrackBar.Location = New System.Drawing.Point(88, 85)
+        Me.WaveMinTrackBar.Location = New System.Drawing.Point(88, 91)
         Me.WaveMinTrackBar.Maximum = 254
         Me.WaveMinTrackBar.Name = "WaveMinTrackBar"
         Me.WaveMinTrackBar.Size = New System.Drawing.Size(200, 26)
@@ -397,7 +397,7 @@ Partial Class MainForm
         Me.WaveMaxTrackBar.BackColor = System.Drawing.Color.LightGray
         Me.WaveMaxTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
         Me.WaveMaxTrackBar.LargeChange = 8
-        Me.WaveMaxTrackBar.Location = New System.Drawing.Point(88, 118)
+        Me.WaveMaxTrackBar.Location = New System.Drawing.Point(88, 124)
         Me.WaveMaxTrackBar.Maximum = 255
         Me.WaveMaxTrackBar.Minimum = 1
         Me.WaveMaxTrackBar.Name = "WaveMaxTrackBar"
@@ -412,7 +412,7 @@ Partial Class MainForm
         Me.WavePhaseTrackBar.BackColor = System.Drawing.Color.LightGray
         Me.WavePhaseTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
         Me.WavePhaseTrackBar.LargeChange = 15
-        Me.WavePhaseTrackBar.Location = New System.Drawing.Point(88, 151)
+        Me.WavePhaseTrackBar.Location = New System.Drawing.Point(88, 157)
         Me.WavePhaseTrackBar.Maximum = 359
         Me.WavePhaseTrackBar.Name = "WavePhaseTrackBar"
         Me.WavePhaseTrackBar.Size = New System.Drawing.Size(200, 26)
@@ -421,7 +421,7 @@ Partial Class MainForm
         '
         'LabelFreq
         '
-        Me.LabelFreq.Location = New System.Drawing.Point(13, 185)
+        Me.LabelFreq.Location = New System.Drawing.Point(13, 191)
         Me.LabelFreq.Name = "LabelFreq"
         Me.LabelFreq.Size = New System.Drawing.Size(80, 13)
         Me.LabelFreq.TabIndex = 33
@@ -434,7 +434,7 @@ Partial Class MainForm
         Me.WaveFreqTrackBar.BackColor = System.Drawing.Color.LightGray
         Me.WaveFreqTrackBar.Cursor = System.Windows.Forms.Cursors.NoMoveHoriz
         Me.WaveFreqTrackBar.LargeChange = 8
-        Me.WaveFreqTrackBar.Location = New System.Drawing.Point(88, 183)
+        Me.WaveFreqTrackBar.Location = New System.Drawing.Point(88, 189)
         Me.WaveFreqTrackBar.Maximum = 256
         Me.WaveFreqTrackBar.Minimum = 1
         Me.WaveFreqTrackBar.Name = "WaveFreqTrackBar"
@@ -445,7 +445,7 @@ Partial Class MainForm
         '
         'LabelPhase
         '
-        Me.LabelPhase.Location = New System.Drawing.Point(13, 153)
+        Me.LabelPhase.Location = New System.Drawing.Point(13, 159)
         Me.LabelPhase.Name = "LabelPhase"
         Me.LabelPhase.Size = New System.Drawing.Size(80, 13)
         Me.LabelPhase.TabIndex = 30
@@ -454,7 +454,7 @@ Partial Class MainForm
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(13, 57)
+        Me.Label4.Location = New System.Drawing.Point(13, 63)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(80, 13)
         Me.Label4.TabIndex = 22
@@ -465,14 +465,14 @@ Partial Class MainForm
         '
         Me.WaveTypeComboBox.FormattingEnabled = True
         Me.WaveTypeComboBox.Items.AddRange(New Object() {"Sine", "Cosine", "Square", "Triangle", "Sawtooth", "Reverse Sawtooth", "Noise (Random)"})
-        Me.WaveTypeComboBox.Location = New System.Drawing.Point(96, 23)
+        Me.WaveTypeComboBox.Location = New System.Drawing.Point(96, 29)
         Me.WaveTypeComboBox.Name = "WaveTypeComboBox"
         Me.WaveTypeComboBox.Size = New System.Drawing.Size(186, 22)
         Me.WaveTypeComboBox.TabIndex = 1
         '
         'Label12
         '
-        Me.Label12.Location = New System.Drawing.Point(13, 88)
+        Me.Label12.Location = New System.Drawing.Point(13, 94)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(80, 13)
         Me.Label12.TabIndex = 25

@@ -327,6 +327,7 @@ Public Class MiniConfigWin
     Private Sub CodeOutputComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles CodeOutputComboBox.SelectedIndexChanged
 
         ShowLanguageStatus()
+
     End Sub
 
 

@@ -2,7 +2,7 @@
 
 Public Class OutputDataGBox
 
-    Private UIconfig As New Config
+    Private AppConfig As New Config
 
     Private _fileData() As Byte
     Private _outputData() As Byte
@@ -14,8 +14,6 @@ Public Class OutputDataGBox
     Public Extension_Binary As String = "bin"
 
     Public Event DataChanged()
-
-    'Public Event AccordionChanged(state As Boolean)
 
 
 
@@ -218,8 +216,8 @@ Public Class OutputDataGBox
         'isInit = True
         'SetDropDown(Me.isOpen)
 
-        Me.OutputText.BackColor = Me.UIconfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.UIconfig.Color_OUTPUT_INK
+        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
     End Sub
 
@@ -227,12 +225,23 @@ Public Class OutputDataGBox
 
     Public Sub InitControl(ByRef _config As Config)
 
-        Me.UIconfig = _config
+        Me.AppConfig = _config
 
-        DataTypeInput.InitControl(Me.UIconfig)
+        DataTypeInput.InitControl(Me.AppConfig)
 
-        Me.OutputText.BackColor = Me.UIconfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.UIconfig.Color_OUTPUT_INK
+        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+
+    End Sub
+
+
+
+    Public Sub RefreshControl()
+
+        DataTypeInput.RefreshControl()
+
+        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
     End Sub
 
@@ -322,6 +331,7 @@ Public Class OutputDataGBox
     Private Function GetFormatData(ByRef data As Byte(), ByRef comments As ArrayList) As String
 
         Dim aMSXDataFormat As New DataFormat
+        aMSXDataFormat.Comment_BASIC = Me.AppConfig.BASIC_CommentInstruction
 
         Dim outputSource As String = ""
 
@@ -471,6 +481,7 @@ Public Class OutputDataGBox
         Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Project_Name)
 
         If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            'Me.Path_SC2 = Path.GetDirectoryName(SaveFileDialog1.FileName)
             SaveBinary(SaveFileDialog1.FileName, _outputData)
         End If
 

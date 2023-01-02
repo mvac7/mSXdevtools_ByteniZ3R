@@ -5,10 +5,11 @@
     ''' </summary>
     Public BASIC_Line As Short = 10000
 
-    ''' <summary>
-    ''' 
-    ''' </summary>
     Public BASIC_increment As Byte = 10
+
+    Public Comment_Assembler As String = ";"
+    Public Comment_C As String = "//"
+    Public Comment_BASIC As String = "REM"
 
 
 
@@ -542,15 +543,15 @@
 
                 Select Case format
                     Case ProgrammingLanguage.BASIC
-                        outputString += CStr(Me.BASIC_Line) + " REM " + commentValue + vbNewLine
+                        outputString += CStr(Me.BASIC_Line) + " " + Comment_BASIC + " " + commentValue + vbNewLine
                         Me.BASIC_Line += Me.BASIC_increment
 
                     Case ProgrammingLanguage.C
-                        outputString += "// " + commentValue + vbNewLine
+                        outputString += Comment_C + " " + commentValue + vbNewLine
 
                     Case Else
                         'ProgrammingLanguage.ASSEMBLER
-                        outputString += "; " + commentValue + vbNewLine
+                        outputString += Comment_Assembler + " " + commentValue + vbNewLine
 
                 End Select
 
