@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Waveform data table generator")>
 <Assembly: AssemblyCompany("MSX Comm·unity")>
 <Assembly: AssemblyProduct("ByteniZ3R devtool")>
-<Assembly: AssemblyCopyright("Copyright 2022 mvac7 (aka A0rante)")>
+<Assembly: AssemblyCopyright("Copyright 2023 mvac7 (aka A0rante)")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.9.21.0")>
-<Assembly: AssemblyFileVersion("0.9.21.0")>
+<Assembly: AssemblyVersion("0.9.22.0")>
+<Assembly: AssemblyFileVersion("0.9.22.0")>

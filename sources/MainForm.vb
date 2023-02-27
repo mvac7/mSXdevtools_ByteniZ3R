@@ -6,7 +6,7 @@ Imports System.Xml
 ''' ByteniZ3R devtool
 ''' Waveform data table generator
 ''' 
-''' Copyright (C) 2022 mvac7
+''' Copyright (C) 2023 mvac7
 ''' This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
 ''' the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 ''' 
@@ -42,6 +42,7 @@ Public Class MainForm
 
     Private Info As ProjectInfo
 
+    Private Const MaxLength = 2048
 
     Private Progress As ProgressController
 
@@ -52,6 +53,8 @@ Public Class MainForm
 
     Public Shadows Enum WAVE_TYPE As Integer
         SINE
+        SINE_UPPER
+        SINE_DOWN
         COSINE
         SQUARE
         TRIANGLE
@@ -91,6 +94,9 @@ Public Class MainForm
             ' if not exist config file
             ShowAbout(True)
         End If
+
+        Me.WaveLengthTrackBar.Maximum = MaxLength
+        Me.WaveLengthTrackBar.TickFrequency = MaxLength / 8
 
         'Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
         'Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
@@ -322,6 +328,12 @@ Public Class MainForm
         phase = WavePhaseTrackBar.Value
 
         Select Case Me.WaveTypeComboBox.SelectedIndex
+            Case WAVE_TYPE.SINE_UPPER
+                tmpData = GetUpperSineTable(tableLength, minValueRange, maxValueRange, freq)
+
+            Case WAVE_TYPE.SINE_DOWN
+                tmpData = GetDownSineTable(tableLength, minValueRange, maxValueRange, freq)
+
             Case WAVE_TYPE.COSINE
                 tmpData = GetCosineTable(tableLength, minValueRange, maxValueRange, phase, freq)
 
@@ -353,30 +365,97 @@ Public Class MainForm
 
 
 
+
     Private Function GetSineTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal phase As Integer, ByVal freq As Integer) As Byte()
 
         Dim tmpData(length) As Byte
 
         Dim amplitude As Integer = maxValueRange - minValueRange
 
-        Dim psize As Integer = length / freq
-
-        Dim calcPhase As Integer = (psize / 360) * phase
+        Dim wave_size As Integer = length / freq
+        Dim calcPhase As Integer = (wave_size / 360) * phase
 
         If amplitude < 1 Then
             amplitude = 15
         End If
 
         For BC As Integer = 0 To length
-            If psize = 0 Then
+            If wave_size < 1 Then
                 ' para evitar una excepcion en el calculo
                 tmpData(BC) = 0
             Else
-                tmpData(BC) = CByte(((Math.Sin(((BC + calcPhase) * (Math.PI * 2)) / psize) * amplitude) + amplitude) / 2) + minValueRange
+                tmpData(BC) = CByte(((Math.Sin(((BC + calcPhase) * (Math.PI * 2)) / wave_size) * amplitude) + amplitude) / 2) + minValueRange
             End If
         Next
 
         Return tmpData
+
+    End Function
+
+
+
+    Private Function GetDownSineTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal freq As Integer) As Byte()
+
+        Dim tmpData(length) As Byte
+
+        Dim amplitude As Integer = maxValueRange - minValueRange
+
+        Dim wave_size As Integer = length / freq
+        'Dim calcPhase As Integer = (wave_size / 360) * 360
+        Dim wave_pos As Integer
+
+        If amplitude < 1 Then
+            amplitude = 15
+        End If
+
+        For BC As Integer = 0 To length
+
+            wave_pos = BC - (Fix(BC / wave_size) * wave_size)
+
+            If wave_size < 1 Then
+                ' para evitar una excepcion en el calculo
+                tmpData(BC) = 0
+            Else
+                tmpData(BC) = CByte(amplitude - Math.Sin((wave_pos * Math.PI) / wave_size) * amplitude) + minValueRange
+            End If
+
+        Next
+        Return tmpData
+
+    End Function
+
+
+
+    Private Function GetUpperSineTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal freq As Integer) As Byte()
+
+        Dim tmpData(length) As Byte
+
+        Dim amplitude As Integer = maxValueRange - minValueRange
+
+        Dim wave_size As Integer = length / freq
+        'Dim calcPhase As Integer = (wave_size / 180) * phase
+
+        Dim wave_pos As Integer
+
+        If amplitude < 1 Then
+            amplitude = 15
+        End If
+
+        For BC As Integer = 0 To length
+
+            wave_pos = BC - (Fix(BC / wave_size) * wave_size)
+
+            If wave_size < 1 Then
+                ' para evitar una excepcion en el calculo
+                tmpData(BC) = 0
+            Else
+                tmpData(BC) = CByte(Math.Sin((wave_pos * Math.PI) / wave_size) * amplitude) + minValueRange
+            End If
+
+        Next
+
+        Return tmpData
+
     End Function
 
 
@@ -387,41 +466,42 @@ Public Class MainForm
 
         Dim amplitude As Integer = maxValueRange - minValueRange
 
-        Dim psize As Integer = length / freq
-
-        Dim calcPhase As Integer = (psize / 360) * phase
+        Dim wave_size As Integer = length / freq
+        Dim calcPhase As Integer = (wave_size / 360) * phase
 
         If amplitude < 1 Then
             amplitude = 15
         End If
 
         For BC As Integer = 0 To length
-            If psize = 0 Then
+            If wave_size < 1 Then
                 ' para evitar una excepcion en el calculo
                 tmpData(BC) = 0
             Else
-                tmpData(BC) = CByte(((Math.Cos(((BC + calcPhase) * (Math.PI * 2)) / psize) * amplitude) + amplitude) / 2) + minValueRange
+                tmpData(BC) = CByte(((Math.Cos(((BC + calcPhase) * (Math.PI * 2)) / wave_size) * amplitude) + amplitude) / 2) + minValueRange
             End If
         Next
 
         Return tmpData
+
     End Function
 
 
 
     Private Function GetSquareTable(ByVal length As Short, ByVal minValueRange As Short, ByVal maxValueRange As Short, ByVal phase As Integer, ByVal freq As Integer) As Byte()
+
         Dim tmpData(length) As Byte
 
-        Dim psize As Integer = length / freq
-        Dim calcPhase As Integer = (psize / 360) * phase
+        Dim wave_size As Integer = length / freq
+        Dim calcPhase As Integer = (wave_size / 360) * phase
 
         For BC As Integer = 0 To length
-            If psize = 0 Then
+            If wave_size < 1 Then
                 ' para evitar una excepcion en el calculo
                 tmpData(BC) = 0
             Else
                 'y[k] = Math.Sin(freq * k)>=0?A:-1*A;
-                If Math.Sin(((BC + calcPhase) * (Math.PI * 2)) / psize) >= 0 Then
+                If Math.Sin(((BC + calcPhase) * (Math.PI * 2)) / wave_size) >= 0 Then
                     tmpData(BC) = maxValueRange
                 Else
                     tmpData(BC) = minValueRange
@@ -430,6 +510,7 @@ Public Class MainForm
         Next
 
         Return tmpData
+
     End Function
 
 
@@ -441,12 +522,15 @@ Public Class MainForm
         Dim interval As Double
         Dim amplitude As Integer
         Dim conta As Double
+        Dim wave_size As Double
+
+        wave_size = length / freq
 
         amplitude = maxValueRange - minValueRange
-        interval = (2 * Math.PI) / (length / freq)
-        conta = (((length / freq) * phase) / 360) * interval
+        interval = (2 * Math.PI) / wave_size
+        conta = ((wave_size * phase) / 360) * interval
 
-        For BC = 0 To length
+        For BC As Integer = 0 To length
 
             If conta < Math.PI Then
                 value = ((conta / Math.PI) * amplitude) + minValueRange
@@ -481,17 +565,17 @@ Public Class MainForm
         Dim value As Double
         Dim interval As Double
         Dim amplitude As Integer
-        Dim waveSize As Double
+        Dim wave_size As Double
         Dim tmpValue As Short
 
-        waveSize = length / freq
+        wave_size = length / freq
 
         amplitude = maxValueRange - minValueRange
-        interval = amplitude / waveSize
+        interval = amplitude / wave_size
 
-        value = ((waveSize / 360) * phase) * interval
+        value = ((wave_size / 360) * phase) * interval
 
-        For t = 0 To length
+        For BC As Integer = 0 To length
 
             tmpValue = Fix(value)  'Math.Ceiling Floor
 
@@ -503,10 +587,10 @@ Public Class MainForm
                 tmpValue = amplitude
             End If
 
-            tmpData(t) = CByte(tmpValue + minValueRange)
+            tmpData(BC) = CByte(tmpValue + minValueRange)
 
             value += interval
-            If value > amplitude Then
+            If Fix(value) > amplitude Then
                 value = 0
             End If
 
@@ -524,19 +608,19 @@ Public Class MainForm
         Dim value As Double
         Dim interval As Double
         Dim amplitude As Integer
-        Dim waveSize As Double
+        Dim wave_size As Double
         Dim tmpValue As Short
 
-        waveSize = length / freq
+        wave_size = length / freq
 
         amplitude = maxValueRange - minValueRange
-        interval = amplitude / waveSize
+        interval = amplitude / wave_size
 
-        value = ((waveSize / 360) * phase) * interval
+        value = ((wave_size / 360) * phase) * interval
 
         value = amplitude - value
 
-        For t = 0 To length
+        For BC As Integer = 0 To length
 
             tmpValue = Fix(value)  'Math.Ceiling Floor
 
@@ -548,7 +632,7 @@ Public Class MainForm
                 tmpValue = amplitude
             End If
 
-            tmpData(t) = CByte(tmpValue + minValueRange)
+            tmpData(BC) = CByte(tmpValue + minValueRange)
 
             value -= interval
             If value < 0 Then
@@ -558,6 +642,7 @@ Public Class MainForm
         Next
 
         Return tmpData
+
     End Function
 
 
@@ -573,8 +658,8 @@ Public Class MainForm
 
         Dim tmpData(length) As Byte
 
-        For i As Integer = 0 To length
-            tmpData(i) = rnd1.Next(minValueRange, maxValueRange)
+        For BC As Integer = 0 To length
+            tmpData(BC) = rnd1.Next(minValueRange, maxValueRange)
         Next
 
         Return tmpData
@@ -699,145 +784,6 @@ Public Class MainForm
 
 
 
-    'Private Sub CopyAll()
-    '    Me.Progress.ShowProgressWin()
-    '    Try
-    '        My.Computer.Clipboard.SetText(Me.OutputText.Text)
-
-    '        'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-    '        'I apply a short wait for the progress window to show without closing too quickly.
-    '        System.Threading.Thread.Sleep(150) 'wait
-    '    Catch ex As Exception
-
-    '    End Try
-    '    Me.Progress.CloseProgressWin()
-    'End Sub
-
-
-
-    'Private Sub SaveSourceDialog()
-
-    '    Dim aStreamWriterFile As StreamWriter
-
-    '    If Me.OutputText.Text = "" Then
-    '        Dim MessageWin As New MessageDialog
-    '        MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
-
-    '    Else
-
-    '        If Me.Path_source = "" Then
-    '            If Me.Path_Project = "" Then
-    '                Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-    '                Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
-    '            Else
-    '                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
-    '                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
-    '            End If
-    '        Else
-    '            Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_source)
-    '            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_source)
-    '        End If
-
-
-    '        Select Case anOutputDataGBox.DataTypeInput.CodeLanguage
-    '            Case DataFormat.ProgrammingLanguage.BASIC
-    '                Me.SaveFileDialog1.DefaultExt = "BAS"
-    '                Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
-    '            Case DataFormat.ProgrammingLanguage.C
-    '                Me.SaveFileDialog1.DefaultExt = "c"
-    '                Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
-    '            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-    '                Me.SaveFileDialog1.DefaultExt = "asm"
-    '                Me.SaveFileDialog1.Filter = "ASM file|*.asm|ASM file|*.s"
-    '        End Select
-
-
-    '        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-
-    '            Me.Path_source = SaveFileDialog1.FileName
-
-    '            Try
-    '                Me.Progress.ShowProgressWin()
-
-    '                aStreamWriterFile = New System.IO.StreamWriter(Me.Path_source)
-    '                aStreamWriterFile.WriteLine(Me.OutputText.Text)
-    '                aStreamWriterFile.Close()
-
-    '                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-    '                'I apply a short wait for the progress window to show without closing too quickly.
-    '                System.Threading.Thread.Sleep(200) 'wait
-
-    '                Me.Progress.CloseProgressWin()
-
-    '            Catch ex As Exception
-    '                Me.Progress.CloseProgressWin()
-    '                MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
-    '            End Try
-
-    '        End If
-
-    '    End If
-
-    'End Sub
-
-
-
-    'Private Sub SaveBinaryDialog()
-
-    '    Dim aStream As System.IO.FileStream
-
-    '    If Me.lastOutputData.Length < 1 Then
-    '        Dim MessageWin As New MessageDialog
-    '        MessageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
-
-    '    Else
-
-    '        If Me.Path_binary = "" Then
-    '            If Me.Path_Project = "" Then
-    '                Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-    '                Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
-    '            Else
-    '                Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_Project)
-    '                Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
-    '            End If
-    '        Else
-    '            Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Path_binary)
-    '            Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_binary)
-    '        End If
-
-    '        'Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-    '        Me.SaveFileDialog1.DefaultExt = "BIN"
-    '        Me.SaveFileDialog1.Filter = "Binary file|*.BIN"
-
-    '        If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-
-    '            Me.Path_binary = SaveFileDialog1.FileName
-
-    '            Try
-    '                Me.Progress.ShowProgressWin()
-
-    '                aStream = New System.IO.FileStream(Me.Path_binary, IO.FileMode.Create)
-    '                aStream.Write(Me.lastOutputData, 0, Me.lastOutputData.Length)
-    '                aStream.Close()
-
-    '                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-    '                'I apply a short wait for the progress window to show without closing too quickly.
-    '                System.Threading.Thread.Sleep(150) 'wait
-
-    '                Me.Progress.CloseProgressWin()
-
-    '            Catch ex As Exception
-    '                Me.Progress.CloseProgressWin()
-    '                MsgBox(ex.Message, MsgBoxStyle.Critical, "I/O Error")
-    '            End Try
-
-    '        End If
-
-    '    End If
-    'End Sub
-
-
-
     Private Sub MainForm_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles MyBase.DragDrop
         Dim s() As String = e.Data.GetData("FileDrop", False)
         Dim tmpFilePath As String = s(0)
@@ -934,6 +880,7 @@ Public Class MainForm
 
     Private Sub WaveLengthTrackBar_ValueChanged(sender As System.Object, e As System.EventArgs) ' Handles WaveLengthTrackBar.ValueChanged
         ValidateWaveLength(Me.WaveLengthTrackBar.Value)
+        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         ShowWave()
         'GenerateData()
     End Sub
@@ -992,23 +939,39 @@ Public Class MainForm
 
 
     Private Sub SetWaveState(ByVal index As WAVE_TYPE)
-        Dim state As Boolean
 
         If index = WAVE_TYPE.NOISE Then
-            state = False
+            Me.LabelFreq.Enabled = False
+            Me.WaveFreqTrackBar.Enabled = False
+            Me.FreqTextBox.Enabled = False
+
+            Me.LabelPhase.Enabled = False
+            Me.WavePhaseTrackBar.Enabled = False
+            Me.PhaseTextBox.Enabled = False
+
+            Me.RandomButton.Visible = True
+        ElseIf index = WAVE_TYPE.SINE_UPPER Or index = WAVE_TYPE.SINE_DOWN Then
+            Me.LabelFreq.Enabled = True
+            Me.WaveFreqTrackBar.Enabled = True
+            Me.FreqTextBox.Enabled = True
+
+            Me.LabelPhase.Enabled = True
+            Me.WavePhaseTrackBar.Enabled = False
+            Me.PhaseTextBox.Enabled = True
+
+            Me.RandomButton.Visible = False
         Else
-            state = True
+            Me.LabelFreq.Enabled = True
+            Me.WaveFreqTrackBar.Enabled = True
+            Me.FreqTextBox.Enabled = True
+
+            Me.LabelPhase.Enabled = True
+            Me.WavePhaseTrackBar.Enabled = True
+            Me.PhaseTextBox.Enabled = True
+
+            Me.RandomButton.Visible = False
         End If
 
-        Me.LabelFreq.Enabled = state
-        Me.WaveFreqTrackBar.Enabled = state
-        Me.FreqTextBox.Enabled = state
-
-        Me.LabelPhase.Enabled = state
-        Me.WavePhaseTrackBar.Enabled = state
-        Me.PhaseTextBox.Enabled = state
-
-        Me.RandomButton.Visible = Not state
     End Sub
 
 
@@ -1028,19 +991,25 @@ Public Class MainForm
         End If
 
         SetWavePhase(value)
+
     End Sub
 
 
 
     Private Sub ValidateFreqValue(ByVal value As Integer)
 
-        If value > 255 Then
+        Dim WaveLengthValue As Integer = WaveLengthTrackBar.Value
+
+        If WaveLengthValue < value * 4 Then
+            value = WaveLengthValue / 4
+        ElseIf value > 255 Then
             value = 255
         ElseIf value < 1 Then
             value = 1
         End If
 
         SetWaveFreq(value)
+
     End Sub
 
 
@@ -1053,8 +1022,8 @@ Public Class MainForm
 
 
     Private Sub ValidateWaveLength(ByVal value As Integer)
-        If value > 1024 Then
-            value = 1024
+        If value > MaxLength Then
+            value = MaxLength
         ElseIf value < 8 Then
             value = 8
         End If
@@ -1069,6 +1038,7 @@ Public Class MainForm
             WaveLengthTextBox.Text = CStr(defaultWaveLength)
         End If
         ValidateWaveLength(CInt(WaveLengthTextBox.Text))
+        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         GenerateData()
     End Sub
 
@@ -1566,8 +1536,6 @@ Public Class MainForm
         Dim newInfo As New ProjectInfo
         Dim aNode As XmlNode
         'Dim anAttribute As XmlAttribute
-
-
 
         ' get project info ############################################
         aNode = aDataNode.SelectSingleNode("@name")

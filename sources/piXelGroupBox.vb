@@ -54,8 +54,8 @@ Public Class piXelGroupBox
             lineColor = Color.FromArgb(70, 70, 70)
             charColor = Color.FromArgb(255, 42, 83, 138)
         Else
-            lineColor = Color.LightGray
-            charColor = Color.FromArgb(180, 42, 83, 138)
+            lineColor = Color.DarkGray   'LightGray
+            charColor = Color.FromArgb(140, 80, 80, 80)
         End If
 
         linePen = New Pen(lineColor, 4)
@@ -63,11 +63,12 @@ Public Class piXelGroupBox
 
         e.Graphics.FillRectangle(New SolidBrush(Color.LightGray), posX, posY, boxWidth - 2, boxHeight)
 
-        If Me.Enabled Then
-            e.Graphics.DrawLine(linePen, posX, posY, 10, posY)
-        Else
-            e.Graphics.DrawLine(linePen, posX, posY, boxWidth, posY)
-        End If
+        e.Graphics.DrawLine(linePen, posX, posY, 10, posY)
+        'If Me.Enabled Then
+        '    e.Graphics.DrawLine(linePen, posX, posY, 10, posY)
+        'Else
+        '    e.Graphics.DrawLine(linePen, posX, posY, boxWidth, posY)
+        'End If
 
         e.Graphics.DrawLine(linePen, posX, posY, posX, boxHeight)
         e.Graphics.DrawLine(linePen, boxWidth, posY, boxWidth, boxHeight)
@@ -86,9 +87,9 @@ Public Class piXelGroupBox
             Next
         End If
 
-        If Me.Enabled Then
-            e.Graphics.DrawLine(linePen, posChar + 4, posY, boxWidth, posY)
-        End If
+        'If Me.Enabled Then
+        e.Graphics.DrawLine(linePen, posChar + 4, posY, boxWidth, posY)
+        'End If
 
     End Sub
 

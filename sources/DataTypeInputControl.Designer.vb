@@ -58,6 +58,7 @@ Partial Class DataTypeInputControl
         'WordDataLabel
         '
         Me.WordDataLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WordDataLabel.ForeColor = System.Drawing.Color.Black
         Me.WordDataLabel.Location = New System.Drawing.Point(10, 61)
         Me.WordDataLabel.Name = "WordDataLabel"
         Me.WordDataLabel.Size = New System.Drawing.Size(94, 21)
@@ -67,7 +68,9 @@ Partial Class DataTypeInputControl
         '
         'AsmWordDataTextBox
         '
+        Me.AsmWordDataTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.AsmWordDataTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AsmWordDataTextBox.ForeColor = System.Drawing.Color.Black
         Me.AsmWordDataTextBox.Location = New System.Drawing.Point(107, 61)
         Me.AsmWordDataTextBox.MaxLength = 128
         Me.AsmWordDataTextBox.Name = "AsmWordDataTextBox"
@@ -80,6 +83,7 @@ Partial Class DataTypeInputControl
         Me.AddIndexCheck.BackColor = System.Drawing.Color.Transparent
         Me.AddIndexCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.AddIndexCheck.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AddIndexCheck.ForeColor = System.Drawing.Color.Black
         Me.AddIndexCheck.Location = New System.Drawing.Point(31, 88)
         Me.AddIndexCheck.Name = "AddIndexCheck"
         Me.AddIndexCheck.Size = New System.Drawing.Size(90, 18)
@@ -90,6 +94,7 @@ Partial Class DataTypeInputControl
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(10, 34)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(94, 21)
@@ -99,7 +104,9 @@ Partial Class DataTypeInputControl
         '
         'AsmByteDataTextBox
         '
+        Me.AsmByteDataTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.AsmByteDataTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AsmByteDataTextBox.ForeColor = System.Drawing.Color.Black
         Me.AsmByteDataTextBox.Location = New System.Drawing.Point(107, 34)
         Me.AsmByteDataTextBox.MaxLength = 128
         Me.AsmByteDataTextBox.Name = "AsmByteDataTextBox"
@@ -108,6 +115,7 @@ Partial Class DataTypeInputControl
         '
         'SizeLineComboBox
         '
+        Me.SizeLineComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.SizeLineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.SizeLineComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.SizeLineComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -122,6 +130,7 @@ Partial Class DataTypeInputControl
         'Label17
         '
         Me.Label17.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.Black
         Me.Label17.Location = New System.Drawing.Point(0, 84)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
@@ -133,6 +142,7 @@ Partial Class DataTypeInputControl
         'NumberSystemLabel
         '
         Me.NumberSystemLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumberSystemLabel.ForeColor = System.Drawing.Color.Black
         Me.NumberSystemLabel.Location = New System.Drawing.Point(0, 29)
         Me.NumberSystemLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.NumberSystemLabel.Name = "NumberSystemLabel"
@@ -143,6 +153,7 @@ Partial Class DataTypeInputControl
         '
         'CompressComboBox
         '
+        Me.CompressComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.CompressComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CompressComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.CompressComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -157,6 +168,7 @@ Partial Class DataTypeInputControl
         'CompressLabel
         '
         Me.CompressLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CompressLabel.ForeColor = System.Drawing.Color.Black
         Me.CompressLabel.Location = New System.Drawing.Point(0, 56)
         Me.CompressLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.CompressLabel.Name = "CompressLabel"
@@ -168,6 +180,7 @@ Partial Class DataTypeInputControl
         'LineNumberLabel
         '
         Me.LineNumberLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LineNumberLabel.ForeColor = System.Drawing.Color.Black
         Me.LineNumberLabel.Location = New System.Drawing.Point(14, 10)
         Me.LineNumberLabel.Name = "LineNumberLabel"
         Me.LineNumberLabel.Size = New System.Drawing.Size(100, 14)
@@ -177,7 +190,9 @@ Partial Class DataTypeInputControl
         '
         'IntervalText
         '
+        Me.IntervalText.BackColor = System.Drawing.Color.WhiteSmoke
         Me.IntervalText.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.IntervalText.ForeColor = System.Drawing.Color.Black
         Me.IntervalText.Location = New System.Drawing.Point(117, 34)
         Me.IntervalText.MaxLength = 3
         Me.IntervalText.Name = "IntervalText"
@@ -188,7 +203,9 @@ Partial Class DataTypeInputControl
         '
         'LineNumberText
         '
+        Me.LineNumberText.BackColor = System.Drawing.Color.WhiteSmoke
         Me.LineNumberText.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LineNumberText.ForeColor = System.Drawing.Color.Black
         Me.LineNumberText.Location = New System.Drawing.Point(117, 7)
         Me.LineNumberText.MaxLength = 5
         Me.LineNumberText.Name = "LineNumberText"
@@ -200,6 +217,7 @@ Partial Class DataTypeInputControl
         'IntervalLabel
         '
         Me.IntervalLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.IntervalLabel.ForeColor = System.Drawing.Color.Black
         Me.IntervalLabel.Location = New System.Drawing.Point(14, 37)
         Me.IntervalLabel.Name = "IntervalLabel"
         Me.IntervalLabel.Size = New System.Drawing.Size(100, 14)
@@ -212,6 +230,7 @@ Partial Class DataTypeInputControl
         Me.RemoveZerosCheck.AutoSize = True
         Me.RemoveZerosCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.RemoveZerosCheck.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RemoveZerosCheck.ForeColor = System.Drawing.Color.Black
         Me.RemoveZerosCheck.Location = New System.Drawing.Point(15, 62)
         Me.RemoveZerosCheck.Name = "RemoveZerosCheck"
         Me.RemoveZerosCheck.Size = New System.Drawing.Size(115, 18)
@@ -221,9 +240,11 @@ Partial Class DataTypeInputControl
         '
         'NumberSystemCombo
         '
+        Me.NumberSystemCombo.BackColor = System.Drawing.Color.WhiteSmoke
         Me.NumberSystemCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.NumberSystemCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.NumberSystemCombo.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NumberSystemCombo.ForeColor = System.Drawing.Color.Black
         Me.NumberSystemCombo.FormattingEnabled = True
         Me.NumberSystemCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
         Me.NumberSystemCombo.Location = New System.Drawing.Point(101, 30)
@@ -234,6 +255,7 @@ Partial Class DataTypeInputControl
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(0, 3)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(100, 21)
@@ -243,9 +265,11 @@ Partial Class DataTypeInputControl
         '
         'LanguageComboBox
         '
+        Me.LanguageComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.LanguageComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.LanguageComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LanguageComboBox.ForeColor = System.Drawing.Color.Black
         Me.LanguageComboBox.FormattingEnabled = True
         Me.LanguageComboBox.Items.AddRange(New Object() {"Assembler default", "Assembler SJasm", "Assembler SDCC", "BASIC", "C"})
         Me.LanguageComboBox.Location = New System.Drawing.Point(101, 3)
@@ -256,6 +280,7 @@ Partial Class DataTypeInputControl
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Black
         Me.Label4.Location = New System.Drawing.Point(10, 34)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(92, 21)
@@ -265,7 +290,9 @@ Partial Class DataTypeInputControl
         '
         'CdataTypeTextBox
         '
+        Me.CdataTypeTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.CdataTypeTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CdataTypeTextBox.ForeColor = System.Drawing.Color.Black
         Me.CdataTypeTextBox.Location = New System.Drawing.Point(107, 34)
         Me.CdataTypeTextBox.MaxLength = 128
         Me.CdataTypeTextBox.Name = "CdataTypeTextBox"
@@ -305,7 +332,9 @@ Partial Class DataTypeInputControl
         '
         'AsmFieldNameTextBox
         '
+        Me.AsmFieldNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.AsmFieldNameTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AsmFieldNameTextBox.ForeColor = System.Drawing.Color.Black
         Me.AsmFieldNameTextBox.Location = New System.Drawing.Point(107, 7)
         Me.AsmFieldNameTextBox.Name = "AsmFieldNameTextBox"
         Me.AsmFieldNameTextBox.Size = New System.Drawing.Size(120, 22)
@@ -315,6 +344,7 @@ Partial Class DataTypeInputControl
         'AsmFieldNameLabel
         '
         Me.AsmFieldNameLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AsmFieldNameLabel.ForeColor = System.Drawing.Color.Black
         Me.AsmFieldNameLabel.Location = New System.Drawing.Point(10, 7)
         Me.AsmFieldNameLabel.Name = "AsmFieldNameLabel"
         Me.AsmFieldNameLabel.Size = New System.Drawing.Size(94, 21)
@@ -337,7 +367,9 @@ Partial Class DataTypeInputControl
         '
         'CesFieldNameTextBox
         '
+        Me.CesFieldNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.CesFieldNameTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CesFieldNameTextBox.ForeColor = System.Drawing.Color.Black
         Me.CesFieldNameTextBox.Location = New System.Drawing.Point(107, 7)
         Me.CesFieldNameTextBox.Name = "CesFieldNameTextBox"
         Me.CesFieldNameTextBox.Size = New System.Drawing.Size(120, 22)
@@ -347,6 +379,7 @@ Partial Class DataTypeInputControl
         'CesFieldNameLabel
         '
         Me.CesFieldNameLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CesFieldNameLabel.ForeColor = System.Drawing.Color.Black
         Me.CesFieldNameLabel.Location = New System.Drawing.Point(10, 7)
         Me.CesFieldNameLabel.Name = "CesFieldNameLabel"
         Me.CesFieldNameLabel.Size = New System.Drawing.Size(94, 21)
