@@ -89,10 +89,10 @@
     <Compile Include="MessageDialog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MiniConfigWin.designer.vb">
-      <DependentUpon>MiniConfigWin.vb</DependentUpon>
+    <Compile Include="ConfigDialog.designer.vb">
+      <DependentUpon>ConfigDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="MiniConfigWin.vb">
+    <Compile Include="ConfigDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -165,8 +165,8 @@
     <EmbeddedResource Include="MessageDialog.resx">
       <DependentUpon>MessageDialog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MiniConfigWin.resx">
-      <DependentUpon>MiniConfigWin.vb</DependentUpon>
+    <EmbeddedResource Include="ConfigDialog.resx">
+      <DependentUpon>ConfigDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

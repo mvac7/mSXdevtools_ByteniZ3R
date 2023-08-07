@@ -20,12 +20,14 @@
     End Enum
 
 
+
     Public Shadows Enum Compress_Type As Integer
         RAW
         RLE
         RLEWB
         PLETTER
     End Enum
+
 
 
     Public Event DataChanged()
@@ -164,7 +166,7 @@
 
 
 
-    Public ReadOnly Property C_DataType As String
+    Public ReadOnly Property CdataType As String
         Get
             Return Me.CdataTypeTextBox.Text
         End Get
@@ -313,7 +315,7 @@
         Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmWordDataCommand
 
-        Me.CdataTypeTextBox.Text = Me.AppConfig.CByteCommand
+        Me.CdataTypeTextBox.Text = Me.AppConfig.CdataType
 
         Me.LineNumberText.Text = CStr(Me.AppConfig.BASIC_initLine)
         Me.IntervalText.Text = CStr(Me.AppConfig.BASIC_incLines)
@@ -330,6 +332,7 @@
 
 
     Private Sub AddHandlers()
+	
         AddHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
         AddHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         AddHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
@@ -342,14 +345,19 @@
         AddHandler Me.RemoveZerosCheck.CheckedChanged, AddressOf RemoveZerosCheck_CheckedChanged
         AddHandler Me.AddIndexCheck.CheckedChanged, AddressOf AddIndexCheck_CheckedChanged
 
-        AddHandler Me.LineNumberText.TextChanged, AddressOf Text_TextChanged
+		AddHandler Me.LineNumberText.TextChanged, AddressOf Text_TextChanged
         AddHandler Me.IntervalText.TextChanged, AddressOf Text_TextChanged
+        AddHandler Me.AsmByteDataTextBox.TextChanged, AddressOf Text_TextChanged
+        AddHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
+
+        AddHandler Me.CdataTypeTextBox.TextChanged, AddressOf Text_TextChanged
 
     End Sub
 
 
 
     Private Sub RemoveHandlers()
+	
         RemoveHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
         RemoveHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         RemoveHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
@@ -364,6 +372,10 @@
 
         RemoveHandler Me.LineNumberText.TextChanged, AddressOf Text_TextChanged
         RemoveHandler Me.IntervalText.TextChanged, AddressOf Text_TextChanged
+        RemoveHandler Me.AsmByteDataTextBox.TextChanged, AddressOf Text_TextChanged
+        RemoveHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
+
+        RemoveHandler Me.CdataTypeTextBox.TextChanged, AddressOf Text_TextChanged
 
     End Sub
 
@@ -389,7 +401,6 @@
 
     Private Sub LanguageComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) 'Handles LanguageComboBox.SelectedIndexChanged
         RemoveHandlers()
-        Me.AppConfig.CodeOutput = Me.LanguageComboBox.SelectedIndex
         ShowLanguageStatus()
 
         ' ----------------------------------------------------------------------------------------- set default values
@@ -480,8 +491,6 @@
 
         End Select
 
-
-
     End Sub
 
 
@@ -500,21 +509,21 @@
 
 
     Private Sub NumberSystem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
-        Me.AppConfig.CodeNumberSystem = NumberSystemCombo.SelectedIndex
+        'Me.AppConfig.CodeNumberSystem = NumberSystemCombo.SelectedIndex
         RaiseEvent DataChanged()
     End Sub
 
 
 
     Private Sub SizeLineComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
-        Me.AppConfig.CodeLineSize = SizeLineComboBox.SelectedIndex
+        'Me.AppConfig.CodeLineSize = SizeLineComboBox.SelectedIndex
         RaiseEvent DataChanged()
     End Sub
 
 
 
     Private Sub CompressComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
-        Me.AppConfig.CodeCompressType = CompressComboBox.SelectedIndex
+        'Me.AppConfig.CodeCompressType = CompressComboBox.SelectedIndex
         _compressType = Me.AppConfig.CodeCompressType
         RaiseEvent DataChanged()
     End Sub
@@ -522,21 +531,21 @@
 
 
     Private Sub CdataTypeTextBox_TextChanged(sender As System.Object, e As System.EventArgs) 'Handles CdataTypeTextBox.TextChanged
-        Me.AppConfig.CByteCommand = Me.CdataTypeTextBox.Text
+        'Me.AppConfig.CdataType = Me.CdataTypeTextBox.Text
         RaiseEvent DataChanged()
     End Sub
 
 
 
     Private Sub AsmCommandTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.AppConfig.AsmByteCommand = Me.AsmByteDataTextBox.Text
+        'Me.AppConfig.AsmByteCommand = Me.AsmByteDataTextBox.Text
         RaiseEvent DataChanged()
     End Sub
 
 
 
     Private Sub AsmWordDataTextBox_TextChanged(sender As System.Object, e As System.EventArgs)
-        Me.AppConfig.AsmWordDataCommand = Me.AsmWordDataTextBox.Text
+        'Me.AppConfig.AsmWordDataCommand = Me.AsmWordDataTextBox.Text
         RaiseEvent DataChanged()
     End Sub
 
@@ -613,29 +622,6 @@
             aNumber = 10
         End If
         Return aNumber
-    End Function
-
-
-
-    Public Function GetInfoName(name As String) As String
-
-        Select Case Me.CompressComboBox.SelectedIndex
-
-            Case 1
-                name += "_RLE"
-
-            Case 2
-                name += "_RLEWB"
-
-            Case 3
-                name += "_PLT"
-
-            Case Else
-
-
-        End Select
-
-        Return name
     End Function
 
 

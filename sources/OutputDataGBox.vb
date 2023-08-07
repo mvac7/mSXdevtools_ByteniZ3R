@@ -139,7 +139,7 @@ Public Class OutputDataGBox
 
     Public ReadOnly Property C_DataType As String
         Get
-            Return DataTypeInput.C_DataType
+            Return DataTypeInput.CdataType
         End Get
     End Property
 
@@ -347,7 +347,7 @@ Public Class OutputDataGBox
         ' show data in respective code language
         Select Case DataTypeInput.CodeLanguage
             Case DataFormat.ProgrammingLanguage.C
-                outputSource = aMSXDataFormat.GetCcode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.FieldName, comments, DataTypeInput.C_DataType)
+                outputSource = aMSXDataFormat.GetCcode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.FieldName, comments, DataTypeInput.CdataType)
 
             Case DataFormat.ProgrammingLanguage.ASSEMBLER
                 outputSource = aMSXDataFormat.GetAssemblerCode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.FieldName, comments, DataTypeInput.AsmByteCommand)

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class MiniConfigWin
+Partial Class ConfigDialog
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -23,7 +23,7 @@ Partial Class MiniConfigWin
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MiniConfigWin))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConfigDialog))
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.DataLabelTextBox = New System.Windows.Forms.TextBox()
         Me.NumFormatComboBox = New System.Windows.Forms.ComboBox()

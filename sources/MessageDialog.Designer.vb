@@ -48,10 +48,10 @@ Partial Class MessageDialog
         Me.OK_Button.ForeColor = System.Drawing.SystemColors.ControlText
         Me.OK_Button.ImageIndex = 0
         Me.OK_Button.ImageList = Me.AcceptImageList
-        Me.OK_Button.Location = New System.Drawing.Point(180, 4)
+        Me.OK_Button.Location = New System.Drawing.Point(193, 4)
         Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(130, 36)
+        Me.OK_Button.Size = New System.Drawing.Size(125, 36)
         Me.OK_Button.TabIndex = 3
         Me.OK_Button.UseVisualStyleBackColor = False
         '
@@ -75,10 +75,10 @@ Partial Class MessageDialog
         Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Cancel_Button.ImageIndex = 0
         Me.Cancel_Button.ImageList = Me.CancelImageList
-        Me.Cancel_Button.Location = New System.Drawing.Point(310, 4)
+        Me.Cancel_Button.Location = New System.Drawing.Point(318, 4)
         Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(110, 36)
+        Me.Cancel_Button.Size = New System.Drawing.Size(102, 36)
         Me.Cancel_Button.TabIndex = 4
         Me.Cancel_Button.UseVisualStyleBackColor = False
         Me.Cancel_Button.Visible = False

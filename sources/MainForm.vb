@@ -1036,9 +1036,10 @@ Public Class MainForm
     Private Sub WaveLengthTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveLengthTextBox.Validating
         If Not IsNumeric(WaveLengthTextBox.Text) Then
             WaveLengthTextBox.Text = CStr(defaultWaveLength)
+        Else
+            ValidateWaveLength(CInt(WaveLengthTextBox.Text))
+            ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         End If
-        ValidateWaveLength(CInt(WaveLengthTextBox.Text))
-        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         GenerateData()
     End Sub
 
@@ -1630,7 +1631,7 @@ Public Class MainForm
 
     Private Sub SetConfig()
 
-        Dim aConfig As New MiniConfigWin(Me.AppConfig, MiniConfigWin.CONFIG_TYPE.BYTENIZ3R)
+        Dim aConfig As New ConfigDialog(Me.AppConfig, ConfigDialog.CONFIG_TYPE.BYTENIZ3R)
 
         If aConfig.ShowDialog() = DialogResult.OK Then
             Me.AppConfig.Save()

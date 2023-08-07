@@ -2,8 +2,8 @@
 
 Public NotInheritable Class AboutWin
 
-    Private Const URL_GPL As String = "http://www.gnu.org/licenses/gpl-3.0-standalone.html"
-
+    Private Const URL_GPL3 As String = "https://www.gnu.org/licenses/gpl-3.0.html"
+    Private Const URL_GPL As String = "https://www.gnu.org/licenses"
 
     Public WriteOnly Property SetLogo() As Image
         Set(value As Image)
@@ -44,7 +44,6 @@ Public NotInheritable Class AboutWin
 
         Dim widthCalc As Integer
 
-        Dim LicenseText As String
         Dim ApplicationTitle As String
 
         If Not My.Application.Info.Title = "" Then
@@ -64,13 +63,6 @@ Public NotInheritable Class AboutWin
         If Me.DescriptionLabel.Text = "description..." Then
             Me.DescriptionLabel.Text = My.Application.Info.Description
         End If
-
-        LicenseText = "License:"
-        LicenseText += vbNewLine + "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
-        LicenseText += vbNewLine + vbNewLine + "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
-        LicenseText += vbNewLine + vbNewLine + "You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>."
-
-        Me.LicenseTextBox.Text = LicenseText
 
         If Not LogoPictureBox.Image Is Nothing Then
 
@@ -94,8 +86,11 @@ Public NotInheritable Class AboutWin
 
 
     Private Sub GPLButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LicenseButton.Click
-        System.Diagnostics.Process.Start(URL_GPL)
+        System.Diagnostics.Process.Start(URL_GPL3)
     End Sub
 
+    Private Sub Licens3LinkLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles Licens3LinkLabel.LinkClicked
+        System.Diagnostics.Process.Start(URL_GPL)
+    End Sub
 
 End Class

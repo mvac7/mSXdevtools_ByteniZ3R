@@ -4,7 +4,7 @@
 ''' <summary>
 ''' 
 ''' </summary>
-Public Class MiniConfigWin
+Public Class ConfigDialog
 
     Private AppConfig As Config
 
@@ -87,7 +87,7 @@ Public Class MiniConfigWin
         Me.CompressTypeComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
         Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmWordDataCommand
-        Me.CByteDataTextBox.Text = Me.AppConfig.CByteCommand
+        Me.CByteDataTextBox.Text = Me.AppConfig.CdataType
 
         Me.BASICdataTextBox.Text = Me.AppConfig.BASIC_DataInstruction
         Me.BASICcommentComboBox.SelectedIndex = GetBASIC_CommentInstruction_Index(Me.AppConfig.BASIC_CommentInstruction)
@@ -283,7 +283,7 @@ Public Class MiniConfigWin
         Me.AppConfig.CodeCompressType = Me.CompressTypeComboBox.SelectedIndex
         Me.AppConfig.AsmByteCommand = Me.AsmByteDataTextBox.Text
         Me.AppConfig.AsmWordDataCommand = Me.AsmWordDataTextBox.Text
-        Me.AppConfig.CByteCommand = Me.CByteDataTextBox.Text
+        Me.AppConfig.CdataType = Me.CByteDataTextBox.Text
         Me.AppConfig.BASIC_initLine = CInt(Me.BASICinitLineTextBox.Text)
         Me.AppConfig.BASIC_incLines = CInt(Me.BASICincLineslTextBox.Text)
         Me.AppConfig.BASIC_remove0 = Me.RemoveZerosCheck.Checked

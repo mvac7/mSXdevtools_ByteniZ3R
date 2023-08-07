@@ -115,6 +115,8 @@ Partial Class DataTypeInputControl
         '
         'SizeLineComboBox
         '
+        Me.SizeLineComboBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SizeLineComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.SizeLineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.SizeLineComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -153,6 +155,8 @@ Partial Class DataTypeInputControl
         '
         'CompressComboBox
         '
+        Me.CompressComboBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CompressComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.CompressComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CompressComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -240,6 +244,8 @@ Partial Class DataTypeInputControl
         '
         'NumberSystemCombo
         '
+        Me.NumberSystemCombo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NumberSystemCombo.BackColor = System.Drawing.Color.WhiteSmoke
         Me.NumberSystemCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.NumberSystemCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -265,6 +271,8 @@ Partial Class DataTypeInputControl
         '
         'LanguageComboBox
         '
+        Me.LanguageComboBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LanguageComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.LanguageComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -301,6 +309,7 @@ Partial Class DataTypeInputControl
         '
         'BasicPanel
         '
+        Me.BasicPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BasicPanel.BackColor = System.Drawing.Color.Transparent
         Me.BasicPanel.BackgroundImage = CType(resources.GetObject("BasicPanel.BackgroundImage"), System.Drawing.Image)
         Me.BasicPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
@@ -316,6 +325,7 @@ Partial Class DataTypeInputControl
         '
         'AssemblerPanel
         '
+        Me.AssemblerPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AssemblerPanel.BackColor = System.Drawing.Color.Transparent
         Me.AssemblerPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.AssemblerPanel.Controls.Add(Me.AsmFieldNameTextBox)
@@ -354,6 +364,7 @@ Partial Class DataTypeInputControl
         '
         'CesPanel
         '
+        Me.CesPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CesPanel.BackColor = System.Drawing.Color.Transparent
         Me.CesPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.CesPanel.Controls.Add(Me.Label4)

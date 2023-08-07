@@ -3,6 +3,23 @@ Imports System.IO
 
 Public Class Config
 
+
+    Public Shadows Enum FIRST_PROJECT As Integer
+        PRESENTATION
+        NEWPROJECT
+        LASTPROJECT
+    End Enum
+
+
+
+    Public Shadows Enum PATH_TYPE As Integer
+        APP
+        LAST_USED
+        USER
+    End Enum
+
+
+
     Private ConfigFileName As String = "tMSgfX"
 
     Private ConfigPath As String
@@ -37,7 +54,7 @@ Public Class Config
     Public Shadows Const def_CodeCompressType As Integer = 0 ' RAW
     Public Shadows Const def_AsmByteCommand As String = "DB"
     Public Shadows Const def_AsmWordDataCommand As String = "DW"
-    Public Shadows Const def_CByteCommand As String = "const char"
+    Public Shadows Const def_CdataType As String = "const char"
     Public Shadows Const def_DataLabel As String = "DATA"
 
     Public Shadows Const def_BASIC_CommentInstruction As String = "REM"
@@ -61,15 +78,6 @@ Public Class Config
     Public Color_OUTPUT_INK As Color
 
 
-    Public Shadows Enum FIRST_PROJECT As Integer
-        PRESENTATION
-        NEWPROJECT
-        LASTPROJECT
-    End Enum
-
-
-
-
     Public firstProjectType As FIRST_PROJECT = FIRST_PROJECT.NEWPROJECT
 
     Public PathLastProject As String = ""
@@ -89,7 +97,7 @@ Public Class Config
     Public AsmByteCommand As String
     Public AsmWordDataCommand As String
 
-    Public CByteCommand As String
+    Public CdataType As String
 
     Public BASIC_DataInstruction As String
     Public BASIC_CommentInstruction As String
@@ -120,39 +128,8 @@ Public Class Config
     End Property
 
 
-    Public Shadows Enum PATH_TYPE As Integer
-        APP
-        LAST_USED
-        USER
-    End Enum
 
 
-    'Public PathTmsgfxPresentation As String = "tMSgfX." ' + MSXOpenDocumentIO.Extension_ProjectDocument
-    'Public ReadOnly Property PathTmsgfxTitle As String
-    '    Get
-    '        Return "tMSgfX." + mSXdevtools.FileDataTypes.MSXOpenDocumentIO.Extension_ProjectDocument
-    '    End Get
-    'End Property
-
-
-    'Public Property PathProject() As String
-    '    Get
-    '        Select Case Me.PathProject_Type
-    '            Case PATH_TYPE.LAST_USED
-    '                Return Me._PathProject
-    '            Case PATH_TYPE.USER
-    '                Return Me._PathProject
-    '            Case Else
-    '                Return Application.StartupPath
-    '        End Select
-    '    End Get
-    '    Set(ByVal value As String)
-    '        Me._PathProject = value
-    '    End Set
-    'End Property
-
-
-    'Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName
 
 
     Public Sub New()
@@ -338,11 +315,11 @@ Public Class Config
                             Me.AsmWordDataCommand = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("CByteCommand")
+                        aNode = groupNode.SelectSingleNode("CdataType")
                         If aNode Is Nothing Then
-                            Me.CByteCommand = def_CByteCommand
+                            Me.CdataType = def_CdataType
                         Else
-                            Me.CByteCommand = aNode.InnerText
+                            Me.CdataType = aNode.InnerText
                         End If
 
 
@@ -755,8 +732,8 @@ Public Class Config
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("CByteCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.CByteCommand)
+            anElement = aXmlDoc.CreateElement("CdataType")
+            txtElement = aXmlDoc.CreateTextNode(Me.CdataType)
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
@@ -874,7 +851,7 @@ Public Class Config
         Me.AsmByteCommand = def_AsmByteCommand
         Me.AsmWordDataCommand = def_AsmWordDataCommand
 
-        Me.CByteCommand = def_CByteCommand
+        Me.CdataType = def_CdataType
 
         Me.BASIC_DataInstruction = def_BASIC_DataInstruction
         Me.BASIC_CommentInstruction = def_BASIC_CommentInstruction
@@ -887,6 +864,8 @@ Public Class Config
 
         Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
         Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
+
+        Me.DataLabel = def_DataLabel
 
     End Sub
 
