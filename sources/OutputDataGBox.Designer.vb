@@ -22,52 +22,36 @@ Partial Class OutputDataGBox
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputDataGBox))
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
-        Me.OutputText = New System.Windows.Forms.TextBox()
+        Me.PiXelGroupBox1 = New ByteniZ3R.piXelST_GroupBox()
         Me.OutputButtonsPanel = New System.Windows.Forms.Panel()
-        Me.CopyAllButton = New System.Windows.Forms.Button()
-        Me.SaveSourceButton = New System.Windows.Forms.Button()
-        Me.SaveCompressFileButton = New System.Windows.Forms.Button()
-        Me.PiXelGroupBox1 = New ByteniZ3R.piXelGroupBox()
-        Me.OutputButtonsPanel.SuspendLayout()
+        Me.CopyAllButton = New ByteniZ3R.piXelST_Button()
+        Me.SaveSourceButton = New ByteniZ3R.piXelST_Button()
+        Me.SaveCompressFileButton = New ByteniZ3R.piXelST_Button()
+        Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
+        Me.OutputTextBox = New System.Windows.Forms.TextBox()
         Me.PiXelGroupBox1.SuspendLayout()
+        Me.OutputButtonsPanel.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DataTypeInput
+        'PiXelGroupBox1
         '
-        Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
-        Me.DataTypeInput.Compress = ByteniZ3R.DataTypeInputControl.Compress_Type.RAW
-        Me.DataTypeInput.EnableAssemblerIndex = False
-        Me.DataTypeInput.EnableCompress = False
-        Me.DataTypeInput.EnableDataSizeLine = False
-        Me.DataTypeInput.FieldName = "DATA"
-        Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataTypeInput.Location = New System.Drawing.Point(14, 26)
-        Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DataTypeInput.Name = "DataTypeInput"
-        Me.DataTypeInput.Size = New System.Drawing.Size(510, 117)
-        Me.DataTypeInput.SizeLineIndex = 6
-        Me.DataTypeInput.TabIndex = 68
-        '
-        'OutputText
-        '
-        Me.OutputText.AcceptsReturn = True
-        Me.OutputText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OutputText.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.OutputText.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.OutputText.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputText.ForeColor = System.Drawing.Color.Black
-        Me.OutputText.Location = New System.Drawing.Point(14, 150)
-        Me.OutputText.Margin = New System.Windows.Forms.Padding(4)
-        Me.OutputText.Multiline = True
-        Me.OutputText.Name = "OutputText"
-        Me.OutputText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.OutputText.Size = New System.Drawing.Size(573, 50)
-        Me.OutputText.TabIndex = 40
+        Me.PiXelGroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PiXelGroupBox1.BGColor = System.Drawing.Color.LightGray
+        Me.PiXelGroupBox1.Controls.Add(Me.OutputButtonsPanel)
+        Me.PiXelGroupBox1.Controls.Add(Me.DataTypeInput)
+        Me.PiXelGroupBox1.Controls.Add(Me.OutputTextBox)
+        Me.PiXelGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PiXelGroupBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.PiXelGroupBox1.LineColor = System.Drawing.Color.DimGray
+        Me.PiXelGroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PiXelGroupBox1.MinimumSize = New System.Drawing.Size(600, 260)
+        Me.PiXelGroupBox1.Name = "PiXelGroupBox1"
+        Me.PiXelGroupBox1.Padding = New System.Windows.Forms.Padding(0)
+        Me.PiXelGroupBox1.Size = New System.Drawing.Size(600, 260)
+        Me.PiXelGroupBox1.TabIndex = 5
+        Me.PiXelGroupBox1.TabStop = False
+        Me.PiXelGroupBox1.Text = "Output Data"
         '
         'OutputButtonsPanel
         '
@@ -77,67 +61,99 @@ Partial Class OutputDataGBox
         Me.OutputButtonsPanel.Controls.Add(Me.CopyAllButton)
         Me.OutputButtonsPanel.Controls.Add(Me.SaveSourceButton)
         Me.OutputButtonsPanel.Controls.Add(Me.SaveCompressFileButton)
-        Me.OutputButtonsPanel.Location = New System.Drawing.Point(13, 207)
+        Me.OutputButtonsPanel.Location = New System.Drawing.Point(10, 214)
         Me.OutputButtonsPanel.Name = "OutputButtonsPanel"
-        Me.OutputButtonsPanel.Size = New System.Drawing.Size(574, 44)
+        Me.OutputButtonsPanel.Size = New System.Drawing.Size(580, 40)
         Me.OutputButtonsPanel.TabIndex = 70
         '
         'CopyAllButton
         '
-        Me.CopyAllButton.BackColor = System.Drawing.Color.Transparent
+        Me.CopyAllButton.BackColor = System.Drawing.Color.LightGray
+        Me.CopyAllButton.ButtonColor = System.Drawing.Color.Gray
+        Me.CopyAllButton.ButtonType = ByteniZ3R.piXelST_Button.Button_TYPES.Confirmation
+        Me.CopyAllButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.CopyAllButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.CopyAllButton.FlatAppearance.BorderSize = 0
         Me.CopyAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CopyAllButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CopyAllButton.Image = CType(resources.GetObject("CopyAllButton.Image"), System.Drawing.Image)
-        Me.CopyAllButton.Location = New System.Drawing.Point(4, 0)
+        Me.CopyAllButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.CopyAllButton.Location = New System.Drawing.Point(10, 0)
         Me.CopyAllButton.Name = "CopyAllButton"
-        Me.CopyAllButton.Size = New System.Drawing.Size(154, 44)
+        Me.CopyAllButton.Padding = New System.Windows.Forms.Padding(4)
+        Me.CopyAllButton.Size = New System.Drawing.Size(154, 40)
         Me.CopyAllButton.TabIndex = 41
+        Me.CopyAllButton.Text = "Copy All"
         Me.CopyAllButton.UseVisualStyleBackColor = False
         '
         'SaveSourceButton
         '
-        Me.SaveSourceButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveSourceButton.BackColor = System.Drawing.Color.LightGray
+        Me.SaveSourceButton.ButtonColor = System.Drawing.Color.Gray
+        Me.SaveSourceButton.ButtonType = ByteniZ3R.piXelST_Button.Button_TYPES.Save
+        Me.SaveSourceButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SaveSourceButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SaveSourceButton.FlatAppearance.BorderSize = 0
         Me.SaveSourceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.SaveSourceButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveSourceButton.Image = CType(resources.GetObject("SaveSourceButton.Image"), System.Drawing.Image)
-        Me.SaveSourceButton.Location = New System.Drawing.Point(158, 0)
+        Me.SaveSourceButton.ForeColor = System.Drawing.Color.Black
+        Me.SaveSourceButton.Location = New System.Drawing.Point(164, 0)
         Me.SaveSourceButton.Name = "SaveSourceButton"
-        Me.SaveSourceButton.Size = New System.Drawing.Size(208, 44)
+        Me.SaveSourceButton.Padding = New System.Windows.Forms.Padding(4)
+        Me.SaveSourceButton.Size = New System.Drawing.Size(208, 40)
         Me.SaveSourceButton.TabIndex = 42
+        Me.SaveSourceButton.Text = "Save Source"
         Me.SaveSourceButton.UseVisualStyleBackColor = False
         '
         'SaveCompressFileButton
         '
-        Me.SaveCompressFileButton.BackColor = System.Drawing.Color.Transparent
+        Me.SaveCompressFileButton.BackColor = System.Drawing.Color.LightGray
+        Me.SaveCompressFileButton.ButtonColor = System.Drawing.Color.Gray
+        Me.SaveCompressFileButton.ButtonType = ByteniZ3R.piXelST_Button.Button_TYPES.Save
+        Me.SaveCompressFileButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.SaveCompressFileButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SaveCompressFileButton.FlatAppearance.BorderSize = 0
         Me.SaveCompressFileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SaveCompressFileButton.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveCompressFileButton.Image = CType(resources.GetObject("SaveCompressFileButton.Image"), System.Drawing.Image)
-        Me.SaveCompressFileButton.Location = New System.Drawing.Point(366, 0)
+        Me.SaveCompressFileButton.ForeColor = System.Drawing.Color.Black
+        Me.SaveCompressFileButton.Location = New System.Drawing.Point(372, 0)
         Me.SaveCompressFileButton.Name = "SaveCompressFileButton"
-        Me.SaveCompressFileButton.Size = New System.Drawing.Size(208, 44)
+        Me.SaveCompressFileButton.Padding = New System.Windows.Forms.Padding(4)
+        Me.SaveCompressFileButton.Size = New System.Drawing.Size(208, 40)
         Me.SaveCompressFileButton.TabIndex = 43
+        Me.SaveCompressFileButton.Text = "Save Binary"
         Me.SaveCompressFileButton.UseVisualStyleBackColor = False
         '
-        'PiXelGroupBox1
+        'DataTypeInput
         '
-        Me.PiXelGroupBox1.Controls.Add(Me.OutputButtonsPanel)
-        Me.PiXelGroupBox1.Controls.Add(Me.DataTypeInput)
-        Me.PiXelGroupBox1.Controls.Add(Me.OutputText)
-        Me.PiXelGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PiXelGroupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PiXelGroupBox1.MinimumSize = New System.Drawing.Size(600, 260)
-        Me.PiXelGroupBox1.Name = "PiXelGroupBox1"
-        Me.PiXelGroupBox1.Padding = New System.Windows.Forms.Padding(10)
-        Me.PiXelGroupBox1.Size = New System.Drawing.Size(600, 260)
-        Me.PiXelGroupBox1.TabIndex = 5
-        Me.PiXelGroupBox1.TabStop = False
-        Me.PiXelGroupBox1.Text = "Output Data"
+        Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
+        Me.DataTypeInput.CompressType = ByteniZ3R.DataTypeInputControl.COMPRESS_TYPE.RAW
+        Me.DataTypeInput.EnableAssemblerIndex = False
+        Me.DataTypeInput.EnableCompress = False
+        Me.DataTypeInput.EnableDataLineSize = False
+        Me.DataTypeInput.FieldName = "DATA"
+        Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataTypeInput.LineSizeIndex = 6
+        Me.DataTypeInput.Location = New System.Drawing.Point(14, 26)
+        Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DataTypeInput.Name = "DataTypeInput"
+        Me.DataTypeInput.Size = New System.Drawing.Size(540, 117)
+        Me.DataTypeInput.TabIndex = 68
+        '
+        'OutputTextBox
+        '
+        Me.OutputTextBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OutputTextBox.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.OutputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.OutputTextBox.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputTextBox.ForeColor = System.Drawing.Color.Black
+        Me.OutputTextBox.Location = New System.Drawing.Point(14, 150)
+        Me.OutputTextBox.Margin = New System.Windows.Forms.Padding(4)
+        Me.OutputTextBox.Multiline = True
+        Me.OutputTextBox.Name = "OutputTextBox"
+        Me.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.OutputTextBox.Size = New System.Drawing.Size(572, 58)
+        Me.OutputTextBox.TabIndex = 40
+        Me.OutputTextBox.TabStop = False
         '
         'OutputDataGBox
         '
@@ -145,18 +161,18 @@ Partial Class OutputDataGBox
         Me.MinimumSize = New System.Drawing.Size(600, 260)
         Me.Name = "OutputDataGBox"
         Me.Size = New System.Drawing.Size(600, 260)
-        Me.OutputButtonsPanel.ResumeLayout(False)
         Me.PiXelGroupBox1.ResumeLayout(False)
         Me.PiXelGroupBox1.PerformLayout()
+        Me.OutputButtonsPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents DataTypeInput As DataTypeInputControl
-    Friend WithEvents OutputText As TextBox
+    Friend WithEvents OutputTextBox As TextBox
     Friend WithEvents OutputButtonsPanel As Panel
-    Friend WithEvents CopyAllButton As Button
-    Friend WithEvents SaveSourceButton As Button
-    Friend WithEvents SaveCompressFileButton As Button
-    Friend WithEvents PiXelGroupBox1 As piXelGroupBox
+    Friend WithEvents CopyAllButton As piXelST_Button
+    Friend WithEvents SaveSourceButton As piXelST_Button
+    Friend WithEvents SaveCompressFileButton As piXelST_Button
+    Friend WithEvents PiXelGroupBox1 As piXelST_GroupBox
 End Class

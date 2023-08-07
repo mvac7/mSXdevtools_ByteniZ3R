@@ -8,16 +8,19 @@ Public Class ConfigDialog
 
     Private AppConfig As Config
 
-    Private _type As CONFIG_TYPE
+    Private AppType As CONFIG_TYPE
 
 
-    Private Enum Language_CODE As Integer
-        ASSEMBLER_default
-        ASSEMBLER_SJasm
-        ASSEMBLER_SDCC
-        BASIC
-        C
-    End Enum
+    'Private Enum Language_CODE_index As Integer
+    '    BASIC
+    '    C
+    '    Assembler_Default
+    '    Assembler_asMSX
+    '    Assembler_tniASM
+    '    Assembler_SJasm
+    '    Assembler_SDCC
+    'End Enum
+
 
 
     Public Shadows Enum CONFIG_TYPE As Integer
@@ -34,21 +37,19 @@ Public Class ConfigDialog
     End Enum
 
 
-    Public ReadOnly Property CodeLanguage As DataFormat.ProgrammingLanguage
-        Get
-            Dim value As DataFormat.ProgrammingLanguage
 
-            Select Case Me.CodeOutputComboBox.SelectedIndex
-                Case Language_CODE.ASSEMBLER_default To Language_CODE.ASSEMBLER_SDCC
-                    value = DataFormat.ProgrammingLanguage.ASSEMBLER
-                Case Language_CODE.BASIC
-                    value = DataFormat.ProgrammingLanguage.BASIC
-                Case Language_CODE.C
-                    value = DataFormat.ProgrammingLanguage.C
-                Case Else
-                    value = DataFormat.ProgrammingLanguage.ASSEMBLER
-            End Select
-            Return value
+    Public ReadOnly Property ProgrammingLanguage As CodeInfo.PROGRAMMING_LANGUAGE
+        Get
+            Dim codeformat As New CodeInfo
+            Return codeformat.GetProgrammingLanguageByLanguageCode(Me.CodeOutputComboBox.SelectedIndex)
+        End Get
+    End Property
+
+
+
+    Public ReadOnly Property LanguageCode As CodeInfo.LANGUAGE_CODE
+        Get
+            Return Me.CodeOutputComboBox.SelectedIndex
         End Get
     End Property
 
@@ -61,7 +62,7 @@ Public Class ConfigDialog
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.AppConfig = _config
-        Me._type = aType
+        Me.AppType = aType
 
     End Sub
 
@@ -69,24 +70,13 @@ Public Class ConfigDialog
 
     Private Sub ConfigWin_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        'Me.CodeOutputComboBox.SelectedIndex = Me.AppConfig.CodeOutput
-        Select Case Me.AppConfig.CodeOutput
-            Case DataFormat.ProgrammingLanguage.C
-                Me.CodeOutputComboBox.SelectedIndex = Language_CODE.C
+        Me.CodeOutputComboBox.SelectedIndex = Me.AppConfig.CodeOutput
 
-            Case DataFormat.ProgrammingLanguage.BASIC
-                Me.CodeOutputComboBox.SelectedIndex = Language_CODE.BASIC
-
-            Case Else
-                Me.CodeOutputComboBox.SelectedIndex = Language_CODE.ASSEMBLER_default
-
-        End Select
-
-        Me.NumFormatComboBox.SelectedIndex = Me.AppConfig.CodeNumberSystem
+        Me.NumberSystemCombo.SelectedIndex = Me.AppConfig.CodeNumberSystem
         Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
         Me.CompressTypeComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
-        Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmByteCommand
-        Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmWordDataCommand
+        Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
+        Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
         Me.CByteDataTextBox.Text = Me.AppConfig.CdataType
 
         Me.BASICdataTextBox.Text = Me.AppConfig.BASIC_DataInstruction
@@ -101,6 +91,8 @@ Public Class ConfigDialog
             Me.DataLabelTextBox.Text = Me.AppConfig.DataLabel
         End If
 
+        ShowLanguageStatus()
+
 
         Me.UserNameTextBox.Text = Me.AppConfig.Author
         Me.GroupNameTextBox.Text = Me.AppConfig.Group
@@ -111,31 +103,13 @@ Public Class ConfigDialog
         SetColor(Me.OutputINKcolorButton, Me.AppConfig.Color_OUTPUT_INK)
         SetColor(Me.OutputBGcolorButton, Me.AppConfig.Color_OUTPUT_BG)
 
-
-        'If Not Me.AppConfig.PathLastProject = "" Then
-        '    Me.PathLastPRJTextBox.Text = Path.GetFileName(Me.AppConfig.PathLastProject)
-        '    Me.ToolTip1.SetToolTip(Me.PathLastPRJTextBox, Me.AppConfig.PathLastProject)
-        'End If
-
-
-        'Select Case Me.AppConfig.firstProjectType
-        '    Case Config.FIRST_PROJECT.NEWPROJECT
-        '        Me.RadioButton2.Checked = True
-
-        '    Case Config.FIRST_PROJECT.LASTPROJECT
-        '        Me.RadioButton3.Checked = True
-
-        '    Case Else
-        '        Me.RadioButton1.Checked = True
-        'End Select
+        Select Case Me.AppType
+            Case CONFIG_TYPE.OTHER
+                ProjectInfoGroupBox.Enabled = False
+                DefaultColorsGroupBox.Enabled = False
 
 
-        ' draw gradient in window-form background
-        Dim gradientBG As New Bitmap(Me.Width, Me.Height)
-        Dim newBrush As New Drawing.Drawing2D.LinearGradientBrush(New PointF(0, 0), New PointF(0, gradientBG.Height), Color.Gainsboro, Color.SlateGray)
-        Dim oneGraphic As Graphics = Graphics.FromImage(gradientBG)
-        oneGraphic.FillRectangle(newBrush, New RectangleF(0, 0, gradientBG.Width, gradientBG.Height))
-        Me.BackgroundImage = gradientBG
+        End Select
 
 
         AddHandlers()
@@ -251,11 +225,21 @@ Public Class ConfigDialog
 
         Select Case ColorConfigsComboBox.SelectedIndex
             Case 1
+                ' green phosphor 
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 52, 255, 93))
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 0, 52, 12))
+
+            Case 2
+                ' amber phosphor 
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 170, 16)) '255, 227, 52
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 85, 20, 0))
+
+            Case 3
                 ' blue MSX BASIC
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 255, 255))   'White
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 84, 85, 237))      'TMS9918A Dark Blue
 
-            Case 2
+            Case 4
                 ' green GB
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 15, 56, 15))    ' light green
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 202, 220, 159))  ' dark green
@@ -271,18 +255,18 @@ Public Class ConfigDialog
 
 
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Ok_Button.Click
 
         ' ######################################################################
         ' update config data        
 
-        Me.AppConfig.CodeOutput = Me.CodeLanguage ' <<<<<<<--------------- OJO!
+        Me.AppConfig.CodeOutput = Me.LanguageCode
 
-        Me.AppConfig.CodeNumberSystem = Me.NumFormatComboBox.SelectedIndex
+        Me.AppConfig.CodeNumberSystem = Me.NumberSystemCombo.SelectedIndex
         Me.AppConfig.CodeLineSize = Me.SizeLineComboBox.SelectedIndex
         Me.AppConfig.CodeCompressType = Me.CompressTypeComboBox.SelectedIndex
-        Me.AppConfig.AsmByteCommand = Me.AsmByteDataTextBox.Text
-        Me.AppConfig.AsmWordDataCommand = Me.AsmWordDataTextBox.Text
+        Me.AppConfig.AsmDataByteCommand = Me.AsmByteDataTextBox.Text
+        Me.AppConfig.AsmDataWordCommand = Me.AsmWordDataTextBox.Text
         Me.AppConfig.CdataType = Me.CByteDataTextBox.Text
         Me.AppConfig.BASIC_initLine = CInt(Me.BASICinitLineTextBox.Text)
         Me.AppConfig.BASIC_incLines = CInt(Me.BASICincLineslTextBox.Text)
@@ -320,92 +304,156 @@ Public Class ConfigDialog
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
+
     End Sub
 
 
 
     Private Sub CodeOutputComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles CodeOutputComboBox.SelectedIndexChanged
-
+        AdjustValuesByLanguage()
         ShowLanguageStatus()
-
     End Sub
 
 
 
     Private Sub ShowLanguageStatus()
 
-        Select Case CodeLanguage
 
-            Case DataFormat.ProgrammingLanguage.BASIC  'basic
-
-                'Me.RemoveZerosCheck.Enabled = True
-                Select Case Me.NumFormatComboBox.SelectedIndex
-                    Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                        Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.DECIMAL_n
-                    Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                        Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.BINARY_BASIC
-                    Case Else
-                        Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.HEXADECIMAL_BASIC
-                End Select
-
-            Case DataFormat.ProgrammingLanguage.C
-
-                SetSDCC_CodeFormat()
-
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-
-                If Me.CodeOutputComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SDCC Then
-
-                    Me.AsmByteDataTextBox.Text = ".db"
-                    Me.AsmWordDataTextBox.Text = ".dw"
-
-                    SetSDCC_CodeFormat()
-
-                Else
-                    If Me.CodeOutputComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SJasm Then
-                        Me.AsmByteDataTextBox.Text = "<tab>DB"
-                        Me.AsmWordDataTextBox.Text = "<tab>DW"
-                    Else
-                        Me.AsmByteDataTextBox.Text = "DB"
-                        Me.AsmWordDataTextBox.Text = "DW"
-                    End If
-
-
-                    Select Case Me.NumFormatComboBox.SelectedIndex
-                        Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                            Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.DECIMAL_nnnd      '?? default
-                        Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                            Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.BINARY_nb         '?? default
-                        Case Else
-                            Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.HEXADECIMAL_Snn   '?? default
-                    End Select
-
-                End If
-
-
-        End Select
-
-        If Me.NumFormatComboBox.SelectedIndex >= DataFormat.DataType.BINARY_n Then
-            Me.SizeLineComboBox.SelectedIndex = 0
+        If Me.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
+            DataLabelLabel.Enabled = False
+            DataLabelTextBox.Enabled = False
         Else
-            Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
+            DataLabelLabel.Enabled = True
+            DataLabelTextBox.Enabled = True
         End If
 
-    End Sub
+
+        Select Case Me.LanguageCode
+
+            Case CodeInfo.LANGUAGE_CODE.BASIC
+
+                AssemblerGroupBox.Enabled = False
+                CGroupBox.Enabled = False
+                BASICGroupBox.Enabled = True
+                Me.NumberSystemLabel.Enabled = True
+                Me.NumberSystemCombo.Enabled = True
 
 
+            Case CodeInfo.LANGUAGE_CODE.C
 
-    Private Sub SetSDCC_CodeFormat()
-        Select Case Me.NumFormatComboBox.SelectedIndex
-            Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.DECIMAL_n
-            Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.BINARY_C
-            Case Else
-                Me.NumFormatComboBox.SelectedIndex = DataFormat.DataType.HEXADECIMAL_C
+                AssemblerGroupBox.Enabled = False
+                CGroupBox.Enabled = True
+                BASICGroupBox.Enabled = False
+                Me.NumberSystemLabel.Enabled = True
+                Me.NumberSystemCombo.Enabled = True
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC
+
+                SetAssemblerFieldsStatus(False)
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SJasm
+
+                SetAssemblerFieldsStatus(False)
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_asMSX, CodeInfo.LANGUAGE_CODE.ASSEMBLER_tniASM
+
+                SetAssemblerFieldsStatus(False)
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
+
+                SetAssemblerFieldsStatus(True)
+
+
         End Select
+
+
     End Sub
 
+
+
+    Private Sub AdjustValuesByLanguage()
+
+
+
+        Select Case Me.LanguageCode
+
+            Case CodeInfo.LANGUAGE_CODE.BASIC
+
+                'Me.RemoveZerosCheck.Enabled = True
+                Select Case Me.NumberSystemCombo.SelectedIndex
+                    Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_n
+                    Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_BASIC
+                    Case Else
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_BASIC
+                End Select
+
+
+            Case CodeInfo.LANGUAGE_CODE.C
+
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_C
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC
+
+                Me.AsmByteDataTextBox.Text = ".db"
+                Me.AsmWordDataTextBox.Text = ".dw"
+
+                Select Case Me.NumberSystemCombo.SelectedIndex
+                    Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_n
+                    Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_C
+                    Case Else
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_C
+                End Select
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SJasm
+
+                Me.AsmByteDataTextBox.Text = "<tab>DB"
+                Me.AsmWordDataTextBox.Text = "<tab>DW"
+
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_asMSX, CodeInfo.LANGUAGE_CODE.ASSEMBLER_tniASM
+
+                Me.AsmByteDataTextBox.Text = "DB"
+                Me.AsmWordDataTextBox.Text = "DW"
+
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+
+
+            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
+
+                Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
+                Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
+
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+
+        End Select
+
+
+    End Sub
+
+
+
+    Private Sub SetAssemblerFieldsStatus(ByVal state As Boolean)
+
+        CGroupBox.Enabled = False
+        BASICGroupBox.Enabled = False
+
+        Me.AssemblerGroupBox.Enabled = state
+        Me.NumberSystemLabel.Enabled = state
+        Me.NumberSystemCombo.Enabled = state
+
+    End Sub
 
 
 End Class

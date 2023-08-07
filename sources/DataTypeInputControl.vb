@@ -1,4 +1,8 @@
-﻿Public Class DataTypeInputControl
+﻿''' <summary>
+''' GUI controller to manage the output format to source code.
+''' Requires the enums that are in the DataFormat class. 
+''' </summary>
+Public Class DataTypeInputControl
 
     Private AppConfig As Config
 
@@ -8,25 +12,9 @@
     Private _enableCompress As Boolean = True
     Private _enableDataSizeLine As Boolean = False
 
-    Private _compressType As Compress_Type = Compress_Type.RAW
+    Private _compressType As COMPRESS_TYPE = COMPRESS_TYPE.RAW
 
-
-    Private Enum Language_CODE As Integer
-        ASSEMBLER_default
-        ASSEMBLER_SJasm
-        ASSEMBLER_SDCC
-        BASIC
-        C
-    End Enum
-
-
-
-    Public Shadows Enum Compress_Type As Integer
-        RAW
-        RLE
-        RLEWB
-        PLETTER
-    End Enum
+    Private _dataFormat As New DataFormat
 
 
 
@@ -35,24 +23,52 @@
 
 
 
+    Public Shadows Enum COMPRESS_TYPE As Integer
+        RAW
+        RLE
+        RLEWB
+        PLETTER
+    End Enum
 
-    Public ReadOnly Property CodeLanguage As DataFormat.ProgrammingLanguage
+
+
+
+    Public ReadOnly Property LanguageCode As CodeInfo.Language_CODE
         Get
-            Dim value As DataFormat.ProgrammingLanguage
-
-            Select Case Me.LanguageComboBox.SelectedIndex
-                Case Language_CODE.ASSEMBLER_default To Language_CODE.ASSEMBLER_SDCC
-                    value = DataFormat.ProgrammingLanguage.ASSEMBLER
-                Case Language_CODE.BASIC
-                    value = DataFormat.ProgrammingLanguage.BASIC
-                Case Language_CODE.C
-                    value = DataFormat.ProgrammingLanguage.C
-                Case Else
-                    value = DataFormat.ProgrammingLanguage.ASSEMBLER
-            End Select
-            Return value
+            Return Me.LanguageComboBox.SelectedIndex
         End Get
     End Property
+
+
+
+
+
+
+    ''' <summary>
+    ''' OJO ----------------------------  Se encuentra en la clase CodeFormat  ------------- OJO!
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property ProgrammingLanguage As CodeInfo.Programming_Language
+        Get
+
+            Dim aCodeFormat As New CodeInfo
+            Return aCodeFormat.GetProgrammingLanguageByLanguageCode(LanguageComboBox.SelectedIndex)
+
+            'Dim value As CodeInfo.Programming_Language
+
+            'Select Case LanguageComboBox.SelectedIndex
+            '    Case CodeInfo.Language_CODE.BASIC
+            '        value = CodeInfo.Programming_Language.BASIC
+            '    Case CodeInfo.Language_CODE.C
+            '        value = CodeInfo.Programming_Language.C
+            '    Case Else
+            '        value = CodeInfo.Programming_Language.ASSEMBLER
+            'End Select
+            'Return value
+        End Get
+    End Property
+
+
 
 
 
@@ -64,25 +80,37 @@
 
 
 
+    Public Property EnableDataLineSize As Boolean
+        Get
+            Return Me._enableDataSizeLine
+        End Get
+        Set(value As Boolean)
+            Me._enableDataSizeLine = value
+        End Set
+    End Property
+
+
+
+
     ''' <summary>
     ''' number of items to output data line: 8,16,24,32
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public ReadOnly Property SizeLine As Integer
+    Public ReadOnly Property LineSize As Integer
         Get
             If IsNumeric(Me.SizeLineComboBox.SelectedItem) Then
                 Return CInt(Me.SizeLineComboBox.SelectedItem)
             Else
-                Return -1 'line length
+                Return -1
             End If
         End Get
     End Property
 
 
 
-    Public Property SizeLineIndex As Integer
+    Public Property LineSizeIndex As Integer
         Get
             Return Me.SizeLineComboBox.SelectedIndex
         End Get
@@ -96,11 +124,11 @@
 
 
 
-    Public Property Compress As Compress_Type
+    Public Property CompressType As COMPRESS_TYPE
         Get
             Return Me._compressType
         End Get
-        Set(value As Compress_Type)
+        Set(value As COMPRESS_TYPE)
             _compressType = value
             Me.CompressComboBox.SelectedIndex = value
         End Set
@@ -119,17 +147,6 @@
 
 
 
-    Public Property EnableDataSizeLine As Boolean
-        Get
-            Return Me._enableDataSizeLine
-        End Get
-        Set(value As Boolean)
-            Me._enableDataSizeLine = value
-        End Set
-    End Property
-
-
-
     ''' <summary>
     ''' Activa el checkbuttom en el menu de assembler para la generación de un indice de los datos
     ''' </summary>
@@ -141,7 +158,7 @@
         End Get
         Set(value As Boolean)
             Me._enableAsmIndex = value
-            showIndex()
+            ShowIndex()
         End Set
     End Property
 
@@ -173,7 +190,7 @@
     End Property
 
 
-    Public ReadOnly Property AsmByteCommand As String
+    Public ReadOnly Property AsmDataByteCommand As String
         Get
             Return Me.AsmByteDataTextBox.Text
         End Get
@@ -181,7 +198,7 @@
 
 
 
-    Public ReadOnly Property AsmWordDataCommand As String
+    Public ReadOnly Property AsmDataWordCommand As String
         Get
             Return Me.AsmWordDataTextBox.Text
         End Get
@@ -215,7 +232,7 @@
 
     Public Property FieldName As String
         Get
-            If CodeLanguage = DataFormat.ProgrammingLanguage.ASSEMBLER Then
+            If ProgrammingLanguage = CodeInfo.Programming_Language.ASSEMBLER Then
                 Return AsmFieldNameTextBox.Text
             Else
                 Return CesFieldNameTextBox.Text
@@ -251,9 +268,13 @@
 
         Me.LanguageComboBox.SelectedIndex = 0
 
-        If _enableCompress = False Then
+        If Me._enableCompress = False Then
             CompressLabel.Enabled = False
             CompressComboBox.Enabled = False
+        End If
+
+        If Me._enableDataSizeLine = True Then
+            Me.SizeLineComboBox.Items.Add("line")
         End If
 
     End Sub
@@ -274,10 +295,6 @@
 
         Me.AppConfig = _config
 
-        If Me._enableDataSizeLine = True Then
-            Me.SizeLineComboBox.Items.Add("line")
-        End If
-
         RefreshControl()
 
     End Sub
@@ -288,32 +305,25 @@
 
         RemoveHandlers()
 
-        'Me.LanguageComboBox.SelectedIndex = Me.AppConfig.CodeOutput
-        Select Case Me.AppConfig.CodeOutput
-            Case DataFormat.ProgrammingLanguage.C
-                Me.LanguageComboBox.SelectedIndex = Language_CODE.C
-
-            Case DataFormat.ProgrammingLanguage.BASIC
-                Me.LanguageComboBox.SelectedIndex = Language_CODE.BASIC
-
-            Case Else
-                Me.LanguageComboBox.SelectedIndex = Language_CODE.ASSEMBLER_default
-
-        End Select
+        Me.LanguageComboBox.SelectedIndex = Me.AppConfig.CodeOutput
 
         Me.NumberSystemCombo.SelectedIndex = Me.AppConfig.CodeNumberSystem ' lastCodeNumberSystem
         Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
 
+        'If _enableCompress = True Then
+        '    Me.CompressComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
+        'Else
+        '    Me.CompressComboBox.SelectedIndex = _compressType
+        'End If
         If _enableCompress = True Then
-            Me.CompressComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
-        Else
-            Me.CompressComboBox.SelectedIndex = _compressType
+            _compressType = Me.AppConfig.CodeCompressType
         End If
+        Me.CompressComboBox.SelectedIndex = _compressType
 
         Me.FieldName = Me.AppConfig.DataLabel
 
-        Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmByteCommand
-        Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmWordDataCommand
+        Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
+        Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
 
         Me.CdataTypeTextBox.Text = Me.AppConfig.CdataType
 
@@ -321,7 +331,7 @@
         Me.IntervalText.Text = CStr(Me.AppConfig.BASIC_incLines)
         Me.RemoveZerosCheck.Checked = Me.AppConfig.BASIC_remove0
 
-        showIndex()
+        ShowIndex()
 
         ShowLanguageStatus()
 
@@ -332,7 +342,7 @@
 
 
     Private Sub AddHandlers()
-	
+
         AddHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
         AddHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         AddHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
@@ -345,7 +355,7 @@
         AddHandler Me.RemoveZerosCheck.CheckedChanged, AddressOf RemoveZerosCheck_CheckedChanged
         AddHandler Me.AddIndexCheck.CheckedChanged, AddressOf AddIndexCheck_CheckedChanged
 
-		AddHandler Me.LineNumberText.TextChanged, AddressOf Text_TextChanged
+        AddHandler Me.LineNumberText.TextChanged, AddressOf Text_TextChanged
         AddHandler Me.IntervalText.TextChanged, AddressOf Text_TextChanged
         AddHandler Me.AsmByteDataTextBox.TextChanged, AddressOf Text_TextChanged
         AddHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
@@ -357,7 +367,7 @@
 
 
     Private Sub RemoveHandlers()
-	
+
         RemoveHandler Me.LanguageComboBox.SelectedIndexChanged, AddressOf LanguageComboBox_SelectedIndexChanged
         RemoveHandler Me.NumberSystemCombo.SelectedIndexChanged, AddressOf NumberSystem_SelectedIndexChanged
         RemoveHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
@@ -381,12 +391,15 @@
 
 
 
-    Private Sub showIndex()
+    Private Sub ShowIndex()
         Try
 
             Me.AddIndexCheck.Visible = Me._enableAsmIndex
             WordDataLabel.Visible = Me._enableAsmIndex
             AsmWordDataTextBox.Visible = Me._enableAsmIndex
+
+            AsmFieldNameTextBox.Enabled = Not Me._enableAsmIndex
+            CesFieldNameTextBox.Enabled = Not Me._enableAsmIndex
 
             If Me._enableAsmIndex = True Then
                 ShowWordAsmCommand()
@@ -400,62 +413,62 @@
 
 
     Private Sub LanguageComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) 'Handles LanguageComboBox.SelectedIndexChanged
+
         RemoveHandlers()
+
         ShowLanguageStatus()
 
         ' ----------------------------------------------------------------------------------------- set default values
-        Select Case CodeLanguage
-            Case DataFormat.ProgrammingLanguage.BASIC
+        Select Case LanguageComboBox.SelectedIndex
+            Case CodeInfo.Language_CODE.BASIC
 
                 'Me.RemoveZerosCheck.Enabled = True
                 Select Case Me.NumberSystemCombo.SelectedIndex
-                    Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
-                    Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_BASIC
+                    Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_n
+                    Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_BASIC
                     Case Else
-                        Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_BASIC
                 End Select
 
 
-            Case DataFormat.ProgrammingLanguage.C
+            Case CodeInfo.Language_CODE.C
 
                 Set_C_CodeFormat()
 
 
-            Case Else
+            Case CodeInfo.Language_CODE.ASSEMBLER_SDCC
 
-                If Me.LanguageComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SDCC Then
+                Me.AsmByteDataTextBox.Text = ".DB"
+                Me.AsmWordDataTextBox.Text = ".DW"
 
-                    Me.AsmByteDataTextBox.Text = ".db"
-                    Me.AsmWordDataTextBox.Text = ".dw"
+                Set_C_CodeFormat()
 
-                    Set_C_CodeFormat()
+            Case CodeInfo.Language_CODE.ASSEMBLER_SJasm
 
-                Else
-                    If Me.LanguageComboBox.SelectedIndex = Language_CODE.ASSEMBLER_SJasm Then
-                        Me.AsmByteDataTextBox.Text = "<tab>DB"
-                        Me.AsmWordDataTextBox.Text = "<tab>DW"
-                    Else
-                        Me.AsmByteDataTextBox.Text = "DB"
-                        Me.AsmWordDataTextBox.Text = "DW"
-                    End If
+                Me.AsmByteDataTextBox.Text = "<tab>DB"
+                Me.AsmWordDataTextBox.Text = "<tab>DW"
 
+                SetAssemblerNumericSystem()
 
-                    Select Case Me.NumberSystemCombo.SelectedIndex
-                        Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                            Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_nnnd      '?? default
-                        Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                            Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_nb         '?? default
-                        Case Else
-                            Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_Snn   '?? default
-                    End Select
+            Case CodeInfo.Language_CODE.ASSEMBLER_asMSX, CodeInfo.Language_CODE.ASSEMBLER_tniASM
 
-                End If
+                Me.AsmByteDataTextBox.Text = "DB"
+                Me.AsmWordDataTextBox.Text = "DW"
+
+                SetAssemblerNumericSystem()
+
+            Case CodeInfo.Language_CODE.ASSEMBLER_default
+
+                Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
+                Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
+
+                SetAssemblerNumericSystem()
 
         End Select
 
-        If Me.NumberSystemCombo.SelectedIndex >= DataFormat.DataType.BINARY_n Then
+        If Me.NumberSystemCombo.SelectedIndex >= CodeInfo.DataType.BINARY_n Then
             Me.SizeLineComboBox.SelectedIndex = 0
         Else
             Me.SizeLineComboBox.SelectedIndex = Me.AppConfig.CodeLineSize
@@ -466,25 +479,26 @@
         AddHandlers()
 
         RaiseEvent DataChanged()
+
     End Sub
 
 
 
     Private Sub ShowLanguageStatus()
 
-        Select Case CodeLanguage
+        Select Case ProgrammingLanguage
 
-            Case DataFormat.ProgrammingLanguage.BASIC  'basic
+            Case CodeInfo.Programming_Language.BASIC  'basic
                 Me.BasicPanel.Visible = True
                 Me.AssemblerPanel.Visible = False
                 Me.CesPanel.Visible = False
 
-            Case DataFormat.ProgrammingLanguage.C
+            Case CodeInfo.Programming_Language.C
                 Me.BasicPanel.Visible = False
                 Me.AssemblerPanel.Visible = False
                 Me.CesPanel.Visible = True
 
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
+            Case CodeInfo.Programming_Language.ASSEMBLER
                 Me.BasicPanel.Visible = False
                 Me.AssemblerPanel.Visible = True
                 Me.CesPanel.Visible = False
@@ -497,12 +511,25 @@
 
     Private Sub Set_C_CodeFormat()
         Select Case Me.NumberSystemCombo.SelectedIndex
-            Case DataFormat.DataType.DECIMAL_n To DataFormat.DataType.DECIMAL_nnnd
-                Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.DECIMAL_n
-            Case DataFormat.DataType.BINARY_n To DataFormat.DataType.BINARY_BASIC
-                Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.BINARY_C
+            Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_n
+            Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_C
             Case Else
-                Me.NumberSystemCombo.SelectedIndex = DataFormat.DataType.HEXADECIMAL_C
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_C
+        End Select
+    End Sub
+
+
+
+    Private Sub SetAssemblerNumericSystem()
+        Select Case Me.NumberSystemCombo.SelectedIndex
+            Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_nnnd      '?? default
+            Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_nb         '?? default
+            Case Else
+                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn   '?? default
         End Select
     End Sub
 
@@ -524,7 +551,7 @@
 
     Private Sub CompressComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs)
         'Me.AppConfig.CodeCompressType = CompressComboBox.SelectedIndex
-        _compressType = Me.AppConfig.CodeCompressType
+        Me._compressType = CompressComboBox.SelectedIndex 'Me.AppConfig.CodeCompressType
         RaiseEvent DataChanged()
     End Sub
 
@@ -628,18 +655,25 @@
 
     Public Function GetInfoSuffix() As String
 
-        Dim outputInfo As String
+        Dim outputInfo As String = ""
+
+        'Dim compressController As New Compress
+
+
+        'If Not Me.CompressComboBox.SelectedIndex = 0 Then
+        '    outputInfo = "_" + compressController.CompresorsAbbreviationList(Me.CompressComboBox.SelectedIndex)
+        'End If
 
         Select Case Me.CompressComboBox.SelectedIndex
 
-            Case 1
+            Case COMPRESS_TYPE.RLE
                 outputInfo = "_RLE"
 
-            Case 2
+            Case COMPRESS_TYPE.RLEWB
                 outputInfo = "_RLEWB"
 
-            Case 3
-                outputInfo = "_PLT"
+            Case COMPRESS_TYPE.PLETTER
+                outputInfo = "_PLT5"
 
             Case Else
                 outputInfo = ""
@@ -647,25 +681,54 @@
         End Select
 
         Return outputInfo
+
     End Function
 
 
 
     Private Sub AsmFieldNameTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles AsmFieldNameTextBox.Validating
-        If Me.AsmFieldNameTextBox.Text.Trim() = "" Then
-            Me.AsmFieldNameTextBox.Text = "DATA"
-        End If
+
+        Me.AsmFieldNameTextBox.Text = _dataFormat.GetAsmFieldFormat(Me.AsmFieldNameTextBox.Text)
+
         RaiseEvent DataChanged()
     End Sub
 
 
 
     Private Sub CesFieldNameTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CesFieldNameTextBox.Validating
-        If Me.CesFieldNameTextBox.Text.Trim() = "" Then
-            Me.CesFieldNameTextBox.Text = "DATA"
-        End If
+
+        Me.CesFieldNameTextBox.Text = _dataFormat.GetCvariableNameFormat(Me.CesFieldNameTextBox.Text)
+
         RaiseEvent DataChanged()
     End Sub
+
+
+
+    Public Function GetCodeFormat() As CodeInfo
+
+        Dim aCodeFormat As New CodeInfo
+
+        aCodeFormat.LanguageCode = Me.LanguageCode
+        aCodeFormat.NumeralSystem = Me.NumeralSystem
+        aCodeFormat.LineSize = Me.LineSize
+        aCodeFormat.CompressType = Me.CompressType
+
+        aCodeFormat.DataLabel = Me.FieldName
+
+        aCodeFormat.AsmDataByteCommand = Me.AsmDataByteCommand
+        aCodeFormat.AsmDataWordCommand = Me.AsmDataWordCommand
+
+        aCodeFormat.CdataType = Me.CdataType
+
+        aCodeFormat.BASIC_DataInstruction = Me.AppConfig.BASIC_DataInstruction
+        aCodeFormat.BASIC_CommentInstruction = Me.AppConfig.BASIC_CommentInstruction
+        aCodeFormat.BASIC_initLine = Me.BASIClineNumber
+        aCodeFormat.BASIC_incLines = Me.BASICInterval
+        aCodeFormat.BASIC_remove0 = Me.BASICremoveZeros
+
+        Return aCodeFormat
+
+    End Function
 
 
 

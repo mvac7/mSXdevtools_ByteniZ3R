@@ -25,25 +25,10 @@ Public Class MessageDialog
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        Me._posX_button = Me.OK_Button.Location.X
+        Me._posX_button = Me.Ok_Button.Location.X
 
     End Sub
 
-
-
-    Public Sub New(ByVal tittle As String, ByVal aMessage As String, ByVal msgType As DIALOG_TYPE)
-
-        ' Llamada necesaria para el Diseñador de Windows Forms.
-        InitializeComponent()
-
-        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        Me.Text = tittle
-        Me.MessageLabel.Text = aMessage
-        Me._type = msgType
-
-        Me._posX_button = Me.OK_Button.Location.X
-
-    End Sub
 
 
 
@@ -58,25 +43,25 @@ Public Class MessageDialog
         Select Case Me._type
             Case DIALOG_TYPE.ABOUT
                 Me.ico64PictureBox.Image = Me.ico64ImageList.Images.Item(1)
-                Me.OK_Button.ImageIndex = 0 'Ok
+                Me.Ok_Button.Text = "Ok"
 
             Case DIALOG_TYPE.HELP
                 Me.ico64PictureBox.Image = Me.ico64ImageList.Images.Item(2)
-                Me.OK_Button.ImageIndex = 0 'Ok
+                Me.Ok_Button.Text = "Ok"
 
             Case DIALOG_TYPE.YES_NO
                 Me.ico64PictureBox.Image = Me.ico64ImageList.Images.Item(0)
-                Me.OK_Button.ImageIndex = 1 'Yes
-                Me.Cancel_Button.ImageIndex = 1 'No
+                Me.Ok_Button.Text = "Yes"
+                Me.Cancel_Button.Text = "No"
 
             Case DIALOG_TYPE.OK_CANCEL
                 Me.ico64PictureBox.Image = Me.ico64ImageList.Images.Item(0)
-                Me.OK_Button.ImageIndex = 0 'Ok
-                Me.Cancel_Button.ImageIndex = 0 'Cancel
+                Me.Ok_Button.Text = "Ok"
+                Me.Cancel_Button.Text = "Cancel"
 
             Case Else
                 Me.ico64PictureBox.Image = Me.ico64ImageList.Images.Item(0)
-                Me.OK_Button.ImageIndex = 0 'Ok
+                Me.Ok_Button.Text = "Ok"
 
         End Select
 
@@ -90,11 +75,11 @@ Public Class MessageDialog
 
 
         ' draw gradient in window-form background
-        Dim gradientBG As New Bitmap(Me.Width, Me.Height)
-        Dim newBrush As New Drawing.Drawing2D.LinearGradientBrush(New PointF(0, 0), New PointF(0, gradientBG.Height), Color.Gainsboro, Color.SlateGray)
-        Dim oneGraphic As Graphics = Graphics.FromImage(gradientBG)
-        oneGraphic.FillRectangle(newBrush, New RectangleF(0, 0, gradientBG.Width, gradientBG.Height))
-        Me.BackgroundImage = gradientBG
+        'Dim gradientBG As New Bitmap(Me.Width, Me.Height)
+        'Dim newBrush As New Drawing.Drawing2D.LinearGradientBrush(New PointF(0, 0), New PointF(0, gradientBG.Height), Color.Gainsboro, Color.SlateGray)
+        'Dim oneGraphic As Graphics = Graphics.FromImage(gradientBG)
+        'oneGraphic.FillRectangle(newBrush, New RectangleF(0, 0, gradientBG.Width, gradientBG.Height))
+        'Me.BackgroundImage = gradientBG
 
 
         Me.ActiveControl = Nothing
@@ -105,7 +90,7 @@ Public Class MessageDialog
 
     Overloads Function ShowDialog(ByRef owner As IWin32Window, ByVal tittle As String, ByVal aMessage As String, ByVal msgType As DIALOG_TYPE) As DialogResult
 
-        Me.Text = tittle
+        Me.Title_Label.Text = tittle
         Me.MessageLabel.Text = aMessage
         Me._type = msgType
 
@@ -117,7 +102,7 @@ Public Class MessageDialog
 
 
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Ok_Button.Click
         If Me._type = DIALOG_TYPE.YES_NO Then
             Me.DialogResult = System.Windows.Forms.DialogResult.Yes
         Else
@@ -140,29 +125,27 @@ Public Class MessageDialog
 
 
 
-    Private Sub MessageDialog_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Me._type = DIALOG_TYPE.YES_NO Then
-                Me.DialogResult = System.Windows.Forms.DialogResult.Yes
-            Else
-                Me.DialogResult = System.Windows.Forms.DialogResult.OK
-            End If
+    'Private Sub MessageDialog_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        If Me._type = DIALOG_TYPE.YES_NO Then
+    '            Me.DialogResult = System.Windows.Forms.DialogResult.Yes
+    '        Else
+    '            Me.DialogResult = System.Windows.Forms.DialogResult.OK
+    '        End If
 
-            Me.Close()
-        End If
+    '        Me.Close()
+    '    End If
 
-        If e.KeyCode = Keys.Escape Then
-            If Me._type = DIALOG_TYPE.YES_NO Then
-                Me.DialogResult = System.Windows.Forms.DialogResult.No
-            Else
-                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-            End If
+    '    If e.KeyCode = Keys.Escape Then
+    '        If Me._type = DIALOG_TYPE.YES_NO Then
+    '            Me.DialogResult = System.Windows.Forms.DialogResult.No
+    '        Else
+    '            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
+    '        End If
 
-            Me.Close()
-        End If
+    '        Me.Close()
+    '    End If
 
-    End Sub
-
-
+    'End Sub
 
 End Class

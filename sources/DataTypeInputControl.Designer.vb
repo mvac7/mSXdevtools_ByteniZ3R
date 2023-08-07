@@ -279,7 +279,7 @@ Partial Class DataTypeInputControl
         Me.LanguageComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LanguageComboBox.ForeColor = System.Drawing.Color.Black
         Me.LanguageComboBox.FormattingEnabled = True
-        Me.LanguageComboBox.Items.AddRange(New Object() {"Assembler default", "Assembler SJasm", "Assembler SDCC", "BASIC", "C"})
+        Me.LanguageComboBox.Items.AddRange(New Object() {"BASIC", "C", "Assembler default", "Assembler asMSX", "Assembler tniASM", "Assembler SJasm", "Assembler SDCC"})
         Me.LanguageComboBox.Location = New System.Drawing.Point(101, 3)
         Me.LanguageComboBox.Name = "LanguageComboBox"
         Me.LanguageComboBox.Size = New System.Drawing.Size(150, 22)

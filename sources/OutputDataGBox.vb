@@ -4,22 +4,33 @@ Public Class OutputDataGBox
 
     Private AppConfig As New Config
 
-    Private _fileData() As Byte
-    Private _outputData() As Byte
-    Private _comments As ArrayList
+    Private fileData() As Byte
+    'Private _outputData() As Byte
+    Private Comments As ArrayList
 
     Private Project_Path As String
     Private Project_Name As String
 
-    Public Extension_Binary As String = "bin"
+    Public Extension_Binary As String = ".bin"
 
     Public Event DataChanged()
 
 
 
-    Public ReadOnly Property CodeLanguage As DataFormat.ProgrammingLanguage
+    Public Property OutputText As String
         Get
-            Return DataTypeInput.CodeLanguage
+            Return Me.OutputTextBox.Text
+        End Get
+        Set(value As String)
+            Me.OutputTextBox.Text = value
+        End Set
+    End Property
+
+
+
+    Public ReadOnly Property CodeLanguage As CodeInfo.Language_CODE
+        Get
+            Return DataTypeInput.LanguageCode
         End Get
     End Property
 
@@ -32,6 +43,16 @@ Public Class OutputDataGBox
     End Property
 
 
+    Public Property EnableDataSizeLine As Boolean
+        Get
+            Return DataTypeInput.EnableDataLineSize
+        End Get
+        Set(value As Boolean)
+            DataTypeInput.EnableDataLineSize = value
+        End Set
+    End Property
+
+
 
     ''' <summary>
     ''' number of items to output data line: 8,16,24,32
@@ -39,31 +60,31 @@ Public Class OutputDataGBox
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public ReadOnly Property SizeLine As Integer
+    Public ReadOnly Property LineSize As Integer
         Get
-            Return DataTypeInput.SizeLine
+            Return DataTypeInput.LineSize
         End Get
     End Property
 
 
 
-    Public Property SizeLineIndex As Integer
+    Public Property LineSizeIndex As Integer
         Get
-            Return DataTypeInput.SizeLineIndex
+            Return DataTypeInput.LineSizeIndex
         End Get
         Set(value As Integer)
-            DataTypeInput.SizeLineIndex = value
+            DataTypeInput.LineSizeIndex = value
         End Set
     End Property
 
 
 
-    Public Property Compress As DataTypeInputControl.Compress_Type
+    Public Property Compress As DataTypeInputControl.COMPRESS_TYPE
         Get
-            Return DataTypeInput.Compress
+            Return DataTypeInput.CompressType
         End Get
-        Set(value As DataTypeInputControl.Compress_Type)
-            DataTypeInput.Compress = value
+        Set(value As DataTypeInputControl.COMPRESS_TYPE)
+            DataTypeInput.CompressType = value
         End Set
     End Property
 
@@ -91,17 +112,6 @@ Public Class OutputDataGBox
         End Get
         Set(value As Boolean)
             DataTypeInput.EnableCompress = value
-        End Set
-    End Property
-
-
-
-    Public Property EnableDataSizeLine As Boolean
-        Get
-            Return DataTypeInput.EnableDataSizeLine
-        End Get
-        Set(value As Boolean)
-            DataTypeInput.EnableDataSizeLine = value
         End Set
     End Property
 
@@ -147,15 +157,15 @@ Public Class OutputDataGBox
 
     Public ReadOnly Property AsmByteCommand As String
         Get
-            Return DataTypeInput.AsmByteCommand
+            Return DataTypeInput.AsmDataByteCommand
         End Get
     End Property
 
 
 
-    Public ReadOnly Property AsmWordDataCommand As String
+    Public ReadOnly Property AsmDataWordCommand As String
         Get
-            Return DataTypeInput.AsmWordDataCommand
+            Return DataTypeInput.AsmDataWordCommand
         End Get
     End Property
 
@@ -216,8 +226,8 @@ Public Class OutputDataGBox
         'isInit = True
         'SetDropDown(Me.isOpen)
 
-        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
     End Sub
 
@@ -229,8 +239,8 @@ Public Class OutputDataGBox
 
         DataTypeInput.InitControl(Me.AppConfig)
 
-        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
     End Sub
 
@@ -240,8 +250,8 @@ Public Class OutputDataGBox
 
         DataTypeInput.RefreshControl()
 
-        Me.OutputText.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputText.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
+        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
 
     End Sub
 
@@ -267,62 +277,53 @@ Public Class OutputDataGBox
     ''' Copy output data to clipboard
     ''' </summary>
     ''' <remarks></remarks>
-    Private Sub CopyAll()
+    Public Sub CopyAll()
 
-        'If Not Me.compressData Is Nothing Then
-
-        'Me.Progress.ShowProgressWin()
         Try
-            My.Computer.Clipboard.SetText(Me.OutputText.Text)
 
-            'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-            'I apply a short wait for the progress window to show without closing too quickly.
-            System.Threading.Thread.Sleep(150) 'wait
+            My.Computer.Clipboard.SetText(Me.OutputTextBox.Text)
+
         Catch ex As Exception
 
         End Try
-        'Me.Progress.CloseProgressWin()
-
-        'Else
-
-        '    ' Nothing que grabar!
-
-        'End If
 
     End Sub
 
 
 
     Public Sub ClearOutput()
-        OutputText.Text = ""
+        OutputTextBox.Text = ""
     End Sub
 
-
-
-    Public Sub WriteOutput(ByVal newtext As String)
-        OutputText.Text = newtext
-    End Sub
 
 
 
     Private Sub ShowData()
 
-        If Not Me._fileData Is Nothing Then
-            Me.OutputText.Text = GetFormatData(Me._fileData, Me._comments)
+        Dim _assembler As New AssemblerFormat
+        Dim newComments As New ArrayList
+        Dim tmpComment As String
+
+        If Not Me.fileData Is Nothing Then
+
+            newComments.AddRange(Me.Comments)
+
+            tmpComment = _assembler.GetCommentWithAssemble(CodeLanguage, False)
+            If tmpComment IsNot "" Then newComments.Add(tmpComment)
+
+            Me.OutputTextBox.Text = GetFormatData(Me.fileData, newComments)
         End If
 
     End Sub
 
 
 
-    Public Sub ShowData(ByVal data As Byte(), ByVal comments As ArrayList)
+    Public Sub ShowData(ByVal data As Byte(), ByVal newComments As ArrayList)
 
-        Me._fileData = data
-        Me._comments = comments
+        Me.fileData = data
+        Me.Comments = newComments
 
-        If Not Me._fileData Is Nothing Then
-            Me.OutputText.Text = GetFormatData(Me._fileData, Me._comments)
-        End If
+        ShowData()
 
     End Sub
 
@@ -330,34 +331,18 @@ Public Class OutputDataGBox
 
     Private Function GetFormatData(ByRef data As Byte(), ByRef comments As ArrayList) As String
 
+        Dim fieldName As String = ""
+
         Dim aMSXDataFormat As New DataFormat
         aMSXDataFormat.Comment_BASIC = Me.AppConfig.BASIC_CommentInstruction
+        aMSXDataFormat.BASIC_Line = DataTypeInput.BASIClineNumber
+        aMSXDataFormat.BASIC_increment = DataTypeInput.BASICInterval
 
-        Dim outputSource As String = ""
+        If Not DataTypeInput.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
+            fieldName = DataTypeInput.FieldName
+        End If
 
-        'Me._outputData = GetCompressData(data)
-        Me._outputData = data
-
-        'comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString + Version_Stage)
-        'comments.Add("File: " + FilenameTextBox.Text)
-
-
-        'comments.Add(paker.Name + " compressed - Original size=" + CStr(originalLength) + " - Compress size=" + CStr(data.Length))
-
-        ' show data in respective code language
-        Select Case DataTypeInput.CodeLanguage
-            Case DataFormat.ProgrammingLanguage.C
-                outputSource = aMSXDataFormat.GetCcode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.FieldName, comments, DataTypeInput.CdataType)
-
-            Case DataFormat.ProgrammingLanguage.ASSEMBLER
-                outputSource = aMSXDataFormat.GetAssemblerCode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.FieldName, comments, DataTypeInput.AsmByteCommand)
-
-            Case Else
-                outputSource = aMSXDataFormat.GetBASICcode(Me._outputData, DataTypeInput.SizeLine, DataTypeInput.NumeralSystem, DataTypeInput.BASICremoveZeros, DataTypeInput.BASIClineNumber, DataTypeInput.BASICInterval, comments)
-        End Select
-
-
-        Return outputSource
+        Return aMSXDataFormat.GetSourceCode(fieldName, DataTypeInput.GetCodeFormat(), data, comments).SourceCode
 
     End Function
 
@@ -403,16 +388,16 @@ Public Class OutputDataGBox
 
     Private Sub SaveSource_Dialog()
 
-        If Me.OutputText.Text = "" Then
+        If Me.OutputTextBox.Text = "" Then
             'messageWin.ShowDialog(Me, "Alert!", "There is nothing to save.", MessageDialog.DIALOG_TYPE.ALERT)
         Else
 
-            Select Case DataTypeInput.CodeLanguage
-                Case DataFormat.ProgrammingLanguage.BASIC
+            Select Case DataTypeInput.ProgrammingLanguage
+                Case CodeInfo.PROGRAMMING_LANGUAGE.BASIC
                     Me.SaveFileDialog1.DefaultExt = "BAS"
                     Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
 
-                Case DataFormat.ProgrammingLanguage.C
+                Case CodeInfo.PROGRAMMING_LANGUAGE.C
                     Me.SaveFileDialog1.DefaultExt = "c"
                     Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
 
@@ -443,28 +428,9 @@ Public Class OutputDataGBox
 
         Dim aStreamWriterFile As System.IO.StreamWriter
 
-        'If Not Me.compressData Is Nothing Then
-
-        'Me.Progress.ShowProgressWin()
-        Try
-
-            aStreamWriterFile = New System.IO.StreamWriter(filePath)
-            aStreamWriterFile.WriteLine(Me.OutputText.Text)
-            aStreamWriterFile.Close()
-
-            'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-            'I apply a short wait for the progress window to show without closing too quickly.
-            System.Threading.Thread.Sleep(150) 'wait
-        Catch ex As Exception
-
-        End Try
-        'Me.Progress.CloseProgressWin()
-
-        'Else
-
-        '    ' Nothing que grabar!
-
-        'End If
+        aStreamWriterFile = New System.IO.StreamWriter(filePath)
+        aStreamWriterFile.WriteLine(Me.OutputTextBox.Text)
+        aStreamWriterFile.Close()
 
     End Sub
 
@@ -476,13 +442,15 @@ Public Class OutputDataGBox
             Me.Project_Path = Application.StartupPath
         End If
         Me.SaveFileDialog1.InitialDirectory = Me.Project_Path
-        Me.SaveFileDialog1.DefaultExt = Me.Extension_Binary
-        Me.SaveFileDialog1.Filter = "Binary file|*." + Me.Extension_Binary + "|All files|*.*"
-        Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Project_Name)
+        'Me.SaveFileDialog1.DefaultExt = Me.Extension_Binary
+        Me.SaveFileDialog1.Filter = "All files|*.*"
+        Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Project_Name) + "_RLEWB" + Me.Extension_Binary
 
         If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
             'Me.Path_SC2 = Path.GetDirectoryName(SaveFileDialog1.FileName)
-            SaveBinary(SaveFileDialog1.FileName, _outputData)
+            SaveBinary(SaveFileDialog1.FileName, Me.fileData)
+
+            Me.Extension_Binary = Path.GetExtension(SaveFileDialog1.FileName)
         End If
 
     End Sub
@@ -493,30 +461,11 @@ Public Class OutputDataGBox
 
         Dim aStream As System.IO.FileStream
 
-        If Not data Is Nothing Then
+        If data IsNot Nothing Then
 
-            'Me.Progress.ShowProgressWin()
-
-            Try
-
-                'Dim patternData() As Byte = CType(Me.outputCompressData.ToArray(GetType(Byte)), Byte())
-
-                aStream = New System.IO.FileStream(filePath, IO.FileMode.Create)
-                aStream.Write(data, 0, data.Length)
-                aStream.Close()
-
-                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-                'I apply a short wait for the progress window to show without closing too quickly.
-                System.Threading.Thread.Sleep(150) 'wait
-
-            Catch ex As Exception
-
-            End Try
-            'Me.Progress.CloseProgressWin()
-
-        Else
-
-            ' Nothing que grabar!
+            aStream = New System.IO.FileStream(filePath, IO.FileMode.Create)
+            aStream.Write(data, 0, data.Length)
+            aStream.Close()
 
         End If
 

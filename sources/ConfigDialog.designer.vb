@@ -26,35 +26,32 @@ Partial Class ConfigDialog
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConfigDialog))
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.DataLabelTextBox = New System.Windows.Forms.TextBox()
-        Me.NumFormatComboBox = New System.Windows.Forms.ComboBox()
+        Me.NumberSystemCombo = New System.Windows.Forms.ComboBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.BASICinitLineTextBox = New System.Windows.Forms.TextBox()
-        Me.BASICincLineslTextBox = New System.Windows.Forms.TextBox()
-        Me.BASICdataTextBox = New System.Windows.Forms.TextBox()
-        Me.BASICcommentComboBox = New System.Windows.Forms.ComboBox()
-        Me.AsmWordDataTextBox = New System.Windows.Forms.TextBox()
-        Me.AsmByteDataTextBox = New System.Windows.Forms.TextBox()
-        Me.CByteDataTextBox = New System.Windows.Forms.TextBox()
-        Me.UserNameTextBox = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Color0Button = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.OutputINKcolorButton = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.OutputBGcolorButton = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.OutputINKcolorButton = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupNameTextBox = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.UserNameTextBox = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.CByteDataTextBox = New System.Windows.Forms.TextBox()
+        Me.AsmByteDataTextBox = New System.Windows.Forms.TextBox()
+        Me.AsmWordDataTextBox = New System.Windows.Forms.TextBox()
+        Me.BASICcommentComboBox = New System.Windows.Forms.ComboBox()
+        Me.BASICdataTextBox = New System.Windows.Forms.TextBox()
+        Me.BASICincLineslTextBox = New System.Windows.Forms.TextBox()
+        Me.BASICinitLineTextBox = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
-        Me.BottonsPanel = New System.Windows.Forms.Panel()
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
         Me.DataOutputTab = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.CGroupBox = New piXelST_GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.AssemblerGroupBox = New piXelST_GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.arrow2PictureBox = New System.Windows.Forms.PictureBox()
         Me.arrow1PictureBox = New System.Windows.Forms.PictureBox()
@@ -63,7 +60,7 @@ Partial Class ConfigDialog
         Me.AsmByteValuesComboBox = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.CompressTypeComboBox = New System.Windows.Forms.ComboBox()
-        Me.BASICGroupBox = New System.Windows.Forms.GroupBox()
+        Me.BASICGroupBox = New piXelST_GroupBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.RemoveZerosCheck = New System.Windows.Forms.CheckBox()
@@ -72,31 +69,35 @@ Partial Class ConfigDialog
         Me.Label6 = New System.Windows.Forms.Label()
         Me.SizeLineComboBox = New System.Windows.Forms.ComboBox()
         Me.CodeOutputComboBox = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DataLabelLabel = New System.Windows.Forms.Label()
+        Me.NumberSystemLabel = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.OthersTab = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DefaultColorsGroupBox = New piXelST_GroupBox()
         Me.GridColorButton = New System.Windows.Forms.Button()
-        Me.OutputdataGroupBox = New System.Windows.Forms.GroupBox()
+        Me.OutputdataColorsGroupBox = New piXelST_GroupBox()
         Me.OutputText = New System.Windows.Forms.TextBox()
         Me.ColorConfigsLabel = New System.Windows.Forms.Label()
         Me.ColorConfigsComboBox = New System.Windows.Forms.ComboBox()
-        Me.InitProjectGroupBox = New System.Windows.Forms.GroupBox()
+        Me.ProjectInfoGroupBox = New piXelST_GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.BottonsPanel.SuspendLayout()
+        Me.BottonsPanel = New System.Windows.Forms.Panel()
+        Me.Ok_Button = New piXelST_Button()
+        Me.Cancel_Button = New piXelST_Button()
+        Me.Title_Label = New piXelST_Label()
         Me.DataOutputTab.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.CGroupBox.SuspendLayout()
+        Me.AssemblerGroupBox.SuspendLayout()
         CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.BASICGroupBox.SuspendLayout()
         Me.OthersTab.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.OutputdataGroupBox.SuspendLayout()
-        Me.InitProjectGroupBox.SuspendLayout()
+        Me.DefaultColorsGroupBox.SuspendLayout()
+        Me.OutputdataColorsGroupBox.SuspendLayout()
+        Me.ProjectInfoGroupBox.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        Me.BottonsPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolTip1
@@ -111,18 +112,18 @@ Partial Class ConfigDialog
         Me.DataLabelTextBox.TabIndex = 252
         Me.ToolTip1.SetToolTip(Me.DataLabelTextBox, "Data definition command (DB, BYTE, DEFB, etc.)")
         '
-        'NumFormatComboBox
+        'NumberSystemCombo
         '
-        Me.NumFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.NumFormatComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.NumFormatComboBox.FormattingEnabled = True
-        Me.NumFormatComboBox.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
-        Me.NumFormatComboBox.Location = New System.Drawing.Point(133, 38)
-        Me.NumFormatComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.NumFormatComboBox.Name = "NumFormatComboBox"
-        Me.NumFormatComboBox.Size = New System.Drawing.Size(221, 22)
-        Me.NumFormatComboBox.TabIndex = 246
-        Me.ToolTip1.SetToolTip(Me.NumFormatComboBox, "Computer number format")
+        Me.NumberSystemCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.NumberSystemCombo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.NumberSystemCombo.FormattingEnabled = True
+        Me.NumberSystemCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
+        Me.NumberSystemCombo.Location = New System.Drawing.Point(133, 38)
+        Me.NumberSystemCombo.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.NumberSystemCombo.Name = "NumberSystemCombo"
+        Me.NumberSystemCombo.Size = New System.Drawing.Size(221, 22)
+        Me.NumberSystemCombo.TabIndex = 246
+        Me.ToolTip1.SetToolTip(Me.NumberSystemCombo, "Computer number format")
         '
         'TextBox1
         '
@@ -137,95 +138,6 @@ Partial Class ConfigDialog
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.TextBox1, "Interval lines (for BASIC)")
         Me.TextBox1.Visible = False
-        '
-        'BASICinitLineTextBox
-        '
-        Me.BASICinitLineTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BASICinitLineTextBox.Location = New System.Drawing.Point(491, 21)
-        Me.BASICinitLineTextBox.MaxLength = 5
-        Me.BASICinitLineTextBox.Name = "BASICinitLineTextBox"
-        Me.BASICinitLineTextBox.Size = New System.Drawing.Size(52, 22)
-        Me.BASICinitLineTextBox.TabIndex = 254
-        Me.BASICinitLineTextBox.Text = "10000"
-        Me.BASICinitLineTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.BASICinitLineTextBox, "Initial number of line (for BASIC)")
-        '
-        'BASICincLineslTextBox
-        '
-        Me.BASICincLineslTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BASICincLineslTextBox.Location = New System.Drawing.Point(491, 49)
-        Me.BASICincLineslTextBox.MaxLength = 3
-        Me.BASICincLineslTextBox.Name = "BASICincLineslTextBox"
-        Me.BASICincLineslTextBox.Size = New System.Drawing.Size(52, 22)
-        Me.BASICincLineslTextBox.TabIndex = 255
-        Me.BASICincLineslTextBox.Text = "10"
-        Me.BASICincLineslTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.BASICincLineslTextBox, "Interval lines (for BASIC)")
-        '
-        'BASICdataTextBox
-        '
-        Me.BASICdataTextBox.Location = New System.Drawing.Point(162, 21)
-        Me.BASICdataTextBox.Name = "BASICdataTextBox"
-        Me.BASICdataTextBox.Size = New System.Drawing.Size(128, 22)
-        Me.BASICdataTextBox.TabIndex = 263
-        Me.BASICdataTextBox.Text = "DATA"
-        Me.ToolTip1.SetToolTip(Me.BASICdataTextBox, "Instruction for datas")
-        '
-        'BASICcommentComboBox
-        '
-        Me.BASICcommentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.BASICcommentComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.BASICcommentComboBox.FormattingEnabled = True
-        Me.BASICcommentComboBox.Items.AddRange(New Object() {"REM", "' (apostrophe)"})
-        Me.BASICcommentComboBox.Location = New System.Drawing.Point(162, 49)
-        Me.BASICcommentComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.BASICcommentComboBox.Name = "BASICcommentComboBox"
-        Me.BASICcommentComboBox.Size = New System.Drawing.Size(128, 22)
-        Me.BASICcommentComboBox.TabIndex = 267
-        Me.ToolTip1.SetToolTip(Me.BASICcommentComboBox, "Instruction for comments")
-        '
-        'AsmWordDataTextBox
-        '
-        Me.AsmWordDataTextBox.Location = New System.Drawing.Point(117, 49)
-        Me.AsmWordDataTextBox.Name = "AsmWordDataTextBox"
-        Me.AsmWordDataTextBox.Size = New System.Drawing.Size(220, 22)
-        Me.AsmWordDataTextBox.TabIndex = 247
-        Me.ToolTip1.SetToolTip(Me.AsmWordDataTextBox, "Word Data command definition (DW, WORD, DEFW...)")
-        '
-        'AsmByteDataTextBox
-        '
-        Me.AsmByteDataTextBox.Location = New System.Drawing.Point(117, 21)
-        Me.AsmByteDataTextBox.Name = "AsmByteDataTextBox"
-        Me.AsmByteDataTextBox.Size = New System.Drawing.Size(220, 22)
-        Me.AsmByteDataTextBox.TabIndex = 247
-        Me.ToolTip1.SetToolTip(Me.AsmByteDataTextBox, "Byte Data command definition.")
-        '
-        'CByteDataTextBox
-        '
-        Me.CByteDataTextBox.Location = New System.Drawing.Point(119, 21)
-        Me.CByteDataTextBox.Name = "CByteDataTextBox"
-        Me.CByteDataTextBox.Size = New System.Drawing.Size(220, 22)
-        Me.CByteDataTextBox.TabIndex = 261
-        Me.ToolTip1.SetToolTip(Me.CByteDataTextBox, "Byte Data command definition for C")
-        '
-        'UserNameTextBox
-        '
-        Me.UserNameTextBox.Location = New System.Drawing.Point(125, 21)
-        Me.UserNameTextBox.Name = "UserNameTextBox"
-        Me.UserNameTextBox.Size = New System.Drawing.Size(303, 22)
-        Me.UserNameTextBox.TabIndex = 254
-        Me.ToolTip1.SetToolTip(Me.UserNameTextBox, "Username to assign the author by default in the project information.")
-        '
-        'Label10
-        '
-        Me.Label10.Location = New System.Drawing.Point(11, 21)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(110, 22)
-        Me.Label10.TabIndex = 255
-        Me.Label10.Text = "Username"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ToolTip1.SetToolTip(Me.Label10, "Username to assign the author by default in the project information.")
         '
         'Label11
         '
@@ -259,26 +171,15 @@ Partial Class ConfigDialog
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolTip1.SetToolTip(Me.Label12, "Username to assign the author by default in the project information.")
         '
-        'Label14
+        'OutputBGcolorButton
         '
-        Me.Label14.Location = New System.Drawing.Point(11, 51)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(130, 22)
-        Me.Label14.TabIndex = 259
-        Me.Label14.Text = "Ink Color"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ToolTip1.SetToolTip(Me.Label14, "Username to assign the author by default in the project information.")
-        '
-        'OutputINKcolorButton
-        '
-        Me.OutputINKcolorButton.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputINKcolorButton.Location = New System.Drawing.Point(150, 50)
-        Me.OutputINKcolorButton.Name = "OutputINKcolorButton"
-        Me.OutputINKcolorButton.Size = New System.Drawing.Size(108, 26)
-        Me.OutputINKcolorButton.TabIndex = 260
-        Me.ToolTip1.SetToolTip(Me.OutputINKcolorButton, "Define a color for the color zero to differentiate it from black.")
-        Me.OutputINKcolorButton.UseVisualStyleBackColor = True
+        Me.OutputBGcolorButton.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputBGcolorButton.Location = New System.Drawing.Point(150, 82)
+        Me.OutputBGcolorButton.Name = "OutputBGcolorButton"
+        Me.OutputBGcolorButton.Size = New System.Drawing.Size(108, 26)
+        Me.OutputBGcolorButton.TabIndex = 262
+        Me.ToolTip1.SetToolTip(Me.OutputBGcolorButton, "Define a color for the color zero to differentiate it from black.")
+        Me.OutputBGcolorButton.UseVisualStyleBackColor = True
         '
         'Label15
         '
@@ -291,15 +192,26 @@ Partial Class ConfigDialog
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolTip1.SetToolTip(Me.Label15, "Username to assign the author by default in the project information.")
         '
-        'OutputBGcolorButton
+        'OutputINKcolorButton
         '
-        Me.OutputBGcolorButton.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputBGcolorButton.Location = New System.Drawing.Point(150, 82)
-        Me.OutputBGcolorButton.Name = "OutputBGcolorButton"
-        Me.OutputBGcolorButton.Size = New System.Drawing.Size(108, 26)
-        Me.OutputBGcolorButton.TabIndex = 262
-        Me.ToolTip1.SetToolTip(Me.OutputBGcolorButton, "Define a color for the color zero to differentiate it from black.")
-        Me.OutputBGcolorButton.UseVisualStyleBackColor = True
+        Me.OutputINKcolorButton.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputINKcolorButton.Location = New System.Drawing.Point(150, 50)
+        Me.OutputINKcolorButton.Name = "OutputINKcolorButton"
+        Me.OutputINKcolorButton.Size = New System.Drawing.Size(108, 26)
+        Me.OutputINKcolorButton.TabIndex = 260
+        Me.ToolTip1.SetToolTip(Me.OutputINKcolorButton, "Define a color for the color zero to differentiate it from black.")
+        Me.OutputINKcolorButton.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.Location = New System.Drawing.Point(11, 51)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(130, 22)
+        Me.Label14.TabIndex = 259
+        Me.Label14.Text = "Ink Color"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ToolTip1.SetToolTip(Me.Label14, "Username to assign the author by default in the project information.")
         '
         'GroupNameTextBox
         '
@@ -320,59 +232,100 @@ Partial Class ConfigDialog
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolTip1.SetToolTip(Me.Label16, "Username to assign the author by default in the project information.")
         '
-        'BottonsPanel
+        'UserNameTextBox
         '
-        Me.BottonsPanel.BackColor = System.Drawing.Color.Transparent
-        Me.BottonsPanel.Controls.Add(Me.OK_Button)
-        Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
-        Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottonsPanel.Location = New System.Drawing.Point(0, 496)
-        Me.BottonsPanel.Name = "BottonsPanel"
-        Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
-        Me.BottonsPanel.Size = New System.Drawing.Size(624, 45)
-        Me.BottonsPanel.TabIndex = 257
+        Me.UserNameTextBox.Location = New System.Drawing.Point(125, 21)
+        Me.UserNameTextBox.Name = "UserNameTextBox"
+        Me.UserNameTextBox.Size = New System.Drawing.Size(303, 22)
+        Me.UserNameTextBox.TabIndex = 254
+        Me.ToolTip1.SetToolTip(Me.UserNameTextBox, "Username to assign the author by default in the project information.")
         '
-        'OK_Button
+        'Label10
         '
-        Me.OK_Button.BackColor = System.Drawing.Color.Transparent
-        Me.OK_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.OK_Button.Dock = System.Windows.Forms.DockStyle.Right
-        Me.OK_Button.FlatAppearance.BorderSize = 0
-        Me.OK_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.OK_Button.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OK_Button.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.OK_Button.Image = CType(resources.GetObject("OK_Button.Image"), System.Drawing.Image)
-        Me.OK_Button.Location = New System.Drawing.Point(380, 4)
-        Me.OK_Button.Margin = New System.Windows.Forms.Padding(4)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(130, 37)
-        Me.OK_Button.TabIndex = 3
-        Me.OK_Button.UseVisualStyleBackColor = False
+        Me.Label10.Location = New System.Drawing.Point(11, 21)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(110, 22)
+        Me.Label10.TabIndex = 255
+        Me.Label10.Text = "Username"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ToolTip1.SetToolTip(Me.Label10, "Username to assign the author by default in the project information.")
         '
-        'Cancel_Button
+        'CByteDataTextBox
         '
-        Me.Cancel_Button.BackColor = System.Drawing.Color.Transparent
-        Me.Cancel_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Cancel_Button.FlatAppearance.BorderSize = 0
-        Me.Cancel_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Cancel_Button.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cancel_Button.ForeColor = System.Drawing.Color.Black
-        Me.Cancel_Button.Image = CType(resources.GetObject("Cancel_Button.Image"), System.Drawing.Image)
-        Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Cancel_Button.Location = New System.Drawing.Point(510, 4)
-        Me.Cancel_Button.Margin = New System.Windows.Forms.Padding(4)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(110, 37)
-        Me.Cancel_Button.TabIndex = 4
-        Me.Cancel_Button.UseVisualStyleBackColor = False
+        Me.CByteDataTextBox.Location = New System.Drawing.Point(119, 21)
+        Me.CByteDataTextBox.Name = "CByteDataTextBox"
+        Me.CByteDataTextBox.Size = New System.Drawing.Size(220, 22)
+        Me.CByteDataTextBox.TabIndex = 261
+        Me.ToolTip1.SetToolTip(Me.CByteDataTextBox, "Byte Data command definition for C")
+        '
+        'AsmByteDataTextBox
+        '
+        Me.AsmByteDataTextBox.Location = New System.Drawing.Point(117, 21)
+        Me.AsmByteDataTextBox.Name = "AsmByteDataTextBox"
+        Me.AsmByteDataTextBox.Size = New System.Drawing.Size(220, 22)
+        Me.AsmByteDataTextBox.TabIndex = 247
+        Me.ToolTip1.SetToolTip(Me.AsmByteDataTextBox, "Byte Data command definition.")
+        '
+        'AsmWordDataTextBox
+        '
+        Me.AsmWordDataTextBox.Location = New System.Drawing.Point(117, 49)
+        Me.AsmWordDataTextBox.Name = "AsmWordDataTextBox"
+        Me.AsmWordDataTextBox.Size = New System.Drawing.Size(220, 22)
+        Me.AsmWordDataTextBox.TabIndex = 247
+        Me.ToolTip1.SetToolTip(Me.AsmWordDataTextBox, "Word Data command definition (DW, WORD, DEFW...)")
+        '
+        'BASICcommentComboBox
+        '
+        Me.BASICcommentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.BASICcommentComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BASICcommentComboBox.FormattingEnabled = True
+        Me.BASICcommentComboBox.Items.AddRange(New Object() {"REM", "' (apostrophe)"})
+        Me.BASICcommentComboBox.Location = New System.Drawing.Point(162, 49)
+        Me.BASICcommentComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.BASICcommentComboBox.Name = "BASICcommentComboBox"
+        Me.BASICcommentComboBox.Size = New System.Drawing.Size(128, 22)
+        Me.BASICcommentComboBox.TabIndex = 267
+        Me.ToolTip1.SetToolTip(Me.BASICcommentComboBox, "Instruction for comments")
+        '
+        'BASICdataTextBox
+        '
+        Me.BASICdataTextBox.Location = New System.Drawing.Point(162, 21)
+        Me.BASICdataTextBox.Name = "BASICdataTextBox"
+        Me.BASICdataTextBox.Size = New System.Drawing.Size(128, 22)
+        Me.BASICdataTextBox.TabIndex = 263
+        Me.BASICdataTextBox.Text = "DATA"
+        Me.ToolTip1.SetToolTip(Me.BASICdataTextBox, "Instruction for datas")
+        '
+        'BASICincLineslTextBox
+        '
+        Me.BASICincLineslTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BASICincLineslTextBox.Location = New System.Drawing.Point(491, 49)
+        Me.BASICincLineslTextBox.MaxLength = 3
+        Me.BASICincLineslTextBox.Name = "BASICincLineslTextBox"
+        Me.BASICincLineslTextBox.Size = New System.Drawing.Size(52, 22)
+        Me.BASICincLineslTextBox.TabIndex = 255
+        Me.BASICincLineslTextBox.Text = "10"
+        Me.BASICincLineslTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.BASICincLineslTextBox, "Interval lines (for BASIC)")
+        '
+        'BASICinitLineTextBox
+        '
+        Me.BASICinitLineTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BASICinitLineTextBox.Location = New System.Drawing.Point(491, 21)
+        Me.BASICinitLineTextBox.MaxLength = 5
+        Me.BASICinitLineTextBox.Name = "BASICinitLineTextBox"
+        Me.BASICinitLineTextBox.Size = New System.Drawing.Size(52, 22)
+        Me.BASICinitLineTextBox.TabIndex = 254
+        Me.BASICinitLineTextBox.Text = "10000"
+        Me.BASICinitLineTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.BASICinitLineTextBox, "Initial number of line (for BASIC)")
         '
         'DataOutputTab
         '
         Me.DataOutputTab.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataOutputTab.Controls.Add(Me.GroupBox3)
-        Me.DataOutputTab.Controls.Add(Me.GroupBox2)
+        Me.DataOutputTab.Controls.Add(Me.CGroupBox)
+        Me.DataOutputTab.Controls.Add(Me.AssemblerGroupBox)
         Me.DataOutputTab.Controls.Add(Me.Label21)
         Me.DataOutputTab.Controls.Add(Me.CompressTypeComboBox)
         Me.DataOutputTab.Controls.Add(Me.BASICGroupBox)
@@ -380,29 +333,34 @@ Partial Class ConfigDialog
         Me.DataOutputTab.Controls.Add(Me.DataLabelTextBox)
         Me.DataOutputTab.Controls.Add(Me.Label6)
         Me.DataOutputTab.Controls.Add(Me.SizeLineComboBox)
-        Me.DataOutputTab.Controls.Add(Me.NumFormatComboBox)
+        Me.DataOutputTab.Controls.Add(Me.NumberSystemCombo)
         Me.DataOutputTab.Controls.Add(Me.CodeOutputComboBox)
-        Me.DataOutputTab.Controls.Add(Me.Label5)
-        Me.DataOutputTab.Controls.Add(Me.Label1)
+        Me.DataOutputTab.Controls.Add(Me.DataLabelLabel)
+        Me.DataOutputTab.Controls.Add(Me.NumberSystemLabel)
         Me.DataOutputTab.Controls.Add(Me.Label2)
         Me.DataOutputTab.Controls.Add(Me.Label3)
-        Me.DataOutputTab.Location = New System.Drawing.Point(4, 23)
+        Me.DataOutputTab.Location = New System.Drawing.Point(4, 22)
         Me.DataOutputTab.Name = "DataOutputTab"
         Me.DataOutputTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.DataOutputTab.Size = New System.Drawing.Size(592, 450)
+        Me.DataOutputTab.Size = New System.Drawing.Size(592, 444)
         Me.DataOutputTab.TabIndex = 1
         Me.DataOutputTab.Text = "Default Data Output"
         '
-        'GroupBox3
+        'CGroupBox
         '
-        Me.GroupBox3.Controls.Add(Me.CByteDataTextBox)
-        Me.GroupBox3.Controls.Add(Me.Label8)
-        Me.GroupBox3.Location = New System.Drawing.Point(17, 255)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(559, 54)
-        Me.GroupBox3.TabIndex = 268
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "C"
+        Me.CGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.CGroupBox.BGColor = System.Drawing.Color.LightGray
+        Me.CGroupBox.Controls.Add(Me.CByteDataTextBox)
+        Me.CGroupBox.Controls.Add(Me.Label8)
+        Me.CGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.CGroupBox.LineColor = System.Drawing.Color.DimGray
+        Me.CGroupBox.Location = New System.Drawing.Point(17, 255)
+        Me.CGroupBox.Name = "CGroupBox"
+        Me.CGroupBox.Padding = New System.Windows.Forms.Padding(0)
+        Me.CGroupBox.Size = New System.Drawing.Size(559, 54)
+        Me.CGroupBox.TabIndex = 268
+        Me.CGroupBox.TabStop = False
+        Me.CGroupBox.Text = "C"
         '
         'Label8
         '
@@ -414,22 +372,27 @@ Partial Class ConfigDialog
         Me.Label8.Text = "C Byte:"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'GroupBox2
+        'AssemblerGroupBox
         '
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.arrow2PictureBox)
-        Me.GroupBox2.Controls.Add(Me.AsmByteDataTextBox)
-        Me.GroupBox2.Controls.Add(Me.arrow1PictureBox)
-        Me.GroupBox2.Controls.Add(Me.AsmWordDataTextBox)
-        Me.GroupBox2.Controls.Add(Me.AsmWordValuesComboBox)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.AsmByteValuesComboBox)
-        Me.GroupBox2.Location = New System.Drawing.Point(17, 158)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(559, 83)
-        Me.GroupBox2.TabIndex = 267
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Assembler"
+        Me.AssemblerGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.AssemblerGroupBox.BGColor = System.Drawing.Color.LightGray
+        Me.AssemblerGroupBox.Controls.Add(Me.Label4)
+        Me.AssemblerGroupBox.Controls.Add(Me.arrow2PictureBox)
+        Me.AssemblerGroupBox.Controls.Add(Me.AsmByteDataTextBox)
+        Me.AssemblerGroupBox.Controls.Add(Me.arrow1PictureBox)
+        Me.AssemblerGroupBox.Controls.Add(Me.AsmWordDataTextBox)
+        Me.AssemblerGroupBox.Controls.Add(Me.AsmWordValuesComboBox)
+        Me.AssemblerGroupBox.Controls.Add(Me.Label7)
+        Me.AssemblerGroupBox.Controls.Add(Me.AsmByteValuesComboBox)
+        Me.AssemblerGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.AssemblerGroupBox.LineColor = System.Drawing.Color.DimGray
+        Me.AssemblerGroupBox.Location = New System.Drawing.Point(17, 158)
+        Me.AssemblerGroupBox.Name = "AssemblerGroupBox"
+        Me.AssemblerGroupBox.Padding = New System.Windows.Forms.Padding(0)
+        Me.AssemblerGroupBox.Size = New System.Drawing.Size(559, 83)
+        Me.AssemblerGroupBox.TabIndex = 267
+        Me.AssemblerGroupBox.TabStop = False
+        Me.AssemblerGroupBox.Text = "Assembler"
         '
         'Label4
         '
@@ -520,6 +483,7 @@ Partial Class ConfigDialog
         Me.BASICGroupBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BASICGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.BASICGroupBox.BGColor = System.Drawing.Color.LightGray
         Me.BASICGroupBox.Controls.Add(Me.BASICcommentComboBox)
         Me.BASICGroupBox.Controls.Add(Me.Label13)
         Me.BASICGroupBox.Controls.Add(Me.Label9)
@@ -529,9 +493,11 @@ Partial Class ConfigDialog
         Me.BASICGroupBox.Controls.Add(Me.BASICincLineslTextBox)
         Me.BASICGroupBox.Controls.Add(Me.BASICinitLineTextBox)
         Me.BASICGroupBox.Controls.Add(Me.IntervalLabel)
-        Me.BASICGroupBox.ForeColor = System.Drawing.Color.Black
+        Me.BASICGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.BASICGroupBox.LineColor = System.Drawing.Color.DimGray
         Me.BASICGroupBox.Location = New System.Drawing.Point(17, 323)
         Me.BASICGroupBox.Name = "BASICGroupBox"
+        Me.BASICGroupBox.Padding = New System.Windows.Forms.Padding(0)
         Me.BASICGroupBox.Size = New System.Drawing.Size(559, 109)
         Me.BASICGroupBox.TabIndex = 249
         Me.BASICGroupBox.TabStop = False
@@ -618,32 +584,32 @@ Partial Class ConfigDialog
         Me.CodeOutputComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CodeOutputComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.CodeOutputComboBox.FormattingEnabled = True
-        Me.CodeOutputComboBox.Items.AddRange(New Object() {"Assembler default", "Assembler SJasm", "Assembler SDCC", "BASIC", "C"})
+        Me.CodeOutputComboBox.Items.AddRange(New Object() {"BASIC", "C", "Assembler default", "Assembler asMSX", "Assembler tniASM", "Assembler SJasm", "Assembler SDCC"})
         Me.CodeOutputComboBox.Location = New System.Drawing.Point(133, 10)
         Me.CodeOutputComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.CodeOutputComboBox.Name = "CodeOutputComboBox"
         Me.CodeOutputComboBox.Size = New System.Drawing.Size(221, 22)
         Me.CodeOutputComboBox.TabIndex = 241
         '
-        'Label5
+        'DataLabelLabel
         '
-        Me.Label5.Location = New System.Drawing.Point(19, 122)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(110, 22)
-        Me.Label5.TabIndex = 253
-        Me.Label5.Text = "Label:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.DataLabelLabel.Location = New System.Drawing.Point(19, 122)
+        Me.DataLabelLabel.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.DataLabelLabel.Name = "DataLabelLabel"
+        Me.DataLabelLabel.Size = New System.Drawing.Size(110, 22)
+        Me.DataLabelLabel.TabIndex = 253
+        Me.DataLabelLabel.Text = "Label:"
+        Me.DataLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label1
+        'NumberSystemLabel
         '
-        Me.Label1.Location = New System.Drawing.Point(17, 38)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(110, 22)
-        Me.Label1.TabIndex = 248
-        Me.Label1.Text = "Number system:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.NumberSystemLabel.Location = New System.Drawing.Point(17, 38)
+        Me.NumberSystemLabel.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.NumberSystemLabel.Name = "NumberSystemLabel"
+        Me.NumberSystemLabel.Size = New System.Drawing.Size(110, 22)
+        Me.NumberSystemLabel.TabIndex = 248
+        Me.NumberSystemLabel.Text = "Number system:"
+        Me.NumberSystemLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label2
         '
@@ -668,28 +634,33 @@ Partial Class ConfigDialog
         'OthersTab
         '
         Me.OthersTab.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.OthersTab.Controls.Add(Me.GroupBox1)
-        Me.OthersTab.Controls.Add(Me.OutputdataGroupBox)
-        Me.OthersTab.Controls.Add(Me.InitProjectGroupBox)
+        Me.OthersTab.Controls.Add(Me.DefaultColorsGroupBox)
+        Me.OthersTab.Controls.Add(Me.OutputdataColorsGroupBox)
+        Me.OthersTab.Controls.Add(Me.ProjectInfoGroupBox)
         Me.OthersTab.Location = New System.Drawing.Point(4, 23)
         Me.OthersTab.Name = "OthersTab"
         Me.OthersTab.Padding = New System.Windows.Forms.Padding(3)
-        Me.OthersTab.Size = New System.Drawing.Size(592, 450)
+        Me.OthersTab.Size = New System.Drawing.Size(592, 443)
         Me.OthersTab.TabIndex = 2
         Me.OthersTab.Text = "General"
         '
-        'GroupBox1
+        'DefaultColorsGroupBox
         '
-        Me.GroupBox1.Controls.Add(Me.GridColorButton)
-        Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.Color0Button)
-        Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Location = New System.Drawing.Point(38, 161)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(535, 93)
-        Me.GroupBox1.TabIndex = 262
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Colors"
+        Me.DefaultColorsGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.DefaultColorsGroupBox.BGColor = System.Drawing.Color.LightGray
+        Me.DefaultColorsGroupBox.Controls.Add(Me.GridColorButton)
+        Me.DefaultColorsGroupBox.Controls.Add(Me.Label11)
+        Me.DefaultColorsGroupBox.Controls.Add(Me.Color0Button)
+        Me.DefaultColorsGroupBox.Controls.Add(Me.Label12)
+        Me.DefaultColorsGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.DefaultColorsGroupBox.LineColor = System.Drawing.Color.DimGray
+        Me.DefaultColorsGroupBox.Location = New System.Drawing.Point(38, 161)
+        Me.DefaultColorsGroupBox.Name = "DefaultColorsGroupBox"
+        Me.DefaultColorsGroupBox.Padding = New System.Windows.Forms.Padding(0)
+        Me.DefaultColorsGroupBox.Size = New System.Drawing.Size(535, 93)
+        Me.DefaultColorsGroupBox.TabIndex = 262
+        Me.DefaultColorsGroupBox.TabStop = False
+        Me.DefaultColorsGroupBox.Text = "Colors"
         '
         'GridColorButton
         '
@@ -700,21 +671,26 @@ Partial Class ConfigDialog
         Me.GridColorButton.TabIndex = 260
         Me.GridColorButton.UseVisualStyleBackColor = True
         '
-        'OutputdataGroupBox
+        'OutputdataColorsGroupBox
         '
-        Me.OutputdataGroupBox.Controls.Add(Me.OutputText)
-        Me.OutputdataGroupBox.Controls.Add(Me.OutputBGcolorButton)
-        Me.OutputdataGroupBox.Controls.Add(Me.Label15)
-        Me.OutputdataGroupBox.Controls.Add(Me.OutputINKcolorButton)
-        Me.OutputdataGroupBox.Controls.Add(Me.Label14)
-        Me.OutputdataGroupBox.Controls.Add(Me.ColorConfigsLabel)
-        Me.OutputdataGroupBox.Controls.Add(Me.ColorConfigsComboBox)
-        Me.OutputdataGroupBox.Location = New System.Drawing.Point(38, 268)
-        Me.OutputdataGroupBox.Name = "OutputdataGroupBox"
-        Me.OutputdataGroupBox.Size = New System.Drawing.Size(535, 118)
-        Me.OutputdataGroupBox.TabIndex = 261
-        Me.OutputdataGroupBox.TabStop = False
-        Me.OutputdataGroupBox.Text = "Output Data colors"
+        Me.OutputdataColorsGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.OutputdataColorsGroupBox.BGColor = System.Drawing.Color.LightGray
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.OutputText)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.OutputBGcolorButton)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.Label15)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.OutputINKcolorButton)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.Label14)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.ColorConfigsLabel)
+        Me.OutputdataColorsGroupBox.Controls.Add(Me.ColorConfigsComboBox)
+        Me.OutputdataColorsGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.OutputdataColorsGroupBox.LineColor = System.Drawing.Color.DimGray
+        Me.OutputdataColorsGroupBox.Location = New System.Drawing.Point(38, 268)
+        Me.OutputdataColorsGroupBox.Name = "OutputdataColorsGroupBox"
+        Me.OutputdataColorsGroupBox.Padding = New System.Windows.Forms.Padding(0)
+        Me.OutputdataColorsGroupBox.Size = New System.Drawing.Size(535, 118)
+        Me.OutputdataColorsGroupBox.TabIndex = 261
+        Me.OutputdataColorsGroupBox.TabStop = False
+        Me.OutputdataColorsGroupBox.Text = "Output Data colors"
         '
         'OutputText
         '
@@ -746,85 +722,155 @@ Partial Class ConfigDialog
         Me.ColorConfigsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ColorConfigsComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ColorConfigsComboBox.FormattingEnabled = True
-        Me.ColorConfigsComboBox.Items.AddRange(New Object() {"Gray (default)", "Blue MSX BASIC", "GreenBoy"})
+        Me.ColorConfigsComboBox.Items.AddRange(New Object() {"Gray", "Green Phosphor", "Ambar Phosphor", "Blue MSX BASIC", "GreenBoy"})
         Me.ColorConfigsComboBox.Location = New System.Drawing.Point(150, 21)
         Me.ColorConfigsComboBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.ColorConfigsComboBox.Name = "ColorConfigsComboBox"
         Me.ColorConfigsComboBox.Size = New System.Drawing.Size(124, 22)
         Me.ColorConfigsComboBox.TabIndex = 243
         '
-        'InitProjectGroupBox
+        'ProjectInfoGroupBox
         '
-        Me.InitProjectGroupBox.Controls.Add(Me.GroupNameTextBox)
-        Me.InitProjectGroupBox.Controls.Add(Me.Label16)
-        Me.InitProjectGroupBox.Controls.Add(Me.UserNameTextBox)
-        Me.InitProjectGroupBox.Controls.Add(Me.Label10)
-        Me.InitProjectGroupBox.Enabled = False
-        Me.InitProjectGroupBox.Location = New System.Drawing.Point(38, 28)
-        Me.InitProjectGroupBox.Name = "InitProjectGroupBox"
-        Me.InitProjectGroupBox.Size = New System.Drawing.Size(535, 119)
-        Me.InitProjectGroupBox.TabIndex = 256
-        Me.InitProjectGroupBox.TabStop = False
-        Me.InitProjectGroupBox.Text = "Default Project Info"
+        Me.ProjectInfoGroupBox.BackColor = System.Drawing.Color.Transparent
+        Me.ProjectInfoGroupBox.BGColor = System.Drawing.Color.LightGray
+        Me.ProjectInfoGroupBox.Controls.Add(Me.GroupNameTextBox)
+        Me.ProjectInfoGroupBox.Controls.Add(Me.Label16)
+        Me.ProjectInfoGroupBox.Controls.Add(Me.UserNameTextBox)
+        Me.ProjectInfoGroupBox.Controls.Add(Me.Label10)
+        Me.ProjectInfoGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.ProjectInfoGroupBox.LineColor = System.Drawing.Color.DimGray
+        Me.ProjectInfoGroupBox.Location = New System.Drawing.Point(38, 28)
+        Me.ProjectInfoGroupBox.Name = "ProjectInfoGroupBox"
+        Me.ProjectInfoGroupBox.Padding = New System.Windows.Forms.Padding(0)
+        Me.ProjectInfoGroupBox.Size = New System.Drawing.Size(535, 119)
+        Me.ProjectInfoGroupBox.TabIndex = 256
+        Me.ProjectInfoGroupBox.TabStop = False
+        Me.ProjectInfoGroupBox.Text = "Default Project Info"
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.OthersTab)
         Me.TabControl1.Controls.Add(Me.DataOutputTab)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 48)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(600, 477)
+        Me.TabControl1.Size = New System.Drawing.Size(600, 470)
         Me.TabControl1.TabIndex = 256
         '
-        'MiniConfigWin
+        'BottonsPanel
         '
+        Me.BottonsPanel.BackColor = System.Drawing.Color.Transparent
+        Me.BottonsPanel.Controls.Add(Me.Ok_Button)
+        Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
+        Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 534)
+        Me.BottonsPanel.Name = "BottonsPanel"
+        Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
+        Me.BottonsPanel.Size = New System.Drawing.Size(626, 44)
+        Me.BottonsPanel.TabIndex = 257
+        '
+        'Ok_Button
+        '
+        Me.Ok_Button.BackColor = System.Drawing.Color.Gainsboro
+        Me.Ok_Button.ButtonColor = System.Drawing.Color.Gray
+        Me.Ok_Button.ButtonType = piXelST_Button.Button_TYPES.Confirmation
+        Me.Ok_Button.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Ok_Button.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Ok_Button.FlatAppearance.BorderSize = 0
+        Me.Ok_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Ok_Button.Font = New System.Drawing.Font("Comic Sans MS", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Ok_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Ok_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Ok_Button.Location = New System.Drawing.Point(395, 4)
+        Me.Ok_Button.Name = "Ok_Button"
+        Me.Ok_Button.Padding = New System.Windows.Forms.Padding(4)
+        Me.Ok_Button.Size = New System.Drawing.Size(125, 36)
+        Me.Ok_Button.TabIndex = 127
+        Me.Ok_Button.TabStop = False
+        Me.Ok_Button.Text = "Ok"
+        Me.Ok_Button.UseVisualStyleBackColor = False
+        '
+        'Cancel_Button
+        '
+        Me.Cancel_Button.BackColor = System.Drawing.Color.Gainsboro
+        Me.Cancel_Button.ButtonColor = System.Drawing.Color.Gray
+        Me.Cancel_Button.ButtonType = piXelST_Button.Button_TYPES.Cancellation
+        Me.Cancel_Button.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Cancel_Button.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Cancel_Button.FlatAppearance.BorderSize = 0
+        Me.Cancel_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Cancel_Button.Font = New System.Drawing.Font("Comic Sans MS", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cancel_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Cancel_Button.Location = New System.Drawing.Point(520, 4)
+        Me.Cancel_Button.Name = "Cancel_Button"
+        Me.Cancel_Button.Padding = New System.Windows.Forms.Padding(4)
+        Me.Cancel_Button.Size = New System.Drawing.Size(102, 36)
+        Me.Cancel_Button.TabIndex = 128
+        Me.Cancel_Button.TabStop = False
+        Me.Cancel_Button.Text = "Cancel"
+        Me.Cancel_Button.UseVisualStyleBackColor = False
+        '
+        'Title_Label
+        '
+        Me.Title_Label.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Title_Label.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Title_Label.ForeColor = System.Drawing.Color.White
+        Me.Title_Label.Location = New System.Drawing.Point(0, 0)
+        Me.Title_Label.Name = "Title_Label"
+        Me.Title_Label.Padding = New System.Windows.Forms.Padding(8, 4, 4, 4)
+        Me.Title_Label.Size = New System.Drawing.Size(626, 32)
+        Me.Title_Label.TabIndex = 258
+        Me.Title_Label.Text = "Application Settings"
+        Me.Title_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'ConfigDialog
+        '
+        Me.AcceptButton = Me.Ok_Button
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(624, 541)
+        Me.ClientSize = New System.Drawing.Size(626, 578)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Title_Label)
         Me.Controls.Add(Me.BottonsPanel)
         Me.Controls.Add(Me.TabControl1)
         Me.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Name = "MiniConfigWin"
+        Me.Name = "ConfigDialog"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "devTools Config"
-        Me.BottonsPanel.ResumeLayout(False)
         Me.DataOutputTab.ResumeLayout(False)
         Me.DataOutputTab.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.CGroupBox.ResumeLayout(False)
+        Me.CGroupBox.PerformLayout()
+        Me.AssemblerGroupBox.ResumeLayout(False)
+        Me.AssemblerGroupBox.PerformLayout()
         CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BASICGroupBox.ResumeLayout(False)
         Me.BASICGroupBox.PerformLayout()
         Me.OthersTab.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.OutputdataGroupBox.ResumeLayout(False)
-        Me.OutputdataGroupBox.PerformLayout()
-        Me.InitProjectGroupBox.ResumeLayout(False)
-        Me.InitProjectGroupBox.PerformLayout()
+        Me.DefaultColorsGroupBox.ResumeLayout(False)
+        Me.OutputdataColorsGroupBox.ResumeLayout(False)
+        Me.OutputdataColorsGroupBox.PerformLayout()
+        Me.ProjectInfoGroupBox.ResumeLayout(False)
+        Me.ProjectInfoGroupBox.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
+        Me.BottonsPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Private WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents ColorDialog1 As ColorDialog
-    Friend WithEvents BottonsPanel As Panel
-    Friend WithEvents OK_Button As Button
-    Friend WithEvents Cancel_Button As Button
     Friend WithEvents DataOutputTab As TabPage
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents CGroupBox As piXelST_GroupBox
     Friend WithEvents CByteDataTextBox As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents AssemblerGroupBox As piXelST_GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents arrow2PictureBox As PictureBox
     Friend WithEvents AsmByteDataTextBox As TextBox
@@ -835,7 +881,7 @@ Partial Class ConfigDialog
     Friend WithEvents AsmByteValuesComboBox As ComboBox
     Friend WithEvents Label21 As Label
     Friend WithEvents CompressTypeComboBox As ComboBox
-    Friend WithEvents BASICGroupBox As GroupBox
+    Friend WithEvents BASICGroupBox As piXelST_GroupBox
     Friend WithEvents BASICcommentComboBox As ComboBox
     Friend WithEvents Label13 As Label
     Friend WithEvents Label9 As Label
@@ -849,14 +895,14 @@ Partial Class ConfigDialog
     Friend WithEvents DataLabelTextBox As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents SizeLineComboBox As ComboBox
-    Friend WithEvents NumFormatComboBox As ComboBox
+    Friend WithEvents NumberSystemCombo As ComboBox
     Friend WithEvents CodeOutputComboBox As ComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents DataLabelLabel As Label
+    Friend WithEvents NumberSystemLabel As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents OthersTab As TabPage
-    Friend WithEvents OutputdataGroupBox As GroupBox
+    Friend WithEvents OutputdataColorsGroupBox As piXelST_GroupBox
     Friend WithEvents OutputBGcolorButton As Button
     Friend WithEvents Label15 As Label
     Friend WithEvents OutputINKcolorButton As Button
@@ -867,12 +913,16 @@ Partial Class ConfigDialog
     Friend WithEvents Label12 As Label
     Friend WithEvents Color0Button As Button
     Friend WithEvents Label11 As Label
-    Friend WithEvents InitProjectGroupBox As GroupBox
+    Friend WithEvents ProjectInfoGroupBox As piXelST_GroupBox
     Friend WithEvents Label10 As Label
     Friend WithEvents UserNameTextBox As TextBox
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents OutputText As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DefaultColorsGroupBox As piXelST_GroupBox
     Friend WithEvents GroupNameTextBox As TextBox
     Friend WithEvents Label16 As Label
+    Friend WithEvents BottonsPanel As Panel
+    Friend WithEvents Ok_Button As piXelST_Button
+    Friend WithEvents Cancel_Button As piXelST_Button
+    Friend WithEvents Title_Label As piXelST_Label
 End Class

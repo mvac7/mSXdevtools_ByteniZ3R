@@ -117,10 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Exit_Button.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAF4AAAAYCAYAAABz00ofAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6
+        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyklE
+        QVRoQ+3ZsQ6DMAwE0Hx2+/UpUIKQdZZp5Ysz3PCWnJ3hBjLQeu9f71eXCc6+VfxsV/EoFDoVX0TFF1Hx
+        RejFt+0Z+QW64x/RvVHOpuKdnG168WgGebr3dG6w8xF0RwYVH0B3ZFjmU4N2d96cd56Vs6l4J2db9lNj
+        2XsGNLuL5qKcTcU7OdvyxXv73nlWzqbinZxtmcd18Pbud955c965ZecstJNBxZs5C+1koBcvmIovouKL
+        qPgi2+txAqEQXD+7VfxcR9+9fQCk+b3q8r5/FgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>188, 17</value>
-  </metadata>
+  <data name="MaximizeButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAABRSURBVDhP3YwxCkAxFMJ6/0u/WocMLvJ/twYCGcQ1
+        lzx2cPqLhhA5aBpC5KBpCJGDpiFEDpqGEDloGkLkoGkIkYOmIUQOmoYQOWga4i+XBzMbkaCEpky1yZIA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="ExitButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAABYSURBVDhP1YxBDsAgDMN4Nrw+kyo6iYAlNnbZwYek
+        jYtaVSCVR/TdBwIr7kzYHx4QFCQkgn4IwbEgyQEMk2UZ/FhAA+iHELwW0NCxPzwgk2B36PTdoaDqAknE
+        +Z8SWrI6AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="icoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACZSURBVFhH7ZFbDoAgDARJuKLe/wSeoYJJEwpFlEd5
+        6CbzwYruJCoA6ApbSsKWkrClJEGx7Qe0xN8jBwv3Uk38vWC4dXyR+QS01rekMq9Aaij1HDOvQCrfFXg6
+        jFlH4O0wZh2B3Kwj0P0X/ALdBXIzrgASE8G+FBOyRw4W5yKJ+5ESTMgeOVici1diL9YiKIYRaD2MBIWs
+        AKgTeNi/aV8/SnYAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

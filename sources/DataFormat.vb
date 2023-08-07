@@ -7,54 +7,124 @@
 
     Public BASIC_increment As Byte = 10
 
-    Public Comment_Assembler As String = ";"
-    Public Comment_C As String = "//"
-    Public Comment_BASIC As String = "REM"
+    Public Shadows Const Comment_Assembler As String = ";"
+    Public Shadows Const Comment_C As String = "//"
+
+
+    Private BASICdataInst As String = "DATA"
+    Public Property BASIC_DataInstruction As String
+        Get
+            Return Me.BASICdataInst
+        End Get
+        Set(value As String)
+            Me.BASICdataInst = value
+        End Set
+    End Property
+
+
+    Private BASICcomment As String = "REM"
+    Public Property Comment_BASIC As String
+        Get
+            Return Me.BASICcomment
+        End Get
+        Set(value As String)
+            Me.BASICcomment = value
+        End Set
+    End Property
 
 
 
-    Public Shadows Enum DataType As Byte
-        DECIMAL_n = 0         '1
-        DECIMAL_nnn = 1      '001  - 11
-        DECIMAL_nnnd = 2      '001d - 1
+    'Public Function GetProgrammingLanguageByLanguageCode(ByVal code As CodeInfo.Language_CODE) As CodeInfo.Programming_Language
+    '    Dim value As CodeInfo.Programming_Language
 
-        HEXADECIMAL_nn = 3    'FF   - 2
-        HEXADECIMAL_Snn = 4   '$FF  - 4
-        HEXADECIMAL_4nn = 5   '#FF  - 5
-        HEXADECIMAL_0nnh = 6  '0FFh - 6
-        HEXADECIMAL_C = 7  '0xFF - 3
-        HEXADECIMAL_BASIC = 8  '&hFF - 7
-
-        BINARY_n = 9          ' 00000000   - 8
-        BINARY_nb = 10        ' 00000000b  - 9
-        BINARY_percentn = 11  ' %00000000
-        BINARY_C = 12         ' 0B00000000
-        BINARY_BASIC = 13     ' &B00000000
-    End Enum
+    '    Select Case code
+    '        Case CodeInfo.Language_CODE.BASIC
+    '            value = CodeInfo.Programming_Language.BASIC
+    '        Case CodeInfo.Language_CODE.C
+    '            value = CodeInfo.Programming_Language.C
+    '        Case Else
+    '            value = CodeInfo.Programming_Language.ASSEMBLER
+    '    End Select
+    '    Return value
+    'End Function
 
 
-    Public Shadows Enum ProgrammingLanguage As Byte
-        ASSEMBLER
-        BASIC
-        C
-    End Enum
+    Public Class DataItem
+        Public Name As String
+        Public SourceCode As String
+        Public Data As Byte()
+
+        Public Sub New(ByVal name As String, ByRef _sourceCode As String, ByRef _data As Byte())
+            Me.Name = name
+            Me.SourceCode = _sourceCode.Clone
+            Me.Data = _data.Clone
+        End Sub
+
+    End Class
+
+
+
+    Public Function GetSourceCode(ByVal name As String, ByRef _codeFormat As CodeInfo, ByRef tmpData() As Byte, ByVal comments As ArrayList) As DataItem
+
+        Dim sourceCode As String = ""
+
+        'Dim compressData As New Compress
+
+        Dim newComments As New ArrayList
+
+        'Dim tmpData As Byte()
+
+        Me.Comment_BASIC = _codeFormat.BASIC_CommentInstruction
+
+        If _codeFormat.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC And Not name = "" Then
+            newComments.Add("Name=" + name)
+        End If
+        newComments.AddRange(comments)
+
+
+        'If _codeFormat.CompressType = iCompressEncoder.COMPRESS_TYPE.RAW Then
+        '    tmpData = data
+        '    newComments.Add("Size=" + CStr(data.Length))
+        'Else
+        '    tmpData = compressData.GetCompressData(_codeFormat.CompressType, data)
+        '    newComments.Add(compressData.Compresors_List(_codeFormat.CompressType) + " compressed - Original size=" + CStr(data.Length) + " - Compress size=" + CStr(tmpData.Length))
+        'End If
+
+        Select Case _codeFormat.ProgrammingLanguage
+            Case CodeInfo.Programming_Language.C
+                sourceCode = GetCcode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.CdataType, newComments)
+
+            Case CodeInfo.Programming_Language.ASSEMBLER
+                sourceCode = GetAssemblerCode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.AsmDataByteCommand, newComments)
+
+            Case CodeInfo.Programming_Language.BASIC
+                sourceCode = GetBASICcode(tmpData, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.BASIC_remove0, Me.BASIC_Line, _codeFormat.BASIC_incLines, newComments)
+
+        End Select
+
+
+        Return New DataItem(name, sourceCode, tmpData)
+
+    End Function
+
 
 
 
     ''' <summary>
-    ''' Provides the formatted data to be used in MSX BASIC.
+    ''' Provides a text with the data formatted in MSX BASIC programming language.
     ''' </summary>
-    ''' <param name="tmpData"></param>
-    ''' <param name="itemsPerLine"></param>
-    ''' <param name="format"></param>
-    ''' <param name="firstNumLine"></param>
-    ''' <param name="incLine"></param>
-    ''' <param name="comment"></param>
+    ''' <param name="tmpData">Data</param>
+    ''' <param name="itemsPerLine">Items per line</param>
+    ''' <param name="format">Data format</param>
+    ''' <param name="removeZeros">Remove zeros state</param>
+    ''' <param name="firstNumLine">Value of the first line</param>
+    ''' <param name="incLine">Value of the increment</param>
+    ''' <param name="comments">Comments list</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetBASICcode(ByVal tmpData As Array, ByVal itemsPerLine As Byte, ByVal format As DataType, ByVal removeZeros As Boolean, ByVal firstNumLine As Short, ByVal incLine As Byte, ByVal comment As ArrayList) As String
+    Public Function GetBASICcode(ByVal tmpData As Array, ByVal itemsPerLine As Byte, ByVal format As CodeInfo.DataType, ByVal removeZeros As Boolean, ByVal firstNumLine As Short, ByVal incLine As Byte, ByVal comments As ArrayList) As String
 
-        Dim outputString As String = ""
+        Dim outputString As String
 
         Dim contador As Integer = 0
 
@@ -71,16 +141,16 @@
         Me.BASIC_Line = firstNumLine
         Me.BASIC_increment = incLine
 
-        outputString = GetComments(comment, ProgrammingLanguage.BASIC) 'GetBASICComments(comment, firstNumLine, incLine)
+        outputString = GetComments(comments, CodeInfo.Programming_Language.BASIC) 'GetBASICComments(comment, firstNumLine, incLine)
 
-        If itemsPerLine = 0 Then
+        If itemsPerLine < 1 Then
             itemsPerLine = 32 ' maximum data per line
         End If
 
         tmpCalc = -Int(-((tableSize + 1) / itemsPerLine))
 
         For i = 1 To tmpCalc
-            line = CStr(Me.BASIC_Line) + " DATA "
+            line = CStr(Me.BASIC_Line) + " " + Me.BASICdataInst + " "
             For o = 0 To itemsPerLine - 2
                 If (contador < tableSize) Then
                     line += GetBasicFormatedValue(tmpData(contador), format, removeZeros) + ","
@@ -106,25 +176,25 @@
 
 
     ''' <summary>
-    ''' Provides data formatted for use in C.
-    ''' Proporciona los datos formateados para ser usados en C.
+    ''' Provides a text with the data formatted in C programming language.
     ''' </summary>
-    ''' <param name="tmpData"></param>
-    ''' <param name="itemsPerLine"></param>
-    ''' <param name="format"></param>
-    ''' <param name="fieldName"></param>
-    ''' <param name="comment"></param>
+    ''' <param name="tmpData">Data</param>
+    ''' <param name="variableName">Field name</param>
+    ''' <param name="itemsPerLine">Items per line</param>
+    ''' <param name="format">Data format</param>
+    ''' <param name="arrayDeclaration">Array declaration in C</param>
+    ''' <param name="comments">Comments list</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetCcode(ByVal tmpData As Array, ByVal itemsPerLine As Byte, ByVal format As DataType, ByVal fieldName As String, ByVal comment As ArrayList, ByVal dataCommand As String) As String
+    Public Function GetCcode(ByVal tmpData As Array, ByVal variableName As String, ByVal itemsPerLine As Byte, ByVal format As CodeInfo.DataType, ByVal arrayDeclaration As String, ByVal comments As ArrayList) As String
 
-        Dim outputString As String = ""
+        Dim outputString As String
 
         Dim contador As Integer = 0
         Dim line As String
 
-        Dim i As Integer = 0
-        Dim o As Integer = 0
+        Dim i As Integer
+        Dim o As Integer
 
         Dim totalLines As Short
 
@@ -134,12 +204,12 @@
         Dim tableSize As Integer
         tableSize = tmpData.Length - 1
 
-        outputString = GetComments(comment, ProgrammingLanguage.C)
+        outputString = GetComments(comments, CodeInfo.Programming_Language.C)
 
-        line = dataCommand + " " + GetCFieldFormat(fieldName) + "[]={"
+        line = arrayDeclaration + " " + GetCvariableNameFormat(variableName) + "[]={"
         outputString += line + vbNewLine
 
-        If itemsPerLine = 0 Then
+        If itemsPerLine < 1 Then
             itemsPerLine = 32 ' maximum data per line
         End If
 
@@ -175,24 +245,25 @@
 
 
     ''' <summary>
-    ''' Provides data formatted for use on Assembler.
+    ''' Provides a text with the data formatted in Assembler programming language.
     ''' </summary>
-    ''' <param name="tmpData"></param>
-    ''' <param name="itemsPerLine"></param>
-    ''' <param name="format"></param>
-    ''' <param name="fieldName"></param>
-    ''' <param name="comment"></param>
+    ''' <param name="tmpData">Data</param>
+    ''' <param name="fieldName">Field name</param>
+    ''' <param name="itemsPerLine">Items per line</param>
+    ''' <param name="format">Data format</param>
+    ''' <param name="dataCommand">Command for the data</param>
+    ''' <param name="comments">Comments list</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function GetAssemblerCode(ByVal tmpData As Array, ByVal itemsPerLine As Byte, ByVal format As DataType, ByVal fieldName As String, ByVal comment As ArrayList, ByVal dataCommand As String) As String
+    Public Function GetAssemblerCode(ByVal tmpData As Array, ByVal fieldName As String, ByVal itemsPerLine As Byte, ByVal format As CodeInfo.DataType, ByVal dataCommand As String, ByVal comments As ArrayList) As String
 
-        Dim outputString As String = ""
+        Dim outputString As String
 
         Dim contador As Integer = 0
         Dim line As String
 
-        Dim i As Integer = 0
-        Dim o As Integer = 0
+        Dim i As Integer
+        Dim o As Integer
 
         Dim totalLines As Short
 
@@ -201,25 +272,29 @@
         Dim tableSize As Short
         tableSize = tmpData.Length - 1
 
-        outputString = GetComments(comment, ProgrammingLanguage.ASSEMBLER)
+        outputString = GetComments(comments, CodeInfo.Programming_Language.ASSEMBLER)
 
         If Not fieldName = "" Then
             outputString += GetAsmFieldFormat(fieldName) + ":" + vbNewLine
         End If
 
-        If itemsPerLine = 0 Then
+        If itemsPerLine < 1 Then
             itemsPerLine = 32 ' maximum data per line
         End If
 
         totalLines = -Int(-((tableSize + 1) / itemsPerLine))
 
+        If dataCommand.Contains("<tab>") Then
+            dataCommand = dataCommand.Replace("<tab>", vbTab)
+        End If
+
+        If dataCommand.Contains("<TAB>") Then
+            dataCommand = dataCommand.Replace("<TAB>", vbTab)
+        End If
+
         For i = 1 To totalLines
 
-            If dataCommand.ToLower.StartsWith("<tab>") Then
-                line = vbTab + dataCommand.Substring(5) + " "
-            Else
-                line = dataCommand + " "
-            End If
+            line = dataCommand + " "
 
             For o = 0 To itemsPerLine - 1
 
@@ -253,7 +328,7 @@
     ''' <param name="format"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Function GetBasicFormatedValue(ByVal value As Object, ByVal format As DataType, ByVal removeZeros As Boolean) As String
+    Private Function GetBasicFormatedValue(ByVal value As Object, ByVal format As CodeInfo.DataType, ByVal removeZeros As Boolean) As String
 
         Dim outputData As String = ""
 
@@ -262,7 +337,7 @@
                 If value = 0 Then
                     outputData = ""
                 Else
-                    If format = DataType.HEXADECIMAL_nn Then
+                    If format = CodeInfo.DataType.HEXADECIMAL_nn Then
                         outputData = Hex(value)
                     Else
                         outputData = GetFormatedValue(value, format)
@@ -285,7 +360,7 @@
     ''' <param name="value"></param>
     ''' <param name="format"></param>
     ''' <returns></returns>
-    Public Function GetFormatedValue(ByVal value As Object, ByVal format As DataType) As String
+    Public Function GetFormatedValue(ByVal value As Object, ByVal format As CodeInfo.DataType) As String
 
         Dim outputData As String = "0"
 
@@ -303,46 +378,46 @@
 
         Select Case format
 
-            Case DataType.DECIMAL_n
+            Case CodeInfo.DataType.DECIMAL_n
                 outputData = CStr(value)
 
-            Case DataType.DECIMAL_nnn
+            Case CodeInfo.DataType.DECIMAL_nnn
                 outputData = CStr(value).PadLeft(decSize, "0"c)
 
-            Case DataType.DECIMAL_nnnd
+            Case CodeInfo.DataType.DECIMAL_nnnd
                 outputData = CStr(value).PadLeft(decSize, "0"c) + "d"
 
-            Case DataType.HEXADECIMAL_nn
+            Case CodeInfo.DataType.HEXADECIMAL_nn
                 outputData = Hex(value).PadLeft(hexSize, "0"c)
 
-            Case DataType.HEXADECIMAL_0nnh
+            Case CodeInfo.DataType.HEXADECIMAL_0nnh
                 outputData = "0" + Hex(value).PadLeft(hexSize, "0"c) + "h"
 
-            Case DataType.HEXADECIMAL_C
+            Case CodeInfo.DataType.HEXADECIMAL_C
                 outputData = "0x" + Hex(value).PadLeft(hexSize, "0"c)
 
-            Case DataType.HEXADECIMAL_4nn
+            Case CodeInfo.DataType.HEXADECIMAL_4nn
                 outputData = "#" + Hex(value).PadLeft(hexSize, "0"c)
 
-            Case DataType.HEXADECIMAL_Snn
+            Case CodeInfo.DataType.HEXADECIMAL_Snn
                 outputData = "$" + Hex(value).PadLeft(hexSize, "0"c)
 
-            Case DataType.HEXADECIMAL_BASIC
+            Case CodeInfo.DataType.HEXADECIMAL_BASIC
                 outputData = "&H" + Hex(value).PadLeft(hexSize, "0"c)
 
-            Case DataType.BINARY_n
+            Case CodeInfo.DataType.BINARY_n
                 outputData = Convert.ToString(value, 2).PadLeft(binSize, "0"c)
 
-            Case DataType.BINARY_nb
+            Case CodeInfo.DataType.BINARY_nb
                 outputData = Convert.ToString(value, 2).PadLeft(binSize, "0"c) + "b"
 
-            Case DataType.BINARY_percentn
+            Case CodeInfo.DataType.BINARY_percentn
                 outputData = "%" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
 
-            Case DataType.BINARY_C
+            Case CodeInfo.DataType.BINARY_C
                 outputData = "0b" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
 
-            Case DataType.BINARY_BASIC
+            Case CodeInfo.DataType.BINARY_BASIC
                 outputData = "&B" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
 
         End Select
@@ -378,11 +453,11 @@
 
 
 
-    ''' <summary>
-    ''' Provides a String formatted from an Array of Bytes, to be used in XML files.
-    ''' </summary>
-    ''' <param name="aData"></param>
-    ''' <returns></returns>
+    '''' <summary>
+    '''' Provides a String formatted from an Array of Bytes, to be used in XML files.
+    '''' </summary>
+    '''' <param name="aData"></param>
+    '''' <returns></returns>
     Public Function JoinDataHex(ByVal aData As Byte()) As String
         Dim anOutput As String = ""
         Dim i As Integer
@@ -393,19 +468,6 @@
 
         Return anOutput
     End Function
-
-
-
-    'Public Function JoinDataHex(ByVal aData As Array) As String
-    '    Dim anOutput As String = ""
-    '    Dim i As Integer
-
-    '    For i = 0 To aData.Length - 1
-    '        anOutput += GetHexByte(aData(i))
-    '    Next
-
-    '    Return anOutput
-    'End Function
 
 
 
@@ -515,45 +577,55 @@
 
 
 
-    Public Function GetCFieldFormat(ByVal field As String) As String
+    Public Function GetCvariableNameFormat(ByVal vName As String) As String
+
+        Dim specialChars As String() = {"(", ")", "{", "}", ";", ":", "#", "!", "?", "+", "@", "%", "*", ",", "'"}
+
         Dim formatedField As String
 
-        formatedField = field.Trim
+        'cannot contain spaces
+        formatedField = vName.Trim
         formatedField = formatedField.Replace(" ", "_")
-        formatedField = formatedField.Replace(".", "_")
-        formatedField = formatedField.Replace("(", "")
-        formatedField = formatedField.Replace(")", "")
+
+        'formatedField = formatedField.Replace(".", "_")  ' <--- dots dont filtering for use in objects in c++ ?
+
+        ' cannot be a number
+        If formatedField = "" Or IsNumeric(formatedField) Then
+            Return "DATA" 'default value
+        End If
+
+        'cannot contain special characters
+        For Each oldValue As String In specialChars
+            formatedField = formatedField.Replace(oldValue, "")
+        Next
+
+        '  first char must be a letter or an underscore 
+        If IsNumeric(formatedField.Substring(0, 1)) Then
+            formatedField = "_" + formatedField.Substring(1)
+        End If
+
+        ' Reserved words filtering not implemented
 
         Return formatedField
+
     End Function
 
 
 
     ''' <summary>
-    ''' Provides a String from a list of texts, in the indicated Programming Language format.
+    ''' Provides a String from a list of comments, in the indicated Programming Language format.
     ''' </summary>
-    ''' <param name="comment"></param>
+    ''' <param name="comments"></param>
     ''' <param name="format"></param>
     ''' <returns></returns>
-    Public Function GetComments(ByVal comment As ArrayList, ByVal format As ProgrammingLanguage) As String
+    Public Function GetComments(ByVal comments As ArrayList, ByVal format As CodeInfo.Programming_Language) As String
+
         Dim outputString As String = ""
 
-        If Not comment Is Nothing Then
-            For Each commentValue As String In comment
+        If Not comments Is Nothing Then
+            For Each commentItem As String In comments
 
-                Select Case format
-                    Case ProgrammingLanguage.BASIC
-                        outputString += CStr(Me.BASIC_Line) + " " + Comment_BASIC + " " + commentValue + vbNewLine
-                        Me.BASIC_Line += Me.BASIC_increment
-
-                    Case ProgrammingLanguage.C
-                        outputString += Comment_C + " " + commentValue + vbNewLine
-
-                    Case Else
-                        'ProgrammingLanguage.ASSEMBLER
-                        outputString += Comment_Assembler + " " + commentValue + vbNewLine
-
-                End Select
+                outputString += GetComment(commentItem, format)
 
             Next
         End If
@@ -564,35 +636,33 @@
 
 
 
-    Public Function GetAsmLabelsIndex(ByVal label As String, ByVal labelsList As ArrayList, ByVal dataCommand As String) As String
+    ''' <summary>
+    ''' Provides a String from a comment, in the indicated Programming Language format.
+    ''' </summary>
+    ''' <param name="comment"></param>
+    ''' <param name="format"></param>
+    ''' <returns></returns>
+    Public Function GetComment(ByVal comment As String, ByVal format As CodeInfo.Programming_Language) As String
+
         Dim outputString As String = ""
-        Dim contaLines As Integer = 0
-        Dim item As String
-        Dim total As Integer = labelsList.Count - 1
 
-        outputString = label + ":" + vbNewLine
+        If Not comment = "" Then
 
-        For i As Integer = 0 To total
-            item = labelsList.Item(i)
+            Select Case format
+                Case CodeInfo.Programming_Language.BASIC
+                    outputString += CStr(Me.BASIC_Line) + " " + Me.BASICcomment + " " + comment + vbNewLine
+                    Me.BASIC_Line += Me.BASIC_increment
 
-            If contaLines = 0 Then
-                If dataCommand.ToLower.StartsWith("<tab>") Then
-                    outputString += vbTab + dataCommand.Substring(5) + " "
-                Else
-                    outputString += dataCommand + " "
-                End If
-            End If
+                Case CodeInfo.Programming_Language.C
+                    outputString += Comment_C + " " + comment + vbNewLine
 
-            outputString += item
-            contaLines += 1
-            If contaLines < 4 And i < total Then
-                outputString += ","
-            Else
-                outputString += vbNewLine
-                contaLines = 0
-            End If
+                Case Else
+                    'ProgrammingLanguage.ASSEMBLER
+                    outputString += Comment_Assembler + " " + comment + vbNewLine
 
-        Next
+            End Select
+
+        End If
 
         Return outputString
 
@@ -600,15 +670,64 @@
 
 
 
-    'Public Function GetProjectInfoComments(ByRef prjinfo As ProjectInfo, ByVal format As ProgrammingLanguage) As String
+    ''' <summary>
+    ''' Provides a comment with a horizontal line
+    ''' </summary>
+    ''' <param name="format"></param>
+    ''' <returns></returns>
+    Public Function GetCommentHorizontalLine(ByVal format As CodeInfo.Programming_Language) As String
+
+        Dim outputString As String = ""
+
+        Dim lineSize As Integer
+
+        Select Case format
+            Case CodeInfo.Programming_Language.BASIC
+                outputString += CStr(Me.BASIC_Line) + " " + Me.BASICcomment + " "
+                Me.BASIC_Line += Me.BASIC_increment
+
+                lineSize = 40 - outputString.Length
+
+            Case CodeInfo.Programming_Language.C
+                outputString += Comment_C + " "
+
+                lineSize = 80 - outputString.Length
+
+            Case Else
+                'ProgrammingLanguage.ASSEMBLER
+                outputString += Comment_Assembler + " "
+
+                lineSize = 80 - outputString.Length
+
+        End Select
+
+        Return outputString + Strings.StrDup(lineSize, "-") + vbNewLine
+
+    End Function
+
+
+
+    'Public Function GetProjectInfoComments(ByVal prjinfo As ProjectInfo, ByVal code As CodeInfo.Language_CODE) As String
+
+    '    Dim outputSource As String
 
     '    Dim comments As New ArrayList
     '    Dim tmpInfo As String = ""
 
-    '    comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
-    '    comments.Add("Project: " + prjinfo.Project)
+    '    Dim _codeInfo As New CodeInfo
+    '    Dim _assembler As New AssemblerFormat
 
-    '    comments.Add("Subproject: " + prjinfo.Name)
+    '    Dim langFormat As CodeInfo.Programming_Language = _codeInfo.GetProgrammingLanguageByLanguageCode(code)
+
+    '    comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString)
+
+    '    If Not prjinfo.ProjectName = "" Then
+    '        comments.Add("Project: " + prjinfo.ProjectName)
+    '    End If
+
+    '    If Not prjinfo.Name = "" Then
+    '        comments.Add("Subproject: " + prjinfo.Name)
+    '    End If
 
     '    If Not prjinfo.Author = "" Then
     '        tmpInfo = "Author: " + prjinfo.Author
@@ -630,7 +749,13 @@
     '        comments.Add("Description: " + prjinfo.Description)
     '    End If
 
-    '    Return GetComments(comments, format)
+
+    '    outputSource = GetCommentHorizontalLine(langFormat)
+    '    outputSource += GetComments(comments, langFormat)
+    '    outputSource += _assembler.GetCommentWithAssemble(code)  'this function only provides a value for assembler
+    '    outputSource += GetCommentHorizontalLine(langFormat)
+
+    '    Return outputSource
 
     'End Function
 

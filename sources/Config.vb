@@ -12,48 +12,49 @@ Public Class Config
 
 
 
-    Public Shadows Enum PATH_TYPE As Integer
-        APP
-        LAST_USED
-        USER
-    End Enum
+    'Public Shadows Enum PATH_TYPE As Integer
+    '    APP
+    '    LAST_USED
+    '    USER
+    'End Enum
 
 
 
-    Private ConfigFileName As String = "tMSgfX"
+    Private AppID As String = "tMSgfX"
 
     Private ConfigPath As String
 
 
     ' -----
-    Public PathItemProject As New PathItem
-    Public PathItemMap As New PathItem
-    Public PathItemTileset As New PathItem
-    Public PathItemPalette As New PathItem
-    Public PathItemSprite As New PathItem
-    Public PathItemOAM As New PathItem
-    Public PathItemSupertile As New PathItem
+    'Public PathItemProject As New PathItem
+    'Public PathItemMap As New PathItem
+    'Public PathItemTileset As New PathItem
+    'Public PathItemPalette As New PathItem
+    'Public PathItemSprite As New PathItem
+    'Public PathItemOAM As New PathItem
+    'Public PathItemSupertile As New PathItem
 
-    Public PathPicture As New PathItem
+    'Public PathPicture As New PathItem
 
-    Public PathByteGen As New PathItem
+    'Public PathByteGen As New PathItem
 
-    Public PathItemMSXBASIC As New PathItem
-    Public PathItemBinary As New PathItem
-    Public PathItemBitmap As New PathItem
-    Public PathItemNMSXtiles As New PathItem
+    'Public PathItemMSXBASIC As New PathItem
+    'Public PathItemBinary As New PathItem
+    'Public PathItemBitmap As New PathItem
+    'Public PathItemNMSXtiles As New PathItem
     ' -----
 
 
 
     Public Shadows Const def_Author As String = ""
     Public Shadows Const def_Group As String = ""
-    Public Shadows Const def_CodeOutput As Integer = DataFormat.ProgrammingLanguage.ASSEMBLER
-    Public Shadows Const def_CodeNumberSystem As Integer = 4
+
+    Public Shadows Const def_CodeOutput As CodeInfo.Language_CODE = CodeInfo.Language_CODE.ASSEMBLER_default
+    Public Shadows Const def_CodeNumberSystem As CodeInfo.DataType = CodeInfo.DataType.HEXADECIMAL_Snn
     Public Shadows Const def_CodeLineSize As Integer = 3      ' 0-6 (1,2,4,8,16,24,32)
-    Public Shadows Const def_CodeCompressType As Integer = 0 ' RAW
-    Public Shadows Const def_AsmByteCommand As String = "DB"
-    Public Shadows Const def_AsmWordDataCommand As String = "DW"
+    Public Shadows Const def_CodeCompressType As Integer = 0  ' RAW
+    Public Shadows Const def_AsmDataByteCommand As String = "DB"
+    Public Shadows Const def_AsmDataWordCommand As String = "DW"
     Public Shadows Const def_CdataType As String = "const char"
     Public Shadows Const def_DataLabel As String = "DATA"
 
@@ -88,14 +89,13 @@ Public Class Config
 
     Public DataLabel As String
 
-    Public CodeOutput As Integer
+    Public CodeOutput As CodeInfo.Language_CODE
     Public CodeNumberSystem As Integer
-    'Public CodeNumberFormat As Integer
     Private _CodeLineSize As Integer
     Public CodeCompressType As Integer
 
-    Public AsmByteCommand As String
-    Public AsmWordDataCommand As String
+    Public AsmDataByteCommand As String
+    Public AsmDataWordCommand As String
 
     Public CdataType As String
 
@@ -139,14 +139,14 @@ Public Class Config
 
 
     Public Sub New(ByVal appName As String) ', ByVal _appID As String
-        Me.ConfigFileName = appName
+        Me.AppID = appName
         Initialize()
     End Sub
 
 
 
     Private Sub Initialize()
-        Me.ConfigPath = Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName + ".config"
+        Me.ConfigPath = Application.StartupPath + Path.DirectorySeparatorChar + Me.AppID + ".config"
         Me.Author = Environment.UserName   'My.User.Name
 
         InitOutputInfo()
@@ -214,7 +214,7 @@ Public Class Config
                 aXmlDoc.Load(Me.ConfigPath)
 
                 rootNode = aXmlDoc.SelectSingleNode("config")
-                If Not rootNode Is Nothing Then
+                If rootNode IsNot Nothing Then
 
                     Me.LastProjects.Clear()
 
@@ -301,18 +301,18 @@ Public Class Config
                             Me.CodeCompressType = CInt(aNode.InnerText)
                         End If
 
-                        aNode = groupNode.SelectSingleNode("AsmByteCommand")
+                        aNode = groupNode.SelectSingleNode("AsmDataByteCommand")
                         If aNode Is Nothing Then
-                            Me.AsmByteCommand = def_AsmByteCommand
+                            Me.AsmDataByteCommand = def_AsmDataByteCommand
                         Else
-                            Me.AsmByteCommand = aNode.InnerText
+                            Me.AsmDataByteCommand = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("AsmWordCommand")
+                        aNode = groupNode.SelectSingleNode("AsmDataWordCommand")
                         If aNode Is Nothing Then
-                            Me.AsmWordDataCommand = def_AsmWordDataCommand
+                            Me.AsmDataWordCommand = def_AsmDataWordCommand
                         Else
-                            Me.AsmWordDataCommand = aNode.InnerText
+                            Me.AsmDataWordCommand = aNode.InnerText
                         End If
 
                         aNode = groupNode.SelectSingleNode("CdataType")
@@ -390,56 +390,56 @@ Public Class Config
                     groupNode = rootNode.SelectSingleNode("misc")
                     If Not groupNode Is Nothing Then
 
-                            aNode = groupNode.SelectSingleNode("firstProjectType")
-                            If aNode Is Nothing Then
-                                Me.firstProjectType = 0
-                            Else
-                                Me.firstProjectType = CInt(aNode.InnerText)
-                            End If
-
-                            aNode = groupNode.SelectSingleNode("PathLastProject")
-                            If aNode Is Nothing Then
-                                Me.PathLastProject = ""
-                            Else
-                                Me.PathLastProject = aNode.InnerText
-                            End If
-
-                            aNode = groupNode.SelectSingleNode("Color_Zero")
-                            If aNode Is Nothing Then
-                                Me.Color_Zero = def_Color_Zero
-                            Else
-                                Me.Color_Zero = Color.FromArgb(CInt(aNode.InnerText))
-                            End If
-
-                            aNode = groupNode.SelectSingleNode("Color_Grid")
-                            If aNode Is Nothing Then
-                                Me.Color_Grid = def_Color_Grid
-                            Else
-                                Me.Color_Grid = Color.FromArgb(CInt(aNode.InnerText))
-                            End If
-
-
-                            aNode = groupNode.SelectSingleNode("Color_OutBG")
-                            If aNode Is Nothing Then
-                                Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
-                            Else
-                                Me.Color_OUTPUT_BG = Color.FromArgb(CInt(aNode.InnerText))
-                            End If
-
-                            aNode = groupNode.SelectSingleNode("Color_OutINK")
-                            If aNode Is Nothing Then
-                                Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
-                            Else
-                                Me.Color_OUTPUT_INK = Color.FromArgb(CInt(aNode.InnerText))
-                            End If
-
+                        aNode = groupNode.SelectSingleNode("firstProjectType")
+                        If aNode Is Nothing Then
+                            Me.firstProjectType = 0
+                        Else
+                            Me.firstProjectType = CInt(aNode.InnerText)
                         End If
-                        '#####################################
+
+                        aNode = groupNode.SelectSingleNode("PathLastProject")
+                        If aNode Is Nothing Then
+                            Me.PathLastProject = ""
+                        Else
+                            Me.PathLastProject = aNode.InnerText
+                        End If
+
+                        aNode = groupNode.SelectSingleNode("Color_Zero")
+                        If aNode Is Nothing Then
+                            Me.Color_Zero = def_Color_Zero
+                        Else
+                            Me.Color_Zero = Color.FromArgb(CInt(aNode.InnerText))
+                        End If
+
+                        aNode = groupNode.SelectSingleNode("Color_Grid")
+                        If aNode Is Nothing Then
+                            Me.Color_Grid = def_Color_Grid
+                        Else
+                            Me.Color_Grid = Color.FromArgb(CInt(aNode.InnerText))
+                        End If
+
+
+                        aNode = groupNode.SelectSingleNode("Color_OutBG")
+                        If aNode Is Nothing Then
+                            Me.Color_OUTPUT_BG = def_Color_OUTPUT_BG
+                        Else
+                            Me.Color_OUTPUT_BG = Color.FromArgb(CInt(aNode.InnerText))
+                        End If
+
+                        aNode = groupNode.SelectSingleNode("Color_OutINK")
+                        If aNode Is Nothing Then
+                            Me.Color_OUTPUT_INK = def_Color_OUTPUT_INK
+                        Else
+                            Me.Color_OUTPUT_INK = Color.FromArgb(CInt(aNode.InnerText))
+                        End If
+
+                    End If
+                    '#####################################
 
 
 
-                        '#####################################
-                        aNodeList = rootNode.SelectNodes("LastProjects/list")
+                    '#####################################
+                    aNodeList = rootNode.SelectNodes("LastProjects/list")
                     If aNodeList Is Nothing Then
                         'Me.RecentProjects = New RecentProjectsList
 
@@ -490,24 +490,24 @@ Public Class Config
             result = False
         End Try
 
-        If result = False Then
-            Me.PathItemProject = New PathItem  'Application.StartupPath System.AppDomain.CurrentDomain.BaseDirectory
-            Me.PathItemMap = New PathItem
-            Me.PathItemTileset = New PathItem
-            Me.PathItemSprite = New PathItem
-            Me.PathItemOAM = New PathItem
-            Me.PathItemPalette = New PathItem
-            Me.PathItemSupertile = New PathItem
+        'If result = False Then
+        '    Me.PathItemProject = New PathItem  'Application.StartupPath System.AppDomain.CurrentDomain.BaseDirectory
+        '    Me.PathItemMap = New PathItem
+        '    Me.PathItemTileset = New PathItem
+        '    Me.PathItemSprite = New PathItem
+        '    Me.PathItemOAM = New PathItem
+        '    Me.PathItemPalette = New PathItem
+        '    Me.PathItemSupertile = New PathItem
 
-            Me.PathPicture = New PathItem
+        '    Me.PathPicture = New PathItem
 
-            Me.PathByteGen = New PathItem
+        '    Me.PathByteGen = New PathItem
 
-            Me.PathItemMSXBASIC = New PathItem
-            Me.PathItemBinary = New PathItem
-            Me.PathItemBitmap = New PathItem
-            Me.PathItemNMSXtiles = New PathItem
-        End If
+        '    Me.PathItemMSXBASIC = New PathItem
+        '    Me.PathItemBinary = New PathItem
+        '    Me.PathItemBitmap = New PathItem
+        '    Me.PathItemNMSXtiles = New PathItem
+        'End If
 
         'InitOutputInfo()
 
@@ -517,50 +517,50 @@ Public Class Config
 
 
 
-    Private Function getPathItemFromNode(ByRef aNode As XmlNode) As PathItem
+    'Private Function getPathItemFromNode(ByRef aNode As XmlNode) As PathItem
 
-        Dim _pathItem As New PathItem
+    '    Dim _pathItem As New PathItem
 
-        Dim subNode As XmlNode
+    '    Dim subNode As XmlNode
 
-        Try
+    '    Try
 
-            If aNode Is Nothing Then
-                _pathItem = New PathItem
-            Else
-                subNode = aNode.SelectSingleNode("@type")
-                If subNode Is Nothing Then
-                    _pathItem.TypePath = PATH_TYPE.APP
-                Else
-                    _pathItem.TypePath = CInt(subNode.InnerText)
-                    If _pathItem.TypePath > 1 Then
-                        _pathItem.TypePath = PATH_TYPE.APP
-                    End If
-                End If
-                'Me.PathItemProject.Path = aNode.InnerText
+    '        If aNode Is Nothing Then
+    '            _pathItem = New PathItem
+    '        Else
+    '            subNode = aNode.SelectSingleNode("@type")
+    '            If subNode Is Nothing Then
+    '                _pathItem.TypePath = PATH_TYPE.APP
+    '            Else
+    '                _pathItem.TypePath = CInt(subNode.InnerText)
+    '                If _pathItem.TypePath > 1 Then
+    '                    _pathItem.TypePath = PATH_TYPE.APP
+    '                End If
+    '            End If
+    '            'Me.PathItemProject.Path = aNode.InnerText
 
-                subNode = aNode.SelectSingleNode("@pathUser")
-                If Not subNode Is Nothing Then
-                    '    _pathItem.pathUser = ""
-                    'Else
-                    _pathItem.pathUser = subNode.InnerText
-                End If
+    '            subNode = aNode.SelectSingleNode("@pathUser")
+    '            If Not subNode Is Nothing Then
+    '                '    _pathItem.pathUser = ""
+    '                'Else
+    '                _pathItem.pathUser = subNode.InnerText
+    '            End If
 
-                subNode = aNode.SelectSingleNode("@pathLast")
-                If subNode Is Nothing Then
-                    _pathItem.pathLast = _pathItem.pathUser
-                Else
-                    _pathItem.pathLast = subNode.InnerText
-                End If
-            End If
+    '            subNode = aNode.SelectSingleNode("@pathLast")
+    '            If subNode Is Nothing Then
+    '                _pathItem.pathLast = _pathItem.pathUser
+    '            Else
+    '                _pathItem.pathLast = subNode.InnerText
+    '            End If
+    '        End If
 
-        Catch ex As Exception
+    '    Catch ex As Exception
 
-        End Try
+    '    End Try
 
-        Return _pathItem
+    '    Return _pathItem
 
-    End Function
+    'End Function
 
 
 
@@ -722,13 +722,13 @@ Public Class Config
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("AsmByteCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.AsmByteCommand)
+            anElement = aXmlDoc.CreateElement("AsmDataByteCommand")
+            txtElement = aXmlDoc.CreateTextNode(Me.AsmDataByteCommand)
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("AsmWordCommand")
-            txtElement = aXmlDoc.CreateTextNode(Me.AsmWordDataCommand)
+            anElement = aXmlDoc.CreateElement("AsmDataWordCommand")
+            txtElement = aXmlDoc.CreateTextNode(Me.AsmDataWordCommand)
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
@@ -805,39 +805,39 @@ Public Class Config
 
 
 
-    Private Function getElementPath(ByRef aXmlDoc As XmlDocument, _name As String, ByVal _pathItem As PathItem) As XmlElement
+    'Private Function getElementPath(ByRef aXmlDoc As XmlDocument, _name As String, ByVal _pathItem As PathItem) As XmlElement
 
-        'Dim txtElement As XmlText
-        Dim anElement As XmlElement
-        Dim anAttribute As XmlAttribute
+    '    'Dim txtElement As XmlText
+    '    Dim anElement As XmlElement
+    '    Dim anAttribute As XmlAttribute
 
-        anElement = aXmlDoc.CreateElement(_name)
+    '    anElement = aXmlDoc.CreateElement(_name)
 
-        'If (Not _pathItem.TypePath = PathItem.PATH_TYPE.APP) Then
-        'txtElement = aXmlDoc.CreateTextNode(_pathItem.Path)
-        'anElement.AppendChild(txtElement)
+    '    'If (Not _pathItem.TypePath = PathItem.PATH_TYPE.APP) Then
+    '    'txtElement = aXmlDoc.CreateTextNode(_pathItem.Path)
+    '    'anElement.AppendChild(txtElement)
 
-        'If Not _pathItem.pathUser = Application.StartupPath Then
-        anAttribute = aXmlDoc.CreateAttribute("pathUser")
-        anAttribute.Value = CStr(_pathItem.pathUser)
-        anElement.SetAttributeNode(anAttribute)
-        'End If
+    '    'If Not _pathItem.pathUser = Application.StartupPath Then
+    '    anAttribute = aXmlDoc.CreateAttribute("pathUser")
+    '    anAttribute.Value = CStr(_pathItem.pathUser)
+    '    anElement.SetAttributeNode(anAttribute)
+    '    'End If
 
-        'If Not _pathItem.pathLast = Application.StartupPath Then
-        anAttribute = aXmlDoc.CreateAttribute("pathLast")
-        anAttribute.Value = CStr(_pathItem.pathLast)
-        anElement.SetAttributeNode(anAttribute)
-        'End If
+    '    'If Not _pathItem.pathLast = Application.StartupPath Then
+    '    anAttribute = aXmlDoc.CreateAttribute("pathLast")
+    '    anAttribute.Value = CStr(_pathItem.pathLast)
+    '    anElement.SetAttributeNode(anAttribute)
+    '    'End If
 
-        'End If
-        'groupElement.AppendChild(anElement)
-        anAttribute = aXmlDoc.CreateAttribute("type")
-        anAttribute.Value = CStr(_pathItem.TypePath)
-        anElement.SetAttributeNode(anAttribute)
+    '    'End If
+    '    'groupElement.AppendChild(anElement)
+    '    anAttribute = aXmlDoc.CreateAttribute("type")
+    '    anAttribute.Value = CStr(_pathItem.TypePath)
+    '    anElement.SetAttributeNode(anAttribute)
 
-        Return anElement
+    '    Return anElement
 
-    End Function
+    'End Function
 
 
 
@@ -848,8 +848,8 @@ Public Class Config
         Me.CodeLineSize = def_CodeLineSize
         Me.CodeCompressType = def_CodeCompressType
 
-        Me.AsmByteCommand = def_AsmByteCommand
-        Me.AsmWordDataCommand = def_AsmWordDataCommand
+        Me.AsmDataByteCommand = def_AsmDataByteCommand
+        Me.AsmDataWordCommand = def_AsmDataWordCommand
 
         Me.CdataType = def_CdataType
 

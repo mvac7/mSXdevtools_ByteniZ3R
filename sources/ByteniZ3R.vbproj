@@ -67,6 +67,8 @@
     <Compile Include="AboutWin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AssemblerFormat.vb" />
+    <Compile Include="CodeInfo.vb" />
     <Compile Include="Config.vb" />
     <Compile Include="DataFormat.vb" />
     <Compile Include="DataTypeInputControl.Designer.vb">
@@ -74,6 +76,12 @@
     </Compile>
     <Compile Include="DataTypeInputControl.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HelpDialog.Designer.vb">
+      <DependentUpon>HelpDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HelpDialog.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="LastProjectsList.vb" />
     <Compile Include="MainForm.vb">
@@ -111,24 +119,38 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PathEntryControl.designer.vb">
-      <DependentUpon>PathEntryControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PathEntryControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PathItem.vb" />
     <Compile Include="OutputDataGBox.Designer.vb">
       <DependentUpon>OutputDataGBox.vb</DependentUpon>
     </Compile>
     <Compile Include="OutputDataGBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="piXelGroupBox.Designer.vb">
-      <DependentUpon>piXelGroupBox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="piXelGroupBox.vb">
+    <Compile Include="piXelST_Button.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="piXelST_GroupBox.Designer.vb">
+      <DependentUpon>piXelST_GroupBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelST_GroupBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="piXelST_Help.Designer.vb">
+      <DependentUpon>piXelST_Help.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelST_Help.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="piXelST_Label.Designer.vb">
+      <DependentUpon>piXelST_Label.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelST_Label.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="piXelST_Text.Designer.vb">
+      <DependentUpon>piXelST_Text.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelST_Text.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ProgressController.vb" />
     <Compile Include="ProgressForm.Designer.vb">
@@ -159,6 +181,9 @@
     <EmbeddedResource Include="DataTypeInputControl.resx">
       <DependentUpon>DataTypeInputControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelpDialog.resx">
+      <DependentUpon>HelpDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -174,14 +199,20 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PathEntryControl.resx">
-      <DependentUpon>PathEntryControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="OutputDataGBox.resx">
       <DependentUpon>OutputDataGBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="piXelGroupBox.resx">
-      <DependentUpon>piXelGroupBox.vb</DependentUpon>
+    <EmbeddedResource Include="piXelST_GroupBox.resx">
+      <DependentUpon>piXelST_GroupBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="piXelST_Help.resx">
+      <DependentUpon>piXelST_Help.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="piXelST_Label.resx">
+      <DependentUpon>piXelST_Label.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="piXelST_Text.resx">
+      <DependentUpon>piXelST_Text.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressForm.resx">
       <DependentUpon>ProgressForm.vb</DependentUpon>

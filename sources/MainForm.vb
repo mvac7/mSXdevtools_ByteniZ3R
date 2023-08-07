@@ -1093,7 +1093,7 @@ Public Class MainForm
 
         If Me.Path_Project = "" Then
             Me.OpenFileDialog1.FileName = Me.Info.Name
-            Me.OpenFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
+            'Me.OpenFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
         Else
             Me.OpenFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
             Me.OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
@@ -1250,11 +1250,11 @@ Public Class MainForm
                         Me.AppConfig.CodeLineSize = CInt(attrNode.InnerText)
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@AsmCommand")
+                    attrNode = subNode.SelectSingleNode("@AsmDataByteCommand")
                     If attrNode Is Nothing Then
                         'Me.AsmCommandTextBox.Text = Me.AppConfig.defAsmByteCommand
                     Else
-                        Me.AppConfig.AsmByteCommand = attrNode.InnerText
+                        Me.AppConfig.AsmDataByteCommand = attrNode.InnerText
                     End If
 
                     attrNode = subNode.SelectSingleNode("@BASICinitLine")
@@ -1338,7 +1338,7 @@ Public Class MainForm
 
         If Me.Path_Project = "" Then
             Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-            Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
+            'Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
         Else
             Me.SaveFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
             Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
@@ -1426,8 +1426,8 @@ Public Class MainForm
         anItemElement = aXmlDoc.CreateElement("OutputConfig")
         anElement.AppendChild(anItemElement)
         '
-        anAttribute = aXmlDoc.CreateAttribute("CodeType")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.CodeLanguage)
+        anAttribute = aXmlDoc.CreateAttribute("LanguageCode")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.LanguageCode)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("NumberSystem")
@@ -1438,12 +1438,12 @@ Public Class MainForm
         'anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
         'anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("SizeLine")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.SizeLineIndex) 'Me.ItemsPerLineComboBox.SelectedIndex)
+        anAttribute = aXmlDoc.CreateAttribute("LineSize")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.LineSize) 'Me.ItemsPerLineComboBox.SelectedIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("AsmCommand")
-        anAttribute.Value = Me.anOutputDataGBox.DataTypeInput.AsmByteCommand 'Me.AsmCommandTextBox.Text)
+        anAttribute = aXmlDoc.CreateAttribute("AsmDataByteCommand")
+        anAttribute.Value = Me.anOutputDataGBox.DataTypeInput.AsmDataByteCommand 'Me.AsmCommandTextBox.Text)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("BASICinitLine")

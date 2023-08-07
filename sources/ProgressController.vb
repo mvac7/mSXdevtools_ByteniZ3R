@@ -16,7 +16,8 @@
 
 
     Public Sub ShowProgressWin()
-        Me._parentForm.Enabled = False
+        'Me._parentForm.Enabled = False
+        'Me._parentForm.SuspendLayout()
 
         'StartThread()
         ' http://msdn.microsoft.com/en-us/library/vstudio/system.componentmodel.backgroundworker
@@ -37,14 +38,20 @@
             If Not aProgressForm Is Nothing Then
                 aProgressForm.BeginInvoke(New InvokeDelegate(AddressOf aProgressForm.Close))
             End If
-            Me._parentForm.Enabled = True
-            Me._parentForm.Refresh()
-            'Application.DoEvents()
+            'Me._parentForm.Enabled = True
+            'Me._parentForm.Refresh()
+
 
         Catch ex As Exception
-            System.Threading.Thread.Sleep(2000)
-            closeProgressWin()
+            'System.Threading.Thread.Sleep(2000)
+            CloseProgressWin()
         End Try
+
+        'Me._parentForm.ResumeLayout()
+        'Application.DoEvents()
+
+        Me._parentForm.Activate()
+
     End Sub
 
 
