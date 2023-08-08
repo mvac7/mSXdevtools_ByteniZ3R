@@ -118,29 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="new_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\new_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_config-prj_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_config-prj_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Load_file2_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Load_file2_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="textu00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\textu00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save3_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save3_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_config-app_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_config-app_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder2_x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder2_x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="config_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\config_x24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ByteniZ3R_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ByteniZ3R_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,14 +139,8 @@
   <data name="ico_save-as_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_save-as_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="help_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_about_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_about_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="project_properties_24p" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\project_properties_24p.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_save_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_save_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,9 +157,6 @@
   <data name="icon_byteniZ3R_128px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_byteniZ3R_128px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="about_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\about_24.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_help_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_help_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -186,9 +165,6 @@
   </data>
   <data name="display_ruler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\display_ruler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_as3_x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_as3_x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ico_new_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ico_new_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

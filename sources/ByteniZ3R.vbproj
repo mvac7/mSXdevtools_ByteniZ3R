@@ -238,12 +238,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\display_ruler.png" />
-    <None Include="Resources\project_properties_24p.png" />
-    <None Include="Resources\save3_x24.png" />
-    <None Include="Resources\help_x24.png" />
-    <None Include="Resources\new_24.png" />
-    <None Include="Resources\config_x24.png" />
-    <None Include="Resources\about_24.png" />
     <None Include="app.config" />
     <None Include="Resources\info_blue_16.png" />
   </ItemGroup>
@@ -258,12 +252,10 @@
     <None Include="Resources\ico_help_32px.png" />
     <None Include="Resources\ico_about_32px.png" />
     <None Include="Resources\textu00.png" />
-    <None Include="Resources\save_as3_x24.png" />
     <None Include="Resources\piXel_panel_XL_up_waveform.png" />
     <None Include="Resources\piXel_panel_XL_down.png" />
     <None Include="Resources\icon_byteniZ3R_128px.png" />
     <None Include="Resources\ByteniZ3R_logo.png" />
-    <None Include="Resources\Load_file2_x24.png" />
     <None Include="Resources\folder2_x16.png" />
     <None Include="Resources\folder_x24.png" />
   </ItemGroup>
