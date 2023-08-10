@@ -73,26 +73,6 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property display_ruler() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("display_ruler", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property folder_x24() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("folder_x24", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property folder2_x16() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("folder2_x16", resourceCulture)
@@ -163,6 +143,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ico_reload_16px() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ico_reload_16px", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property ico_save_32px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("ico_save_32px", resourceCulture)
@@ -203,19 +193,9 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property piXel_panel_XL_down() As System.Drawing.Bitmap
+        Friend ReadOnly Property signed_display_ruler() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("piXel_panel_XL_down", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property piXel_panel_XL_up_waveform() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("piXel_panel_XL_up_waveform", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("signed_display_ruler", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -226,6 +206,16 @@ Namespace My.Resources
         Friend ReadOnly Property textu00() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("textu00", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property unsigned_display_ruler() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("unsigned_display_ruler", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

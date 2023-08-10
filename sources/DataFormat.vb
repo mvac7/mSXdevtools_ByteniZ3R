@@ -64,7 +64,7 @@
 
 
 
-    Public Function GetSourceCode(ByVal name As String, ByRef _codeFormat As CodeInfo, ByRef tmpData() As Byte, ByVal comments As ArrayList) As DataItem
+    Public Function GetSourceCode(ByVal name As String, ByRef _codeFormat As CodeInfo, ByRef tmpData As Array, ByVal comments As ArrayList) As DataItem  'ByRef tmpData() As Byte
 
         Dim sourceCode As String = ""
 
@@ -91,13 +91,13 @@
         'End If
 
         Select Case _codeFormat.ProgrammingLanguage
-            Case CodeInfo.Programming_Language.C
+            Case CodeInfo.PROGRAMMING_LANGUAGE.C
                 sourceCode = GetCcode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.CdataType, newComments)
 
-            Case CodeInfo.Programming_Language.ASSEMBLER
+            Case CodeInfo.PROGRAMMING_LANGUAGE.ASSEMBLER
                 sourceCode = GetAssemblerCode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.AsmDataByteCommand, newComments)
 
-            Case CodeInfo.Programming_Language.BASIC
+            Case CodeInfo.PROGRAMMING_LANGUAGE.BASIC
                 sourceCode = GetBASICcode(tmpData, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.BASIC_remove0, Me.BASIC_Line, _codeFormat.BASIC_incLines, newComments)
 
         End Select

@@ -1377,7 +1377,7 @@ Public Class piXelST_Help
 
     Private Sub PrintLine(ByVal aLine As String)
 
-        Dim posInitTAG As Integer
+        'Dim posInitTAG As Integer
         'Dim posEndTAG As Integer
 
         Dim RCmargin As Integer = 0

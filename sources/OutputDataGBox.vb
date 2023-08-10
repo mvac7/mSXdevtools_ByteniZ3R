@@ -16,6 +16,8 @@ Public Class OutputDataGBox
     Public Event DataChanged()
 
 
+    Public Property HasSign As Boolean = False
+
 
     Public Property OutputText As String
         Get
@@ -331,7 +333,10 @@ Public Class OutputDataGBox
 
     Private Function GetFormatData(ByRef data As Byte(), ByRef comments As ArrayList) As String
 
+        Dim sourceCode As String
+
         Dim fieldName As String = ""
+        Dim singValues() As SByte
 
         Dim aMSXDataFormat As New DataFormat
         aMSXDataFormat.Comment_BASIC = Me.AppConfig.BASIC_CommentInstruction
@@ -342,7 +347,19 @@ Public Class OutputDataGBox
             fieldName = DataTypeInput.FieldName
         End If
 
-        Return aMSXDataFormat.GetSourceCode(fieldName, DataTypeInput.GetCodeFormat(), data, comments).SourceCode
+        If HasSign Then
+            ReDim singValues(data.Length - 1)
+
+            For i As Integer = 0 To data.Length - 1
+                singValues(i) = CSByte(data(i) - 128)
+            Next
+            sourceCode = aMSXDataFormat.GetSourceCode(fieldName, DataTypeInput.GetCodeFormat(), singValues, comments).SourceCode
+        Else
+            sourceCode = aMSXDataFormat.GetSourceCode(fieldName, DataTypeInput.GetCodeFormat(), data, comments).SourceCode
+
+        End If
+
+        Return sourceCode
 
     End Function
 
