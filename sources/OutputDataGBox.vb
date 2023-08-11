@@ -30,19 +30,26 @@ Public Class OutputDataGBox
 
 
 
-    Public ReadOnly Property CodeLanguage As CodeInfo.Language_CODE
+    Public Property LanguageCode As CodeInfo.LANGUAGE_CODE
         Get
             Return DataTypeInput.LanguageCode
         End Get
+        Set(value As CodeInfo.LANGUAGE_CODE)
+            Me.DataTypeInput.LanguageCode = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property NumeralSystem As Integer
+    Public Property NumeralSystem As Integer
         Get
             Return DataTypeInput.NumeralSystem
         End Get
+        Set(value As Integer)
+            DataTypeInput.NumeralSystem = value
+        End Set
     End Property
+
 
 
     Public Property EnableDataSizeLine As Boolean
@@ -149,7 +156,7 @@ Public Class OutputDataGBox
 
 
 
-    Public ReadOnly Property C_DataType As String
+    Public ReadOnly Property CdataType As String
         Get
             Return DataTypeInput.CdataType
         End Get
@@ -157,42 +164,57 @@ Public Class OutputDataGBox
 
 
 
-    Public ReadOnly Property AsmByteCommand As String
+    Public Property AsmDataByteCommand As String
         Get
             Return DataTypeInput.AsmDataByteCommand
         End Get
+        Set(value As String)
+            DataTypeInput.AsmDataByteCommand = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property AsmDataWordCommand As String
+    Public Property AsmDataWordCommand As String
         Get
             Return DataTypeInput.AsmDataWordCommand
         End Get
+        Set(value As String)
+            DataTypeInput.AsmDataWordCommand = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASIClineNumber As Integer
+    Public Property BASIClineNumber As Integer
         Get
             Return DataTypeInput.BASIClineNumber
         End Get
+        Set(value As Integer)
+            DataTypeInput.BASIClineNumber = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASICInterval As Integer
+    Public Property BASIClineInterval As Integer
         Get
-            Return DataTypeInput.BASICInterval
+            Return DataTypeInput.BASIClineInterval
         End Get
+        Set(value As Integer)
+            DataTypeInput.BASIClineInterval = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASICremoveZeros As Boolean
+    Public Property BASICremoveZeros As Boolean
         Get
             Return DataTypeInput.BASICremoveZeros
         End Get
+        Set(value As Boolean)
+            DataTypeInput.BASICremoveZeros = value
+        End Set
     End Property
 
 
@@ -310,7 +332,7 @@ Public Class OutputDataGBox
 
             newComments.AddRange(Me.Comments)
 
-            tmpComment = _assembler.GetCommentWithAssemble(CodeLanguage, False)
+            tmpComment = _assembler.GetCommentWithAssemble(LanguageCode, False)
             If tmpComment IsNot "" Then newComments.Add(tmpComment)
 
             Me.OutputTextBox.Text = GetFormatData(Me.fileData, newComments)
@@ -341,7 +363,7 @@ Public Class OutputDataGBox
         Dim aMSXDataFormat As New DataFormat
         aMSXDataFormat.Comment_BASIC = Me.AppConfig.BASIC_CommentInstruction
         aMSXDataFormat.BASIC_Line = DataTypeInput.BASIClineNumber
-        aMSXDataFormat.BASIC_increment = DataTypeInput.BASICInterval
+        aMSXDataFormat.BASIC_increment = DataTypeInput.BASIClineInterval
 
         If Not DataTypeInput.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
             fieldName = DataTypeInput.FieldName

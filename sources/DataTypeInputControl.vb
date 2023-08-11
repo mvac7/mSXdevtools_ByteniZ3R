@@ -27,55 +27,41 @@ Public Class DataTypeInputControl
         RAW
         RLE
         RLEWB
-        PLETTER
+        PLETTER5
     End Enum
 
 
 
 
-    Public ReadOnly Property LanguageCode As CodeInfo.Language_CODE
+    Public Property LanguageCode As CodeInfo.LANGUAGE_CODE
         Get
             Return Me.LanguageComboBox.SelectedIndex
         End Get
+        Set(value As CodeInfo.LANGUAGE_CODE)
+            Me.LanguageComboBox.SelectedIndex = value
+        End Set
     End Property
 
 
 
 
 
-
-    ''' <summary>
-    ''' OJO ----------------------------  Se encuentra en la clase CodeFormat  ------------- OJO!
-    ''' </summary>
-    ''' <returns></returns>
-    Public ReadOnly Property ProgrammingLanguage As CodeInfo.Programming_Language
+    Public ReadOnly Property ProgrammingLanguage As CodeInfo.PROGRAMMING_LANGUAGE
         Get
-
             Dim aCodeFormat As New CodeInfo
             Return aCodeFormat.GetProgrammingLanguageByLanguageCode(LanguageComboBox.SelectedIndex)
-
-            'Dim value As CodeInfo.Programming_Language
-
-            'Select Case LanguageComboBox.SelectedIndex
-            '    Case CodeInfo.Language_CODE.BASIC
-            '        value = CodeInfo.Programming_Language.BASIC
-            '    Case CodeInfo.Language_CODE.C
-            '        value = CodeInfo.Programming_Language.C
-            '    Case Else
-            '        value = CodeInfo.Programming_Language.ASSEMBLER
-            'End Select
-            'Return value
         End Get
     End Property
 
 
 
-
-
-    Public ReadOnly Property NumeralSystem As Integer
+    Public Property NumeralSystem As Integer
         Get
             Return Me.NumberSystemCombo.SelectedIndex
         End Get
+        Set(value As Integer)
+            Me.NumberSystemCombo.SelectedIndex = value
+        End Set
     End Property
 
 
@@ -115,7 +101,7 @@ Public Class DataTypeInputControl
             Return Me.SizeLineComboBox.SelectedIndex
         End Get
         Set(value As Integer)
-            If value < 0 Then
+            If value < 0 Or value > Me.SizeLineComboBox.Items.Count Then
                 value = Me.SizeLineComboBox.Items.Count - 1
             End If
             Me.SizeLineComboBox.SelectedIndex = value
@@ -190,42 +176,57 @@ Public Class DataTypeInputControl
     End Property
 
 
-    Public ReadOnly Property AsmDataByteCommand As String
+    Public Property AsmDataByteCommand As String
         Get
             Return Me.AsmByteDataTextBox.Text
         End Get
+        Set(value As String)
+            Me.AsmByteDataTextBox.Text = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property AsmDataWordCommand As String
+    Public Property AsmDataWordCommand As String
         Get
             Return Me.AsmWordDataTextBox.Text
         End Get
+        Set(value As String)
+            Me.AsmWordDataTextBox.Text = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASIClineNumber As Integer
+    Public Property BASIClineNumber As Integer
         Get
             Return GetValidateLineNum(Me.LineNumberText.Text)
         End Get
+        Set(value As Integer)
+            Me.LineNumberText.Text = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASICInterval As Integer
+    Public Property BASIClineInterval As Integer
         Get
             Return GetValidateInterval(Me.IntervalText.Text)
         End Get
+        Set(value As Integer)
+            Me.IntervalText.Text = value
+        End Set
     End Property
 
 
 
-    Public ReadOnly Property BASICremoveZeros As Boolean
+    Public Property BASICremoveZeros As Boolean
         Get
             Return Me.RemoveZerosCheck.Checked
         End Get
+        Set(value As Boolean)
+            Me.RemoveZerosCheck.Checked = value
+        End Set
     End Property
 
 
@@ -672,7 +673,7 @@ Public Class DataTypeInputControl
             Case COMPRESS_TYPE.RLEWB
                 outputInfo = "_RLEWB"
 
-            Case COMPRESS_TYPE.PLETTER
+            Case COMPRESS_TYPE.PLETTER5
                 outputInfo = "_PLT5"
 
             Case Else
@@ -723,7 +724,7 @@ Public Class DataTypeInputControl
         aCodeFormat.BASIC_DataInstruction = Me.AppConfig.BASIC_DataInstruction
         aCodeFormat.BASIC_CommentInstruction = Me.AppConfig.BASIC_CommentInstruction
         aCodeFormat.BASIC_initLine = Me.BASIClineNumber
-        aCodeFormat.BASIC_incLines = Me.BASICInterval
+        aCodeFormat.BASIC_incLines = Me.BASIClineInterval
         aCodeFormat.BASIC_remove0 = Me.BASICremoveZeros
 
         Return aCodeFormat

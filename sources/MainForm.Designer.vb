@@ -286,7 +286,7 @@ Partial Class MainForm
         '
         Me.SignComboBox.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SignComboBox.FormattingEnabled = True
-        Me.SignComboBox.Items.AddRange(New Object() {"8b Signed", "8b Unsigned"})
+        Me.SignComboBox.Items.AddRange(New Object() {"8bit Signed", "8bit Unsigned"})
         Me.SignComboBox.Location = New System.Drawing.Point(109, 227)
         Me.SignComboBox.Name = "SignComboBox"
         Me.SignComboBox.Size = New System.Drawing.Size(186, 26)
@@ -542,6 +542,11 @@ Partial Class MainForm
         Me.anOutputDataGBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.anOutputDataGBox.AsmDataByteCommand = ""
+        Me.anOutputDataGBox.AsmDataWordCommand = ""
+        Me.anOutputDataGBox.BASIClineInterval = 10
+        Me.anOutputDataGBox.BASIClineNumber = 10000
+        Me.anOutputDataGBox.BASICremoveZeros = False
         Me.anOutputDataGBox.Compress = ByteniZ3R.DataTypeInputControl.COMPRESS_TYPE.RAW
         Me.anOutputDataGBox.EnableAssemblerIndex = False
         Me.anOutputDataGBox.EnableCompress = False
@@ -549,10 +554,12 @@ Partial Class MainForm
         Me.anOutputDataGBox.FieldName = "DATA"
         Me.anOutputDataGBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.anOutputDataGBox.HasSign = False
+        Me.anOutputDataGBox.LanguageCode = ByteniZ3R.CodeInfo.LANGUAGE_CODE.BASIC
         Me.anOutputDataGBox.LineSizeIndex = 6
         Me.anOutputDataGBox.Location = New System.Drawing.Point(12, 360)
         Me.anOutputDataGBox.MinimumSize = New System.Drawing.Size(600, 260)
         Me.anOutputDataGBox.Name = "anOutputDataGBox"
+        Me.anOutputDataGBox.NumeralSystem = -1
         Me.anOutputDataGBox.OutputText = ""
         Me.anOutputDataGBox.Size = New System.Drawing.Size(760, 280)
         Me.anOutputDataGBox.TabIndex = 117

@@ -273,13 +273,13 @@ Public Class MainForm
 
         Dim infoData As String = ""
 
-        Dim singLabel As String
+        'Dim singLabel As String
 
-        If Me.HasSign Then
-            singLabel = SignLabels(0)
-        Else
-            singLabel = SignLabels(1)
-        End If
+        'If Me.HasSign Then
+        '    singLabel = SignLabels(0)
+        'Else
+        '    singLabel = SignLabels(1)
+        'End If
 
         If comments Is Nothing Then
             comments = New ArrayList
@@ -296,7 +296,7 @@ Public Class MainForm
         Dim freq As Integer = WaveFreqTrackBar.Value
         Dim phase As Integer = WavePhaseTrackBar.Value
 
-        infoData = singLabel + " Length=" + CStr(tableLength + 1) + " Min=" + Me.WaveMinTextBox.Text + " Max=" + Me.WaveMaxTextBox.Text
+        infoData = SignComboBox.SelectedItem + " Length=" + CStr(tableLength + 1) + " Min=" + Me.WaveMinTextBox.Text + " Max=" + Me.WaveMaxTextBox.Text
 
         If Not Me.WaveTypeComboBox.SelectedIndex = WAVE_TYPE.NOISE Then
             infoData += " Phase=" + CStr(phase) + " Freq=" + CStr(freq)
@@ -1216,7 +1216,7 @@ Public Class MainForm
 
         If Me.Path_Project = "" Then
             Me.OpenFileDialog1.FileName = Me.Info.Name
-            'Me.OpenFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
+            Me.OpenFileDialog1.InitialDirectory = Application.StartupPath
         Else
             Me.OpenFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
             Me.OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
@@ -1351,19 +1351,18 @@ Public Class MainForm
 
                 Else
 
-                    attrNode = subNode.SelectSingleNode("@CodeType")
+                    attrNode = subNode.SelectSingleNode("@LanguageCode")
                     If attrNode Is Nothing Then
-                        'Me.LanguageComboBox.SelectedIndex = Me.AppConfig.defCodeOutput
+                        'Me.anOutputDataGBox.LanguageCode = CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
                     Else
-                        Me.AppConfig.CodeOutput = CInt(attrNode.InnerText)
+                        Me.anOutputDataGBox.LanguageCode = CInt(attrNode.InnerText)
                     End If
-                    'ChangeLanguage(Me.LanguageComboBox.SelectedIndex)
 
-                    attrNode = subNode.SelectSingleNode("@NumberSystem")
+                    attrNode = subNode.SelectSingleNode("@NumeralSystem")
                     If attrNode Is Nothing Then
                         'Me.DataFormatComboB.SelectedIndex = Me.AppConfig.defCodeNumberFormat
                     Else
-                        Me.AppConfig.CodeNumberSystem = CInt(attrNode.InnerText)
+                        Me.anOutputDataGBox.NumeralSystem = CInt(attrNode.InnerText)
                     End If
 
                     'attrNode = subNode.SelectSingleNode("@CodeCompressType")
@@ -1373,54 +1372,48 @@ Public Class MainForm
                     '    Me.AppConfig.lastCodeCompressType = CInt(attrNode.InnerText)
                     'End If
 
-                    attrNode = subNode.SelectSingleNode("@SizeLine")
+                    attrNode = subNode.SelectSingleNode("@LineSize")
                     If attrNode Is Nothing Then
                         'Me.ItemsPerLineComboBox.SelectedIndex = Me.AppConfig.defCodeSizeLine
                     Else
-                        Me.AppConfig.CodeLineSize = CInt(attrNode.InnerText)
+                        Me.anOutputDataGBox.LineSizeIndex = CInt(attrNode.InnerText)
                     End If
 
                     attrNode = subNode.SelectSingleNode("@AsmDataByteCommand")
                     If attrNode Is Nothing Then
                         'Me.AsmCommandTextBox.Text = Me.AppConfig.defAsmByteCommand
                     Else
-                        Me.AppConfig.AsmDataByteCommand = attrNode.InnerText
+                        Me.anOutputDataGBox.AsmDataByteCommand = attrNode.InnerText
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@BASICinitLine")
+                    attrNode = subNode.SelectSingleNode("@BASIClineNumber")
                     If attrNode Is Nothing Then
                         'Me.BASICinitLineTextBox.Text = CStr(Me.AppConfig.defBASICinitLine)
                     Else
-                        Me.AppConfig.BASIC_initLine = CInt(attrNode.InnerText)
-                        'Me.BASICinitLineTextBox.Text = attrNode.InnerText
+                        Me.anOutputDataGBox.BASIClineNumber = CInt(attrNode.InnerText)
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@BASICincLines")
+                    attrNode = subNode.SelectSingleNode("@BASIClineInterval")
                     If attrNode Is Nothing Then
                         'Me.BASICincLineslTextBox.Text = CStr(Me.AppConfig.defBASICincLines)
                     Else
-                        Me.AppConfig.BASIC_incLines = CInt(attrNode.InnerText)
-                        'Me.BASICincLineslTextBox.Text = attrNode.InnerText
+                        Me.anOutputDataGBox.BASIClineInterval = CInt(attrNode.InnerText)
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@Remove0")
+                    attrNode = subNode.SelectSingleNode("@BASICremoveZeros")
                     If attrNode Is Nothing Then
-                        Me.AppConfig.BASIC_remove0 = False
+                        Me.anOutputDataGBox.BASICremoveZeros = False
                     Else
-                        Me.AppConfig.BASIC_remove0 = CBool(attrNode.InnerText.ToUpper = "TRUE")
-                        'Me.Remove0Check.Checked = CBool(attrNode.InnerText.ToUpper = "TRUE")
+                        Me.anOutputDataGBox.BASICremoveZeros = CBool(attrNode.InnerText.ToUpper = "TRUE")
                     End If
 
-                    attrNode = subNode.SelectSingleNode("@Label")
+                    attrNode = subNode.SelectSingleNode("@FieldName")
                     If attrNode Is Nothing Then
-                        Me.anOutputDataGBox.DataTypeInput.FieldName = "DATA"
+                        Me.anOutputDataGBox.FieldName = "DATA"
                     Else
-                        Me.anOutputDataGBox.DataTypeInput.FieldName = CStr(attrNode.InnerText)
+                        Me.anOutputDataGBox.FieldName = CStr(attrNode.InnerText)
                     End If
 
-
-                    Me.anOutputDataGBox.InitControl(Me.AppConfig)  '<--- refresh data 
-                    'anOutputDataGBox.DataTypeInput.SizeLineIndex
 
                 End If
                 ' END Output Data Config ###############################################
@@ -1433,9 +1426,9 @@ Public Class MainForm
                 'Me.ASM_COMMAND = Me.AsmCommandTextBox.Text
                 GenerateData()
 
-                'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
-                'I apply a short wait for the progress window to show without closing too quickly.
-                System.Threading.Thread.Sleep(200) 'wait
+                ''The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
+                ''I apply a short wait for the progress window to show without closing too quickly.
+                'System.Threading.Thread.Sleep(200) 'wait
 
                 Me.Progress.CloseProgressWin()
 
@@ -1468,7 +1461,7 @@ Public Class MainForm
 
         If Me.Path_Project = "" Then
             Me.SaveFileDialog1.FileName = Me.Info.Name_without_Spaces
-            'Me.SaveFileDialog1.InitialDirectory = Me.AppConfig.PathByteGen.Path
+            Me.SaveFileDialog1.InitialDirectory = Application.StartupPath
         Else
             Me.SaveFileDialog1.FileName = Path.GetFileName(Me.Path_Project)
             Me.SaveFileDialog1.InitialDirectory = Path.GetDirectoryName(Me.Path_Project)
@@ -1502,7 +1495,9 @@ Public Class MainForm
 
         'Dim result As Boolean = False
 
+
         Me.Progress.ShowProgressWin()
+
 
         ' crea el nodo root
         rootElement = aXmlDoc.CreateElement("msxdevtools")
@@ -1543,11 +1538,11 @@ Public Class MainForm
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("minValue")
-        anAttribute.Value = WaveMinTextBox.Text
+        anAttribute.Value = CStr(WaveMinTrackBar.Value)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("maxValue")
-        anAttribute.Value = WaveMaxTextBox.Text
+        anAttribute.Value = CStr(WaveMaxTrackBar.Value)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("phase")
@@ -1566,39 +1561,39 @@ Public Class MainForm
         anElement.AppendChild(anItemElement)
         '
         anAttribute = aXmlDoc.CreateAttribute("LanguageCode")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.LanguageCode)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.LanguageCode)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("NumberSystem")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.NumeralSystem) 'Me.DataFormatComboB.SelectedIndex)
+        anAttribute = aXmlDoc.CreateAttribute("NumeralSystem")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.NumeralSystem)
         anItemElement.SetAttributeNode(anAttribute)
 
         'anAttribute = aXmlDoc.CreateAttribute("CodeCompressType")
-        'anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress) 'Me.CompressionCB.SelectedIndex)
+        'anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.Compress)
         'anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("LineSize")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.LineSize) 'Me.ItemsPerLineComboBox.SelectedIndex)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.LineSizeIndex)
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("AsmDataByteCommand")
-        anAttribute.Value = Me.anOutputDataGBox.DataTypeInput.AsmDataByteCommand 'Me.AsmCommandTextBox.Text)
+        anAttribute.Value = Me.anOutputDataGBox.AsmDataByteCommand
         anItemElement.SetAttributeNode(anAttribute)
 
         anAttribute = aXmlDoc.CreateAttribute("BASICinitLine")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASIClineNumber) 'Me.BASICinitLineTextBox.Text)
+        anAttribute.Value = CStr(Me.anOutputDataGBox.BASIClineNumber)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("BASICincLines")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASICInterval) 'Me.BASICincLineslTextBox.Text)
+        anAttribute = aXmlDoc.CreateAttribute("BASIClineInterval")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.BASIClineInterval)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("Remove0")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.BASICremoveZeros) 'Me.Remove0Check.Checked)
+        anAttribute = aXmlDoc.CreateAttribute("BASICremoveZeros")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.BASICremoveZeros)
         anItemElement.SetAttributeNode(anAttribute)
 
-        anAttribute = aXmlDoc.CreateAttribute("Label")
-        anAttribute.Value = CStr(Me.anOutputDataGBox.DataTypeInput.FieldName)
+        anAttribute = aXmlDoc.CreateAttribute("FieldName")
+        anAttribute.Value = CStr(Me.anOutputDataGBox.FieldName)
         anItemElement.SetAttributeNode(anAttribute)
         ' END Output Data Config ################################################
 
@@ -1608,7 +1603,7 @@ Public Class MainForm
 
         'The purpose of displaying the progress bar is to let the user know that it has been executed successfully.
         'I apply a short wait for the progress window to show without closing too quickly.
-        System.Threading.Thread.Sleep(200) 'wait
+        'System.Threading.Thread.Sleep(200) 'wait
 
         Me.Progress.CloseProgressWin()
 
