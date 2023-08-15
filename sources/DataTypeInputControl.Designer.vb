@@ -163,7 +163,7 @@ Partial Class DataTypeInputControl
         Me.CompressComboBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CompressComboBox.ForeColor = System.Drawing.Color.Black
         Me.CompressComboBox.FormattingEnabled = True
-        Me.CompressComboBox.Items.AddRange(New Object() {"RAW", "RLE", "RLEWB", "Pletter5c"})
+        Me.CompressComboBox.Items.AddRange(New Object() {"RAW", "RLE", "WRLE", "Pletter5c"})
         Me.CompressComboBox.Location = New System.Drawing.Point(101, 57)
         Me.CompressComboBox.Name = "CompressComboBox"
         Me.CompressComboBox.Size = New System.Drawing.Size(150, 22)

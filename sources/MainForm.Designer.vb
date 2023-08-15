@@ -112,7 +112,7 @@ Partial Class MainForm
         Me.NewButton.Name = "NewButton"
         Me.NewButton.Size = New System.Drawing.Size(36, 36)
         Me.NewButton.Text = "ToolStripButton1"
-        Me.NewButton.ToolTipText = "New Project"
+        Me.NewButton.ToolTipText = "New Project [Ctrl+N]"
         '
         'LoadButton
         '
@@ -123,7 +123,7 @@ Partial Class MainForm
         Me.LoadButton.Name = "LoadButton"
         Me.LoadButton.Size = New System.Drawing.Size(36, 36)
         Me.LoadButton.Text = "ToolStripButton1"
-        Me.LoadButton.ToolTipText = "Load Project"
+        Me.LoadButton.ToolTipText = "Load Project [Ctrl+O]"
         '
         'SaveButton
         '
@@ -145,7 +145,7 @@ Partial Class MainForm
         Me.SaveAsButton.Name = "SaveAsButton"
         Me.SaveAsButton.Size = New System.Drawing.Size(36, 36)
         Me.SaveAsButton.Text = "ToolStripButton1"
-        Me.SaveAsButton.ToolTipText = "Save As Project"
+        Me.SaveAsButton.ToolTipText = "Save As Project [Ctrl+S]"
         '
         'ToolStripSeparator2
         '
@@ -185,19 +185,18 @@ Partial Class MainForm
         Me.ConfigButton.Name = "ConfigButton"
         Me.ConfigButton.Size = New System.Drawing.Size(36, 36)
         Me.ConfigButton.Text = "ToolStripButton1"
-        Me.ConfigButton.ToolTipText = "Config devtools"
+        Me.ConfigButton.ToolTipText = "Application Settings"
         '
         'Help_Button
         '
         Me.Help_Button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.Help_Button.Enabled = False
         Me.Help_Button.Image = Global.ByteniZ3R.My.Resources.Resources.ico_help_32px
         Me.Help_Button.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.Help_Button.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.Help_Button.Name = "Help_Button"
         Me.Help_Button.Size = New System.Drawing.Size(36, 36)
         Me.Help_Button.Text = "ToolStripButton1"
-        Me.Help_Button.ToolTipText = "Help!"
+        Me.Help_Button.ToolTipText = "Help [F1]"
         '
         'AboutButton
         '
@@ -265,7 +264,7 @@ Partial Class MainForm
         Me.SignedRulerPictureBox.BackColor = System.Drawing.Color.Transparent
         Me.SignedRulerPictureBox.BackgroundImage = Global.ByteniZ3R.My.Resources.Resources.signed_display_ruler
         Me.SignedRulerPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.SignedRulerPictureBox.Location = New System.Drawing.Point(351, 284)
+        Me.SignedRulerPictureBox.Location = New System.Drawing.Point(311, 227)
         Me.SignedRulerPictureBox.Name = "SignedRulerPictureBox"
         Me.SignedRulerPictureBox.Size = New System.Drawing.Size(30, 267)
         Me.SignedRulerPictureBox.TabIndex = 38
@@ -286,7 +285,7 @@ Partial Class MainForm
         '
         Me.SignComboBox.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SignComboBox.FormattingEnabled = True
-        Me.SignComboBox.Items.AddRange(New Object() {"8bit Signed", "8bit Unsigned"})
+        Me.SignComboBox.Items.AddRange(New Object() {"8bits Signed", "8bits Unsigned"})
         Me.SignComboBox.Location = New System.Drawing.Point(109, 227)
         Me.SignComboBox.Name = "SignComboBox"
         Me.SignComboBox.Size = New System.Drawing.Size(186, 26)

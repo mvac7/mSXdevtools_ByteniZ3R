@@ -22,6 +22,7 @@ Partial Class OutputDataGBox
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.PiXelGroupBox1 = New ByteniZ3R.piXelST_GroupBox()
         Me.OutputButtonsPanel = New System.Windows.Forms.Panel()
@@ -30,6 +31,7 @@ Partial Class OutputDataGBox
         Me.SaveCompressFileButton = New ByteniZ3R.piXelST_Button()
         Me.DataTypeInput = New ByteniZ3R.DataTypeInputControl()
         Me.OutputTextBox = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PiXelGroupBox1.SuspendLayout()
         Me.OutputButtonsPanel.SuspendLayout()
         Me.SuspendLayout()
@@ -82,6 +84,7 @@ Partial Class OutputDataGBox
         Me.CopyAllButton.Size = New System.Drawing.Size(154, 40)
         Me.CopyAllButton.TabIndex = 41
         Me.CopyAllButton.Text = "Copy All"
+        Me.ToolTip1.SetToolTip(Me.CopyAllButton, "Copy all source code to clipboard [Ctrl+A]")
         Me.CopyAllButton.UseVisualStyleBackColor = False
         '
         'SaveSourceButton
@@ -123,17 +126,24 @@ Partial Class OutputDataGBox
         '
         'DataTypeInput
         '
+        Me.DataTypeInput.AsmDataByteCommand = ""
+        Me.DataTypeInput.AsmDataWordCommand = ""
         Me.DataTypeInput.BackColor = System.Drawing.Color.Transparent
+        Me.DataTypeInput.BASIClineInterval = 10
+        Me.DataTypeInput.BASIClineNumber = 10000
+        Me.DataTypeInput.BASICremoveZeros = False
         Me.DataTypeInput.CompressType = ByteniZ3R.DataTypeInputControl.COMPRESS_TYPE.RAW
         Me.DataTypeInput.EnableAssemblerIndex = False
         Me.DataTypeInput.EnableCompress = False
         Me.DataTypeInput.EnableDataLineSize = False
         Me.DataTypeInput.FieldName = "DATA"
         Me.DataTypeInput.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataTypeInput.LanguageCode = ByteniZ3R.CodeInfo.LANGUAGE_CODE.BASIC
         Me.DataTypeInput.LineSizeIndex = 6
         Me.DataTypeInput.Location = New System.Drawing.Point(14, 26)
         Me.DataTypeInput.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DataTypeInput.Name = "DataTypeInput"
+        Me.DataTypeInput.NumeralSystem = -1
         Me.DataTypeInput.Size = New System.Drawing.Size(540, 117)
         Me.DataTypeInput.TabIndex = 68
         '
@@ -175,4 +185,5 @@ Partial Class OutputDataGBox
     Friend WithEvents SaveSourceButton As piXelST_Button
     Friend WithEvents SaveCompressFileButton As piXelST_Button
     Friend WithEvents PiXelGroupBox1 As piXelST_GroupBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

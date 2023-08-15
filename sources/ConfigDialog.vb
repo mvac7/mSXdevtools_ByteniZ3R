@@ -22,6 +22,12 @@ Public Class ConfigDialog
     'End Enum
 
 
+    Public Shadows Enum CONFIG_TAB As Integer
+        MISCELANEA
+        SOURCE_CODE
+    End Enum
+
+
 
     Public Shadows Enum CONFIG_TYPE As Integer
         TMSGFX
@@ -34,6 +40,17 @@ Public Class ConfigDialog
         OAMSX
         PAINTSX
         OTHER
+    End Enum
+
+
+    Public Shadows Enum PALETTE_TYPE As Integer
+        LIGHT_SIDE_FORCE
+        DARK_KNIGHT
+        MSX_BLUE
+        GREEN_BOY
+        NUTCILLA
+        GREEN_PHOSPHOR
+        AMBAR_PHOSPHOR
     End Enum
 
 
@@ -60,6 +77,8 @@ Public Class ConfigDialog
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
 
+        Me.Size = New System.Drawing.Size(628, 580)
+
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.AppConfig = _config
         Me.AppType = aType
@@ -68,7 +87,15 @@ Public Class ConfigDialog
 
 
 
+
+
+
+
     Private Sub ConfigWin_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        SetConfigTab(CONFIG_TAB.MISCELANEA)
+
+        Me.SourceCodePanel.Location = MiscPanel.Location
 
         Me.CodeOutputComboBox.SelectedIndex = Me.AppConfig.CodeOutput
 
@@ -224,28 +251,33 @@ Public Class ConfigDialog
     Private Sub ColorConfigsComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorConfigsComboBox.SelectedIndexChanged
 
         Select Case ColorConfigsComboBox.SelectedIndex
-            Case 1
-                ' green phosphor 
+
+            Case PALETTE_TYPE.NUTCILLA
+                SetColor(Me.OutputINKcolorButton, Color.White) 'FromArgb(255, 255, 255)
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(&H6C, &H3B, &H1E)) '6c3b1e
+
+            Case PALETTE_TYPE.DARK_KNIGHT
+                SetColor(Me.OutputINKcolorButton, Color.WhiteSmoke)
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(22, 22, 33))
+
+            Case PALETTE_TYPE.GREEN_PHOSPHOR
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 52, 255, 93))
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 0, 52, 12))
 
-            Case 2
-                ' amber phosphor 
+            Case PALETTE_TYPE.AMBAR_PHOSPHOR
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 170, 16)) '255, 227, 52
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 85, 20, 0))
 
-            Case 3
-                ' blue MSX BASIC
+            Case PALETTE_TYPE.MSX_BLUE
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 255, 255))   'White
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 84, 85, 237))      'TMS9918A Dark Blue
 
-            Case 4
-                ' green GB
+            Case PALETTE_TYPE.GREEN_BOY
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 15, 56, 15))    ' light green
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 202, 220, 159))  ' dark green
 
             Case Else
-                ' default
+                ' default PALETTE_TYPE.LIGHT_SIDE_FORCE
                 SetColor(Me.OutputINKcolorButton, Me.AppConfig.def_Color_OUTPUT_INK)
                 SetColor(Me.OutputBGcolorButton, Me.AppConfig.def_Color_OUTPUT_BG)
 
@@ -455,5 +487,27 @@ Public Class ConfigDialog
 
     End Sub
 
+
+    Private Sub PiXelST_HorizontalTab1_TabChanged(index As Integer) Handles PiXelST_HorizontalTab1.TabChanged
+
+        SetConfigTab(index)
+
+    End Sub
+
+
+    Private Sub SetConfigTab(index As CONFIG_TAB)
+
+        Dim panelState As Boolean
+
+        If index = CONFIG_TAB.MISCELANEA Then
+            panelState = True
+        Else
+            panelState = False
+        End If
+
+        Me.MiscPanel.Visible = panelState
+        Me.SourceCodePanel.Visible = Not panelState
+
+    End Sub
 
 End Class

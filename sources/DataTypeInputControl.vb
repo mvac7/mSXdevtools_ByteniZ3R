@@ -26,7 +26,7 @@ Public Class DataTypeInputControl
     Public Shadows Enum COMPRESS_TYPE As Integer
         RAW
         RLE
-        RLEWB
+        WRLE
         PLETTER5
     End Enum
 
@@ -670,8 +670,8 @@ Public Class DataTypeInputControl
             Case COMPRESS_TYPE.RLE
                 outputInfo = "_RLE"
 
-            Case COMPRESS_TYPE.RLEWB
-                outputInfo = "_RLEWB"
+            Case COMPRESS_TYPE.WRLE
+                outputInfo = "_WRLE"
 
             Case COMPRESS_TYPE.PLETTER5
                 outputInfo = "_PLT5"
@@ -701,6 +701,7 @@ Public Class DataTypeInputControl
         Me.CesFieldNameTextBox.Text = _dataFormat.GetCvariableNameFormat(Me.CesFieldNameTextBox.Text)
 
         RaiseEvent DataChanged()
+
     End Sub
 
 

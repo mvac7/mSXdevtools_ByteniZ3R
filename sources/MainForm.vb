@@ -224,6 +224,15 @@ Public Class MainForm
 
 
 
+    Private Sub Help()
+
+        Dim Helping As New HelpDialog(800, 700)
+        'Helping.ShowDialog(Me, "Help " + My.Application.Info.Title, Global.ByteniZ3R.My.Resources.help)
+
+    End Sub
+
+
+
     Private Sub SetSingType(ByVal state As Boolean)
         Me.HasSign = state
         If Me.HasSign Then
@@ -1827,8 +1836,7 @@ Public Class MainForm
 
 
     Private Sub HelpButton_Click(sender As System.Object, e As System.EventArgs) Handles Help_Button.Click
-        'Dim helper As New HelpWin(Me.Name, helpURL)
-        'helper.ShowDialog()
+        Help()
     End Sub
 
 
@@ -1838,9 +1846,11 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub anOutputDataGBox_DataChanged()
         GenerateData()
     End Sub
+
 
 
     Private Sub SignComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles SignComboBox.SelectedIndexChanged
@@ -1860,6 +1870,45 @@ Public Class MainForm
         ShowWaveMaxValue(Me.WaveMaxTrackBar.Value)
 
         GenerateData()
+
+    End Sub
+
+
+    Private Sub MainWindow_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+        If e.KeyCode = Keys.F1 Then
+            Help()
+        End If
+
+        If e.Control Then
+            Select Case e.KeyCode
+
+                Case Keys.N
+                    NewProjectDialog()
+
+                Case Keys.O
+                    LoadProjectDialog()
+
+                Case Keys.S
+                    SaveProjectDialog()
+
+                Case Keys.A
+                    Me.anOutputDataGBox.CopyAll()
+
+            End Select
+
+        End If
+
+
+        'If e.Alt Then
+        '    Select Case e.KeyCode
+        '        Case Keys.Enter
+        '            Compress()
+
+        '    End Select
+
+        'End If
+
     End Sub
 
 

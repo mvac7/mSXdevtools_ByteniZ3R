@@ -19,19 +19,19 @@ License:      GNU General Public License v3
 
 ## Description
 
-Generates tables of 8 bits unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
+Generates tables of 8bits signed or unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
 It can be useful for generating graphics or creating paths to move [Sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)).
 
-It includes examples for various development environments of the MSX system (Assembler, C and BASIC), 
+This tool is designed for the cross-development of computer programs with 8bits processors.
+
+It includes [`examples`](Examples/) for various development environments of the MSX system (Assembler, C and MSX BASIC), 
 which is what I know (sorry developers of other platforms).
-
-You can access the documentation here with [`ByteniZ3R devtool DOC`](Docs/HOWTO.md).
-
-In the source code [`Examples/`](Examples/), you can find applications for testing and learning purposes.
 
 This project is open source, so you can improve or adapt the tool to your needs.
    
 This software was developed in Microsoft Visual Studio Community 2019.
+
+You can access the documentation here with [`ByteniZ3R devtool User Guide`](Docs/HOWTO.md).
  
 
 <br/>
@@ -40,7 +40,7 @@ This software was developed in Microsoft Visual Studio Community 2019.
 
 ## License
 
-Copyright (C) 2022 mvac7
+Copyright (C) 2023 mvac7
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -49,7 +49,8 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with this program.
+If not, see <http://www.gnu.org/licenses/>.
  
 <br/>
 
@@ -62,20 +63,20 @@ You should have received a copy of the GNU General Public License along with thi
 
 <br/>
 
-
 ---
 
 ## Features
 
-* 7 waveform generators: Sine, Cosine, Square, Triangle, Sawtooth, Reverse Sawtooth and Noise.
-* Maximum and minimum adjustment.
-* Phase and Frequency adjustmens.
-* BASIC, C or Assembler output.
-* Supports several number systems and data formats (decimal, hexadecimal or binary)
-* Edit info project (Name, Version, Author, Group, and Description).
-* Save/Load project files.
-* Save output to source code 
-* Save output to binary file
+- 8bits signed or unsigned values
+- 9 waveform generators: Sine, 1/2 Sine Upper, 1/2 Sine Lower, Cosine, Square, Triangle, Sawtooth, Reverse Sawtooth and Noise.
+- Maximum and minimum adjustment.
+- Phase and Frequency adjustmens.
+- BASIC, C or Assembler output.
+- Supports several number systems and data formats (decimal, hexadecimal or binary)
+- Edit info project (Name, Version, Author, Group, and Description).
+- Save/Load project files.
+- Save output to source code 
+- Save output to binary file
 
 ![ByteniZ3R screenshot](https://github.com/mvac7/mSXdevtools_ByteniZ3R/raw/main/GFX/screenshots/ByteniZ3R_v0916b_screenshot01.png)
 
@@ -98,6 +99,17 @@ Updated some classes, removed binary loading, and gave the frontend a new look.
 The decision to remove the binary load is due to the fact that I have been developing several specific applications for different compressors for some time. 
 This functionality is no longer required.
 
+### ByteniZ3R v1.0b (? 2023)
+
+- Added 8bits signed type.
+- Expand max length to 2048 Bytes.
+- Added 1/2 Sine Upper and 1/2 Sine Lower waveforms.
+- Updated graphical interface (piXelST style). Added new UI controls and 32px icons.
+- The waveform is drawn at the defined size (Before it was adjusted to the size of the box).
+- The file format has been improved, so it is not compatible with the previous version (sorry).
+- Added different assembler formats: asMSX, tniASM, SJasm and SDCC.
+
+<br/>
 
 ### ByteniZ3R v0.9.17b (7 June 2022)
 
@@ -108,20 +120,21 @@ This functionality is no longer required.
 - Configure colors of the graph and the data output.
 - Accepts tabs in the assembler output data format (add <tab>)
 - It allows to obtain the data in binary numbers.
-- Add binary number system in output data settings.
+- Added binary number system in output data settings.
 
+<br/>
 
 ### ByteniZ3R v0.9.1b (August 2021)
 
 - Save/Load Project File.
 - Add Project Info
 - Move Random tab to waveform.
-- Add Square waveform
-- Add Triangle waveform
-- Add Sawtooth waveform
-- Add Phase property, to move the waveform.
-- Add Frequency property.
-- Add sliders in all wave form values.
+- Added Square waveform
+- Added Triangle waveform
+- Added Sawtooth waveform
+- Added Phase property, to move the waveform.
+- Added Frequency property.
+- Added sliders in all wave form values.
 - Improvements in the visualization of the graphic output of the wave.
 - In the output it shows the parameters in a comment.
 - Save binary file from output (with compression). For assemblers and compilers that allow to include binary files.
@@ -130,68 +143,48 @@ This functionality is no longer required.
 - Config for paths and default output type data.
 - More internal improvements.
 
+<br/>
 
 ### BytesGen! v0.8.1b (January 2018) 
 
 Not published.
 
+<br/>
 
 ### BytesGen! v0.8b (May 2016) 
 
 Not published.
 
+<br/>
 
 ### BytesGen! v0.7.2.0b (February 2014)
 
 - Output Textbox and buttons, added to the Output GroupBox.
 - Clear button
 
-[Google Code](https://code.google.com/archive/p/bytes-gen/)
-
+<br/>
 
 ### BytesGen! v0.7.1.0b (?) 
 
 Not published.
 
-- basic line changes do increase to 10 (before = 15). 
-- drag & drop a file from the system to the input file (binary file).
+- Basic line changes do increase to 10 (before = 15). 
+- Drag & drop a file from the system to the input file (binary file).
 - Added new output formats data (hex).
 - Output is cleared when switching tabs.
 
+<br/>
 
 ### BytesGen v0.7.0.0b (May 2013) First published version
 
 Requires: PC with Windows System and Framework 2.0
 
+- Sinus table generator.
+- Cosinus table generator.
+- Random table generator.
+- Data dump from a binary file.
+- Supports output formats: C, MSX BASIC, Assembler and SDCC Assembler.
+
 [Google Code](https://code.google.com/archive/p/bytes-gen/)
-
-
-<br/>
-
----
-
-## Acknowledgments
-  
-I want to give a special thanks to all those who freely share their knowledge with the MSX developer community.
-
-- MSXKun/Paxanga soft > [`WEB`](http://paxangasoft.retroinvaders.com/)
-- Fubukimaru > [`gitHub`](https://github.com/Fubukimaru)
-- Avelino Herrera > [`WEB`](http://msx.avelinoherrera.com/index_es.html)
-- Nerlaska > [`Blog`](http://albertodehoyonebot.blogspot.com.es)
-- Marq > [`Marq`](http://www.kameli.net/marq/)
-- Andrear > [`Blog`](http://andrear.altervista.org/home/msxsoftware.php)
-- Sapphire/Z80ST > [`WEB`](http://z80st.auic.es/)
-- Fernando García > [`Video Tutorial`](http://www.z80st.es/cursos/bitvision-assembler)
-- Ramones > [`MSXblog`](https://www.msxblog.es/tutoriales-de-programacion-en-ensamblador-ramones/) - [`MSXbanzai`](http://msxbanzai.tni.nl/dev/faq.html)
-- Eric Boez > [`gitHub`](https://github.com/ericb59)
-- MSX Assembly Page > [`WEB`](http://map.grauw.nl/resources/msxbios.php)
-- Portar MSX Tech Doc > [`WEB`](https://problemkaputt.de/portar.htm)
-- MSX Resource Center > [`WEB`](http://www.msx.org/)
-- Karoshi MSX Community > [`WEB`](http://karoshi.auic.es/)
-- BlueMSX emulator >> [`WEB`](http://www.bluemsx.com/)
-- OpenMSX emulator >> [`WEB`](http://openmsx.sourceforge.net/)
-- [`WebMSX`](https://webmsx.org/) emulator by Paulo A. Peccin >> [`gitHub`](https://github.com/ppeccin/webmsx)
-- fMSX emulator by Marat Fayzullin [`WEB`](https://fms.komkon.org/fMSX/)
-- Meisei emulator by Hap >> `?`
 
 ---

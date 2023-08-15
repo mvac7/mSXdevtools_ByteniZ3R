@@ -140,6 +140,12 @@
     <Compile Include="piXelST_Help.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="piXelST_HorizontalTab.designer.vb">
+      <DependentUpon>piXelST_HorizontalTab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="piXelST_HorizontalTab.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="piXelST_Label.Designer.vb">
       <DependentUpon>piXelST_Label.vb</DependentUpon>
     </Compile>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="piXelST_Help.resx">
       <DependentUpon>piXelST_Help.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="piXelST_HorizontalTab.resx">
+      <DependentUpon>piXelST_HorizontalTab.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="piXelST_Label.resx">
       <DependentUpon>piXelST_Label.vb</DependentUpon>
