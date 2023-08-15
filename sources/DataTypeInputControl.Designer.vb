@@ -42,7 +42,7 @@ Partial Class DataTypeInputControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LanguageComboBox = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.CdataTypeTextBox = New System.Windows.Forms.TextBox()
+        Me.UnsignedByteDefTextBox = New System.Windows.Forms.TextBox()
         Me.BasicPanel = New System.Windows.Forms.Panel()
         Me.AssemblerPanel = New System.Windows.Forms.Panel()
         Me.AsmFieldNameTextBox = New System.Windows.Forms.TextBox()
@@ -50,6 +50,8 @@ Partial Class DataTypeInputControl
         Me.CesPanel = New System.Windows.Forms.Panel()
         Me.CesFieldNameTextBox = New System.Windows.Forms.TextBox()
         Me.CesFieldNameLabel = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.SignedByteDefTextBox = New System.Windows.Forms.TextBox()
         Me.BasicPanel.SuspendLayout()
         Me.AssemblerPanel.SuspendLayout()
         Me.CesPanel.SuspendLayout()
@@ -293,19 +295,19 @@ Partial Class DataTypeInputControl
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(92, 21)
         Me.Label4.TabIndex = 15
-        Me.Label4.Text = "Type:"
+        Me.Label4.Text = "Unsigned:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'CdataTypeTextBox
+        'UnsignedByteDefTextBox
         '
-        Me.CdataTypeTextBox.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.CdataTypeTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CdataTypeTextBox.ForeColor = System.Drawing.Color.Black
-        Me.CdataTypeTextBox.Location = New System.Drawing.Point(107, 34)
-        Me.CdataTypeTextBox.MaxLength = 128
-        Me.CdataTypeTextBox.Name = "CdataTypeTextBox"
-        Me.CdataTypeTextBox.Size = New System.Drawing.Size(120, 22)
-        Me.CdataTypeTextBox.TabIndex = 14
+        Me.UnsignedByteDefTextBox.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.UnsignedByteDefTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.UnsignedByteDefTextBox.ForeColor = System.Drawing.Color.Black
+        Me.UnsignedByteDefTextBox.Location = New System.Drawing.Point(107, 34)
+        Me.UnsignedByteDefTextBox.MaxLength = 128
+        Me.UnsignedByteDefTextBox.Name = "UnsignedByteDefTextBox"
+        Me.UnsignedByteDefTextBox.Size = New System.Drawing.Size(120, 22)
+        Me.UnsignedByteDefTextBox.TabIndex = 14
         '
         'BasicPanel
         '
@@ -367,9 +369,11 @@ Partial Class DataTypeInputControl
         Me.CesPanel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CesPanel.BackColor = System.Drawing.Color.Transparent
         Me.CesPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.CesPanel.Controls.Add(Me.Label2)
+        Me.CesPanel.Controls.Add(Me.SignedByteDefTextBox)
         Me.CesPanel.Controls.Add(Me.Label4)
         Me.CesPanel.Controls.Add(Me.CesFieldNameTextBox)
-        Me.CesPanel.Controls.Add(Me.CdataTypeTextBox)
+        Me.CesPanel.Controls.Add(Me.UnsignedByteDefTextBox)
         Me.CesPanel.Controls.Add(Me.CesFieldNameLabel)
         Me.CesPanel.Location = New System.Drawing.Point(258, 237)
         Me.CesPanel.Name = "CesPanel"
@@ -397,6 +401,28 @@ Partial Class DataTypeInputControl
         Me.CesFieldNameLabel.TabIndex = 274
         Me.CesFieldNameLabel.Text = "Field name:"
         Me.CesFieldNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(10, 62)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(92, 21)
+        Me.Label2.TabIndex = 277
+        Me.Label2.Text = "Signed:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'SignedByteDefTextBox
+        '
+        Me.SignedByteDefTextBox.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.SignedByteDefTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SignedByteDefTextBox.ForeColor = System.Drawing.Color.Black
+        Me.SignedByteDefTextBox.Location = New System.Drawing.Point(107, 62)
+        Me.SignedByteDefTextBox.MaxLength = 128
+        Me.SignedByteDefTextBox.Name = "SignedByteDefTextBox"
+        Me.SignedByteDefTextBox.Size = New System.Drawing.Size(120, 22)
+        Me.SignedByteDefTextBox.TabIndex = 276
         '
         'DataTypeInputControl
         '
@@ -443,7 +469,7 @@ Partial Class DataTypeInputControl
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents LanguageComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents CdataTypeTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents UnsignedByteDefTextBox As System.Windows.Forms.TextBox
     Friend WithEvents BasicPanel As Panel
     Friend WithEvents AssemblerPanel As Panel
     Friend WithEvents AsmFieldNameTextBox As TextBox
@@ -451,4 +477,6 @@ Partial Class DataTypeInputControl
     Friend WithEvents CesPanel As Panel
     Friend WithEvents CesFieldNameTextBox As TextBox
     Friend WithEvents CesFieldNameLabel As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents SignedByteDefTextBox As TextBox
 End Class

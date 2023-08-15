@@ -77,7 +77,7 @@ Public Class ConfigDialog
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
 
-        Me.Size = New System.Drawing.Size(628, 580)
+        Me.Size = New System.Drawing.Size(628, Me.Height)
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.AppConfig = _config
@@ -104,7 +104,8 @@ Public Class ConfigDialog
         Me.CompressTypeComboBox.SelectedIndex = Me.AppConfig.CodeCompressType
         Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
-        Me.CByteDataTextBox.Text = Me.AppConfig.CdataType
+        Me.UnsignedByteDefTextBox.Text = Me.AppConfig.C_UnsignedByteTypeDef
+        Me.SignedByteDefTextBox.Text = Me.AppConfig.C_SignedByteTypeDef
 
         Me.BASICdataTextBox.Text = Me.AppConfig.BASIC_DataInstruction
         Me.BASICcommentComboBox.SelectedIndex = GetBASIC_CommentInstruction_Index(Me.AppConfig.BASIC_CommentInstruction)
@@ -299,7 +300,8 @@ Public Class ConfigDialog
         Me.AppConfig.CodeCompressType = Me.CompressTypeComboBox.SelectedIndex
         Me.AppConfig.AsmDataByteCommand = Me.AsmByteDataTextBox.Text
         Me.AppConfig.AsmDataWordCommand = Me.AsmWordDataTextBox.Text
-        Me.AppConfig.CdataType = Me.CByteDataTextBox.Text
+        Me.AppConfig.C_UnsignedByteTypeDef = Me.UnsignedByteDefTextBox.Text
+        Me.AppConfig.C_SignedByteTypeDef = Me.SignedByteDefTextBox.Text
         Me.AppConfig.BASIC_initLine = CInt(Me.BASICinitLineTextBox.Text)
         Me.AppConfig.BASIC_incLines = CInt(Me.BASICincLineslTextBox.Text)
         Me.AppConfig.BASIC_remove0 = Me.RemoveZerosCheck.Checked

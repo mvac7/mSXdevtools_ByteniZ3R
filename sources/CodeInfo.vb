@@ -49,7 +49,8 @@
     Public AsmDataByteCommand As String
     Public AsmDataWordCommand As String
 
-    Public CdataType As String
+    Public C_UnsignedByteTypeDef As String
+    Public C_SignedByteTypeDef As String
 
     Public BASIC_DataInstruction As String = "DATA"
     Public BASIC_CommentInstruction As String = "REM"

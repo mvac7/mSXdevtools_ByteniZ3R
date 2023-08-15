@@ -156,9 +156,17 @@ Public Class OutputDataGBox
 
 
 
-    Public ReadOnly Property CdataType As String
+    Public ReadOnly Property C_UnsignedByteTypeDef As String
         Get
-            Return DataTypeInput.CdataType
+            Return DataTypeInput.C_UnsignedByteTypeDef
+        End Get
+    End Property
+
+
+
+    Public ReadOnly Property C_SignedByteTypeDef As String
+        Get
+            Return DataTypeInput.C_SignedByteTypeDef
         End Get
     End Property
 

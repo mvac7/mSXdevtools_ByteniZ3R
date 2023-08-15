@@ -27,7 +27,7 @@ Partial Class ConfigDialog
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.DataLabelTextBox = New System.Windows.Forms.TextBox()
         Me.NumberSystemCombo = New System.Windows.Forms.ComboBox()
-        Me.CByteDataTextBox = New System.Windows.Forms.TextBox()
+        Me.UnsignedByteDefTextBox = New System.Windows.Forms.TextBox()
         Me.AsmByteDataTextBox = New System.Windows.Forms.TextBox()
         Me.AsmWordDataTextBox = New System.Windows.Forms.TextBox()
         Me.BASICcommentComboBox = New System.Windows.Forms.ComboBox()
@@ -45,16 +45,18 @@ Partial Class ConfigDialog
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Color0Button = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.SignedByteDefTextBox = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.CGroupBox = New ByteniZ3R.piXelST_GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.AssemblerGroupBox = New ByteniZ3R.piXelST_GroupBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.BDLabel = New System.Windows.Forms.Label()
         Me.arrow2PictureBox = New System.Windows.Forms.PictureBox()
         Me.arrow1PictureBox = New System.Windows.Forms.PictureBox()
         Me.AsmWordValuesComboBox = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.WDLabel = New System.Windows.Forms.Label()
         Me.AsmByteValuesComboBox = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.CompressTypeComboBox = New System.Windows.Forms.ComboBox()
@@ -122,13 +124,13 @@ Partial Class ConfigDialog
         Me.NumberSystemCombo.TabIndex = 246
         Me.ToolTip1.SetToolTip(Me.NumberSystemCombo, "Computer number format")
         '
-        'CByteDataTextBox
+        'UnsignedByteDefTextBox
         '
-        Me.CByteDataTextBox.Location = New System.Drawing.Point(119, 21)
-        Me.CByteDataTextBox.Name = "CByteDataTextBox"
-        Me.CByteDataTextBox.Size = New System.Drawing.Size(220, 22)
-        Me.CByteDataTextBox.TabIndex = 261
-        Me.ToolTip1.SetToolTip(Me.CByteDataTextBox, "Byte Data command definition for C")
+        Me.UnsignedByteDefTextBox.Location = New System.Drawing.Point(117, 18)
+        Me.UnsignedByteDefTextBox.Name = "UnsignedByteDefTextBox"
+        Me.UnsignedByteDefTextBox.Size = New System.Drawing.Size(220, 22)
+        Me.UnsignedByteDefTextBox.TabIndex = 261
+        Me.ToolTip1.SetToolTip(Me.UnsignedByteDefTextBox, "Type definition for unsigned Byte values.")
         '
         'AsmByteDataTextBox
         '
@@ -304,43 +306,63 @@ Partial Class ConfigDialog
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ToolTip1.SetToolTip(Me.Label11, "Username to assign the author by default in the project information.")
         '
+        'SignedByteDefTextBox
+        '
+        Me.SignedByteDefTextBox.Location = New System.Drawing.Point(117, 46)
+        Me.SignedByteDefTextBox.Name = "SignedByteDefTextBox"
+        Me.SignedByteDefTextBox.Size = New System.Drawing.Size(220, 22)
+        Me.SignedByteDefTextBox.TabIndex = 263
+        Me.ToolTip1.SetToolTip(Me.SignedByteDefTextBox, "Type definition for signed Byte values.")
+        '
         'CGroupBox
         '
         Me.CGroupBox.BackColor = System.Drawing.Color.Transparent
         Me.CGroupBox.BGColor = System.Drawing.Color.LightGray
-        Me.CGroupBox.Controls.Add(Me.CByteDataTextBox)
+        Me.CGroupBox.Controls.Add(Me.SignedByteDefTextBox)
+        Me.CGroupBox.Controls.Add(Me.Label1)
+        Me.CGroupBox.Controls.Add(Me.UnsignedByteDefTextBox)
         Me.CGroupBox.Controls.Add(Me.Label8)
         Me.CGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.CGroupBox.LineColor = System.Drawing.Color.DimGray
         Me.CGroupBox.Location = New System.Drawing.Point(17, 259)
         Me.CGroupBox.Name = "CGroupBox"
         Me.CGroupBox.Padding = New System.Windows.Forms.Padding(0)
-        Me.CGroupBox.Size = New System.Drawing.Size(559, 54)
+        Me.CGroupBox.Size = New System.Drawing.Size(559, 81)
         Me.CGroupBox.TabIndex = 268
         Me.CGroupBox.TabStop = False
         Me.CGroupBox.Text = "C"
         '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(5, 46)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(110, 22)
+        Me.Label1.TabIndex = 264
+        Me.Label1.Text = "Signed Byte:"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(5, 21)
+        Me.Label8.Location = New System.Drawing.Point(5, 18)
         Me.Label8.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(110, 22)
         Me.Label8.TabIndex = 262
-        Me.Label8.Text = "C Byte:"
+        Me.Label8.Text = "Unsigned Byte:"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'AssemblerGroupBox
         '
         Me.AssemblerGroupBox.BackColor = System.Drawing.Color.Transparent
         Me.AssemblerGroupBox.BGColor = System.Drawing.Color.LightGray
-        Me.AssemblerGroupBox.Controls.Add(Me.Label4)
+        Me.AssemblerGroupBox.Controls.Add(Me.BDLabel)
         Me.AssemblerGroupBox.Controls.Add(Me.arrow2PictureBox)
         Me.AssemblerGroupBox.Controls.Add(Me.AsmByteDataTextBox)
         Me.AssemblerGroupBox.Controls.Add(Me.arrow1PictureBox)
         Me.AssemblerGroupBox.Controls.Add(Me.AsmWordDataTextBox)
         Me.AssemblerGroupBox.Controls.Add(Me.AsmWordValuesComboBox)
-        Me.AssemblerGroupBox.Controls.Add(Me.Label7)
+        Me.AssemblerGroupBox.Controls.Add(Me.WDLabel)
         Me.AssemblerGroupBox.Controls.Add(Me.AsmByteValuesComboBox)
         Me.AssemblerGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.AssemblerGroupBox.LineColor = System.Drawing.Color.DimGray
@@ -352,15 +374,15 @@ Partial Class ConfigDialog
         Me.AssemblerGroupBox.TabStop = False
         Me.AssemblerGroupBox.Text = "Assembler"
         '
-        'Label4
+        'BDLabel
         '
-        Me.Label4.Location = New System.Drawing.Point(3, 21)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(110, 22)
-        Me.Label4.TabIndex = 251
-        Me.Label4.Text = "Asm Byte:"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BDLabel.Location = New System.Drawing.Point(5, 21)
+        Me.BDLabel.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.BDLabel.Name = "BDLabel"
+        Me.BDLabel.Size = New System.Drawing.Size(110, 22)
+        Me.BDLabel.TabIndex = 251
+        Me.BDLabel.Text = "Byte Data:"
+        Me.BDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'arrow2PictureBox
         '
@@ -392,15 +414,15 @@ Partial Class ConfigDialog
         Me.AsmWordValuesComboBox.Size = New System.Drawing.Size(171, 22)
         Me.AsmWordValuesComboBox.TabIndex = 264
         '
-        'Label7
+        'WDLabel
         '
-        Me.Label7.Location = New System.Drawing.Point(3, 49)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(110, 22)
-        Me.Label7.TabIndex = 251
-        Me.Label7.Text = "Asm Word:"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.WDLabel.Location = New System.Drawing.Point(5, 49)
+        Me.WDLabel.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.WDLabel.Name = "WDLabel"
+        Me.WDLabel.Size = New System.Drawing.Size(110, 22)
+        Me.WDLabel.TabIndex = 251
+        Me.WDLabel.Text = "Word Data:"
+        Me.WDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'AsmByteValuesComboBox
         '
@@ -453,7 +475,7 @@ Partial Class ConfigDialog
         Me.BASICGroupBox.Controls.Add(Me.IntervalLabel)
         Me.BASICGroupBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.BASICGroupBox.LineColor = System.Drawing.Color.DimGray
-        Me.BASICGroupBox.Location = New System.Drawing.Point(17, 327)
+        Me.BASICGroupBox.Location = New System.Drawing.Point(17, 347)
         Me.BASICGroupBox.Name = "BASICGroupBox"
         Me.BASICGroupBox.Padding = New System.Windows.Forms.Padding(0)
         Me.BASICGroupBox.Size = New System.Drawing.Size(559, 109)
@@ -486,7 +508,7 @@ Partial Class ConfigDialog
         Me.RemoveZerosCheck.BackColor = System.Drawing.Color.Transparent
         Me.RemoveZerosCheck.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.RemoveZerosCheck.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RemoveZerosCheck.Location = New System.Drawing.Point(418, 78)
+        Me.RemoveZerosCheck.Location = New System.Drawing.Point(380, 78)
         Me.RemoveZerosCheck.Name = "RemoveZerosCheck"
         Me.RemoveZerosCheck.Size = New System.Drawing.Size(125, 22)
         Me.RemoveZerosCheck.TabIndex = 258
@@ -583,7 +605,7 @@ Partial Class ConfigDialog
         Me.BottonsPanel.Controls.Add(Me.Ok_Button)
         Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
         Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottonsPanel.Location = New System.Drawing.Point(0, 534)
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 554)
         Me.BottonsPanel.Name = "BottonsPanel"
         Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
         Me.BottonsPanel.Size = New System.Drawing.Size(1227, 44)
@@ -651,9 +673,9 @@ Partial Class ConfigDialog
         Me.MiscPanel.Controls.Add(Me.DefaultColorsGroupBox)
         Me.MiscPanel.Controls.Add(Me.ProjectInfoGroupBox)
         Me.MiscPanel.Controls.Add(Me.OutputdataColorsGroupBox)
-        Me.MiscPanel.Location = New System.Drawing.Point(12, 82)
+        Me.MiscPanel.Location = New System.Drawing.Point(12, 72)
         Me.MiscPanel.Name = "MiscPanel"
-        Me.MiscPanel.Size = New System.Drawing.Size(592, 443)
+        Me.MiscPanel.Size = New System.Drawing.Size(592, 470)
         Me.MiscPanel.TabIndex = 259
         '
         'DefaultColorsGroupBox
@@ -775,9 +797,9 @@ Partial Class ConfigDialog
         Me.SourceCodePanel.Controls.Add(Me.DataLabelTextBox)
         Me.SourceCodePanel.Controls.Add(Me.NumberSystemCombo)
         Me.SourceCodePanel.Controls.Add(Me.SizeLineComboBox)
-        Me.SourceCodePanel.Location = New System.Drawing.Point(621, 82)
+        Me.SourceCodePanel.Location = New System.Drawing.Point(621, 72)
         Me.SourceCodePanel.Name = "SourceCodePanel"
-        Me.SourceCodePanel.Size = New System.Drawing.Size(592, 443)
+        Me.SourceCodePanel.Size = New System.Drawing.Size(592, 470)
         Me.SourceCodePanel.TabIndex = 260
         '
         'PiXelST_HorizontalTab1
@@ -785,11 +807,11 @@ Partial Class ConfigDialog
         Me.PiXelST_HorizontalTab1.BackColor = System.Drawing.Color.Gainsboro
         Me.PiXelST_HorizontalTab1.ForeColor = System.Drawing.Color.WhiteSmoke
         Me.PiXelST_HorizontalTab1.Items = New String() {"Miscelanea", "Source Code"}
-        Me.PiXelST_HorizontalTab1.Location = New System.Drawing.Point(12, 48)
+        Me.PiXelST_HorizontalTab1.Location = New System.Drawing.Point(12, 38)
         Me.PiXelST_HorizontalTab1.Margin = New System.Windows.Forms.Padding(0)
         Me.PiXelST_HorizontalTab1.MinimumSize = New System.Drawing.Size(256, 32)
         Me.PiXelST_HorizontalTab1.Name = "PiXelST_HorizontalTab1"
-        Me.PiXelST_HorizontalTab1.Padding = New System.Windows.Forms.Padding(2, 4, 0, 0)
+        Me.PiXelST_HorizontalTab1.Padding = New System.Windows.Forms.Padding(0, 4, 2, 0)
         Me.PiXelST_HorizontalTab1.Size = New System.Drawing.Size(592, 34)
         Me.PiXelST_HorizontalTab1.TabIndex = 261
         Me.PiXelST_HorizontalTab1.TabStop = False
@@ -800,7 +822,7 @@ Partial Class ConfigDialog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(1227, 578)
+        Me.ClientSize = New System.Drawing.Size(1227, 598)
         Me.ControlBox = False
         Me.Controls.Add(Me.PiXelST_HorizontalTab1)
         Me.Controls.Add(Me.SourceCodePanel)
@@ -837,16 +859,16 @@ Partial Class ConfigDialog
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents ColorDialog1 As ColorDialog
     Friend WithEvents CGroupBox As piXelST_GroupBox
-    Friend WithEvents CByteDataTextBox As TextBox
+    Friend WithEvents UnsignedByteDefTextBox As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents AssemblerGroupBox As piXelST_GroupBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents BDLabel As Label
     Friend WithEvents arrow2PictureBox As PictureBox
     Friend WithEvents AsmByteDataTextBox As TextBox
     Friend WithEvents arrow1PictureBox As PictureBox
     Friend WithEvents AsmWordDataTextBox As TextBox
     Friend WithEvents AsmWordValuesComboBox As ComboBox
-    Friend WithEvents Label7 As Label
+    Friend WithEvents WDLabel As Label
     Friend WithEvents AsmByteValuesComboBox As ComboBox
     Friend WithEvents Label21 As Label
     Friend WithEvents CompressTypeComboBox As ComboBox
@@ -893,4 +915,6 @@ Partial Class ConfigDialog
     Friend WithEvents ColorConfigsComboBox As ComboBox
     Friend WithEvents SourceCodePanel As Panel
     Friend WithEvents PiXelST_HorizontalTab1 As piXelST_HorizontalTab
+    Friend WithEvents SignedByteDefTextBox As TextBox
+    Friend WithEvents Label1 As Label
 End Class

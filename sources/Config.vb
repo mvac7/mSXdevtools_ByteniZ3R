@@ -55,7 +55,9 @@ Public Class Config
     Public Shadows Const def_CodeCompressType As Integer = 0  ' RAW
     Public Shadows Const def_AsmDataByteCommand As String = "DB"
     Public Shadows Const def_AsmDataWordCommand As String = "DW"
-    Public Shadows Const def_CdataType As String = "const char"
+    Public Shadows Const def_C_UnsignedByteTypeDef As String = "const char"
+    Public Shadows Const def_C_SignedByteTypeDef As String = "const signed char"
+
     Public Shadows Const def_DataLabel As String = "DATA"
 
     Public Shadows Const def_BASIC_CommentInstruction As String = "REM"
@@ -97,7 +99,8 @@ Public Class Config
     Public AsmDataByteCommand As String
     Public AsmDataWordCommand As String
 
-    Public CdataType As String
+    Public C_UnsignedByteTypeDef As String
+    Public C_SignedByteTypeDef As String
 
     Public BASIC_DataInstruction As String
     Public BASIC_CommentInstruction As String
@@ -315,11 +318,18 @@ Public Class Config
                             Me.AsmDataWordCommand = aNode.InnerText
                         End If
 
-                        aNode = groupNode.SelectSingleNode("CdataType")
+                        aNode = groupNode.SelectSingleNode("CUnsignedByteTypeDef")
                         If aNode Is Nothing Then
-                            Me.CdataType = def_CdataType
+                            Me.C_UnsignedByteTypeDef = def_C_UnsignedByteTypeDef
                         Else
-                            Me.CdataType = aNode.InnerText
+                            Me.C_UnsignedByteTypeDef = aNode.InnerText
+                        End If
+
+                        aNode = groupNode.SelectSingleNode("CSignedByteTypeDef")
+                        If aNode Is Nothing Then
+                            Me.C_SignedByteTypeDef = def_C_SignedByteTypeDef
+                        Else
+                            Me.C_SignedByteTypeDef = aNode.InnerText
                         End If
 
 
@@ -732,8 +742,13 @@ Public Class Config
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
-            anElement = aXmlDoc.CreateElement("CdataType")
-            txtElement = aXmlDoc.CreateTextNode(Me.CdataType)
+            anElement = aXmlDoc.CreateElement("CUnsignedByteTypeDef")
+            txtElement = aXmlDoc.CreateTextNode(Me.C_UnsignedByteTypeDef)
+            anElement.AppendChild(txtElement)
+            groupElement.AppendChild(anElement)
+
+            anElement = aXmlDoc.CreateElement("CSignedByteTypeDef")
+            txtElement = aXmlDoc.CreateTextNode(Me.C_SignedByteTypeDef)
             anElement.AppendChild(txtElement)
             groupElement.AppendChild(anElement)
 
@@ -851,7 +866,8 @@ Public Class Config
         Me.AsmDataByteCommand = def_AsmDataByteCommand
         Me.AsmDataWordCommand = def_AsmDataWordCommand
 
-        Me.CdataType = def_CdataType
+        Me.C_UnsignedByteTypeDef = def_C_UnsignedByteTypeDef
+        Me.C_SignedByteTypeDef = def_C_SignedByteTypeDef
 
         Me.BASIC_DataInstruction = def_BASIC_DataInstruction
         Me.BASIC_CommentInstruction = def_BASIC_CommentInstruction

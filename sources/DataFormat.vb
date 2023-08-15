@@ -68,6 +68,8 @@
 
         Dim sourceCode As String = ""
 
+        Dim CTypeDef As String
+
         'Dim compressData As New Compress
 
         Dim newComments As New ArrayList
@@ -92,7 +94,14 @@
 
         Select Case _codeFormat.ProgrammingLanguage
             Case CodeInfo.PROGRAMMING_LANGUAGE.C
-                sourceCode = GetCcode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.CdataType, newComments)
+
+                If TypeOf tmpData(0) Is SByte Then
+                    CTypeDef = _codeFormat.C_SignedByteTypeDef
+                Else
+                    CTypeDef = _codeFormat.C_UnsignedByteTypeDef
+                End If
+
+                sourceCode = GetCcode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, CTypeDef, newComments)
 
             Case CodeInfo.PROGRAMMING_LANGUAGE.ASSEMBLER
                 sourceCode = GetAssemblerCode(tmpData, name, _codeFormat.LineSize, _codeFormat.NumeralSystem, _codeFormat.AsmDataByteCommand, newComments)

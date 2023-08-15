@@ -169,11 +169,20 @@ Public Class DataTypeInputControl
 
 
 
-    Public ReadOnly Property CdataType As String
+    Public ReadOnly Property C_UnsignedByteTypeDef As String
         Get
-            Return Me.CdataTypeTextBox.Text
+            Return Me.UnsignedByteDefTextBox.Text
         End Get
     End Property
+
+
+
+    Public ReadOnly Property C_SignedByteTypeDef As String
+        Get
+            Return Me.SignedByteDefTextBox.Text
+        End Get
+    End Property
+
 
 
     Public Property AsmDataByteCommand As String
@@ -233,7 +242,7 @@ Public Class DataTypeInputControl
 
     Public Property FieldName As String
         Get
-            If ProgrammingLanguage = CodeInfo.Programming_Language.ASSEMBLER Then
+            If ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.ASSEMBLER Then
                 Return AsmFieldNameTextBox.Text
             Else
                 Return CesFieldNameTextBox.Text
@@ -326,7 +335,8 @@ Public Class DataTypeInputControl
         Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
         Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
 
-        Me.CdataTypeTextBox.Text = Me.AppConfig.CdataType
+        Me.UnsignedByteDefTextBox.Text = Me.AppConfig.C_UnsignedByteTypeDef
+        Me.SignedByteDefTextBox.Text = Me.AppConfig.C_SignedByteTypeDef
 
         Me.LineNumberText.Text = CStr(Me.AppConfig.BASIC_initLine)
         Me.IntervalText.Text = CStr(Me.AppConfig.BASIC_incLines)
@@ -349,7 +359,7 @@ Public Class DataTypeInputControl
         AddHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
         AddHandler Me.CompressComboBox.SelectedIndexChanged, AddressOf CompressComboBox_SelectedIndexChanged
 
-        AddHandler Me.CdataTypeTextBox.TextChanged, AddressOf CdataTypeTextBox_TextChanged
+        AddHandler Me.UnsignedByteDefTextBox.TextChanged, AddressOf CdataTypeTextBox_TextChanged
         AddHandler Me.AsmByteDataTextBox.TextChanged, AddressOf AsmCommandTextBox_TextChanged
         AddHandler Me.AsmWordDataTextBox.TextChanged, AddressOf AsmWordDataTextBox_TextChanged
 
@@ -361,7 +371,7 @@ Public Class DataTypeInputControl
         AddHandler Me.AsmByteDataTextBox.TextChanged, AddressOf Text_TextChanged
         AddHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
 
-        AddHandler Me.CdataTypeTextBox.TextChanged, AddressOf Text_TextChanged
+        AddHandler Me.UnsignedByteDefTextBox.TextChanged, AddressOf Text_TextChanged
 
     End Sub
 
@@ -374,7 +384,7 @@ Public Class DataTypeInputControl
         RemoveHandler Me.SizeLineComboBox.SelectedIndexChanged, AddressOf SizeLineComboBox_SelectedIndexChanged
         RemoveHandler Me.CompressComboBox.SelectedIndexChanged, AddressOf CompressComboBox_SelectedIndexChanged
 
-        RemoveHandler Me.CdataTypeTextBox.TextChanged, AddressOf CdataTypeTextBox_TextChanged
+        RemoveHandler Me.UnsignedByteDefTextBox.TextChanged, AddressOf CdataTypeTextBox_TextChanged
         RemoveHandler Me.AsmByteDataTextBox.TextChanged, AddressOf AsmCommandTextBox_TextChanged
         RemoveHandler Me.AsmWordDataTextBox.TextChanged, AddressOf AsmWordDataTextBox_TextChanged
 
@@ -386,7 +396,7 @@ Public Class DataTypeInputControl
         RemoveHandler Me.AsmByteDataTextBox.TextChanged, AddressOf Text_TextChanged
         RemoveHandler Me.AsmWordDataTextBox.TextChanged, AddressOf Text_TextChanged
 
-        RemoveHandler Me.CdataTypeTextBox.TextChanged, AddressOf Text_TextChanged
+        RemoveHandler Me.UnsignedByteDefTextBox.TextChanged, AddressOf Text_TextChanged
 
     End Sub
 
@@ -720,7 +730,8 @@ Public Class DataTypeInputControl
         aCodeFormat.AsmDataByteCommand = Me.AsmDataByteCommand
         aCodeFormat.AsmDataWordCommand = Me.AsmDataWordCommand
 
-        aCodeFormat.CdataType = Me.CdataType
+        aCodeFormat.C_UnsignedByteTypeDef = Me.C_UnsignedByteTypeDef
+        aCodeFormat.C_SignedByteTypeDef = Me.C_SignedByteTypeDef
 
         aCodeFormat.BASIC_DataInstruction = Me.AppConfig.BASIC_DataInstruction
         aCodeFormat.BASIC_CommentInstruction = Me.AppConfig.BASIC_CommentInstruction
