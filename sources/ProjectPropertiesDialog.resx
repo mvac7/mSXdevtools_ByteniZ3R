@@ -117,26 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="OK_Button.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAHYAAAAcCAYAAAC0yEstAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6
-        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAqUlE
-        QVRoQ+3aMQqAMBBE0ZzUc3hY77KKYgjBmLWc8RevcSTNB0FIiYjTsq0BfXdPwpqpYZ9G6COsKcKaIqwp
-        wpoirCnZsOX4U3sze7/f3RDWlFzYWaDRPnqe3dUQNrmrIWxyV0PY5K7mt2FH2rOUEbbTnqWMT3FyV0PY
-        5K5GLuytD9Gbvf91V0PY5K5GNizeEdYUYU0R1hRhTRHWFBfGzdQL44T1cvWMsgPDMoRgH5NOsAAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
-  <data name="Cancel_Button.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAF4AAAAYCAYAAABz00ofAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6
-        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA60lE
-        QVRoQ+2Zuw7DMAwD/dnt17tBEwWGYEa2/FBRcLhFpBTkhmZoyjmfvF+ZbODyTfG7ucXXQrIcig+C4oOg
-        +CDc4tPxeXiitvNPjL4vxTsZfd9u8d4H6j1Nb1/Qe0KtWzK7r3MLip/U17nFNvEIdA/NrRzNEVYf5Wje
-        CsUbfZSjeSs/81MjoH556ylHc4TuW6C98mYLFK/6FmivvNnCcvFWH+VobuVojujtC949geI7+4J3T+gW
-        L+gHa3r7AuqXtzy5ZnZf5xYUP6mvcwu3eDIGxQdB8UFQfBDHV+GiEpIF3H92U/xevr5z+gBhg74bRxKc
-        WwAAAABJRU5ErkJggg==
-</value>
-  </data>
 </root>

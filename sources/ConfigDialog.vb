@@ -44,9 +44,12 @@ Public Class ConfigDialog
 
 
     Public Shadows Enum PALETTE_TYPE As Integer
-        LIGHT_SIDE_FORCE
+        LIGHT_SIDE_4TH
         DARK_KNIGHT
-        MSX_BLUE
+        TMS9918_BLUE
+        SIXTYFOUR_BLUE
+        CGA_PALETTE0
+        CGA_PALETTE1
         GREEN_BOY
         NUTCILLA
         GREEN_PHOSPHOR
@@ -219,7 +222,7 @@ Public Class ConfigDialog
 
     Private Sub SetColor(ByRef aButton As Button, ByVal newColor As Color)
         aButton.BackColor = newColor
-        aButton.Text = newColor.Name
+        aButton.Text = newColor.Name.ToUpper
         If newColor.GetBrightness > 0.7 Then
             aButton.ForeColor = Color.Black
         Else
@@ -237,25 +240,13 @@ Public Class ConfigDialog
 
 
 
-    Private Sub AsmByteValuesComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmByteValuesComboBox.SelectedIndexChanged
-        AsmByteDataTextBox.Text = AsmByteValuesComboBox.SelectedItem
-    End Sub
-
-
-
-    Private Sub AsmWordComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmWordValuesComboBox.SelectedIndexChanged
-        AsmWordDataTextBox.Text = AsmWordValuesComboBox.SelectedItem
-    End Sub
-
-
-
     Private Sub ColorConfigsComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ColorConfigsComboBox.SelectedIndexChanged
 
         Select Case ColorConfigsComboBox.SelectedIndex
 
             Case PALETTE_TYPE.NUTCILLA
-                SetColor(Me.OutputINKcolorButton, Color.White) 'FromArgb(255, 255, 255)
-                SetColor(Me.OutputBGcolorButton, Color.FromArgb(&H6C, &H3B, &H1E)) '6c3b1e
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(&HB8, &H98, &H87))
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(&H6C, &H3B, &H1E))
 
             Case PALETTE_TYPE.DARK_KNIGHT
                 SetColor(Me.OutputINKcolorButton, Color.WhiteSmoke)
@@ -269,21 +260,57 @@ Public Class ConfigDialog
                 SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 170, 16)) '255, 227, 52
                 SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 85, 20, 0))
 
-            Case PALETTE_TYPE.MSX_BLUE
-                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 255, 255))   'White
-                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 84, 85, 237))      'TMS9918A Dark Blue
+            Case PALETTE_TYPE.TMS9918_BLUE
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 255, 255, 255)) 'Light Blue
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 84, 85, 237))    'Dark Blue
+
+            Case PALETTE_TYPE.SIXTYFOUR_BLUE
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, &H88, &H7E, &HCB)) 'Light Blue
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, &H50, &H45, &H9B))  'Dark Blue
+
+            Case PALETTE_TYPE.CGA_PALETTE0
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, &HFF, &H55, &H55))  ' green #55FF55 ; red #FF5555 ; yellow #FFFF55
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, &H55, &HFF, &H55))   '
+
+            Case PALETTE_TYPE.CGA_PALETTE1
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(&H55, &HFF, &HFF)) '#FF55FF
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(&HFF, &H55, &HFF)) '#55FFFF
 
             Case PALETTE_TYPE.GREEN_BOY
-                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 15, 56, 15))    ' light green
-                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 202, 220, 159))  ' dark green
+                SetColor(Me.OutputINKcolorButton, Color.FromArgb(255, 15, 56, 15))    'Light green
+                SetColor(Me.OutputBGcolorButton, Color.FromArgb(255, 202, 220, 159))  'Dark green
 
             Case Else
-                ' default PALETTE_TYPE.LIGHT_SIDE_FORCE
+                ' default PALETTE_TYPE.LIGHT_SIDE_4TH
                 SetColor(Me.OutputINKcolorButton, Me.AppConfig.def_Color_OUTPUT_INK)
                 SetColor(Me.OutputBGcolorButton, Me.AppConfig.def_Color_OUTPUT_BG)
 
         End Select
 
+    End Sub
+
+
+
+    Private Sub SwapColorsButton_Click(sender As Object, e As EventArgs) Handles SwapColorsButton.Click
+
+        Dim oldInkColor As Color = Me.OutputINKcolorButton.BackColor
+        Dim oldBGColor As Color = Me.OutputBGcolorButton.BackColor
+
+        SetColor(Me.OutputINKcolorButton, oldBGColor)
+        SetColor(Me.OutputBGcolorButton, oldInkColor)
+
+    End Sub
+
+
+
+    Private Sub AsmByteValuesComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmByteValuesComboBox.SelectedIndexChanged
+        AsmByteDataTextBox.Text = AsmByteValuesComboBox.SelectedItem
+    End Sub
+
+
+
+    Private Sub AsmWordComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AsmWordValuesComboBox.SelectedIndexChanged
+        AsmWordDataTextBox.Text = AsmWordValuesComboBox.SelectedItem
     End Sub
 
 
@@ -511,5 +538,6 @@ Public Class ConfigDialog
         Me.SourceCodePanel.Visible = Not panelState
 
     End Sub
+
 
 End Class

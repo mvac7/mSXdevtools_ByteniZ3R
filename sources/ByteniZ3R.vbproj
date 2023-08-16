@@ -167,12 +167,6 @@
     </Compile>
     <Compile Include="ProjectFileItem.vb" />
     <Compile Include="ProjectInfo.vb" />
-    <Compile Include="ProjectInfoUserControl.designer.vb">
-      <DependentUpon>ProjectInfoUserControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectInfoUserControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ProjectPropertiesDialog.designer.vb">
       <DependentUpon>ProjectPropertiesDialog.vb</DependentUpon>
     </Compile>
@@ -226,9 +220,6 @@
     <EmbeddedResource Include="ProgressForm.resx">
       <DependentUpon>ProgressForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProjectInfoUserControl.resx">
-      <DependentUpon>ProjectInfoUserControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ProjectPropertiesDialog.resx">
       <DependentUpon>ProjectPropertiesDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
+    <None Include="Resources\ico_swap02_32px.png" />
     <None Include="Resources\signed_display_ruler.png" />
     <None Include="Resources\unsigned_display_ruler.png" />
     <None Include="Resources\ico_reload_16px.png" />

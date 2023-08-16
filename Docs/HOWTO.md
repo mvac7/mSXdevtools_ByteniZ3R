@@ -88,10 +88,11 @@ For run, execute `ByteniZ3R`
 - 8bits signed or unsigned values
 - 9 waveform generators: Sine, 1/2 Sine Upper, 1/2 Sine Lower, Cosine, Square, Triangle, Sawtooth, Reverse Sawtooth and Noise.
 - Maximum and minimum adjustment.
-- Phase and Frequency adjustmens.
+- Length, Phase and Frequency adjustmens.
 - BASIC, C or Assembler output.
 - Supports several number systems and data formats (decimal, hexadecimal or binary)
 - Edit info project (Name, Version, Author, Group, and Description).
+- Application Settings. Set default source code format and colors.
 - Save/Load project files.
 - Save output to source code 
 - Save output to binary file
