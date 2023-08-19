@@ -126,13 +126,14 @@ At the top of the main window we have the project menu, with the following optio
 
 | **Attention!** |
 | :---           |
-| You can also load a project by dragging and dropping the file to the main window. |
+| You can also load a project by Drag & Drop the file to the main window. |
    
 - `Save Project` Save the configuration of a project (Project info, Waveform and Source code format).  
+- `Save As Project` Save the project with another file name.
 - `Edit Project info` Allows you to edit the name, version, group, author and description of the project.
 - `Application Settings` Shows a window where you can edit the colors of the graph and the data output box; and configure the default format of the source code.
-- `Help` Shows a dialog with the User Guide.
-- `About` Shows a dialog with application version and license information.
+- `Help` Shows a window with the User Guide.
+- `About` Shows a window with application version and license information.
 
 <br/>
 
@@ -168,9 +169,9 @@ Supports various number systems and formats for different compilers or assembler
 
 Name              | Example     | Language
 ----------------- | ----------- | -----------------------
-decimal     n     |   15        | Assembler, C or BASIC
-decimal     nnn   |  015        | Assembler, C or BASIC
-decimal     nnnd  |  015d       | Assembler
+decimal n         |   15        | Assembler, C or BASIC
+decimal nnn       |  015        | Assembler, C or BASIC
+decimal nnnd      |  015d       | Assembler
 hexadecimal FF    |   0F        | BASIC           
 hexadecimal $FF   |  $0F        | Assembler
 hexadecimal #FF   |  #0F        | Assembler

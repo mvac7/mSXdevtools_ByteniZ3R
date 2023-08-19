@@ -48,10 +48,10 @@ Partial Class DataTypeInputControl
         Me.AsmFieldNameTextBox = New System.Windows.Forms.TextBox()
         Me.AsmFieldNameLabel = New System.Windows.Forms.Label()
         Me.CesPanel = New System.Windows.Forms.Panel()
-        Me.CesFieldNameTextBox = New System.Windows.Forms.TextBox()
-        Me.CesFieldNameLabel = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SignedByteDefTextBox = New System.Windows.Forms.TextBox()
+        Me.CesFieldNameTextBox = New System.Windows.Forms.TextBox()
+        Me.CesFieldNameLabel = New System.Windows.Forms.Label()
         Me.BasicPanel.SuspendLayout()
         Me.AssemblerPanel.SuspendLayout()
         Me.CesPanel.SuspendLayout()
@@ -254,7 +254,7 @@ Partial Class DataTypeInputControl
         Me.NumberSystemCombo.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NumberSystemCombo.ForeColor = System.Drawing.Color.Black
         Me.NumberSystemCombo.FormattingEnabled = True
-        Me.NumberSystemCombo.Items.AddRange(New Object() {"dec n", "dec nnn", "dec nnnd", "hex FF", "hex $FF", "hex #FF", "hex 0FFh", "hex 0xFF", "hex &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
+        Me.NumberSystemCombo.Items.AddRange(New Object() {"decimal n", "decimal nnn", "decimal nnnd", "hexadecimal FF", "hexadecimal $FF", "hexadecimal #FF", "hexadecimal 0FFh", "hexadecimal 0xFF", "hexadecimal &HFF", "binary 00000000", "binary 00000000b", "binary %00000000", "binary 0b00000000", "binary &B00000000"})
         Me.NumberSystemCombo.Location = New System.Drawing.Point(101, 30)
         Me.NumberSystemCombo.Name = "NumberSystemCombo"
         Me.NumberSystemCombo.Size = New System.Drawing.Size(150, 22)
@@ -380,28 +380,6 @@ Partial Class DataTypeInputControl
         Me.CesPanel.Size = New System.Drawing.Size(241, 111)
         Me.CesPanel.TabIndex = 264
         '
-        'CesFieldNameTextBox
-        '
-        Me.CesFieldNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.CesFieldNameTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CesFieldNameTextBox.ForeColor = System.Drawing.Color.Black
-        Me.CesFieldNameTextBox.Location = New System.Drawing.Point(107, 7)
-        Me.CesFieldNameTextBox.Name = "CesFieldNameTextBox"
-        Me.CesFieldNameTextBox.Size = New System.Drawing.Size(120, 22)
-        Me.CesFieldNameTextBox.TabIndex = 275
-        Me.CesFieldNameTextBox.Text = "DATA"
-        '
-        'CesFieldNameLabel
-        '
-        Me.CesFieldNameLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CesFieldNameLabel.ForeColor = System.Drawing.Color.Black
-        Me.CesFieldNameLabel.Location = New System.Drawing.Point(10, 7)
-        Me.CesFieldNameLabel.Name = "CesFieldNameLabel"
-        Me.CesFieldNameLabel.Size = New System.Drawing.Size(94, 21)
-        Me.CesFieldNameLabel.TabIndex = 274
-        Me.CesFieldNameLabel.Text = "Field name:"
-        Me.CesFieldNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -423,6 +401,28 @@ Partial Class DataTypeInputControl
         Me.SignedByteDefTextBox.Name = "SignedByteDefTextBox"
         Me.SignedByteDefTextBox.Size = New System.Drawing.Size(120, 22)
         Me.SignedByteDefTextBox.TabIndex = 276
+        '
+        'CesFieldNameTextBox
+        '
+        Me.CesFieldNameTextBox.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.CesFieldNameTextBox.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CesFieldNameTextBox.ForeColor = System.Drawing.Color.Black
+        Me.CesFieldNameTextBox.Location = New System.Drawing.Point(107, 7)
+        Me.CesFieldNameTextBox.Name = "CesFieldNameTextBox"
+        Me.CesFieldNameTextBox.Size = New System.Drawing.Size(120, 22)
+        Me.CesFieldNameTextBox.TabIndex = 275
+        Me.CesFieldNameTextBox.Text = "DATA"
+        '
+        'CesFieldNameLabel
+        '
+        Me.CesFieldNameLabel.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CesFieldNameLabel.ForeColor = System.Drawing.Color.Black
+        Me.CesFieldNameLabel.Location = New System.Drawing.Point(10, 7)
+        Me.CesFieldNameLabel.Name = "CesFieldNameLabel"
+        Me.CesFieldNameLabel.Size = New System.Drawing.Size(94, 21)
+        Me.CesFieldNameLabel.TabIndex = 274
+        Me.CesFieldNameLabel.Text = "Field name:"
+        Me.CesFieldNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'DataTypeInputControl
         '

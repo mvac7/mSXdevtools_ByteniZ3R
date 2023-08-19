@@ -373,15 +373,27 @@
 
         Dim outputData As String = "0"
 
-        Dim decSize As Integer = 3
-        Dim hexSize As Integer = 2
-        Dim binSize As Integer = 8
+        'Dim decValue As SByte
+
+        Dim decSize As Integer
+        Dim hexSize As Integer
+        Dim binSize As Integer
 
 
         If TypeOf value Is Short Then
             decSize = 5
             hexSize = 4
             binSize = 16
+        Else
+            decSize = 3
+            hexSize = 2
+            binSize = 8
+            'If TypeOf value Is SByte Then
+            '    decValue = CSByte(value)
+            '    If decValue < -99 Then
+            '        decSize = 4
+            '    End If
+            'End If
         End If
 
 
@@ -391,43 +403,60 @@
                 outputData = CStr(value)
 
             Case CodeInfo.DataType.DECIMAL_nnn
-                outputData = CStr(value).PadLeft(decSize, "0"c)
+                If TypeOf value Is SByte Then
+                    outputData = CStr(value).PadLeft(4, " "c)
+                Else
+                    outputData = CStr(value).PadLeft(decSize, "0"c)
+                End If
+
 
             Case CodeInfo.DataType.DECIMAL_nnnd
-                outputData = CStr(value).PadLeft(decSize, "0"c) + "d"
+                If TypeOf value Is SByte Then
+                    outputData = CStr(value).PadLeft(4, " "c) + "d"
+                Else
+                    outputData = CStr(value).PadLeft(decSize, "0"c) + "d"
+                End If
 
-            Case CodeInfo.DataType.HEXADECIMAL_nn
+            Case CodeInfo.DataType.HEXADECIMAL_nn To CodeInfo.DataType.HEXADECIMAL_BASIC
                 outputData = Hex(value).PadLeft(hexSize, "0"c)
 
-            Case CodeInfo.DataType.HEXADECIMAL_0nnh
-                outputData = "0" + Hex(value).PadLeft(hexSize, "0"c) + "h"
+                Select Case format
+                    Case CodeInfo.DataType.HEXADECIMAL_Snn
+                        outputData = "$" + outputData
 
-            Case CodeInfo.DataType.HEXADECIMAL_C
-                outputData = "0x" + Hex(value).PadLeft(hexSize, "0"c)
+                    Case CodeInfo.DataType.HEXADECIMAL_4nn
+                        outputData = "#" + outputData
 
-            Case CodeInfo.DataType.HEXADECIMAL_4nn
-                outputData = "#" + Hex(value).PadLeft(hexSize, "0"c)
+                    Case CodeInfo.DataType.HEXADECIMAL_0nnh
+                        outputData = "0" + outputData + "h"
 
-            Case CodeInfo.DataType.HEXADECIMAL_Snn
-                outputData = "$" + Hex(value).PadLeft(hexSize, "0"c)
+                    Case CodeInfo.DataType.HEXADECIMAL_C
+                        outputData = "0x" + outputData
 
-            Case CodeInfo.DataType.HEXADECIMAL_BASIC
-                outputData = "&H" + Hex(value).PadLeft(hexSize, "0"c)
+                    Case CodeInfo.DataType.HEXADECIMAL_BASIC
+                        outputData = "&H" + outputData
 
-            Case CodeInfo.DataType.BINARY_n
+                End Select
+
+
+            Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+
                 outputData = Convert.ToString(value, 2).PadLeft(binSize, "0"c)
+                outputData = outputData.Substring(outputData.Length - binSize)
 
-            Case CodeInfo.DataType.BINARY_nb
-                outputData = Convert.ToString(value, 2).PadLeft(binSize, "0"c) + "b"
+                Select Case format
+                    Case CodeInfo.DataType.BINARY_nb
+                        outputData += "b"
 
-            Case CodeInfo.DataType.BINARY_percentn
-                outputData = "%" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
+                    Case CodeInfo.DataType.BINARY_percentn
+                        outputData = "%" + outputData
 
-            Case CodeInfo.DataType.BINARY_C
-                outputData = "0b" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
+                    Case CodeInfo.DataType.BINARY_C
+                        outputData = "0b" + outputData
 
-            Case CodeInfo.DataType.BINARY_BASIC
-                outputData = "&B" + Convert.ToString(value, 2).PadLeft(binSize, "0"c)
+                    Case CodeInfo.DataType.BINARY_BASIC
+                        outputData = "&B" + outputData
+                End Select
 
         End Select
 

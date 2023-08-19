@@ -1,0 +1,9 @@
+<msxdevtools app="ByteniZ3R" version="0.9.26.0-beta">
+  <ByteniZ3R>
+    <info name="Test BASIC Signed byte" group="Reservoir Cats" version="1" author="BakMan" startDate="638279136000000000" lastUpdate="638279136000000000">
+      <description>for test ByteniZ3R v1</description>
+    </info>
+    <waveform type="0" HasSign="True" size="128" minValue="18" maxValue="235" phase="0" freq="1" />
+    <OutputConfig LanguageCode="0" NumeralSystem="1" LineSize="3" AsmDataByteCommand="DB" BASICinitLine="1000" BASIClineInterval="10" BASICremoveZeros="False" FieldName="DATA" />
+  </ByteniZ3R>
+</msxdevtools>

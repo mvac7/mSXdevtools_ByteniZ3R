@@ -114,8 +114,6 @@ Public Class MainForm
 
         SetDrawImage(WaveLengthTrackBar.Value)
 
-        AddHandlers()
-
         NewProject()
 
         GenerateData()
@@ -123,6 +121,8 @@ Public Class MainForm
         Application.DoEvents()
 
         WaveTypeComboBox.Focus()
+
+        AddHandlers()
 
     End Sub
 
@@ -198,9 +198,9 @@ Public Class MainForm
 
     Private Sub NewProject()
 
-        SetSingType(False)
-
         Me.WaveTypeComboBox.SelectedIndex = 0
+
+        SetSingType(False)
 
         SetWaveLength(256)
         'SetWaveState(0)
@@ -282,13 +282,13 @@ Public Class MainForm
 
         Dim infoData As String = ""
 
-        'Dim singLabel As String
+        Dim singLabel As String
 
-        'If Me.HasSign Then
-        '    singLabel = SignLabels(0)
-        'Else
-        '    singLabel = SignLabels(1)
-        'End If
+        If Me.HasSign Then
+            singLabel = SignLabels(0)
+        Else
+            singLabel = SignLabels(1)
+        End If
 
         If comments Is Nothing Then
             comments = New ArrayList
@@ -296,7 +296,7 @@ Public Class MainForm
 
         comments.Add(My.Application.Info.ProductName + " v" + My.Application.Info.Version.ToString + Version_Stage)
         comments.Add("Project: " + Me.Info.Name)
-        comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
+        'comments.Add(CStr(Me.WaveTypeComboBox.SelectedItem))
 
         Dim tableLength As Short = WaveLengthTrackBar.Value - 1
         Dim minValueRange As Short = CByte(WaveMinTrackBar.Value)
@@ -305,7 +305,7 @@ Public Class MainForm
         Dim freq As Integer = WaveFreqTrackBar.Value
         Dim phase As Integer = WavePhaseTrackBar.Value
 
-        infoData = SignComboBox.SelectedItem + " Length=" + CStr(tableLength + 1) + " Min=" + Me.WaveMinTextBox.Text + " Max=" + Me.WaveMaxTextBox.Text
+        infoData = "WF: " + CStr(Me.WaveTypeComboBox.SelectedItem).Replace(" ", "_") + " " + singLabel + " Length=" + CStr(tableLength + 1) + " Min=" + Me.WaveMinTextBox.Text + " Max=" + Me.WaveMaxTextBox.Text
 
         If Not Me.WaveTypeComboBox.SelectedIndex = WAVE_TYPE.NOISE Then
             infoData += " Phase=" + CStr(phase) + " Freq=" + CStr(freq)
@@ -1179,10 +1179,9 @@ Public Class MainForm
 
 
     Private Sub WaveMinTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveMinTextBox.Validating
-        If Not IsNumeric(Me.WaveMinTextBox.Text) Then
-            Me.WaveMinTextBox.Text = "0"
-        End If
-        ValidateMinValue(CInt(Me.WaveMinTextBox.Text))
+        Dim newValue As Integer
+        newValue = ValidateMinValue(Me.WaveMinTextBox.Text)
+        ShowWaveMinValue(newValue)
         GenerateData()
     End Sub
 
