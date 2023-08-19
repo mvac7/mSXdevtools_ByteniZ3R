@@ -1,8 +1,7 @@
 10 REM Test Signed values
 20 DEFINT A-Z
 30 DIM PATH(127)
-40 posX=120
-50 posY=88
+40 PX=120:PY=88
 50 SCREEN 1,2:REM screen 1 & sprites 16x16
 
 60 REM Set Array
@@ -10,42 +9,42 @@
 
 80 REM Set Sprite pattern
 90 BC=BASE(9):REM sprite pattern table
-100 FOR BC=BC TO BC+(2*32):READ A:VPOKE BC,A:NEXT
+100 FOR BC=BC TO BC+31:READ A:VPOKE BC,A:NEXT
 
 120 REM init sprite
-130 PUTSPRITE 0,(posX,posY),1,0
-140 IX=0:IY=90
-150 HL=BASE(8)::REM &H1B00 OAM in screen 1,2 & 3
+130 PUTSPRITE 0,(PX,PY),11,0
+140 HL=0:DE=90
+150 IX=BASE(8)::REM &H1B00 OAM in screen 1,2 & 3
 160 REM booocle
-170 VPOKE HL,posY+PATH(IY):REM Sprite Y
-180 VPOKE HL+1,posX+PATH(IX):REM Sprite X
-190 IX=IX+1
-200 IF IX>127 THEN IX=0
-210 IX=IX+1
-220 IF IX>127 THEN IX=0
-230 IF STRIN(0)=0 THEN 170
+170 VPOKE IX,PY+PATH(DE):REM Sprite Y
+180 VPOKE IX+1,PX+PATH(HL):REM Sprite X
+190 HL=HL+1
+200 IF HL>127 THEN HL=0
+210 DE=DE+1
+220 IF DE>127 THEN DE=0
+230 IF STRIG(0)=0 THEN 170
 240 END
 
-1000 REM ByteniZ3R devtool v0.9.26.0-beta
+1000 REM ByteniZ3R devtool v0.9.27.0-beta
 1010 REM Project: Test BASIC Signed byte
-1020 REM Sine
-1030 REM 8bits Signed Length=128 Min=-110 Max=107 Phase=0 Freq=1
-1040 DATA   -2,   4,   9,  15,  20,  25,  30,  35
-1050 DATA   40,  45,  50,  55,  59,  64,  68,  72
-1060 DATA   76,  79,  83,  86,  89,  92,  95,  97
-1070 DATA   99, 101, 103, 104, 105, 106, 107, 107
-1080 DATA  107, 107, 106, 106, 105, 103, 102, 100
-1090 DATA   98,  96,  93,  91,  88,  85,  81,  78
-1100 DATA   74,  70,  66,  61,  57,  52,  48,  43
-1110 DATA   38,  33,  28,  22,  17,  12,   7,   1
-1120 DATA   -4, -10, -15, -20, -25, -31, -36, -41
-1130 DATA  -46, -51, -55, -60, -64, -69, -73, -77
-1140 DATA  -81, -84, -88, -91, -94, -96, -99,-101
-1150 DATA -103,-105,-106,-108,-109,-109,-110,-110
-1160 DATA -110,-110,-109,-108,-107,-106,-104,-102
-1170 DATA -100, -98, -95, -92, -89, -86, -82, -79
-1180 DATA  -75, -71, -67, -62, -58, -53, -48, -43
-1190 DATA  -38, -33, -28, -23, -18, -12,  -7,  -2
+1020 REM WF: Sine Signed Length=128 Min=-64 Max=64 Phase=0 Freq=1
+1030 DATA    0,   3,   6,   9,  13,  16,  19,  22
+1040 DATA   25,  28,  30,  33,  36,  38,  41,  43
+1050 DATA   46,  48,  50,  52,  53,  55,  57,  58
+1060 DATA   59,  60,  61,  62,  63,  63,  64,  64
+1070 DATA   64,  64,  64,  63,  63,  62,  61,  60
+1080 DATA   59,  57,  56,  54,  53,  51,  49,  47
+1090 DATA   44,  42,  40,  37,  34,  32,  29,  26
+1100 DATA   23,  20,  17,  14,  11,   8,   5,   2
+1110 DATA   -2,  -5,  -8, -11, -14, -17, -20, -23
+1120 DATA  -26, -29, -32, -34, -37, -40, -42, -44
+1130 DATA  -47, -49, -51, -53, -54, -56, -57, -59
+1140 DATA  -60, -61, -62, -63, -63, -64, -64, -64
+1150 DATA  -64, -64, -63, -63, -62, -61, -60, -59
+1160 DATA  -58, -57, -55, -53, -52, -50, -48, -46
+1170 DATA  -43, -41, -38, -36, -33, -30, -28, -25
+1180 DATA  -22, -19, -16, -13,  -9,  -6,  -3,   0
+
 1400 REM -------------------------------
 1420 REM spriteSX devtool v1.0.7.0
 1430 REM Name=Frutas 16x_SSET_PAT
