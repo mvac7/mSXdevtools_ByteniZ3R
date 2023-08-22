@@ -1,21 +1,21 @@
-10 REM Test Signed values
+10 REM Test Signed values ------------
 20 DEFINT A-Z
 30 DIM PATH(127)
 40 PX=120:PY=88
 50 SCREEN 1,2:REM screen 1 & sprites 16x16
-
-60 REM Set Array
+54 REM ------------------------------
+60 REM Init Array
 70 FOR B=0 to 127:READ A:PATH(B)=A:NEXT
-
+74 REM ------------------------------
 80 REM Set Sprite pattern
 90 BC=BASE(9):REM sprite pattern table
 100 FOR BC=BC TO BC+31:READ A:VPOKE BC,A:NEXT
-
-120 REM init sprite
+110 REM ------------------------------
+120 REM init the sprite
 130 PUTSPRITE 0,(PX,PY),11,0
 140 HL=0:DE=90
 150 IX=BASE(8)::REM &H1B00 OAM in screen 1,2 & 3
-160 REM booocle
+160 REM move the sprite
 170 VPOKE IX,PY+PATH(DE):REM Sprite Y
 180 VPOKE IX+1,PX+PATH(HL):REM Sprite X
 190 HL=HL+1
@@ -24,7 +24,7 @@
 220 IF DE>127 THEN DE=0
 230 IF STRIG(0)=0 THEN 170
 240 END
-
+250 REM ------------------------------
 1000 REM ByteniZ3R devtool v0.9.27.0-beta
 1010 REM Project: Test BASIC Signed byte
 1020 REM WF: Sine Signed Length=128 Min=-64 Max=64 Phase=0 Freq=1
@@ -44,7 +44,6 @@
 1160 DATA  -58, -57, -55, -53, -52, -50, -48, -46
 1170 DATA  -43, -41, -38, -36, -33, -30, -28, -25
 1180 DATA  -22, -19, -16, -13,  -9,  -6,  -3,   0
-
 1400 REM -------------------------------
 1420 REM spriteSX devtool v1.0.7.0
 1430 REM Name=Frutas 16x_SSET_PAT

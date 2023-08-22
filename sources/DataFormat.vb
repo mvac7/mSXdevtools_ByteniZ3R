@@ -147,10 +147,13 @@
         Dim tableSize As Short
         tableSize = tmpData.Length - 1
 
-        Me.BASIC_Line = firstNumLine
+        Me.BASIC_Line = firstNumLine ' set first line for comments
         Me.BASIC_increment = incLine
 
         outputString = GetComments(comments, CodeInfo.Programming_Language.BASIC) 'GetBASICComments(comment, firstNumLine, incLine)
+
+
+        Me.BASIC_Line = ((firstNumLine / 10) * 10) + 10 ' set the first line for DATAs
 
         If itemsPerLine < 1 Then
             itemsPerLine = 32 ' maximum data per line
@@ -689,7 +692,7 @@
             Select Case format
                 Case CodeInfo.Programming_Language.BASIC
                     outputString += CStr(Me.BASIC_Line) + " " + Me.BASICcomment + " " + comment + vbNewLine
-                    Me.BASIC_Line += Me.BASIC_increment
+                    Me.BASIC_Line += 1 'Me.BASIC_increment
 
                 Case CodeInfo.Programming_Language.C
                     outputString += Comment_C + " " + comment + vbNewLine
@@ -722,7 +725,7 @@
         Select Case format
             Case CodeInfo.Programming_Language.BASIC
                 outputString += CStr(Me.BASIC_Line) + " " + Me.BASICcomment + " "
-                Me.BASIC_Line += Me.BASIC_increment
+                Me.BASIC_Line += 1 'Me.BASIC_increment
 
                 lineSize = 40 - outputString.Length
 

@@ -122,8 +122,6 @@ Public Class ConfigDialog
             Me.DataLabelTextBox.Text = Me.AppConfig.DataLabel
         End If
 
-        ShowLanguageStatus()
-
 
         Me.UserNameTextBox.Text = Me.AppConfig.Author
         Me.GroupNameTextBox.Text = Me.AppConfig.Group
@@ -372,66 +370,6 @@ Public Class ConfigDialog
 
     Private Sub CodeOutputComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles CodeOutputComboBox.SelectedIndexChanged
         AdjustValuesByLanguage()
-        ShowLanguageStatus()
-    End Sub
-
-
-
-    Private Sub ShowLanguageStatus()
-
-
-        If Me.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
-            DataLabelLabel.Enabled = False
-            DataLabelTextBox.Enabled = False
-        Else
-            DataLabelLabel.Enabled = True
-            DataLabelTextBox.Enabled = True
-        End If
-
-
-        Select Case Me.LanguageCode
-
-            Case CodeInfo.LANGUAGE_CODE.BASIC
-
-                AssemblerGroupBox.Enabled = False
-                CGroupBox.Enabled = False
-                BASICGroupBox.Enabled = True
-                Me.NumberSystemLabel.Enabled = True
-                Me.NumberSystemCombo.Enabled = True
-
-
-            Case CodeInfo.LANGUAGE_CODE.C
-
-                AssemblerGroupBox.Enabled = False
-                CGroupBox.Enabled = True
-                BASICGroupBox.Enabled = False
-                Me.NumberSystemLabel.Enabled = True
-                Me.NumberSystemCombo.Enabled = True
-
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC
-
-                SetAssemblerFieldsStatus(False)
-
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SJasm
-
-                SetAssemblerFieldsStatus(False)
-
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_asMSX, CodeInfo.LANGUAGE_CODE.ASSEMBLER_tniASM
-
-                SetAssemblerFieldsStatus(False)
-
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
-
-                SetAssemblerFieldsStatus(True)
-
-
-        End Select
-
-
     End Sub
 
 
@@ -455,15 +393,7 @@ Public Class ConfigDialog
                 End Select
 
 
-            Case CodeInfo.LANGUAGE_CODE.C
-
-                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_C
-
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC
-
-                Me.AsmByteDataTextBox.Text = ".db"
-                Me.AsmWordDataTextBox.Text = ".dw"
+            Case CodeInfo.LANGUAGE_CODE.C, CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC
 
                 Select Case Me.NumberSystemCombo.SelectedIndex
                     Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
@@ -474,32 +404,48 @@ Public Class ConfigDialog
                         Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_C
                 End Select
 
-
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SJasm
-
-                Me.AsmByteDataTextBox.Text = "<tab>DB"
-                Me.AsmWordDataTextBox.Text = "<tab>DW"
-
-                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+                If Me.LanguageCode = CodeInfo.LANGUAGE_CODE.ASSEMBLER_SDCC Then
+                    Me.AsmByteDataTextBox.Text = ".db"
+                    Me.AsmWordDataTextBox.Text = ".dw"
+                End If
 
 
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_asMSX, CodeInfo.LANGUAGE_CODE.ASSEMBLER_tniASM
+            Case Else
+                ' assembler
 
-                Me.AsmByteDataTextBox.Text = "DB"
-                Me.AsmWordDataTextBox.Text = "DW"
+                Select Case Me.NumberSystemCombo.SelectedIndex
+                    Case CodeInfo.DataType.DECIMAL_n To CodeInfo.DataType.DECIMAL_nnnd
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.DECIMAL_n
+                    Case CodeInfo.DataType.BINARY_n To CodeInfo.DataType.BINARY_BASIC
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.BINARY_nb
+                    Case Else
+                        Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+                End Select
 
-                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
+
+                Select Case Me.LanguageCode
+
+                    Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_SJasm
+                        Me.AsmByteDataTextBox.Text = "<tab>DB"
+                        Me.AsmWordDataTextBox.Text = "<tab>DW"
+
+                    Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_asMSX
+                        Me.AsmByteDataTextBox.Text = "DB"
+                        Me.AsmWordDataTextBox.Text = "DW"
+
+                    Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_tniASM
+                        Me.AsmByteDataTextBox.Text = "DB"
+                        Me.AsmWordDataTextBox.Text = "DW"
+
+                    Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
+                        Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
+                        Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
+
+                End Select
 
 
-            Case CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
-
-                Me.AsmByteDataTextBox.Text = Me.AppConfig.AsmDataByteCommand
-                Me.AsmWordDataTextBox.Text = Me.AppConfig.AsmDataWordCommand
-
-                Me.NumberSystemCombo.SelectedIndex = CodeInfo.DataType.HEXADECIMAL_Snn
 
         End Select
-
 
     End Sub
 

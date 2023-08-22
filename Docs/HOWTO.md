@@ -19,7 +19,7 @@
 - [7 Programming information](#7-Programming-information)
    - [7.1 Examples](#71-Examples)
    - [7.2 How to read data in MSX BASIC](#72-How-to-read-data-in-MSX-BASIC)
-
+- [8 References](#8-References)
 
 <br/>
 
@@ -265,55 +265,82 @@ The application includes a folder `Examples\` where you will find programming ex
 
 ### 7.2 How to read data in MSX BASIC
 
-For MSX BASIC it can be generated in different formats, but there are two ways that I recommend depending on what you need:
-
+For MSX BASIC you can generate the data in different formats, but there are two ways that I recommend depending on what you need:
 
 
 #### That occupies little
    
-If we work with a very large list and we need to reduce size, the best way is to use the `hex FF` format and remove0. 
+If you have a very large program and need to reduce the size, the best way is to use the `hex FF` format and remove0. 
 In this way, a value will occupy 0 to 2 Bytes, but it has a drawback: execution is slower, 
 because each alphanumeric data must be converted to a numeric value using the VAL instruction.    
 
 ```basic
-100 FOR BC=0 to 31
-110 READ A$:A=VAL("&H"+A$)
-120 PRINT A
+10 DIM AR(31)
+20 RESTORE 210:L=31:GOSUB 110
+30 FOR BC=0 to L
+40 PRINT USING "### : ###";BC;AR(BC)
+50 NEXT
+60 END
+100 REM ----------------------
+101 REM Data Loader
+102 REM Imput:  L=Length-1
+103 REM Output: AR()
+104 REM ----------------------
+110 FOR BC=0 to L
+120 READ A$:AR(BC)=VAL("&H"+A$)
 130 NEXT
-140 END
-200 REM ByteniZ3R v0.9.16.0
-210 REM Project: Example BASIC
-220 REM Sine
-230 REM Length=32; Min=0; Max=255; Phase=0; Freq=1
-240 DATA 80,99,B2,C8,DC,EC,F7,FE
-250 DATA FF,FB,F2,E4,D3,BD,A6,8C
-260 DATA 73,59,42,2C,1B,D,4,
-270 DATA 1,8,13,23,37,4D,66,7F
+140 RETURN
+150 REM ----------------------
+200 REM ByteniZ3R devtool v0.9.28.0-beta
+201 REM Project: Example for BASIC
+202 REM WF: Sine Unsigned Length=32 Min=0 Max=255 Phase=0 Freq=1
+210 DATA 80,99,B2,C8,DC,EC,F7,FE
+220 DATA FF,FB,F2,E4,D3,BD,A6,8C
+230 DATA 73,59,42,2C,1B,0D,04,00
+240 DATA 01,08,13,23,37,4D,66,7F
 ```
 
     
 #### Make it fast
   
-If we want the data block to be read as fast as possible, the best way is in decimal `dec n` or hexadecimal `hex &HFF`. 
+If you want the data block to be read as fast as possible, the best way is in decimal `dec n` or hexadecimal `hex &HFF`. 
 This way is about twice as fast as the previous one.
   
 ```basic
-100 FOR BC=0 to 31
-110 READ A
-120 PRINT A
+10 DIM AR(31)
+20 RESTORE 210:L=31:GOSUB 110
+30 FOR BC=0 to L
+40 PRINT USING "### : ###";BC;AR(BC)
+50 NEXT
+60 END
+100 REM ----------------------
+101 REM Data Loader
+102 REM Imput:  L=Length-1
+103 REM Output: AR()
+104 REM ----------------------
+110 FOR BC=0 to L
+120 READ A:AR(BC)=A
 130 NEXT
-140 END  
-200 REM ByteniZ3R v0.9.16.0
-210 REM Project: Example BASIC
-220 REM Sine
-230 REM Length=32; Min=0; Max=255; Phase=0; Freq=1
-240 DATA 128,153,178,200,220,236,247,254
-250 DATA 255,251,242,228,211,189,166,140
-260 DATA 115,89,66,44,27,13,4,
-270 DATA 1,8,19,35,55,77,102,127
+140 RETURN
+150 REM ----------------------  
+200 REM ByteniZ3R devtool v0.9.28.0-beta
+201 REM Project: Example for BASIC
+202 REM WF: Sine Unsigned Length=32 Min=0 Max=255 Phase=0 Freq=1
+210 DATA 128,153,178,200,220,236,247,254
+220 DATA 255,251,242,228,211,189,166,140
+230 DATA 115,89,66,44,27,13,4,0
+240 DATA 1,8,19,35,55,77,102,127
 ```
 
+<br/>
 
+---
+
+## 8 References
+
+- Sjasm [Numeric constants](https://www.xl2s.tk/sjasmman4.html)
+- Sjasm [Data definition](https://www.xl2s.tk/sjasmman6.html)
+- asMSX [manual](https://github.com/Fubukimaru/asMSX/blob/master/doc/asmsx.md)
 
 <br/>
 
