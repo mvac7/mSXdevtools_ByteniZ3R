@@ -144,7 +144,7 @@ There are 9 waveform generators available: Sine, 1/2 Sine Upper, 1/2 Sine Lower,
 It has several parameters to adjust the form:
    
 - `Length` (8-1024): Number of bytes dedicated to drawing the shape.
-- `Min value` and  `Max value` (0>255 or -128>127): Defines the smallest and the highest value of the form.
+- `Min value` and  `Max value` (Unsigned:0 to 255 or Signed:-128 to 127): Defines the smallest and the highest value of the form.
 - `Phase` (0-359): Shifts the wave n degrees.
 - `Frecuency` (1-256): Number of times the shape will be repeated.
 - `Type Selector` Indicates whether the output values are signed or unsigned.
@@ -152,10 +152,12 @@ It has several parameters to adjust the form:
 <br/>
 
 ### 6.4 Data output format
-
 In the output area, we have a form to define the format, such as the programming language, numeric format and compression.
 
-#### Languages: 
+
+#### Programming language
+Includes presets for some assemblers.
+ 
 - BASIC 
 - C 
 - Assembler default
@@ -164,8 +166,8 @@ In the output area, we have a form to define the format, such as the programming
 - Assembler SJasm
 - Assembler SDCC 
 
-#### Number sys:  
-Supports various number systems and formats for different compilers or assemblers.
+#### Numeric system
+Supports various number systems and formats for different programming languages.
 
 Name              | Example     | Language
 ----------------- | ----------- | -----------------------
@@ -185,7 +187,7 @@ binary 0b00000000 | 0b00001111  | C or Assembler
 binary &B00000000 | &B00001111  | BASIC
                     
 
-#### Size Line: 
+#### Line size
 
 Number of elements per line (1,2,4,8, 16, 24 or 32).
  
