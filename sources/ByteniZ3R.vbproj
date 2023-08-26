@@ -242,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ByteniZ3R.ico" />
-    <None Include="Resources\ico_swap02_32px.png" />
     <None Include="Resources\signed_display_ruler.png" />
     <None Include="Resources\unsigned_display_ruler.png" />
     <None Include="Resources\ico_reload_16px.png" />

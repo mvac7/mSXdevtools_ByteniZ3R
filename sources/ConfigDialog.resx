@@ -120,13 +120,24 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SwapColorsButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEeSURBVFhH3c5BbgIxEAVRDplchV2OnBtEclSLRvSn
+        4p4FMFIWT8LWNzWXtdap9PKd9BIfn98Lef9seonTPqDCKXfl6/qzjsh35eHC4shdsZjJd+X2w6Km9sVi
+        O/n+9sNipvbFIjv5/nA41R9YZKfelfM/IC8shtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7c
+        tQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxNLI7ctQMsjtxN
+        LI7ctQMsjtxNLI7ctQMsvlPvLHbE//mAYhFT+/YYFtnJ9xYztW+P71nM5LtiUeSuHe5ZzOS7YnHkrh1e
+        4a9w0ctnOv0DJnr5PuvyC+46ldIihytJAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>
   <metadata name="ColorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>287, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="arrow2PictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6

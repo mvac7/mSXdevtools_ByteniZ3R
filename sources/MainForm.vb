@@ -198,18 +198,9 @@ Public Class MainForm
 
     Private Sub NewProject()
 
-        Me.WaveTypeComboBox.SelectedIndex = 0
+        'Me.WaveTypeComboBox.SelectedIndex = 0
 
-        SetSingType(False)
-
-        SetWaveLength(256)
-        'SetWaveState(0)
-
-        SetWaveMinValue(0)
-        SetWaveMaxValue(255)
-
-        SetWavePhase(0)
-        SetWaveFreq(1)
+        SetWaveForm(New WaveFormItem)
 
         Me.Path_Project = ""
         Me.Path_source = ""
@@ -221,6 +212,29 @@ Public Class MainForm
         SetTitle(Me.Info.Name)
 
     End Sub
+
+
+
+    Private Sub SetWaveForm(ByVal WF As WaveFormItem)
+
+        Me.WaveTypeComboBox.SelectedIndex = WF.Type
+        SetWaveState(WF.Type)
+
+        SetSingType(WF.Sign)
+
+        SetSingType(WF.Sign)
+        SetWaveLength(WF.Length)
+
+        SetWaveMinValue(WF.Minimum)
+        SetWaveMaxValue(WF.Maximum)
+
+        SetWavePhase(WF.Phase)
+        SetWaveFreq(WF.Frequency)
+
+        GenerateData()
+
+    End Sub
+
 
 
 
@@ -1064,7 +1078,7 @@ Public Class MainForm
 
 
 
-    Private Sub WaveTypeComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub WaveTypeComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Me.WaveTypeComboBox.SelectedIndex = WF.Type
         SetWaveState(WaveTypeComboBox.SelectedIndex)
         GenerateData()
     End Sub
@@ -1894,6 +1908,9 @@ Public Class MainForm
                 Case Keys.A
                     Me.anOutputDataGBox.CopyAll()
 
+                Case Keys.V
+                    PasteClipboard()
+
             End Select
 
         End If
@@ -1910,6 +1927,156 @@ Public Class MainForm
 
     End Sub
 
+
+
+    Private Sub PasteClipboard()
+
+        Dim clipboardText As String
+
+        Dim values As Hashtable
+        Dim hasSign As Boolean = False
+
+        Dim WFitem As New WaveFormItem
+
+
+        ' for test --->
+        '  WF: Reverse_Sawtooth Unsigned Length=32 Min=16 Max=128 Phase=45 Freq=2
+        ' WF: Cosine Signed Length=512 Min=-64 Max=64 Phase=90 Freq=3  
+
+        If My.Computer.Clipboard.ContainsText Then
+            clipboardText = My.Computer.Clipboard.GetText()
+            clipboardText = clipboardText.Trim.ToUpper
+            clipboardText = clipboardText.Replace(";", "") 'for compatibility with previous versions 
+
+            If clipboardText.StartsWith("WF:") Then
+
+                values = GetWFData(clipboardText)
+
+                Dim splitdata As String() = clipboardText.Split(" ")
+
+                If splitdata(2) = "SIGNED" Then
+                    WFitem.Sign = True
+                End If
+
+                WFitem.Type = GetWaveFormIndex(splitdata(1))
+
+                If values.ContainsKey("LENGTH") Then
+                    WFitem.Length = CInt(values.Item("LENGTH"))
+                End If
+
+                If values.ContainsKey("MIN") Then
+                    WFitem.Minimum = CInt(values.Item("MIN"))
+                    If WFitem.Sign Then
+                        WFitem.Minimum += 128
+                    End If
+                End If
+
+                If values.ContainsKey("MAX") Then
+                    WFitem.Maximum = CInt(values.Item("MAX"))
+                    If WFitem.Sign Then
+                        WFitem.Maximum += 128
+                    End If
+                End If
+
+                If values.ContainsKey("PHASE") Then
+                    WFitem.Phase = CInt(values.Item("PHASE"))
+                End If
+
+                If values.ContainsKey("FREQ") Then
+                    WFitem.Frequency = CInt(values.Item("FREQ"))
+                End If
+
+                SetWaveForm(WFitem)
+
+                My.Computer.Clipboard.Clear()
+
+            End If
+
+        End If
+
+    End Sub
+
+
+
+    Private Function GetWFData(ByVal clipboardText As String) As Hashtable
+
+        Dim values As New Hashtable
+
+        Dim splitdata As String() = clipboardText.Split(" ")
+        Dim item As String()
+
+        For Each itemData As String In splitdata
+            If itemData.Contains("=") Then
+                item = itemData.Split("=")
+                values.Add(item(0), item(1))
+            End If
+        Next
+
+        Return values
+
+    End Function
+
+
+
+    Private Function GetWaveFormIndex(ByVal waveName As String) As Integer
+
+        Dim waveStrings As New ArrayList()
+
+        Dim waveindex As Integer
+
+        For Each item As String In WaveTypeComboBox.Items
+            waveStrings.Add(item.ToUpper.Replace(" ", "_"))
+        Next
+
+        waveindex = waveStrings.IndexOf(waveName.ToUpper)
+        If waveindex < 0 Then
+            waveindex = 0
+        End If
+
+        Return waveindex
+
+    End Function
+
+
+
+    Public Class WaveFormItem
+
+        Public Type As Integer = 0
+        Public Sign As Boolean = False
+        Public _length As Integer = 256
+
+        ''' <summary>
+        ''' ' length + 1 (there is no zero. Minimum 8)
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Length As Integer
+            Get
+                Return _length
+            End Get
+            Set(value As Integer)
+                If value < 8 Then
+                    value = 8
+                End If
+                If value > 2048 Then
+                    value = 2048
+                End If
+                Me._length = value
+            End Set
+        End Property
+
+
+
+        Public Minimum As Integer = 0
+
+
+        Public Maximum As Integer = 255
+
+
+
+        Public Phase As Integer = 0
+        Public Frequency As Integer = 1
+
+    End Class
 
 
 End Class

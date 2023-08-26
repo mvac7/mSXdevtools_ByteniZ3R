@@ -46,6 +46,7 @@ Partial Class ConfigDialog
         Me.Color0Button = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.SignedByteDefTextBox = New System.Windows.Forms.TextBox()
+        Me.SwapColorsButton = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.CGroupBox = New ByteniZ3R.piXelST_GroupBox()
@@ -53,6 +54,8 @@ Partial Class ConfigDialog
         Me.Label8 = New System.Windows.Forms.Label()
         Me.AssemblerGroupBox = New ByteniZ3R.piXelST_GroupBox()
         Me.BDLabel = New System.Windows.Forms.Label()
+        Me.arrow2PictureBox = New System.Windows.Forms.PictureBox()
+        Me.arrow1PictureBox = New System.Windows.Forms.PictureBox()
         Me.AsmWordValuesComboBox = New System.Windows.Forms.ComboBox()
         Me.WDLabel = New System.Windows.Forms.Label()
         Me.AsmByteValuesComboBox = New System.Windows.Forms.ComboBox()
@@ -84,11 +87,10 @@ Partial Class ConfigDialog
         Me.ColorConfigsComboBox = New System.Windows.Forms.ComboBox()
         Me.SourceCodePanel = New System.Windows.Forms.Panel()
         Me.PiXelST_HorizontalTab1 = New ByteniZ3R.piXelST_HorizontalTab()
-        Me.arrow2PictureBox = New System.Windows.Forms.PictureBox()
-        Me.arrow1PictureBox = New System.Windows.Forms.PictureBox()
-        Me.SwapColorsButton = New System.Windows.Forms.Button()
         Me.CGroupBox.SuspendLayout()
         Me.AssemblerGroupBox.SuspendLayout()
+        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.BASICGroupBox.SuspendLayout()
         Me.BottonsPanel.SuspendLayout()
         Me.MiscPanel.SuspendLayout()
@@ -96,8 +98,6 @@ Partial Class ConfigDialog
         Me.ProjectInfoGroupBox.SuspendLayout()
         Me.OutputdataColorsGroupBox.SuspendLayout()
         Me.SourceCodePanel.SuspendLayout()
-        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ToolTip1
@@ -315,6 +315,16 @@ Partial Class ConfigDialog
         Me.SignedByteDefTextBox.TabIndex = 263
         Me.ToolTip1.SetToolTip(Me.SignedByteDefTextBox, "Type definition for signed Byte values.")
         '
+        'SwapColorsButton
+        '
+        Me.SwapColorsButton.Image = CType(resources.GetObject("SwapColorsButton.Image"), System.Drawing.Image)
+        Me.SwapColorsButton.Location = New System.Drawing.Point(225, 51)
+        Me.SwapColorsButton.Name = "SwapColorsButton"
+        Me.SwapColorsButton.Size = New System.Drawing.Size(49, 54)
+        Me.SwapColorsButton.TabIndex = 264
+        Me.ToolTip1.SetToolTip(Me.SwapColorsButton, "Swap colors")
+        Me.SwapColorsButton.UseVisualStyleBackColor = True
+        '
         'CGroupBox
         '
         Me.CGroupBox.BackColor = System.Drawing.Color.Transparent
@@ -384,6 +394,24 @@ Partial Class ConfigDialog
         Me.BDLabel.TabIndex = 251
         Me.BDLabel.Text = "Byte Data:"
         Me.BDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'arrow2PictureBox
+        '
+        Me.arrow2PictureBox.Image = CType(resources.GetObject("arrow2PictureBox.Image"), System.Drawing.Image)
+        Me.arrow2PictureBox.Location = New System.Drawing.Point(343, 49)
+        Me.arrow2PictureBox.Name = "arrow2PictureBox"
+        Me.arrow2PictureBox.Size = New System.Drawing.Size(24, 24)
+        Me.arrow2PictureBox.TabIndex = 266
+        Me.arrow2PictureBox.TabStop = False
+        '
+        'arrow1PictureBox
+        '
+        Me.arrow1PictureBox.Image = CType(resources.GetObject("arrow1PictureBox.Image"), System.Drawing.Image)
+        Me.arrow1PictureBox.Location = New System.Drawing.Point(343, 20)
+        Me.arrow1PictureBox.Name = "arrow1PictureBox"
+        Me.arrow1PictureBox.Size = New System.Drawing.Size(24, 24)
+        Me.arrow1PictureBox.TabIndex = 265
+        Me.arrow1PictureBox.TabStop = False
         '
         'AsmWordValuesComboBox
         '
@@ -588,10 +616,10 @@ Partial Class ConfigDialog
         Me.BottonsPanel.Controls.Add(Me.Ok_Button)
         Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
         Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottonsPanel.Location = New System.Drawing.Point(0, 546)
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 542)
         Me.BottonsPanel.Name = "BottonsPanel"
         Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
-        Me.BottonsPanel.Size = New System.Drawing.Size(1219, 44)
+        Me.BottonsPanel.Size = New System.Drawing.Size(1215, 44)
         Me.BottonsPanel.TabIndex = 257
         '
         'Ok_Button
@@ -606,7 +634,7 @@ Partial Class ConfigDialog
         Me.Ok_Button.Font = New System.Drawing.Font("Comic Sans MS", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Ok_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.Ok_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Ok_Button.Location = New System.Drawing.Point(988, 4)
+        Me.Ok_Button.Location = New System.Drawing.Point(984, 4)
         Me.Ok_Button.Name = "Ok_Button"
         Me.Ok_Button.Padding = New System.Windows.Forms.Padding(4)
         Me.Ok_Button.Size = New System.Drawing.Size(125, 36)
@@ -628,7 +656,7 @@ Partial Class ConfigDialog
         Me.Cancel_Button.Font = New System.Drawing.Font("Comic Sans MS", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cancel_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Cancel_Button.Location = New System.Drawing.Point(1113, 4)
+        Me.Cancel_Button.Location = New System.Drawing.Point(1109, 4)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Padding = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Size = New System.Drawing.Size(102, 36)
@@ -645,7 +673,7 @@ Partial Class ConfigDialog
         Me.Title_Label.Location = New System.Drawing.Point(0, 0)
         Me.Title_Label.Name = "Title_Label"
         Me.Title_Label.Padding = New System.Windows.Forms.Padding(8, 4, 4, 4)
-        Me.Title_Label.Size = New System.Drawing.Size(1219, 32)
+        Me.Title_Label.Size = New System.Drawing.Size(1215, 32)
         Me.Title_Label.TabIndex = 258
         Me.Title_Label.Text = "Application Settings"
         Me.Title_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -800,41 +828,13 @@ Partial Class ConfigDialog
         Me.PiXelST_HorizontalTab1.TabIndex = 261
         Me.PiXelST_HorizontalTab1.TabStop = False
         '
-        'arrow2PictureBox
-        '
-        Me.arrow2PictureBox.Image = CType(resources.GetObject("arrow2PictureBox.Image"), System.Drawing.Image)
-        Me.arrow2PictureBox.Location = New System.Drawing.Point(343, 49)
-        Me.arrow2PictureBox.Name = "arrow2PictureBox"
-        Me.arrow2PictureBox.Size = New System.Drawing.Size(24, 24)
-        Me.arrow2PictureBox.TabIndex = 266
-        Me.arrow2PictureBox.TabStop = False
-        '
-        'arrow1PictureBox
-        '
-        Me.arrow1PictureBox.Image = CType(resources.GetObject("arrow1PictureBox.Image"), System.Drawing.Image)
-        Me.arrow1PictureBox.Location = New System.Drawing.Point(343, 20)
-        Me.arrow1PictureBox.Name = "arrow1PictureBox"
-        Me.arrow1PictureBox.Size = New System.Drawing.Size(24, 24)
-        Me.arrow1PictureBox.TabIndex = 265
-        Me.arrow1PictureBox.TabStop = False
-        '
-        'SwapColorsButton
-        '
-        Me.SwapColorsButton.Image = Global.ByteniZ3R.My.Resources.Resources.ico_swap02_32px
-        Me.SwapColorsButton.Location = New System.Drawing.Point(225, 51)
-        Me.SwapColorsButton.Name = "SwapColorsButton"
-        Me.SwapColorsButton.Size = New System.Drawing.Size(49, 54)
-        Me.SwapColorsButton.TabIndex = 264
-        Me.ToolTip1.SetToolTip(Me.SwapColorsButton, "Swap colors")
-        Me.SwapColorsButton.UseVisualStyleBackColor = True
-        '
         'ConfigDialog
         '
         Me.AcceptButton = Me.Ok_Button
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(1219, 590)
+        Me.ClientSize = New System.Drawing.Size(1215, 586)
         Me.ControlBox = False
         Me.Controls.Add(Me.PiXelST_HorizontalTab1)
         Me.Controls.Add(Me.SourceCodePanel)
@@ -853,6 +853,8 @@ Partial Class ConfigDialog
         Me.CGroupBox.PerformLayout()
         Me.AssemblerGroupBox.ResumeLayout(False)
         Me.AssemblerGroupBox.PerformLayout()
+        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BASICGroupBox.ResumeLayout(False)
         Me.BASICGroupBox.PerformLayout()
         Me.BottonsPanel.ResumeLayout(False)
@@ -864,8 +866,6 @@ Partial Class ConfigDialog
         Me.OutputdataColorsGroupBox.PerformLayout()
         Me.SourceCodePanel.ResumeLayout(False)
         Me.SourceCodePanel.PerformLayout()
-        CType(Me.arrow2PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.arrow1PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
