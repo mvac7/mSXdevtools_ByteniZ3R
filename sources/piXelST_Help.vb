@@ -49,6 +49,10 @@ Public Class piXelST_Help
     Public is_BG_Gradient As Boolean = False
 
 
+    Public Property HorizontalRuleChar As Char = "-" 'or piXel_font_HORIZONTAL_LINE
+
+
+
     Private State_Quoting As Boolean = False
     Private State_Code_Block As Boolean = False
     Private State_Bold As Boolean = False
@@ -69,11 +73,16 @@ Public Class piXelST_Help
     Private _columns As Integer
 
 
+    Private Const MD_Bold = "**"
+    Private Const MD_HorizontalRule = "---"
+    Private Const MD_Quoting = "`" 'single backticks
+    Private Const MD_QuotingCode = "```" 'triple backticks
 
-    Private Const HorizontalRule = "---"
-    Private Const QuotingCode = "```"
+    Private Const MD_TaskList = "[ ]"
+    Private Const MD_TaskListCheck = "[x]"
+    Private Const MD_Quote = ">"
+
     Private Const LineBreak = "<br/>"
-
 
     ' font character sizes
     'Private charSize As Byte() = {6, 3, 4, 6, 6, 7, 8, 4, 5, 5, 7, 7, 3, 6, 3, 8, 7, 4, 7, 6, 7, 7, 7, 7, 7, 7, 3, 3, 5, 5, 5, 7,
@@ -96,7 +105,7 @@ Public Class piXelST_Help
     Private Const piXel_font_LOWER_LEFT_CORNER = 128 + 26
     Private Const piXel_font_LOWER_RIGHT_CORNER = 128 + 27
 
-    Private Const piXel_font_HORIZONTAL_LINE = 128 + 23
+    Public Shadows Const piXel_font_HORIZONTAL_LINE = 128 + 23
     Private Const piXel_font_VERTICAL_LINE = 128 + 22
 
 
@@ -300,6 +309,12 @@ Public Class piXelST_Help
 
         State_Code_Block = False
 
+        ' add head
+        tmpLines.Add("# Help from " + My.Application.Info.Title + " v" + My.Application.Info.Version.ToString + "-beta")
+        tmpLines.Add("## " + My.Application.Info.Description)
+        tmpLines.Add(MD_HorizontalRule)
+        tmpLines.Add("")
+
         tmpLines.AddRange(helpText.Trim.Split(vbCr))
 
 
@@ -316,11 +331,11 @@ Public Class piXelST_Help
 
             'End If
 
-            If commandLine = QuotingCode Then
+            If commandLine.StartsWith(MD_QuotingCode) Then
                 If Not aLine = "" Then
                     AddNewLine(aLine)
                 End If
-                AddNewLine(commandLine)
+                AddNewLine(MD_QuotingCode)
                 emptyLines = 0
                 aLine = ""
                 State_Code_Block = Not State_Code_Block
@@ -349,7 +364,7 @@ Public Class piXelST_Help
 
                     AddNewLine("")
 
-                ElseIf commandLine = HorizontalRule Or commandLine.StartsWith("#") Or commandLine.StartsWith("|") Then
+                ElseIf commandLine = MD_HorizontalRule Or commandLine.StartsWith("#") Or commandLine.StartsWith("|") Then
                     ' 
                     If Not aLine = "" Then
                         AddNewLine(aLine)
@@ -359,13 +374,15 @@ Public Class piXelST_Help
                     AddNewLine(commandLine)
                     aLine = ""
 
-                ElseIf commandLine.StartsWith("-") Or commandLine.StartsWith("*") Then
+                ElseIf commandLine.StartsWith("- ") Or commandLine.StartsWith("* ") Then
                     ' List
                     If Not aLine = "" Then
                         AddNewLine(aLine)
                     End If
-                    aLine = newLine
+
                     emptyLines = 0
+                    aLine = newLine
+
 
                 ElseIf newLine.Contains(".") Then
                     'numbered list
@@ -523,14 +540,14 @@ Public Class piXelST_Help
                     Is_a_Table = True
                     Table_Lines.Clear()
                 End If
-                Table_Lines.Add(aLine.TrimStart)
+                Table_Lines.Add(aLine.Trim)
             Else
                 If Is_a_Table Then
                     Is_a_Table = False
                     Doc_Lines.AddRange(GetTableLines(Table_Lines, help_width))
                 End If
 
-                If aLine.Trim = QuotingCode Then
+                If aLine.Trim = MD_QuotingCode Then
                     State_Code_Block = Not State_Code_Block
                     Doc_Lines.Add(aLine.Trim)
                 Else
@@ -590,7 +607,7 @@ Public Class piXelST_Help
 
         ' identifica el numero de columnas y el alineamiento de estas
         aling_line = Table_Lines.Item(1).Trim  'Text
-        If aling_line.Contains(HorizontalRule) Then
+        If aling_line.Contains(MD_HorizontalRule) Then
 
             If aling_line.EndsWith("|") Then
                 'delete the last table marker
@@ -891,13 +908,13 @@ Public Class piXelST_Help
             TAGoffset += 9
         Loop
 
-        Do While aText.Contains("`")
-            aText = aText.Remove(aText.IndexOf("`"), 1)
+        Do While aText.Contains(MD_Quoting)
+            aText = aText.Remove(aText.IndexOf(MD_Quoting), 1)
             TAGoffset += 1
         Loop
 
-        Do While aText.Contains("**")
-            aText = aText.Remove(aText.IndexOf("**"), 2)
+        Do While aText.Contains(MD_Bold)
+            aText = aText.Remove(aText.IndexOf(MD_Bold), 2)
             TAGoffset += 2
         Loop
 
@@ -949,7 +966,7 @@ Public Class piXelST_Help
 
 
         tmpLine = aLine.Trim
-        If tmpLine = QuotingCode Or tmpLine = HorizontalRule Then
+        If tmpLine = MD_QuotingCode Or tmpLine = MD_HorizontalRule Then
             lines.Add(tmpLine)
             Return lines
         End If
@@ -981,13 +998,13 @@ Public Class piXelST_Help
 
         'calculate offset by control characters -------------- 
         tmpLine = aLine
-        Do While tmpLine.Contains("`")
-            tmpLine = tmpLine.Remove(tmpLine.IndexOf("`"), 1)
+        Do While tmpLine.Contains(MD_Quoting)
+            tmpLine = tmpLine.Remove(tmpLine.IndexOf(MD_Quoting), 1)
             TAGoffset += 1
         Loop
 
-        Do While tmpLine.Contains("**")
-            tmpLine = tmpLine.Remove(tmpLine.IndexOf("**"), 2)
+        Do While tmpLine.Contains(MD_Bold)
+            tmpLine = tmpLine.Remove(tmpLine.IndexOf(MD_Bold), 2)
             TAGoffset += 2
         Loop
         ' ----------------------------------------------------
@@ -1073,15 +1090,15 @@ Public Class piXelST_Help
                         'TAGoffset += 9
 
 
-                    ElseIf aWord = "`" Then
+                    ElseIf aWord = MD_Quoting Then
                         State_Quoting = Not State_Quoting
                         newLine += aWord
                         'TAGoffset += 1
 
-                    ElseIf aWord = "**" Then
+                    ElseIf aWord = MD_Bold Then
 
                         State_Bold = Not State_Bold
-                        newLine += "**"
+                        newLine += MD_Bold
                         'TAGoffset -= 2
 
                         'ElseIf aWord = "```" Then
@@ -1099,9 +1116,9 @@ Public Class piXelST_Help
 
                             If Not newLine = "" Then
                                 If State_Quoting Then
-                                    newLine += "`"
+                                    newLine += MD_Quoting
                                 ElseIf State_Bold Then
-                                    newLine += "**"
+                                    newLine += MD_Bold
                                 End If
 
                                 lines.Add(newLine)
@@ -1122,11 +1139,11 @@ Public Class piXelST_Help
                             _posX = RCmargin * 2
 
                             If State_Quoting Then
-                                newLine += "`"
+                                newLine += MD_Quoting
                                 'TAGoffset += 1
 
                             ElseIf State_Bold Then
-                                newLine += "**"
+                                newLine += MD_Bold
                                 'TAGoffset += 2
                                 'Else
                                 '    newLine = ""
@@ -1161,16 +1178,16 @@ Public Class piXelST_Help
                                 '    If aWord.Chars(nchar + 1) = "*" Then
                                 '        State_Bold = Not State_Bold
                                 '        TAGoffset -= 2
-                                '        newLine += "**"
+                                '        newLine += MD_Bold
                                 '        nchar += 1
 
                                 '    End If
 
                                 'Else
 
-                                'If char16 = "`" Then
+                                'If char16 = MD_Quoting Then
                                 '    'TAGoffset -= 1
-                                '    newLine += "`"
+                                '    newLine += MD_Quoting
 
                                 If char16 = vbCr Then
                                     '_posX = 0
@@ -1180,9 +1197,9 @@ Public Class piXelST_Help
                                     newLine = newLine.TrimEnd
 
                                     If State_Quoting Then
-                                        newLine += "`"
+                                        newLine += MD_Quoting
                                     ElseIf State_Bold Then
-                                        newLine += "**"
+                                        newLine += MD_Bold
                                     End If
 
                                     lines.Add(newLine)
@@ -1193,10 +1210,10 @@ Public Class piXelST_Help
                                     _posX = RCmargin * 2
 
                                     If State_Quoting Then
-                                        newLine += "`"
+                                        newLine += MD_Quoting
                                         'TAGoffset += 1
                                     ElseIf State_Bold Then
-                                        newLine += "**"
+                                        newLine += MD_Bold
                                         'TAGoffset += 2
                                         'Else
                                         '    newLine = ""
@@ -1221,9 +1238,9 @@ Public Class piXelST_Help
                                         newLine = newLine.TrimEnd
 
                                         If State_Quoting Then
-                                            newLine += "`"
+                                            newLine += MD_Quoting
                                         ElseIf State_Bold Then
-                                            newLine += "**"
+                                            newLine += MD_Bold
                                         End If
 
                                         lines.Add(newLine)
@@ -1234,10 +1251,10 @@ Public Class piXelST_Help
                                         _posX = RCmargin * 2
 
                                         If State_Quoting Then
-                                            newLine += "`"
+                                            newLine += MD_Quoting
                                             'TAGoffset += 1
                                         ElseIf State_Bold Then
-                                            newLine += "**"
+                                            newLine += MD_Bold
                                             'TAGoffset += 2
                                             'Else
                                             '    newLine = ""
@@ -1249,16 +1266,16 @@ Public Class piXelST_Help
                             Next
 
 
-                            'If Not newLine = "" And Not newLine = "`" And Not newLine = "**" And i < (wordsList.Count - 1) Then
+                            'If Not newLine = "" And Not newLine = MD_Quoting And Not newLine = MD_Bold And i < (wordsList.Count - 1) Then
 
                             '    nextWord = wordsList.Item(i + 1)
 
-                            '    If Not aWord = "`" And Not (State_Quoting And nextWord = "`") And Not nextWord = vbCr Then
+                            '    If Not aWord = MD_Quoting And Not (State_Quoting And nextWord = MD_Quoting) And Not nextWord = vbCr Then
                             '        _posX += 1
                             '        newLine += " "
                             '    End If
 
-                            '    'If Not (State_Quoting And wordsList.Item(i + 1) = "`") Then
+                            '    'If Not (State_Quoting And wordsList.Item(i + 1) = MD_Quoting) Then
                             '    '    _posX += 1
                             '    '    newLine += " "
                             '    'End If
@@ -1324,19 +1341,19 @@ Public Class piXelST_Help
             TAGoffset += 9
         Loop
 
-        Do While tmpCell.Contains("`")
-            tmpCell = tmpCell.Remove(tmpCell.IndexOf("`"), 1)
+        Do While tmpCell.Contains(MD_Quoting)
+            tmpCell = tmpCell.Remove(tmpCell.IndexOf(MD_Quoting), 1)
             TAGoffset += 1
         Loop
 
-        Do While tmpCell.Contains("**")
-            tmpCell = tmpCell.Remove(tmpCell.IndexOf("**"), 2)
+        Do While tmpCell.Contains(MD_Bold)
+            tmpCell = tmpCell.Remove(tmpCell.IndexOf(MD_Bold), 2)
             TAGoffset += 2
         Loop
 
         column_size += TAGoffset
 
-        'If cellText.EndsWith("**") Then
+        'If cellText.EndsWith(MD_Bold) Then
         '    cellText += " "
         'End If
 
@@ -1349,7 +1366,7 @@ Public Class piXelST_Help
 
         'Else
 
-        If _align = COLUMN_ALIGN.LEFT Then
+        If _align = COLUMN_ALIGN.LEFT Or cellText = "" Then
             newCell = cellText.PadRight(column_size, Chr(piXel_font_SPACE))
         ElseIf _align = COLUMN_ALIGN.RIGHT Then
             newCell = cellText.PadLeft(column_size, Chr(piXel_font_SPACE)) '<-- another space char
@@ -1417,9 +1434,9 @@ Public Class piXelST_Help
 
         'Dim isBold As Boolean = False
 
-        'Do While aLine.Contains("**")
+        'Do While aLine.Contains(MD_Bold)
         '    isBold = Not isBold
-        '    posInitTAG = aLine.IndexOf("**")
+        '    posInitTAG = aLine.IndexOf(MD_Bold)
 
         '    If isBold Then
         '        colorTag = GetColorTag(Color_Bold)
@@ -1435,7 +1452,7 @@ Public Class piXelST_Help
 
         firstWord = wordsList.Item(0)
 
-        If State_Code_Block And Not firstWord = QuotingCode Then
+        If State_Code_Block And Not firstWord = MD_QuotingCode Then
             AddCodeBlockLine()
         End If
 
@@ -1503,11 +1520,11 @@ Public Class piXelST_Help
                     wordsList.RemoveAt(0)
                     RCmargin = 3
 
-                Case HorizontalRule '+ Chr(13)
-                    PrintWord(Strings.StrDup(Me._columns, "-") + Chr(13), Color_Line, Color.Transparent)
+                Case MD_HorizontalRule '+ Chr(13)
+                    PrintWord(Strings.StrDup(Me._columns, Me.HorizontalRuleChar) + Chr(13), Color_Line, Color.Transparent)
                     wordsList.RemoveAt(0)
 
-                Case QuotingCode '+ Chr(13)  'code block
+                Case MD_QuotingCode '+ Chr(13)  'code block
                     State_Code_Block = Not State_Code_Block
                     'wordsList.RemoveAt(0)
                     Exit Sub
@@ -1562,7 +1579,7 @@ Public Class piXelST_Help
 
                 posX += 1 'add space char
 
-            ElseIf aWord = "`" Then
+            ElseIf aWord = MD_Quoting Then
 
                 State_Quoting = Not State_Quoting
 
@@ -1577,7 +1594,7 @@ Public Class piXelST_Help
 
             Else
 
-                If aWord.StartsWith("**") Then
+                If aWord.StartsWith(MD_Bold) Then
                     State_Bold = Not State_Bold
                     aWord = aWord.Substring(2)
                 End If
@@ -1596,7 +1613,7 @@ Public Class piXelST_Help
                     End If
                 End If
 
-                If aWord.EndsWith("**") Then
+                If aWord.EndsWith(MD_Bold) Then
                     State_Bold = Not State_Bold
                     aWord = aWord.Substring(0, aWord.Length - 2)
                 End If
@@ -1643,7 +1660,7 @@ Public Class piXelST_Help
 
                         Else
 
-                            'If Not (State_Quoting And nextWord = "`") Then
+                            'If Not (State_Quoting And nextWord = MD_Quoting) Then
 
                             '    If State_Quoting And Not State_Code_Block Then
                             '        AddSpaceChar()
@@ -1694,7 +1711,7 @@ Public Class piXelST_Help
                     posX += 2
                     posX = CInt(Math.Floor(posX / 2)) * 2
 
-                    'ElseIf char16 = "`" Then
+                    'ElseIf char16 = MD_Quoting Then
 
                     '    State_Quoting = Not State_Quoting
 
@@ -1756,9 +1773,9 @@ Public Class piXelST_Help
 
         Dim char16 As Char
         Dim char16B As Char
-        Dim char16C As Char
+        'Dim char16C As Char
         Dim command2 As String
-        Dim command3 As String
+        'Dim command3 As String
 
         'Dim RCmargin As Integer
 
@@ -1769,10 +1786,9 @@ Public Class piXelST_Help
 
         If Not aLine = "" Then
 
-            If aLine = QuotingCode Or aLine = HorizontalRule Then
+            If aLine = MD_QuotingCode Or aLine = MD_HorizontalRule Then
 
                 wordsList.Add(aLine)
-
 
 
             Else
@@ -1842,20 +1858,20 @@ Public Class piXelST_Help
                     Else
                         char16B = ""
                     End If
-                    If i < aLine.Length - 2 Then
-                        char16C = aLine.Chars(i + 2)
-                    Else
-                        char16C = ""
-                    End If
+                    'If i < aLine.Length - 2 Then
+                    '    char16C = aLine.Chars(i + 2)
+                    'Else
+                    '    char16C = ""
+                    'End If
                     command2 = char16 + char16B
-                    command3 = command2 + char16C
+                    'command3 = command2 + char16C
 
                     If char16 = " " Then
 
                         If char16B = " " Then
                             Do
                                 i += 1
-                            Loop While (i < (aLine.Length - 1) And aLine.Chars(i) = " ")
+                            Loop While (i < (aLine.Length - 2) AndAlso aLine.Chars(i + 1) = " ")
                         End If
 
                         If Not aWord = "" Then
@@ -1866,20 +1882,20 @@ Public Class piXelST_Help
                         wordsList.Add(" ")
 
 
-                    ElseIf command2 = "**" Then 'char16 = "*" And char16B = "*" Then
+                    ElseIf command2 = MD_Bold Then 'char16 = "*" And char16B = "*" Then
                         If Not aWord = "" Then
                             wordsList.Add(aWord)
                             aWord = ""
                         End If
-                        wordsList.Add("**")
+                        wordsList.Add(MD_Bold)
                         i += 1
 
                         'If aWord = "" Then
-                        '    aWord = "**"
+                        '    aWord = MD_Bold
                         '    i += 1
                         'Else
-                        '    wordsList.Add(aWord + "**")
-                        '    'wordsList.Add("**")
+                        '    wordsList.Add(aWord + MD_Bold)
+                        '    'wordsList.Add(MD_Bold)
                         '    aWord = ""
                         '    i += 1
                         'End If
@@ -1892,7 +1908,7 @@ Public Class piXelST_Help
                         '    wordsList.Add(QuotingCode)
                         '    i += 2
 
-                    ElseIf char16 = Chr(piXel_font_VERTICAL_LINE) Or char16 = vbCr Or char16 = "`" Then
+                    ElseIf char16 = Chr(piXel_font_VERTICAL_LINE) Or char16 = vbCr Or char16 = MD_Quoting Then
 
                         ' ------------------------------------------- <<< special chars
                         If Not aWord = "" Then

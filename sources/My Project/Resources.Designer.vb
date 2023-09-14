@@ -81,6 +81,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Busca una cadena traducida similar a ## Description
+        '''
+        '''Generates tables of 8bits signed or unsigned values, from waveforms in different programming languages (BASIC, C or ASM).
+        '''It can be useful for generating graphics or creating paths to move [Sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)).
+        '''
+        '''This tool is designed for the cross-development of computer programs with 8bits processors.
+        '''
+        '''It includes examples for various development environments of the MSX system (Assembler, C and MSX BASIC), 
+        '''which is what I know (sorry d [resto de la cadena truncado]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property Help() As String
+            Get
+                Return ResourceManager.GetString("Help", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property ico_about_32px() As System.Drawing.Bitmap

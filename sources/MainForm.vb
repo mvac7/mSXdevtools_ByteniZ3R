@@ -241,7 +241,8 @@ Public Class MainForm
     Private Sub Help()
 
         Dim Helping As New HelpDialog(800, 700)
-        'Helping.ShowDialog(Me, "Help " + My.Application.Info.Title, Global.ByteniZ3R.My.Resources.help)
+        Helping.HorizontalRuleChar = Chr(piXelST_Help.piXel_font_HORIZONTAL_LINE)
+        Helping.ShowDialog(Me, "Help " + My.Application.Info.Title, Global.ByteniZ3R.My.Resources.Help)
 
     End Sub
 

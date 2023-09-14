@@ -2,6 +2,14 @@
 
     Dim help_Text As String
 
+    Public WriteOnly Property HorizontalRuleChar As Char
+        Set(value As Char)
+            Me.HelpController.HorizontalRuleChar = value
+        End Set
+    End Property
+
+
+
     Public Sub New()
 
         ' Esta llamada es exigida por el diseñador.
