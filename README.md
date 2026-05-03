@@ -108,6 +108,8 @@ This functionality is no longer required.
 - The waveform is drawn at the defined size (Before it was adjusted to the size of the box).
 - The file format has been improved, so it is not compatible with the previous version (sorry).
 - Added different assembler formats: asMSX, tniASM, SJasm and sdasz80(SDCC).
+- Shortcuts
+- Help window.
 
 <br/>
 

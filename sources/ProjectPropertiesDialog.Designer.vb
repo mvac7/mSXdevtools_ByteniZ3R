@@ -22,10 +22,10 @@ Partial Class ProjectPropertiesDialog
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Title_Label = New ByteniZ3R.piXelST_Label()
+        Me.Title_Label = New mSXdevtools.GUI.piXelST.pxLabel()
         Me.BottonsPanel = New System.Windows.Forms.Panel()
-        Me.Ok_Button = New ByteniZ3R.piXelST_Button()
-        Me.Cancel_Button = New ByteniZ3R.piXelST_Button()
+        Me.Ok_Button = New mSXdevtools.GUI.piXelST.pxButton()
+        Me.Cancel_Button = New mSXdevtools.GUI.piXelST.pxButton()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.LastUpdateTextBox = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -51,57 +51,52 @@ Partial Class ProjectPropertiesDialog
         Me.Title_Label.Location = New System.Drawing.Point(0, 0)
         Me.Title_Label.Name = "Title_Label"
         Me.Title_Label.Padding = New System.Windows.Forms.Padding(8, 4, 4, 4)
-        Me.Title_Label.Size = New System.Drawing.Size(502, 32)
+        Me.Title_Label.Rounded = False
+        Me.Title_Label.Size = New System.Drawing.Size(498, 32)
         Me.Title_Label.TabIndex = 259
         Me.Title_Label.Text = "Project info"
-        Me.Title_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'BottonsPanel
         '
         Me.BottonsPanel.Controls.Add(Me.Ok_Button)
         Me.BottonsPanel.Controls.Add(Me.Cancel_Button)
         Me.BottonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BottonsPanel.Location = New System.Drawing.Point(0, 316)
+        Me.BottonsPanel.Location = New System.Drawing.Point(0, 312)
         Me.BottonsPanel.Name = "BottonsPanel"
         Me.BottonsPanel.Padding = New System.Windows.Forms.Padding(4)
-        Me.BottonsPanel.Size = New System.Drawing.Size(502, 44)
+        Me.BottonsPanel.Size = New System.Drawing.Size(498, 44)
         Me.BottonsPanel.TabIndex = 260
         '
         'Ok_Button
         '
-        Me.Ok_Button.ButtonColor = System.Drawing.Color.Gray
-        Me.Ok_Button.ButtonType = ByteniZ3R.piXelST_Button.Button_TYPES.Confirmation
-        Me.Ok_Button.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Ok_Button.BackColor = System.Drawing.Color.FromArgb(CType(CType(89, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Ok_Button.ButtonType = mSXdevtools.GUI.piXelST.pxButton.Button_TYPES.Confirmation
         Me.Ok_Button.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Ok_Button.Dock = System.Windows.Forms.DockStyle.Right
         Me.Ok_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.Ok_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Ok_Button.Location = New System.Drawing.Point(271, 4)
+        Me.Ok_Button.Location = New System.Drawing.Point(267, 4)
         Me.Ok_Button.Name = "Ok_Button"
         Me.Ok_Button.Padding = New System.Windows.Forms.Padding(4)
         Me.Ok_Button.Size = New System.Drawing.Size(125, 36)
         Me.Ok_Button.TabIndex = 127
         Me.Ok_Button.TabStop = False
         Me.Ok_Button.Text = "Ok"
-        Me.Ok_Button.UseVisualStyleBackColor = True
         '
         'Cancel_Button
         '
-        Me.Cancel_Button.ButtonColor = System.Drawing.Color.Gray
-        Me.Cancel_Button.ButtonType = ByteniZ3R.piXelST_Button.Button_TYPES.Cancellation
-        Me.Cancel_Button.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Cancel_Button.BackColor = System.Drawing.Color.FromArgb(CType(CType(89, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Cancel_Button.ButtonAlign = mSXdevtools.GUI.piXelST.pxButton.Button_ALIGN.Bottom
+        Me.Cancel_Button.ButtonType = mSXdevtools.GUI.piXelST.pxButton.Button_TYPES.Cancellation
         Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel_Button.Dock = System.Windows.Forms.DockStyle.Right
         Me.Cancel_Button.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.Cancel_Button.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Cancel_Button.Location = New System.Drawing.Point(396, 4)
+        Me.Cancel_Button.Location = New System.Drawing.Point(392, 4)
         Me.Cancel_Button.Name = "Cancel_Button"
         Me.Cancel_Button.Padding = New System.Windows.Forms.Padding(4)
         Me.Cancel_Button.Size = New System.Drawing.Size(102, 36)
         Me.Cancel_Button.TabIndex = 128
         Me.Cancel_Button.TabStop = False
         Me.Cancel_Button.Text = "Cancel"
-        Me.Cancel_Button.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -245,7 +240,7 @@ Partial Class ProjectPropertiesDialog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(502, 360)
+        Me.ClientSize = New System.Drawing.Size(498, 356)
         Me.ControlBox = False
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.LastUpdateTextBox)
@@ -279,10 +274,10 @@ Partial Class ProjectPropertiesDialog
 
     End Sub
 
-    Friend WithEvents Title_Label As piXelST_Label
+    Friend WithEvents Title_Label As pxLabel
     Friend WithEvents BottonsPanel As Panel
-    Friend WithEvents Ok_Button As piXelST_Button
-    Friend WithEvents Cancel_Button As piXelST_Button
+    Friend WithEvents Ok_Button As pxButton
+    Friend WithEvents Cancel_Button As pxButton
     Private WithEvents Label7 As Label
     Private WithEvents LastUpdateTextBox As TextBox
     Private WithEvents Label6 As Label

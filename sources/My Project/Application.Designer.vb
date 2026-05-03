@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.ByteniZ3R.MainForm
+            Me.MainForm = Global.mSXdevtools.ByteniZ3R.MainForm
         End Sub
     End Class
 End Namespace

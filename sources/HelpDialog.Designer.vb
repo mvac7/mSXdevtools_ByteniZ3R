@@ -27,7 +27,7 @@ Partial Class HelpDialog
         Me.Exit_Button = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.WindowControlBarPanel = New System.Windows.Forms.Panel()
-        Me.Title_Label = New piXelST_Label()
+        Me.Title_Label = New mSXdevtools.GUI.piXelST.pxLabel()
         Me.MaximizeButton = New System.Windows.Forms.Button()
         Me.ExitButton = New System.Windows.Forms.Button()
         Me.icoButton = New System.Windows.Forms.Button()
@@ -185,7 +185,7 @@ Partial Class HelpDialog
     Friend WithEvents WindowControlBarPanel As Panel
     Friend WithEvents MaximizeButton As Button
     Friend WithEvents ExitButton As Button
-    Friend WithEvents Title_Label As piXelST_Label
+    Friend WithEvents Title_Label As pxLabel
     Friend WithEvents HelpController As piXelST_Help
     Friend WithEvents icoButton As Button
 End Class

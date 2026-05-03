@@ -11,7 +11,11 @@ Public Class OutputDataGBox
     Private Project_Path As String
     Private Project_Name As String
 
-    Public Extension_Binary As String = ".bin"
+    'Public Property Extension_Binary As String = ".bin"
+
+    Public Property Suffix_dataType As String
+
+    Public Property Extension_dataType As String
 
     Public Event DataChanged()
 
@@ -30,11 +34,11 @@ Public Class OutputDataGBox
 
 
 
-    Public Property LanguageCode As CodeInfo.LANGUAGE_CODE
+    Public Property LanguageCode As SourceCodeInfo.LANGUAGE_CODE
         Get
             Return DataTypeInput.LanguageCode
         End Get
-        Set(value As CodeInfo.LANGUAGE_CODE)
+        Set(value As SourceCodeInfo.LANGUAGE_CODE)
             Me.DataTypeInput.LanguageCode = value
         End Set
     End Property
@@ -96,6 +100,8 @@ Public Class OutputDataGBox
             DataTypeInput.CompressType = value
         End Set
     End Property
+
+
 
 
 
@@ -332,7 +338,7 @@ Public Class OutputDataGBox
 
     Private Sub ShowData()
 
-        Dim _assembler As New AssemblerFormat
+        Dim Z80assembler As New AssemblerFormat
         Dim newComments As New ArrayList
         Dim tmpComment As String
 
@@ -340,7 +346,7 @@ Public Class OutputDataGBox
 
             newComments.AddRange(Me.Comments)
 
-            tmpComment = _assembler.GetCommentWithAssemble(LanguageCode, False)
+            tmpComment = Z80assembler.GetAssemblyInformationString(LanguageCode)
             If tmpComment IsNot "" Then newComments.Add(tmpComment)
 
             Me.OutputTextBox.Text = GetFormatData(Me.fileData, newComments)
@@ -369,11 +375,11 @@ Public Class OutputDataGBox
         Dim singValues() As SByte
 
         Dim aMSXDataFormat As New DataFormat
-        aMSXDataFormat.Comment_BASIC = Me.AppConfig.BASIC_CommentInstruction
+        aMSXDataFormat.Comment_BASIC = Me.AppConfig.CodeFormat.BASIC_CommentInstruction
         aMSXDataFormat.BASIC_Line = DataTypeInput.BASIClineNumber
         aMSXDataFormat.BASIC_increment = DataTypeInput.BASIClineInterval
 
-        If Not DataTypeInput.ProgrammingLanguage = CodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
+        If Not DataTypeInput.ProgrammingLanguage = SourceCodeInfo.PROGRAMMING_LANGUAGE.BASIC Then
             fieldName = DataTypeInput.FieldName
         End If
 
@@ -440,11 +446,11 @@ Public Class OutputDataGBox
         Else
 
             Select Case DataTypeInput.ProgrammingLanguage
-                Case CodeInfo.PROGRAMMING_LANGUAGE.BASIC
+                Case SourceCodeInfo.PROGRAMMING_LANGUAGE.BASIC
                     Me.SaveFileDialog1.DefaultExt = "BAS"
                     Me.SaveFileDialog1.Filter = "BASIC file|*.BAS"
 
-                Case CodeInfo.PROGRAMMING_LANGUAGE.C
+                Case SourceCodeInfo.PROGRAMMING_LANGUAGE.C
                     Me.SaveFileDialog1.DefaultExt = "c"
                     Me.SaveFileDialog1.Filter = "C file|*.c|Header file|*.h"
 
@@ -489,15 +495,12 @@ Public Class OutputDataGBox
             Me.Project_Path = Application.StartupPath
         End If
         Me.SaveFileDialog1.InitialDirectory = Me.Project_Path
-        'Me.SaveFileDialog1.DefaultExt = Me.Extension_Binary
-        Me.SaveFileDialog1.Filter = "All files|*.*"
-        Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Project_Name) + "_RLEWB" + Me.Extension_Binary
+        Me.SaveFileDialog1.DefaultExt = Me.Extension_dataType
+        Me.SaveFileDialog1.Filter = Me.Suffix_dataType + " files|*." + Me.Extension_dataType
+        Me.SaveFileDialog1.FileName = Path.GetFileNameWithoutExtension(Me.Project_Name)
 
         If SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            'Me.Path_SC2 = Path.GetDirectoryName(SaveFileDialog1.FileName)
             SaveBinary(SaveFileDialog1.FileName, Me.fileData)
-
-            Me.Extension_Binary = Path.GetExtension(SaveFileDialog1.FileName)
         End If
 
     End Sub

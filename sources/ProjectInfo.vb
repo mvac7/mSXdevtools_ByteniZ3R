@@ -1,7 +1,6 @@
 ﻿Imports System.Xml
 
 
-'Note: (18/10/2017) i'm listening a Thom Yorke's music (Radio Head) while write this code :) https://youtu.be/1KppTrxiaOI
 Public Class ProjectInfo
 
     Public Name As String

@@ -29,6 +29,7 @@ Public Class MainForm
     Private helpURL As String = Application.StartupPath + System.IO.Path.DirectorySeparatorChar + "Help" + System.IO.Path.DirectorySeparatorChar + AppID + System.IO.Path.DirectorySeparatorChar + AppID + "_UserGuide.html"
 
     Private aMSXDataFormat As New DataFormat
+    Private MessageWin As New MessageDialog
 
     'Private workBitmap As Bitmap
     Private aGraphics As Graphics
@@ -42,7 +43,7 @@ Public Class MainForm
 
     Private Info As ProjectInfo
 
-    Private Const MaxLength = 2048
+    Private Const MAX_LENGTH = 2048
 
     Private Progress As ProgressController
 
@@ -75,9 +76,11 @@ Public Class MainForm
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
 
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Me.ProjectNameTextBox.Font = piXelSTyle.GetFont()
+
         Me.Info = New ProjectInfo
 
-        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.AppConfig = New Config(AppID) 'Application.StartupPath + Path.DirectorySeparatorChar + ConfigFileName) 'System.AppDomain.CurrentDomain.BaseDirectory
         'Me.AppConfig.Load()
 
@@ -99,8 +102,8 @@ Public Class MainForm
             ShowAbout(True)
         End If
 
-        Me.WaveLengthTrackBar.Maximum = MaxLength
-        Me.WaveLengthTrackBar.TickFrequency = MaxLength / 8
+        Me.WaveLengthTrackBar.Maximum = MAX_LENGTH
+        'Me.WaveLengthTrackBar.TickFrequency = MaxLength / 8
 
 
         Me.anOutputDataGBox.InitControl(Me.AppConfig)
@@ -127,6 +130,7 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub SetDrawImage(ByVal waveLength As Integer)
         'Dim workBitmap As New Bitmap(Me.GFXoutputPictureBox.Width, Me.GFXoutputPictureBox.Height)
         Dim workBitmap As New Bitmap(waveLength, 256)
@@ -136,13 +140,15 @@ Public Class MainForm
     End Sub
 
 
+
     Private Sub SetTitle(filename As String)
         If Not filename = "" Then
             filename = " · [" + filename + "]"
         End If
 
-        Me.Text = My.Application.Info.Title + " " + filename
+        Me.Title_Label.Text = My.Application.Info.Title + " " + filename
     End Sub
+
 
 
     Private Sub AddHandlers()
@@ -177,20 +183,21 @@ Public Class MainForm
 
     Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
 
-        Dim result As System.Windows.Forms.DialogResult
-        Dim MessageWin As New MessageDialog
+        Dim result As DialogResult
 
         Application.DoEvents()
 
         Beep()
 
-        result = MessageWin.ShowDialog(Me, "Closing Application!", "Are you sure you want to close " + My.Application.Info.Title + "?", MessageDialog.DIALOG_TYPE.YES_NO) '+ vbCrLf
+        result = MessageWin.ShowDialog(Me, "Closing the application", "Are you sure you want to close " + My.Application.Info.Title + "?", MessageDialog.DIALOG_TYPE.YES_NO) '+ vbCrLf
 
         If result = Windows.Forms.DialogResult.Yes Then
             Me.AppConfig.Save()
         Else
             e.Cancel = True 'cancela la salida de la aplicacion
         End If
+
+        MessageWin.Dispose()
 
     End Sub
 
@@ -242,7 +249,7 @@ Public Class MainForm
 
         Dim Helping As New HelpDialog(800, 700)
         Helping.HorizontalRuleChar = Chr(piXelST_Help.piXel_font_HORIZONTAL_LINE)
-        Helping.ShowDialog(Me, "Help " + My.Application.Info.Title, Global.ByteniZ3R.My.Resources.Help)
+        Helping.ShowDialog(Me, "Help " + My.Application.Info.Title, mSXdevtools.ByteniZ3R.My.Resources.Help) ' Global
 
     End Sub
 
@@ -260,7 +267,7 @@ Public Class MainForm
 
 
     Private Sub NewProjectDialog()
-        Dim MessageWin As New MessageDialog
+
         Dim result As DialogResult
 
         Beep()
@@ -865,41 +872,45 @@ Public Class MainForm
 
 
 
-    Private Function ValidateMinValue(ByVal waveMinText As String) As Integer
+    'Private Function ValidateMinValue(ByVal waveMinText As String) As Integer
 
-        Dim waveMinValue As Integer
+    '    Dim waveMinValue As Integer
 
-        If IsNumeric(waveMinText) Then
-            waveMinValue = CInt(waveMinText)
-        ElseIf Me.HasSign Then
-            waveMinValue = -128
-        Else
-            waveMinValue = 0
-        End If
+    '    If IsNumeric(waveMinText) Then
+    '        waveMinValue = CInt(waveMinText)
+    '    ElseIf Me.HasSign Then
+    '        waveMinValue = -128
+    '    Else
+    '        waveMinValue = 0
+    '    End If
 
-        If Me.HasSign Then
-            waveMinValue += 128
-        End If
+    '    If Me.HasSign Then
+    '        waveMinValue += 128
+    '    End If
 
-        Return ValidateMinValue(waveMinValue) ' value unsigned
+    '    Return ValidateMinValue(waveMinValue) ' value unsigned
 
-    End Function
+    'End Function
 
 
 
     Private Function ValidateMinValue(ByVal waveMinValue As Integer) As Integer
 
-        Dim waveMaxValue As Integer = Me.WaveMaxTrackBar.Value
+        Dim waveMaxValue As Integer = Me.WaveMaxTextBox.Value
+
+        'If Me.HasSign Then
+        '    waveMinValue += 128
+        'End If
 
         If waveMinValue > waveMaxValue Then
             waveMinValue = waveMaxValue - 1
         End If
 
-        If waveMinValue > 254 Then
-            waveMinValue = waveMaxValue - 1
-        ElseIf waveMinValue < 0 Then
-            waveMinValue = 0
-        End If
+        'If waveMinValue > 254 Then
+        '    waveMinValue = waveMaxValue - 1
+        'ElseIf waveMinValue < 0 Then
+        '    waveMinValue = 0
+        'End If
 
         Return waveMinValue
 
@@ -918,52 +929,57 @@ Public Class MainForm
 
     Private Sub ShowWaveMinValue(value As Integer)
         RemoveHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
-        Me.WaveMinTrackBar.Value = value
+
+        Me.WaveMinTextBox.Value = value
+
+
         If Me.HasSign Then
-            value -= 128
+            value += 128
         End If
-        Me.WaveMinTextBox.Text = CStr(value)
+        Me.WaveMinTrackBar.Value = value
+
+
         AddHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
     End Sub
 
 
 
 
-    Private Function ValidateMaxValue(ByVal waveMaxText As String) As Integer
+    'Private Function ValidateMaxValue(ByVal waveMaxText As String) As Integer
 
-        Dim waveMaxValue As Integer
+    '    Dim waveMaxValue As Integer
 
-        If IsNumeric(waveMaxText) Then
-            waveMaxValue = CInt(waveMaxText)
-        ElseIf Me.HasSign Then
-            waveMaxValue = 127
-        Else
-            waveMaxValue = 255
-        End If
+    '    If IsNumeric(waveMaxText) Then
+    '        waveMaxValue = CInt(waveMaxText)
+    '    ElseIf Me.HasSign Then
+    '        waveMaxValue = 127
+    '    Else
+    '        waveMaxValue = 255
+    '    End If
 
-        If Me.HasSign Then
-            waveMaxValue += 128
-        End If
+    '    If Me.HasSign Then
+    '        waveMaxValue += 128
+    '    End If
 
-        Return ValidateMaxValue(waveMaxValue) ' value unsigned
+    '    Return ValidateMaxValue(waveMaxValue) ' value unsigned
 
-    End Function
+    'End Function
 
 
 
     Private Function ValidateMaxValue(ByVal waveMaxValue As Integer) As Integer
 
-        Dim waveMinValue As Integer = WaveMinTrackBar.Value
+        Dim waveMinValue As Integer = WaveMinTextBox.Value
 
         If waveMaxValue < waveMinValue Then
             waveMaxValue = waveMinValue + 1
         End If
 
-        If waveMaxValue > 255 Then
-            waveMaxValue = 255
-        ElseIf waveMaxValue < 1 Then
-            waveMaxValue = 1
-        End If
+        'If waveMaxValue > 255 Then
+        '    waveMaxValue = 255
+        'ElseIf waveMaxValue < 1 Then
+        '    waveMaxValue = 1
+        'End If
 
         Return waveMaxValue
 
@@ -983,36 +999,31 @@ Public Class MainForm
         If Me.HasSign Then
             value -= 128
         End If
-        Me.WaveMaxTextBox.Text = CStr(value)
+        Me.WaveMaxTextBox.Value = value
         AddHandler WaveMaxTrackBar.ValueChanged, AddressOf WaveMaxTrackBar_ValueChanged
     End Sub
 
 
 
     Private Sub SetWavePhase(value As Integer)
-        Me.PhaseTextBox.Text = CStr(value)
+        Me.PhaseTextBox.Value = value
         Me.WavePhaseTrackBar.Value = value
     End Sub
 
 
 
     Private Sub SetWaveFreq(value As Integer)
-        Me.FreqTextBox.Text = CStr(value)
+        Me.FreqTextBox.Value = value
         Me.WaveFreqTrackBar.Value = value
     End Sub
 
 
 
-    Private Sub WaveLengthTrackBar_ValueChanged(sender As System.Object, e As System.EventArgs) ' Handles WaveLengthTrackBar.ValueChanged
-        ValidateWaveLength(Me.WaveLengthTrackBar.Value)
-        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
-        ShowWave()
-        'GenerateData()
-    End Sub
 
 
 
-    Private Sub WaveMaxTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    Private Sub WaveMaxTrackBar_ValueChanged(sender As Object, value As Integer)
 
         Dim newValue As Integer = Me.WaveMaxTrackBar.Value
 
@@ -1026,7 +1037,7 @@ Public Class MainForm
 
 
 
-    Private Sub WaveMinTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Handles WaveMinTrackBar.ValueChanged
+    Private Sub WaveMinTrackBar_ValueChanged(sender As Object, value As Integer) 'Handles WaveMinTrackBar.ValueChanged
 
         'RemoveHandler WaveMinTrackBar.ValueChanged, AddressOf WaveMinTrackBar_ValueChanged
 
@@ -1051,7 +1062,7 @@ Public Class MainForm
 
 
 
-    Private Sub PhaseTrackBar_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) ' Handles WavePhaseTrackBar.ValueChanged
+    Private Sub PhaseTrackBar_ValueChanged(sender As Object, value As Integer) ' Handles WavePhaseTrackBar.ValueChanged
         ValidatePhaseValue(Me.WavePhaseTrackBar.Value)
         ShowWave()
         'GenerateData()
@@ -1059,7 +1070,7 @@ Public Class MainForm
 
 
 
-    Private Sub FreqTrackBar_ValueChanged(sender As System.Object, e As System.EventArgs) 'Handles WaveFreqTrackBar.ValueChanged
+    Private Sub FreqTrackBar_ValueChanged(sender As Object, value As Integer) 'Handles WaveFreqTrackBar.ValueChanged
         ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         ShowWave()
         'GenerateData()
@@ -1079,7 +1090,7 @@ Public Class MainForm
 
 
 
-    Private Sub WaveTypeComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Me.WaveTypeComboBox.SelectedIndex = WF.Type
+    Private Sub WaveTypeComboBox_SelectedIndexChanged(sender As System.Object, index As Integer) 'Me.WaveTypeComboBox.SelectedIndex = WF.Type
         SetWaveState(WaveTypeComboBox.SelectedIndex)
         GenerateData()
     End Sub
@@ -1163,39 +1174,50 @@ Public Class MainForm
 
 
     Private Sub SetWaveLength(value As Integer)
-        Me.WaveLengthTextBox.Text = CStr(value)
+        Me.WaveLengthTextBox.Value = value
         Me.WaveLengthTrackBar.Value = value
     End Sub
 
 
 
-    Private Sub ValidateWaveLength(ByVal value As Integer)
-        If value > MaxLength Then
-            value = MaxLength
-        ElseIf value < 8 Then
-            value = 8
-        End If
+    'Private Sub ValidateWaveLength(ByVal value As Integer)
+    '    If value > MAX_LENGTH Then
+    '        value = MAX_LENGTH
+    '    ElseIf value < 8 Then
+    '        value = 8
+    '    End If
 
-        SetWaveLength(value)
+    '    SetWaveLength(value)
+    'End Sub
+
+
+
+    Private Sub WaveLengthTrackBar_ValueChanged(sender As Object, value As Integer) ' Handles WaveLengthTrackBar.ValueChanged
+        'ValidateWaveLength(value) 'Me.WaveLengthTrackBar.Value)
+        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
+        ShowWave()
+        'GenerateData()
     End Sub
 
 
 
     Private Sub WaveLengthTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveLengthTextBox.Validating
-        If Not IsNumeric(WaveLengthTextBox.Text) Then
-            WaveLengthTextBox.Text = CStr(defaultWaveLength)
-        Else
-            ValidateWaveLength(CInt(WaveLengthTextBox.Text))
-            ValidateFreqValue(Me.WaveFreqTrackBar.Value)
-        End If
+        '    If Not IsNumeric(WaveLengthTextBox.Text) Then
+        '        WaveLengthTextBox.Text = CStr(defaultWaveLength)
+        '    Else
+        '        ValidateWaveLength(CInt(WaveLengthTextBox.Text))
+        '        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
+        '    End If
+        ValidateFreqValue(Me.WaveFreqTrackBar.Value)
         GenerateData()
     End Sub
 
 
 
+
     Private Sub WaveMinTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveMinTextBox.Validating
         Dim newValue As Integer
-        newValue = ValidateMinValue(Me.WaveMinTextBox.Text)
+        newValue = ValidateMinValue(Me.WaveMinTextBox.Value)
         ShowWaveMinValue(newValue)
         GenerateData()
     End Sub
@@ -1204,7 +1226,7 @@ Public Class MainForm
 
     Private Sub WaveMaxTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles WaveMaxTextBox.Validating
         Dim newValue As Integer
-        newValue = ValidateMaxValue(Me.WaveMaxTextBox.Text)
+        newValue = ValidateMaxValue(Me.WaveMaxTextBox.Value)
         ShowWaveMaxValue(newValue)
         GenerateData()
     End Sub
@@ -1212,20 +1234,20 @@ Public Class MainForm
 
 
     Private Sub PhaseTextBox_Validating(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles PhaseTextBox.Validating
-        If Not IsNumeric(Me.PhaseTextBox.Text) Then
-            Me.PhaseTextBox.Text = "0"
-        End If
-        ValidatePhaseValue(CInt(Me.PhaseTextBox.Text))
+        'If Not IsNumeric(Me.PhaseTextBox.Text) Then
+        '    Me.PhaseTextBox.Value = 0
+        'End If
+        ValidatePhaseValue(Me.PhaseTextBox.Value)
         GenerateData()
     End Sub
 
 
 
     Private Sub FreqTextBox_Validating(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles FreqTextBox.Validating
-        If Not IsNumeric(Me.FreqTextBox.Text) Then
-            Me.FreqTextBox.Text = "1"
-        End If
-        ValidateFreqValue(CInt(Me.FreqTextBox.Text))
+        'If Not IsNumeric(Me.FreqTextBox.Text) Then
+        '    Me.FreqTextBox.Text = "1"
+        'End If
+        ValidateFreqValue(Me.FreqTextBox.Value)
         GenerateData()
     End Sub
 
@@ -1376,7 +1398,7 @@ Public Class MainForm
 
                     attrNode = subNode.SelectSingleNode("@LanguageCode")
                     If attrNode Is Nothing Then
-                        'Me.anOutputDataGBox.LanguageCode = CodeInfo.LANGUAGE_CODE.ASSEMBLER_default
+                        'Me.anOutputDataGBox.LanguageCode = SourceCodeInfo.LANGUAGE_CODE.ASSEMBLER_default
                     Else
                         Me.anOutputDataGBox.LanguageCode = CInt(attrNode.InnerText)
                     End If
@@ -1458,14 +1480,12 @@ Public Class MainForm
             Else
                 Me.Progress.CloseProgressWin()
 
-                Dim MessageWin As New MessageDialog
                 MessageWin.ShowDialog(Me, "Load Project", "This file does not contain the correct format.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
             End If
 
 
         Else
             ' en el caso de que no exista
-            Dim MessageWin As New MessageDialog
             MessageWin.ShowDialog(Me, "Load Project", "The file does not exist.", MessageDialog.DIALOG_TYPE.ALERT) '+ vbCrLf
 
         End If
@@ -1752,9 +1772,9 @@ Public Class MainForm
 
 
     Private Sub ShowAbout(isOnInitialization As Boolean)
-        Dim newAboutWin As New AboutWin
-        newAboutWin.SetIcon = Global.ByteniZ3R.My.Resources.icon_byteniZ3R_128px
-        newAboutWin.SetLogo = Global.ByteniZ3R.My.Resources.ByteniZ3R_logo
+        Dim newAboutWin As New mSXdevtools.GUI.Controls.AboutWin
+        newAboutWin.SetIcon = mSXdevtools.ByteniZ3R.My.Resources.icon_byteniZ3R_128px
+        newAboutWin.SetLogo = mSXdevtools.ByteniZ3R.My.Resources.ByteniZ3R_logo
         'newAboutWin.Width = 660
         If isOnInitialization = True Then
             newAboutWin.StartPosition = FormStartPosition.CenterScreen
@@ -1867,7 +1887,7 @@ Public Class MainForm
 
 
 
-    Private Sub SignComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles SignComboBox.SelectedIndexChanged
+    Private Sub SignComboBox_SelectedIndexChanged(sender As System.Object, index As Integer) 'Handles SignComboBox.SelectedIndexChanged
 
         Dim state As Boolean = False
 
@@ -1937,6 +1957,8 @@ Public Class MainForm
         Dim values As Hashtable
         Dim hasSign As Boolean = False
 
+        Dim result As DialogResult
+
         Dim WFitem As New WaveFormItem
 
 
@@ -1951,45 +1973,50 @@ Public Class MainForm
 
             If clipboardText.StartsWith("WF:") Then
 
-                values = GetWFData(clipboardText)
+                result = MessageWin.ShowDialog(Me, "Paste Waveform Data", "I've received the following waveform data:" + vbCrLf + clipboardText + vbCrLf + "Do you want me to include it?" + vbCrLf + "(Recent data will be lost)", MessageDialog.DIALOG_TYPE.YES_NO)
+                If result = DialogResult.Yes Then
 
-                Dim splitdata As String() = clipboardText.Split(" ")
+                    values = GetWFData(clipboardText)
 
-                If splitdata(2) = "SIGNED" Then
-                    WFitem.Sign = True
-                End If
+                    Dim splitdata As String() = clipboardText.Split(" ")
 
-                WFitem.Type = GetWaveFormIndex(splitdata(1))
-
-                If values.ContainsKey("LENGTH") Then
-                    WFitem.Length = CInt(values.Item("LENGTH"))
-                End If
-
-                If values.ContainsKey("MIN") Then
-                    WFitem.Minimum = CInt(values.Item("MIN"))
-                    If WFitem.Sign Then
-                        WFitem.Minimum += 128
+                    If splitdata(2) = "SIGNED" Then
+                        WFitem.Sign = True
                     End If
-                End If
 
-                If values.ContainsKey("MAX") Then
-                    WFitem.Maximum = CInt(values.Item("MAX"))
-                    If WFitem.Sign Then
-                        WFitem.Maximum += 128
+                    WFitem.Type = GetWaveFormIndex(splitdata(1))
+
+                    If values.ContainsKey("LENGTH") Then
+                        WFitem.Length = CInt(values.Item("LENGTH"))
                     End If
+
+                    If values.ContainsKey("MIN") Then
+                        WFitem.Minimum = CInt(values.Item("MIN"))
+                        If WFitem.Sign Then
+                            WFitem.Minimum += 128
+                        End If
+                    End If
+
+                    If values.ContainsKey("MAX") Then
+                        WFitem.Maximum = CInt(values.Item("MAX"))
+                        If WFitem.Sign Then
+                            WFitem.Maximum += 128
+                        End If
+                    End If
+
+                    If values.ContainsKey("PHASE") Then
+                        WFitem.Phase = CInt(values.Item("PHASE"))
+                    End If
+
+                    If values.ContainsKey("FREQ") Then
+                        WFitem.Frequency = CInt(values.Item("FREQ"))
+                    End If
+
+                    SetWaveForm(WFitem)
+
+                    My.Computer.Clipboard.Clear()
+
                 End If
-
-                If values.ContainsKey("PHASE") Then
-                    WFitem.Phase = CInt(values.Item("PHASE"))
-                End If
-
-                If values.ContainsKey("FREQ") Then
-                    WFitem.Frequency = CInt(values.Item("FREQ"))
-                End If
-
-                SetWaveForm(WFitem)
-
-                My.Computer.Clipboard.Clear()
 
             End If
 
@@ -2078,6 +2105,66 @@ Public Class MainForm
         Public Frequency As Integer = 1
 
     End Class
+
+#Region "WindowControlBar functions"
+
+
+    Private posX As Integer
+    Private posY As Integer
+    Private enableDragDialog As Boolean = False
+
+    Private Sub ControlBarPanel_MouseDown(sender As Object, e As MouseEventArgs) Handles Title_Label.MouseDown
+        'AddHandler ControlBarPanel.MouseMove, AddressOf Me.ControlBarPanel_MouseMove
+        If enableDragDialog = False Then
+            If e.Button = MouseButtons.Left Then
+                enableDragDialog = True
+                posX = Cursor.Position.X   'e.X
+                posY = Cursor.Position.Y
+            End If
+        End If
+
+    End Sub
+
+
+    Private Sub ControlBarPanel_MouseMove(sender As Object, e As MouseEventArgs) Handles Title_Label.MouseMove
+
+        Dim newX As Integer
+        Dim newY As Integer
+
+        If enableDragDialog = True Then
+            If e.Button = MouseButtons.Left Then
+                newX = Me.Location.X + (Cursor.Position.X - posX)
+                newY = Me.Location.Y + (Cursor.Position.Y - posY)
+                Me.Location = New Point(newX, newY)
+                posX = Cursor.Position.X
+                posY = Cursor.Position.Y
+            End If
+        End If
+
+    End Sub
+
+
+    Private Sub ControlBarPanel_MouseUp(sender As Object, e As MouseEventArgs) Handles Title_Label.MouseUp
+        enableDragDialog = False
+    End Sub
+
+
+    Private Sub MaximizeButton_Click(sender As Object, e As EventArgs) Handles MaximizeButton.Click
+        If Me.WindowState = FormWindowState.Maximized Then
+            Me.WindowState = FormWindowState.Normal
+        Else
+            Me.WindowState = FormWindowState.Maximized
+        End If
+    End Sub
+
+
+
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+        Me.Close()
+    End Sub
+
+
+#End Region
 
 
 End Class

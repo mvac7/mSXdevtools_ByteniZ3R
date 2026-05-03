@@ -4,13 +4,51 @@
 ''' <remarks></remarks>
 Public Class LastProjectsList
 
-    Private _IndexList As New ArrayList
-    Private _dataItems As New Hashtable
+
+
+    ''' <summary>
+    ''' Item for list of recent projects
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Class ProjectFileItem
+
+        Public Sub New(ByVal aName As String, ByVal aPath As String)
+            Me.Name = aName
+            Me.Path = aPath
+        End Sub
+
+
+        ''' <summary>
+        ''' File Name
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Name() As String
+
+
+        ''' <summary>
+        ''' Path
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Path() As String
+
+
+
+        Public Function Clone() As ProjectFileItem
+            Dim tmpFileItem As New ProjectFileItem(Me.Name, Me.Path)
+            Return tmpFileItem
+        End Function
+
+    End Class
+
+
+
+    Private IndexList As New ArrayList
+    Private Items As New Hashtable
 
 
     Public ReadOnly Property Count()
         Get
-            Return _IndexList.Count
+            Return IndexList.Count
         End Get
     End Property
 
@@ -36,11 +74,9 @@ Public Class LastProjectsList
         Dim name As String
         name = System.IO.Path.GetFileName(path)
 
-        'Dim hashCode As Integer = GetHash()
-
-        If Not name = "" And Not _dataItems.ContainsKey(name) Then
-            _IndexList.Add(name)
-            _dataItems.Add(name, New ProjectFileItem(name, path))
+        If Not name = "" And Not Me.Items.ContainsKey(name) Then
+            Me.IndexList.Add(name)
+            Me.Items.Add(name, New ProjectFileItem(name, path))
         End If
 
     End Sub
@@ -69,60 +105,69 @@ Public Class LastProjectsList
     ''' <param name="name"></param>
     ''' <param name="path"></param>
     ''' <remarks></remarks>
-    Public Sub Add(ByVal name As String, ByVal path As String)
+    Private Sub Add(ByVal name As String, ByVal path As String)
 
-        If _dataItems.ContainsKey(name) Then
+        If Me.Items.ContainsKey(name) Then
             ' si ya contiene el fichero, lo elimina de la lista para que aparezca en primera posicion
-            _IndexList.Remove(name)
-            _dataItems.Remove(name)
+            Me.IndexList.Remove(name)
+            Me.Items.Remove(name)
         End If
 
-        _IndexList.Insert(0, name)
-        _dataItems.Add(name, New ProjectFileItem(name, path))
+        Me.IndexList.Insert(0, name)
+        Me.Items.Add(name, New ProjectFileItem(name, path))
 
-        If _IndexList.Count > 10 Then
-            name = _IndexList(10)
-            _IndexList.Remove(name)
-            _dataItems.Remove(name)
+        If Me.IndexList.Count > 10 Then
+            name = Me.IndexList(10)
+            Me.IndexList.Remove(name)
+            Me.Items.Remove(name)
         End If
 
     End Sub
 
-    'Public Sub Add(ByVal name As String, ByVal path As String)
 
-    '    Dim hashCode As Integer = GetHash()
 
-    '    _IndexList.Insert(0, hashCode)
-    '    _dataItems.Add(hashCode, New ProjectFileItem(hashCode, name, path))
+    ''' <summary>
+    ''' Checks if the paths in the list exist.
+    ''' </summary>
+    Public Sub Refresh()
 
-    '    If _IndexList.Count > 10 Then
-    '        hashCode = _IndexList(10)
-    '        _dataItems.Remove(hashCode)
-    '        _IndexList.Remove(hashCode)
-    '    End If
+        Dim tmpItem As ProjectFileItem
 
-    'End Sub
+        Dim tmpList() As String
 
-    Private Function GetHash() As Integer
-        Dim rnd1 As New Random()
-        Dim hashCode As Integer
 
-        Do
-            hashCode = rnd1.Next
-        Loop While (_IndexList.Contains(hashCode))
+        If Me.Items.Count < 1 Then
+            Return
+        End If
 
-        Return hashCode
-    End Function
+        ReDim tmpList(Me.Items.Count - 1)
+
+        Me.Items.Keys.CopyTo(tmpList, 0)
+
+        For Each nameItem As String In tmpList
+
+            tmpItem = Me.Items.Item(nameItem)
+
+            If Not System.IO.File.Exists(tmpItem.Path) Then
+                Me.Items.Remove(tmpItem.Name)
+                Me.IndexList.Remove(tmpItem.Name)
+            End If
+
+        Next
+
+    End Sub
+
 
 
     Public Function GetFileItem(ByVal index As Integer) As ProjectFileItem
-        Return _dataItems.Item(_IndexList(index))
+        Return Me.Items.Item(Me.IndexList(index))
     End Function
 
 
+
     Public Sub clear()
-        Me._IndexList.Clear()
-        Me._dataItems.Clear()
+        Me.IndexList.Clear()
+        Me.MemberwiseClone.Items.Clear()
     End Sub
 
 
