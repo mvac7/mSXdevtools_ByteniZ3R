@@ -22,9 +22,7 @@ Partial Class OutputDataGBox
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.CopyAllButton = New mSXdevtools.GUI.piXelST.pxButton()
         Me.PiXelGroupBox1 = New mSXdevtools.GUI.piXelST.pxGroupBox()
         Me.OutputButtonsPanel = New System.Windows.Forms.Panel()
@@ -38,18 +36,17 @@ Partial Class OutputDataGBox
         '
         'CopyAllButton
         '
+        Me.CopyAllButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(89, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.CopyAllButton.ButtonType = mSXdevtools.GUI.piXelST.pxButton.Button_TYPES.Confirmation
         Me.CopyAllButton.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CopyAllButton.ForeColor = System.Drawing.Color.FromArgb(CType(CType(42, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.CopyAllButton.Image = Nothing
         Me.CopyAllButton.Location = New System.Drawing.Point(0, 0)
-        Me.CopyAllButton.Margin = New System.Windows.Forms.Padding(0)
         Me.CopyAllButton.Name = "CopyAllButton"
         Me.CopyAllButton.Padding = New System.Windows.Forms.Padding(4)
         Me.CopyAllButton.Size = New System.Drawing.Size(156, 32)
         Me.CopyAllButton.TabIndex = 41
         Me.CopyAllButton.Text = "Copy All"
-        Me.ToolTip1.SetToolTip(Me.CopyAllButton, "Copy all source code to clipboard [Ctrl+A]")
+        Me.CopyAllButton.Tooltip = "Copy all source code to clipboard [Ctrl+A]"
         '
         'PiXelGroupBox1
         '
@@ -81,10 +78,10 @@ Partial Class OutputDataGBox
         '
         'SaveSourceButton
         '
+        Me.SaveSourceButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(89, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.SaveSourceButton.ButtonType = mSXdevtools.GUI.piXelST.pxButton.Button_TYPES.Save
         Me.SaveSourceButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SaveSourceButton.ForeColor = System.Drawing.Color.Black
-        Me.SaveSourceButton.Image = Nothing
         Me.SaveSourceButton.Location = New System.Drawing.Point(156, 0)
         Me.SaveSourceButton.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.SaveSourceButton.Name = "SaveSourceButton"
@@ -92,13 +89,14 @@ Partial Class OutputDataGBox
         Me.SaveSourceButton.Size = New System.Drawing.Size(208, 32)
         Me.SaveSourceButton.TabIndex = 42
         Me.SaveSourceButton.Text = "Save Source"
+        Me.SaveSourceButton.Tooltip = Nothing
         '
         'SaveCompressFileButton
         '
+        Me.SaveCompressFileButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(89, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.SaveCompressFileButton.ButtonType = mSXdevtools.GUI.piXelST.pxButton.Button_TYPES.Save
         Me.SaveCompressFileButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SaveCompressFileButton.ForeColor = System.Drawing.Color.Black
-        Me.SaveCompressFileButton.Image = Nothing
         Me.SaveCompressFileButton.Location = New System.Drawing.Point(364, 0)
         Me.SaveCompressFileButton.Margin = New System.Windows.Forms.Padding(4, 0, 0, 0)
         Me.SaveCompressFileButton.Name = "SaveCompressFileButton"
@@ -106,6 +104,7 @@ Partial Class OutputDataGBox
         Me.SaveCompressFileButton.Size = New System.Drawing.Size(208, 32)
         Me.SaveCompressFileButton.TabIndex = 43
         Me.SaveCompressFileButton.Text = "Save Binary"
+        Me.SaveCompressFileButton.Tooltip = Nothing
         '
         'DataTypeInput
         '
@@ -167,5 +166,4 @@ Partial Class OutputDataGBox
     Friend WithEvents SaveSourceButton As pxButton
     Friend WithEvents SaveCompressFileButton As pxButton
     Friend WithEvents PiXelGroupBox1 As pxGroupBox
-    Friend WithEvents ToolTip1 As ToolTip
 End Class

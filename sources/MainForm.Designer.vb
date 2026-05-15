@@ -25,7 +25,7 @@ Partial Class MainForm
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.FreqTextBox = New mSXdevtools.GUI.piXelST.pxTextBox()
+        Me.WaveFreqTextBox = New mSXdevtools.GUI.piXelST.pxTextBox()
         Me.WaveMinTextBox = New mSXdevtools.GUI.piXelST.pxTextBox()
         Me.WaveMaxTextBox = New mSXdevtools.GUI.piXelST.pxTextBox()
         Me.WaveLengthTextBox = New mSXdevtools.GUI.piXelST.pxTextBox()
@@ -88,16 +88,18 @@ Partial Class MainForm
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ReshowDelay = 100
         '
-        'FreqTextBox
+        'WaveFreqTextBox
         '
-        Me.FreqTextBox.ItsAnumber = True
-        Me.FreqTextBox.Location = New System.Drawing.Point(419, 190)
-        Me.FreqTextBox.MaxLength = 3
-        Me.FreqTextBox.Name = "FreqTextBox"
-        Me.FreqTextBox.Size = New System.Drawing.Size(70, 24)
-        Me.FreqTextBox.TabIndex = 12
-        Me.FreqTextBox.Text = "0"
-        Me.ToolTip1.SetToolTip(Me.FreqTextBox, "Frequency from 1 to (Length/4)")
+        Me.WaveFreqTextBox.ItsAnumber = True
+        Me.WaveFreqTextBox.Location = New System.Drawing.Point(419, 190)
+        Me.WaveFreqTextBox.MaxLength = 3
+        Me.WaveFreqTextBox.Name = "WaveFreqTextBox"
+        Me.WaveFreqTextBox.Size = New System.Drawing.Size(70, 24)
+        Me.WaveFreqTextBox.TabIndex = 12
+        Me.WaveFreqTextBox.Text = "1"
+        Me.WaveFreqTextBox.Tooltip = Nothing
+        Me.ToolTip1.SetToolTip(Me.WaveFreqTextBox, "Frequency from 1 to (Length/4)")
+        Me.WaveFreqTextBox.Value = 1
         '
         'WaveMinTextBox
         '
@@ -108,6 +110,7 @@ Partial Class MainForm
         Me.WaveMinTextBox.Size = New System.Drawing.Size(70, 24)
         Me.WaveMinTextBox.TabIndex = 6
         Me.WaveMinTextBox.Text = "0"
+        Me.WaveMinTextBox.Tooltip = Nothing
         Me.ToolTip1.SetToolTip(Me.WaveMinTextBox, "(0-255)")
         '
         'WaveMaxTextBox
@@ -119,6 +122,7 @@ Partial Class MainForm
         Me.WaveMaxTextBox.Size = New System.Drawing.Size(70, 24)
         Me.WaveMaxTextBox.TabIndex = 8
         Me.WaveMaxTextBox.Text = "0"
+        Me.WaveMaxTextBox.Tooltip = Nothing
         Me.ToolTip1.SetToolTip(Me.WaveMaxTextBox, "(0-255)")
         '
         'WaveLengthTextBox
@@ -126,12 +130,13 @@ Partial Class MainForm
         Me.WaveLengthTextBox.ItsAnumber = True
         Me.WaveLengthTextBox.Location = New System.Drawing.Point(419, 59)
         Me.WaveLengthTextBox.MaxLength = 5
-        Me.WaveLengthTextBox.MaxValue = 1024
-        Me.WaveLengthTextBox.MinValue = 8
+        Me.WaveLengthTextBox.Maximum = 2048
+        Me.WaveLengthTextBox.Minimum = 8
         Me.WaveLengthTextBox.Name = "WaveLengthTextBox"
         Me.WaveLengthTextBox.Size = New System.Drawing.Size(70, 24)
         Me.WaveLengthTextBox.TabIndex = 4
         Me.WaveLengthTextBox.Text = "8"
+        Me.WaveLengthTextBox.Tooltip = Nothing
         Me.ToolTip1.SetToolTip(Me.WaveLengthTextBox, "Total of values (8 to 1024).")
         Me.WaveLengthTextBox.Value = 8
         '
@@ -143,7 +148,7 @@ Partial Class MainForm
         Me.RandomButton.Size = New System.Drawing.Size(70, 24)
         Me.RandomButton.TabIndex = 2
         Me.RandomButton.Text = "Rnd"
-        Me.ToolTip1.SetToolTip(Me.RandomButton, "Generate a new random data.")
+        Me.RandomButton.Tooltip = "Generate a new random data."
         '
         'PhaseTextBox
         '
@@ -154,6 +159,7 @@ Partial Class MainForm
         Me.PhaseTextBox.Size = New System.Drawing.Size(70, 24)
         Me.PhaseTextBox.TabIndex = 10
         Me.PhaseTextBox.Text = "0"
+        Me.PhaseTextBox.Tooltip = Nothing
         Me.ToolTip1.SetToolTip(Me.PhaseTextBox, "Phase (0-359)")
         '
         'OpenFileDialog1
@@ -299,7 +305,7 @@ Partial Class MainForm
         Me.PiXelGroupBox1.Controls.Add(Me.UnsignedRulerPictureBox)
         Me.PiXelGroupBox1.Controls.Add(Me.Label13)
         Me.PiXelGroupBox1.Controls.Add(Me.Label14)
-        Me.PiXelGroupBox1.Controls.Add(Me.FreqTextBox)
+        Me.PiXelGroupBox1.Controls.Add(Me.WaveFreqTextBox)
         Me.PiXelGroupBox1.Controls.Add(Me.WaveMinTrackBar)
         Me.PiXelGroupBox1.Controls.Add(Me.WaveMaxTrackBar)
         Me.PiXelGroupBox1.Controls.Add(Me.WaveMinTextBox)
@@ -326,10 +332,11 @@ Partial Class MainForm
         '
         Me.WaveLengthTrackBar.Location = New System.Drawing.Point(160, 59)
         Me.WaveLengthTrackBar.Maximum = 2048
-        Me.WaveLengthTrackBar.Minimum = 1
+        Me.WaveLengthTrackBar.Minimum = 8
         Me.WaveLengthTrackBar.Name = "WaveLengthTrackBar"
         Me.WaveLengthTrackBar.Size = New System.Drawing.Size(255, 24)
         Me.WaveLengthTrackBar.TabIndex = 39
+        Me.WaveLengthTrackBar.Tooltip = Nothing
         Me.WaveLengthTrackBar.Value = 8
         '
         'SignedRulerPictureBox
@@ -352,19 +359,21 @@ Partial Class MainForm
         Me.Label1.TabIndex = 37
         Me.Label1.Text = "Type"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label1.Tooltip = Nothing
         '
         'SignComboBox
         '
         Me.SignComboBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.SignComboBox.ForeColor = System.Drawing.Color.Black
-        Me.SignComboBox.Items.Add("8bits Signed")
         Me.SignComboBox.Items.Add("8bits Unsigned")
+        Me.SignComboBox.Items.Add("8bits Signed")
         Me.SignComboBox.Location = New System.Drawing.Point(164, 227)
         Me.SignComboBox.MinimumSize = New System.Drawing.Size(202, 24)
         Me.SignComboBox.Name = "SignComboBox"
-        Me.SignComboBox.SelectedIndex = -1
+        Me.SignComboBox.SelectedIndex = 0
         Me.SignComboBox.Size = New System.Drawing.Size(242, 24)
         Me.SignComboBox.TabIndex = 36
+        Me.SignComboBox.Tooltip = "Select the 8-bit output data type (signed/unsigned)"
         '
         'DrawPanel
         '
@@ -407,6 +416,7 @@ Partial Class MainForm
         Me.Label13.TabIndex = 23
         Me.Label13.Text = "Max value"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label13.Tooltip = Nothing
         '
         'Label14
         '
@@ -416,6 +426,7 @@ Partial Class MainForm
         Me.Label14.TabIndex = 27
         Me.Label14.Text = "Waveform"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label14.Tooltip = Nothing
         '
         'WaveMinTrackBar
         '
@@ -424,6 +435,7 @@ Partial Class MainForm
         Me.WaveMinTrackBar.Name = "WaveMinTrackBar"
         Me.WaveMinTrackBar.Size = New System.Drawing.Size(255, 24)
         Me.WaveMinTrackBar.TabIndex = 5
+        Me.WaveMinTrackBar.Tooltip = Nothing
         '
         'WaveMaxTrackBar
         '
@@ -432,6 +444,7 @@ Partial Class MainForm
         Me.WaveMaxTrackBar.Name = "WaveMaxTrackBar"
         Me.WaveMaxTrackBar.Size = New System.Drawing.Size(255, 24)
         Me.WaveMaxTrackBar.TabIndex = 7
+        Me.WaveMaxTrackBar.Tooltip = Nothing
         Me.WaveMaxTrackBar.Value = 1
         '
         'WavePhaseTrackBar
@@ -442,6 +455,7 @@ Partial Class MainForm
         Me.WavePhaseTrackBar.Name = "WavePhaseTrackBar"
         Me.WavePhaseTrackBar.Size = New System.Drawing.Size(255, 24)
         Me.WavePhaseTrackBar.TabIndex = 9
+        Me.WavePhaseTrackBar.Tooltip = Nothing
         '
         'LabelFreq
         '
@@ -451,6 +465,7 @@ Partial Class MainForm
         Me.LabelFreq.TabIndex = 33
         Me.LabelFreq.Text = "Frequency"
         Me.LabelFreq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LabelFreq.Tooltip = Nothing
         '
         'WaveFreqTrackBar
         '
@@ -460,6 +475,7 @@ Partial Class MainForm
         Me.WaveFreqTrackBar.Name = "WaveFreqTrackBar"
         Me.WaveFreqTrackBar.Size = New System.Drawing.Size(255, 24)
         Me.WaveFreqTrackBar.TabIndex = 11
+        Me.WaveFreqTrackBar.Tooltip = Nothing
         Me.WaveFreqTrackBar.Value = 1
         '
         'LabelPhase
@@ -470,6 +486,7 @@ Partial Class MainForm
         Me.LabelPhase.TabIndex = 30
         Me.LabelPhase.Text = "Phase"
         Me.LabelPhase.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LabelPhase.Tooltip = Nothing
         '
         'Label4
         '
@@ -479,6 +496,7 @@ Partial Class MainForm
         Me.Label4.TabIndex = 22
         Me.Label4.Text = "Length"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label4.Tooltip = Nothing
         '
         'WaveTypeComboBox
         '
@@ -496,9 +514,10 @@ Partial Class MainForm
         Me.WaveTypeComboBox.Location = New System.Drawing.Point(164, 29)
         Me.WaveTypeComboBox.MinimumSize = New System.Drawing.Size(202, 24)
         Me.WaveTypeComboBox.Name = "WaveTypeComboBox"
-        Me.WaveTypeComboBox.SelectedIndex = -1
+        Me.WaveTypeComboBox.SelectedIndex = 0
         Me.WaveTypeComboBox.Size = New System.Drawing.Size(242, 24)
         Me.WaveTypeComboBox.TabIndex = 1
+        Me.WaveTypeComboBox.Tooltip = Nothing
         '
         'Label12
         '
@@ -508,6 +527,7 @@ Partial Class MainForm
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Min value"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label12.Tooltip = Nothing
         '
         'WindowControlBarPanel
         '
@@ -533,6 +553,7 @@ Partial Class MainForm
         Me.Title_Label.Size = New System.Drawing.Size(827, 33)
         Me.Title_Label.TabIndex = 290
         Me.Title_Label.Text = "Output Data"
+        Me.Title_Label.Tooltip = Nothing
         '
         'MaximizeButton
         '
@@ -552,6 +573,7 @@ Partial Class MainForm
         'ExitButton
         '
         Me.ExitButton.BackColor = System.Drawing.Color.Transparent
+        Me.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ExitButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.ExitButton.FlatAppearance.BorderSize = 0
         Me.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -652,7 +674,7 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ProjectInfoButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents WaveFreqTrackBar As pxSlider
-    Friend WithEvents FreqTextBox As pxTextBox
+    Friend WithEvents WaveFreqTextBox As pxTextBox
     Friend WithEvents UnsignedRulerPictureBox As System.Windows.Forms.PictureBox
     Friend WithEvents anOutputDataGBox As OutputDataGBox
     Friend WithEvents SaveAsButton As ToolStripButton

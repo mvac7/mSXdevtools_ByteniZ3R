@@ -130,13 +130,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ProjectFileItem.vb" />
-    <Compile Include="ProjectInfo.vb" />
-    <Compile Include="ProjectPropertiesDialog.designer.vb">
-      <DependentUpon>ProjectPropertiesDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectPropertiesDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="HelpDialog.resx">
@@ -159,9 +152,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="piXelST_Text.resx">
       <DependentUpon>piXelST_Text.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectPropertiesDialog.resx">
-      <DependentUpon>ProjectPropertiesDialog.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

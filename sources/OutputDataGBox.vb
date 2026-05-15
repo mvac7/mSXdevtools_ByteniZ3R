@@ -264,8 +264,9 @@ Public Class OutputDataGBox
         'isInit = True
         'SetDropDown(Me.isOpen)
 
-        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        'Me.OutputTextBox.BackColor = Me.AppConfig.OUTPUT_BG_color
+        'Me.OutputTextBox.ForeColor = Me.AppConfig.OUTPUT_INK_color
+        'Me.OutputTextBox.Font = Me.AppConfig.OUTPUT_Font
 
     End Sub
 
@@ -277,8 +278,9 @@ Public Class OutputDataGBox
 
         DataTypeInput.InitControl(Me.AppConfig)
 
-        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        Me.OutputTextBox.BackColor = Me.AppConfig.OUTPUT_BG_color
+        Me.OutputTextBox.ForeColor = Me.AppConfig.OUTPUT_INK_color
+        Me.OutputTextBox.Font = Me.AppConfig.OUTPUT_Font
 
     End Sub
 
@@ -288,8 +290,9 @@ Public Class OutputDataGBox
 
         DataTypeInput.RefreshControl()
 
-        Me.OutputTextBox.BackColor = Me.AppConfig.Color_OUTPUT_BG
-        Me.OutputTextBox.ForeColor = Me.AppConfig.Color_OUTPUT_INK
+        Me.OutputTextBox.BackColor = Me.AppConfig.OUTPUT_BG_color
+        Me.OutputTextBox.ForeColor = Me.AppConfig.OUTPUT_INK_color
+        Me.OutputTextBox.Font = Me.AppConfig.OUTPUT_Font
 
     End Sub
 
